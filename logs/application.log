@@ -1,0 +1,201 @@
+2026-03-11T17:16:12.486+03:00  INFO 17476 --- [ChatAI] [main] o.example.chatai.ChatAiApplicationTests  : Starting ChatAiApplicationTests using Java 21.0.1 with PID 17476 (started by 7 in C:\java Ultimate\ChatAI)
+2026-03-11T17:16:12.488+03:00  INFO 17476 --- [ChatAI] [main] o.example.chatai.ChatAiApplicationTests  : No active profile set, falling back to 1 default profile: "default"
+2026-03-11T17:16:14.368+03:00  INFO 17476 --- [ChatAI] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-03-11T17:16:14.582+03:00  INFO 17476 --- [ChatAI] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 203 ms. Found 1 JPA repository interface.
+2026-03-11T17:16:15.523+03:00  INFO 17476 --- [ChatAI] [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-03-11T17:16:15.608+03:00  INFO 17476 --- [ChatAI] [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.42.Final
+2026-03-11T17:16:15.649+03:00  INFO 17476 --- [ChatAI] [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-03-11T17:16:16.063+03:00  INFO 17476 --- [ChatAI] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-03-11T17:16:16.128+03:00  INFO 17476 --- [ChatAI] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-03-11T17:16:16.577+03:00  INFO 17476 --- [ChatAI] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@6a7aa675
+2026-03-11T17:16:16.579+03:00  INFO 17476 --- [ChatAI] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-03-11T17:16:16.644+03:00  WARN 17476 --- [ChatAI] [main] org.hibernate.orm.deprecation            : HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-03-11T17:16:16.669+03:00  INFO 17476 --- [ChatAI] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 17.1
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-03-11T17:16:18.541+03:00  INFO 17476 --- [ChatAI] [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-03-11T17:16:18.716+03:00  INFO 17476 --- [ChatAI] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-03-11T17:16:19.174+03:00  WARN 17476 --- [ChatAI] [main] o.s.aop.framework.CglibAopProxy          : Unable to proxy interface-implementing method [public final void org.springframework.web.filter.GenericFilterBean.init(jakarta.servlet.FilterConfig) throws jakarta.servlet.ServletException] because it is marked as final, consider using interface-based JDK proxies instead.
+2026-03-11T17:16:19.329+03:00  INFO 17476 --- [ChatAI] [main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name userDetailsService
+2026-03-11T17:16:20.747+03:00  INFO 17476 --- [ChatAI] [main] o.example.chatai.ChatAiApplicationTests  : Started ChatAiApplicationTests in 8.71 seconds (process running for 10.255)
+2026-03-11T17:16:21.354+03:00  INFO 17476 --- [ChatAI] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-03-11T17:16:21.358+03:00  INFO 17476 --- [ChatAI] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2026-03-11T17:16:21.362+03:00  INFO 17476 --- [ChatAI] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2026-03-11T17:17:47.958+03:00  INFO 9824 --- [ChatAI] [restartedMain] org.example.chatai.ChatAiApplication     : Starting ChatAiApplication using Java 21.0.1 with PID 9824 (C:\java Ultimate\ChatAI\target\classes started by 7 in C:\java Ultimate\ChatAI)
+2026-03-11T17:17:47.961+03:00  INFO 9824 --- [ChatAI] [restartedMain] org.example.chatai.ChatAiApplication     : No active profile set, falling back to 1 default profile: "default"
+2026-03-11T17:17:48.000+03:00  INFO 9824 --- [ChatAI] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2026-03-11T17:17:48.000+03:00  INFO 9824 --- [ChatAI] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2026-03-11T17:17:49.043+03:00  INFO 9824 --- [ChatAI] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-03-11T17:17:49.308+03:00  INFO 9824 --- [ChatAI] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 255 ms. Found 1 JPA repository interface.
+2026-03-11T17:17:50.076+03:00  INFO 9824 --- [ChatAI] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2026-03-11T17:17:50.092+03:00  INFO 9824 --- [ChatAI] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-03-11T17:17:50.093+03:00  INFO 9824 --- [ChatAI] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.52]
+2026-03-11T17:17:50.160+03:00  INFO 9824 --- [ChatAI] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2026-03-11T17:17:50.161+03:00  INFO 9824 --- [ChatAI] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2159 ms
+2026-03-11T17:17:50.333+03:00  INFO 9824 --- [ChatAI] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-03-11T17:17:50.401+03:00  INFO 9824 --- [ChatAI] [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.42.Final
+2026-03-11T17:17:50.435+03:00  INFO 9824 --- [ChatAI] [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-03-11T17:17:50.703+03:00  INFO 9824 --- [ChatAI] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-03-11T17:17:50.744+03:00  INFO 9824 --- [ChatAI] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-03-11T17:17:51.052+03:00  INFO 9824 --- [ChatAI] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@5f558feb
+2026-03-11T17:17:51.055+03:00  INFO 9824 --- [ChatAI] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-03-11T17:17:51.123+03:00  WARN 9824 --- [ChatAI] [restartedMain] org.hibernate.orm.deprecation            : HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-03-11T17:17:51.155+03:00  INFO 9824 --- [ChatAI] [restartedMain] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 17.1
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-03-11T17:17:52.132+03:00  INFO 9824 --- [ChatAI] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-03-11T17:17:52.196+03:00  INFO 9824 --- [ChatAI] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-03-11T17:17:52.538+03:00  WARN 9824 --- [ChatAI] [restartedMain] o.s.aop.framework.CglibAopProxy          : Unable to proxy interface-implementing method [public final void org.springframework.web.filter.GenericFilterBean.init(jakarta.servlet.FilterConfig) throws jakarta.servlet.ServletException] because it is marked as final, consider using interface-based JDK proxies instead.
+2026-03-11T17:17:52.720+03:00  INFO 9824 --- [ChatAI] [restartedMain] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name userDetailsService
+2026-03-11T17:17:53.520+03:00  INFO 9824 --- [ChatAI] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2026-03-11T17:17:53.655+03:00  INFO 9824 --- [ChatAI] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2026-03-11T17:17:53.700+03:00  INFO 9824 --- [ChatAI] [restartedMain] o.a.k.clients.consumer.ConsumerConfig    : ConsumerConfig values: 
+	allow.auto.create.topics = true
+	auto.commit.interval.ms = 5000
+	auto.include.jmx.reporter = true
+	auto.offset.reset = latest
+	bootstrap.servers = [localhost:9092]
+	check.crcs = true
+	client.dns.lookup = use_all_dns_ips
+	client.id = consumer-notify-group-1
+	client.rack = 
+	connections.max.idle.ms = 540000
+	default.api.timeout.ms = 60000
+	enable.auto.commit = false
+	enable.metrics.push = true
+	exclude.internal.topics = true
+	fetch.max.bytes = 52428800
+	fetch.max.wait.ms = 500
+	fetch.min.bytes = 1
+	group.id = notify-group
+	group.instance.id = null
+	group.protocol = classic
+	group.remote.assignor = null
+	heartbeat.interval.ms = 3000
+	interceptor.classes = []
+	internal.leave.group.on.close = true
+	internal.throw.on.fetch.stable.offset.unsupported = false
+	isolation.level = read_uncommitted
+	key.deserializer = class org.apache.kafka.common.serialization.StringDeserializer
+	max.partition.fetch.bytes = 1048576
+	max.poll.interval.ms = 300000
+	max.poll.records = 500
+	metadata.max.age.ms = 300000
+	metadata.recovery.strategy = none
+	metric.reporters = []
+	metrics.num.samples = 2
+	metrics.recording.level = INFO
+	metrics.sample.window.ms = 30000
+	partition.assignment.strategy = [class org.apache.kafka.clients.consumer.RangeAssignor, class org.apache.kafka.clients.consumer.CooperativeStickyAssignor]
+	receive.buffer.bytes = 65536
+	reconnect.backoff.max.ms = 1000
+	reconnect.backoff.ms = 50
+	request.timeout.ms = 30000
+	retry.backoff.max.ms = 1000
+	retry.backoff.ms = 100
+	sasl.client.callback.handler.class = null
+	sasl.jaas.config = null
+	sasl.kerberos.kinit.cmd = /usr/bin/kinit
+	sasl.kerberos.min.time.before.relogin = 60000
+	sasl.kerberos.service.name = null
+	sasl.kerberos.ticket.renew.jitter = 0.05
+	sasl.kerberos.ticket.renew.window.factor = 0.8
+	sasl.login.callback.handler.class = null
+	sasl.login.class = null
+	sasl.login.connect.timeout.ms = null
+	sasl.login.read.timeout.ms = null
+	sasl.login.refresh.buffer.seconds = 300
+	sasl.login.refresh.min.period.seconds = 60
+	sasl.login.refresh.window.factor = 0.8
+	sasl.login.refresh.window.jitter = 0.05
+	sasl.login.retry.backoff.max.ms = 10000
+	sasl.login.retry.backoff.ms = 100
+	sasl.mechanism = GSSAPI
+	sasl.oauthbearer.clock.skew.seconds = 30
+	sasl.oauthbearer.expected.audience = null
+	sasl.oauthbearer.expected.issuer = null
+	sasl.oauthbearer.header.urlencode = false
+	sasl.oauthbearer.jwks.endpoint.refresh.ms = 3600000
+	sasl.oauthbearer.jwks.endpoint.retry.backoff.max.ms = 10000
+	sasl.oauthbearer.jwks.endpoint.retry.backoff.ms = 100
+	sasl.oauthbearer.jwks.endpoint.url = null
+	sasl.oauthbearer.scope.claim.name = scope
+	sasl.oauthbearer.sub.claim.name = sub
+	sasl.oauthbearer.token.endpoint.url = null
+	security.protocol = PLAINTEXT
+	security.providers = null
+	send.buffer.bytes = 131072
+	session.timeout.ms = 45000
+	socket.connection.setup.timeout.max.ms = 30000
+	socket.connection.setup.timeout.ms = 10000
+	ssl.cipher.suites = null
+	ssl.enabled.protocols = [TLSv1.2, TLSv1.3]
+	ssl.endpoint.identification.algorithm = https
+	ssl.engine.factory.class = null
+	ssl.key.password = null
+	ssl.keymanager.algorithm = SunX509
+	ssl.keystore.certificate.chain = null
+	ssl.keystore.key = null
+	ssl.keystore.location = null
+	ssl.keystore.password = null
+	ssl.keystore.type = JKS
+	ssl.protocol = TLSv1.3
+	ssl.provider = null
+	ssl.secure.random.implementation = null
+	ssl.trustmanager.algorithm = PKIX
+	ssl.truststore.certificates = null
+	ssl.truststore.location = null
+	ssl.truststore.password = null
+	ssl.truststore.type = JKS
+	value.deserializer = class org.springframework.kafka.support.serializer.JsonDeserializer
+
+2026-03-11T17:17:53.796+03:00  INFO 9824 --- [ChatAI] [restartedMain] o.a.k.c.t.i.KafkaMetricsCollector        : initializing Kafka metrics collector
+2026-03-11T17:17:53.917+03:00  INFO 9824 --- [ChatAI] [restartedMain] o.a.kafka.common.utils.AppInfoParser     : Kafka version: 3.9.1
+2026-03-11T17:17:53.917+03:00  INFO 9824 --- [ChatAI] [restartedMain] o.a.kafka.common.utils.AppInfoParser     : Kafka commitId: f745dfdcee2b9851
+2026-03-11T17:17:53.917+03:00  INFO 9824 --- [ChatAI] [restartedMain] o.a.kafka.common.utils.AppInfoParser     : Kafka startTimeMs: 1773238673916
+2026-03-11T17:17:53.921+03:00  INFO 9824 --- [ChatAI] [restartedMain] o.a.k.c.c.i.ClassicKafkaConsumer         : [Consumer clientId=consumer-notify-group-1, groupId=notify-group] Subscribed to topic(s): notifyUser
+2026-03-11T17:17:53.940+03:00  INFO 9824 --- [ChatAI] [restartedMain] org.example.chatai.ChatAiApplication     : Started ChatAiApplication in 6.531 seconds (process running for 7.641)
+2026-03-11T17:17:54.276+03:00  INFO 9824 --- [ChatAI] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] org.apache.kafka.clients.NetworkClient   : [Consumer clientId=consumer-notify-group-1, groupId=notify-group] Node -1 disconnected.
+2026-03-11T17:17:54.277+03:00  WARN 9824 --- [ChatAI] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] org.apache.kafka.clients.NetworkClient   : [Consumer clientId=consumer-notify-group-1, groupId=notify-group] Connection to node -1 (localhost/127.0.0.1:9092) could not be established. Node may not be available.
+2026-03-11T17:17:54.278+03:00  WARN 9824 --- [ChatAI] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] org.apache.kafka.clients.NetworkClient   : [Consumer clientId=consumer-notify-group-1, groupId=notify-group] Bootstrap broker localhost:9092 (id: -1 rack: null) disconnected
+2026-03-11T17:17:54.388+03:00  INFO 9824 --- [ChatAI] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] org.apache.kafka.clients.NetworkClient   : [Consumer clientId=consumer-notify-group-1, groupId=notify-group] Node -1 disconnected.
+2026-03-11T17:17:54.389+03:00  WARN 9824 --- [ChatAI] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] org.apache.kafka.clients.NetworkClient   : [Consumer clientId=consumer-notify-group-1, groupId=notify-group] Connection to node -1 (localhost/127.0.0.1:9092) could not be established. Node may not be available.
+2026-03-11T17:17:54.389+03:00  WARN 9824 --- [ChatAI] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] org.apache.kafka.clients.NetworkClient   : [Consumer clientId=consumer-notify-group-1, groupId=notify-group] Bootstrap broker localhost:9092 (id: -1 rack: null) disconnected
+2026-03-11T17:17:54.515+03:00  INFO 9824 --- [ChatAI] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] org.apache.kafka.clients.NetworkClient   : [Consumer clientId=consumer-notify-group-1, groupId=notify-group] Node -1 disconnected.
+2026-03-11T17:17:54.516+03:00  WARN 9824 --- [ChatAI] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] org.apache.kafka.clients.NetworkClient   : [Consumer clientId=consumer-notify-group-1, groupId=notify-group] Connection to node -1 (localhost/127.0.0.1:9092) could not be established. Node may not be available.
+2026-03-11T17:17:54.516+03:00  WARN 9824 --- [ChatAI] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] org.apache.kafka.clients.NetworkClient   : [Consumer clientId=consumer-notify-group-1, groupId=notify-group] Bootstrap broker localhost:9092 (id: -1 rack: null) disconnected
+2026-03-11T17:17:54.766+03:00  INFO 9824 --- [ChatAI] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] org.apache.kafka.clients.NetworkClient   : [Consumer clientId=consumer-notify-group-1, groupId=notify-group] Node -1 disconnected.
+2026-03-11T17:17:54.767+03:00  WARN 9824 --- [ChatAI] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] org.apache.kafka.clients.NetworkClient   : [Consumer clientId=consumer-notify-group-1, groupId=notify-group] Connection to node -1 (localhost/127.0.0.1:9092) could not be established. Node may not be available.
+2026-03-11T17:17:54.768+03:00  WARN 9824 --- [ChatAI] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] org.apache.kafka.clients.NetworkClient   : [Consumer clientId=consumer-notify-group-1, groupId=notify-group] Bootstrap broker localhost:9092 (id: -1 rack: null) disconnected
+2026-03-11T17:17:55.234+03:00  INFO 9824 --- [ChatAI] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] org.apache.kafka.clients.NetworkClient   : [Consumer clientId=consumer-notify-group-1, groupId=notify-group] Node -1 disconnected.
+2026-03-11T17:17:55.235+03:00  WARN 9824 --- [ChatAI] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] org.apache.kafka.clients.NetworkClient   : [Consumer clientId=consumer-notify-group-1, groupId=notify-group] Connection to node -1 (localhost/127.0.0.1:9092) could not be established. Node may not be available.
+2026-03-11T17:17:55.235+03:00  WARN 9824 --- [ChatAI] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] org.apache.kafka.clients.NetworkClient   : [Consumer clientId=consumer-notify-group-1, groupId=notify-group] Bootstrap broker localhost:9092 (id: -1 rack: null) disconnected
+2026-03-11T17:17:56.040+03:00  INFO 9824 --- [ChatAI] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] org.apache.kafka.clients.NetworkClient   : [Consumer clientId=consumer-notify-group-1, groupId=notify-group] Node -1 disconnected.
+2026-03-11T17:17:56.040+03:00  WARN 9824 --- [ChatAI] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] org.apache.kafka.clients.NetworkClient   : [Consumer clientId=consumer-notify-group-1, groupId=notify-group] Connection to node -1 (localhost/127.0.0.1:9092) could not be established. Node may not be available.
+2026-03-11T17:17:56.040+03:00  WARN 9824 --- [ChatAI] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] org.apache.kafka.clients.NetworkClient   : [Consumer clientId=consumer-notify-group-1, groupId=notify-group] Bootstrap broker localhost:9092 (id: -1 rack: null) disconnected
+2026-03-11T17:17:56.989+03:00  INFO 9824 --- [ChatAI] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-notify-group-1, groupId=notify-group] Resetting generation and member id due to: consumer pro-actively leaving the group
+2026-03-11T17:17:56.990+03:00  INFO 9824 --- [ChatAI] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-notify-group-1, groupId=notify-group] Request joining group due to: consumer pro-actively leaving the group
+2026-03-11T17:17:56.990+03:00  INFO 9824 --- [ChatAI] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.a.k.c.c.i.ClassicKafkaConsumer         : [Consumer clientId=consumer-notify-group-1, groupId=notify-group] Unsubscribed all topics or patterns and assigned partitions
+2026-03-11T17:17:56.992+03:00  INFO 9824 --- [ChatAI] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-notify-group-1, groupId=notify-group] Resetting generation and member id due to: consumer pro-actively leaving the group
+2026-03-11T17:17:56.992+03:00  INFO 9824 --- [ChatAI] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-notify-group-1, groupId=notify-group] Request joining group due to: consumer pro-actively leaving the group
+2026-03-11T17:17:56.998+03:00  INFO 9824 --- [ChatAI] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.apache.kafka.common.metrics.Metrics    : Metrics scheduler closed
+2026-03-11T17:17:56.998+03:00  INFO 9824 --- [ChatAI] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.apache.kafka.common.metrics.Metrics    : Closing reporter org.apache.kafka.common.metrics.JmxReporter
+2026-03-11T17:17:56.998+03:00  INFO 9824 --- [ChatAI] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.apache.kafka.common.metrics.Metrics    : Closing reporter org.apache.kafka.common.telemetry.internals.ClientTelemetryReporter
+2026-03-11T17:17:56.999+03:00  INFO 9824 --- [ChatAI] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.apache.kafka.common.metrics.Metrics    : Metrics reporters closed
+2026-03-11T17:17:57.003+03:00  INFO 9824 --- [ChatAI] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.a.kafka.common.utils.AppInfoParser     : App info kafka.consumer for consumer-notify-group-1 unregistered
+2026-03-11T17:17:57.004+03:00  INFO 9824 --- [ChatAI] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.s.k.l.KafkaMessageListenerContainer    : notify-group: Consumer stopped
+2026-03-11T17:17:57.007+03:00  INFO 9824 --- [ChatAI] [SpringApplicationShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2026-03-11T17:17:57.015+03:00  INFO 9824 --- [ChatAI] [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2026-03-11T17:17:57.054+03:00  INFO 9824 --- [ChatAI] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-03-11T17:17:57.058+03:00  INFO 9824 --- [ChatAI] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2026-03-11T17:17:57.062+03:00  INFO 9824 --- [ChatAI] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
