@@ -10,4 +10,6 @@ public interface UserMapper {
     UserDTO convertEntityToDto(UserEntity user);
 
     UserCreateRequest convertDtoToCreateRequest(UserEntity user);
+
+    UserEntity convertDtoToEntity(UserDTO userDTO);
 }
