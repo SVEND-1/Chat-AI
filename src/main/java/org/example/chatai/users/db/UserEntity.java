@@ -2,6 +2,7 @@ package org.example.chatai.users.db;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.example.chatai.subscriptions.db.SubscriptionEntity;
 
 @Setter
 @Getter
@@ -27,4 +28,7 @@ public class UserEntity {
 
     @Column(name = "role")
     private Role role;
+
+    @OneToOne(mappedBy = "user")
+    private SubscriptionEntity subscription;
 }
