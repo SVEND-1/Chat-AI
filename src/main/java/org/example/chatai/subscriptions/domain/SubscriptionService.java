@@ -32,7 +32,7 @@ public class SubscriptionService {
                 subscriptionRepository.save(SubscriptionEntity.builder()
                         .active(Status.ACTIVE)
                         .paymentId(paymentId)
-                                        .user(userMapper.convertDtoToEntity(userService.findUserByEmail("s5090@inbox.ru")))
+                        .user(userMapper.convertDtoToEntity(userService.findUserByEmail("s5090@inbox.ru")))
                                 //.user(userService.getCurrentUser())
                         .endDate(LocalDateTime.now().plusMonths(1))
                         .build());

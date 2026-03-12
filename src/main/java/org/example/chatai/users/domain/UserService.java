@@ -13,6 +13,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+
 @Slf4j
 @Service
 @RequiredArgsConstructor
@@ -78,6 +80,7 @@ public class UserService {
         }
     }
 
+
     @Transactional
     public UserDTO changePassword(Long id, String newPassword) {
         try {
@@ -113,4 +116,5 @@ public class UserService {
             throw new IllegalArgumentException("Не найден пользователь");
         }
     }
+
 }

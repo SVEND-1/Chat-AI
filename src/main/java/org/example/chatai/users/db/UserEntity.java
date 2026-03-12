@@ -2,7 +2,11 @@ package org.example.chatai.users.db;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.example.chatai.payments.db.PaymentEntity;
 import org.example.chatai.subscriptions.db.SubscriptionEntity;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Setter
 @Getter
@@ -28,6 +32,9 @@ public class UserEntity {
 
     @Column(name = "role")
     private Role role;
+
+    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<PaymentEntity> payments = new ArrayList<>();
 
     @OneToOne(mappedBy = "user")
     private SubscriptionEntity subscription;
