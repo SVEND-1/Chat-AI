@@ -1,6 +1,10 @@
 import VerifyRegister from "./pages/register/VerifyRegister";
 import Register from "./pages/register/Register.tsx";
+import Login from "./pages/login/Login.tsx";
+import VerifyResetCode from "./pages/reset-password/VerifyResetCode.tsx";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
+import ForgotPassword from "./pages/forgot-password/ForgotPassword.tsx";
+import ResetPassword from "./pages/reset-password/ResetPassword.tsx";
 
 
 
