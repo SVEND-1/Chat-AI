@@ -3,6 +3,8 @@ package org.example.chatai.users.domain;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.example.chatai.supportTickets.db.entities.SupportTicketEntity;
+import org.example.chatai.supportTickets.db.enums.SupportStatus;
 import org.example.chatai.users.api.dto.users.request.UserCreateRequest;
 import org.example.chatai.users.api.dto.users.response.UserDTO;
 import org.example.chatai.users.db.UserEntity;
@@ -12,6 +14,8 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.time.LocalDateTime;
 
 @Slf4j
 @Service

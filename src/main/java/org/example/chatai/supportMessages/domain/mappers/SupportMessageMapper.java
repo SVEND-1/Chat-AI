@@ -1,4 +1,4 @@
-package org.example.chatai.users.support.domain.mappers;
+package org.example.chatai.supportMessages.domain.mappers;
 
 import org.mapstruct.Mapper;
 

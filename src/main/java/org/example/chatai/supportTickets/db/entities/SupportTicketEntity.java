@@ -1,12 +1,9 @@
-package org.example.chatai.users.support.db.entities;
+package org.example.chatai.supportTickets.db.entities;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.example.chatai.users.db.UserEntity;
-import org.example.chatai.users.support.db.enums.SupportStatus;
+import org.example.chatai.supportTickets.db.enums.SupportStatus;
 
 import java.time.LocalDateTime;
 
@@ -14,6 +11,7 @@ import java.time.LocalDateTime;
 @Table(name = "support_tickets")
 @Getter
 @Setter
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class SupportTicketEntity {
@@ -47,6 +45,7 @@ public class SupportTicketEntity {
     public void onCreate() {
         createdAt = LocalDateTime.now();
         updatedAt = LocalDateTime.now();
+        status = SupportStatus.OPEN;
     }
 
     @PreUpdate

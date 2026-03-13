@@ -1,4 +1,4 @@
-package org.example.chatai.users.support.db.enums;
+package org.example.chatai.supportTickets.db.enums;
 
 public enum SupportStatus {
     OPEN,

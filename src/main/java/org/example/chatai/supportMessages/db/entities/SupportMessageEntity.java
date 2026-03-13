@@ -1,12 +1,13 @@
-package org.example.chatai.users.support.db.entities;
+package org.example.chatai.supportMessages.db.entities;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.example.chatai.supportTickets.db.entities.SupportTicketEntity;
 import org.example.chatai.users.db.UserEntity;
-import org.example.chatai.users.support.db.enums.SenderType;
+import org.example.chatai.supportMessages.db.enums.SenderType;
 
 import java.time.LocalDateTime;
 
