@@ -3,6 +3,7 @@ package org.example.chatai.subscriptions.domain;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.example.chatai.payments.api.dto.response.PaymentResponse;
 import org.example.chatai.payments.domain.PaymentService;
 import org.example.chatai.subscriptions.db.Status;
 import org.example.chatai.subscriptions.db.SubscriptionEntity;
@@ -10,7 +11,6 @@ import org.example.chatai.subscriptions.db.SubscriptionRepository;
 import org.example.chatai.users.domain.UserService;
 import org.example.chatai.users.domain.mapper.UserMapper;
 import org.springframework.stereotype.Service;
-import ru.loolzaaa.youkassa.model.Payment;
 
 import java.time.LocalDateTime;
 
@@ -24,11 +24,15 @@ public class SubscriptionService {
     private final UserMapper userMapper;
 
     @Transactional
-    public String createSubscription(String paymentId) {
+    public String createSubscription(String paymentId) {//Проверить возможность оплатить снова после завершение
         try {
-            Payment payment = paymentService.findPayment(paymentId);
+            if(subscriptionRepository.findByUserEmail("s5090@inbox.ru").getActive().equals(Status.ACTIVE)) {
+                return "Подписка уже оформлена";
+            }
 
-            if ("succeeded".equals(payment.getStatus())) {
+            PaymentResponse payment = paymentService.findPaymentDto(paymentId);
+
+            if ("succeeded".equals(payment.status())) {
                 subscriptionRepository.save(SubscriptionEntity.builder()
                         .active(Status.ACTIVE)
                         .paymentId(paymentId)

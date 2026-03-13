@@ -5,4 +5,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface SubscriptionRepository extends JpaRepository<SubscriptionEntity, Long> {
+    SubscriptionEntity findByUserEmail(String userEmail);
 }
