@@ -1,0 +1,32 @@
+.price-display {
+    text-align: center;
+    margin-bottom: 32px;
+    padding: 0 0;
+}
+
+.price-display__amount {
+    font-size: 48px;
+    font-weight: 800;
+    background: linear-gradient(135deg, #0066ff, #66ccff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1;
+}
+
+.price-display__currency {
+    font-size: 24px;
+    font-weight: 600;
+    background: linear-gradient(135deg, #0066ff, #66ccff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    vertical-align: top;
+    margin-left: 2px;
+}
+
+.price-display__period {
+    font-size: 18px;
+    color: #8a8a8a;
+    margin-left: 8px;
+}
