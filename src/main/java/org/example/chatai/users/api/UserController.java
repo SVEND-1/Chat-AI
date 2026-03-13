@@ -2,6 +2,7 @@ package org.example.chatai.users.api;
 
 import lombok.RequiredArgsConstructor;
 import org.example.chatai.users.api.dto.users.response.UserDTO;
+import org.example.chatai.users.db.UserEntity;
 import org.example.chatai.users.domain.UserService;
 import org.example.chatai.users.domain.mapper.UserMapper;
 import org.springframework.http.ResponseEntity;
@@ -17,4 +18,8 @@ public class UserController {
     private final UserService userService;
     private final UserMapper userMapper;
 
+    @GetMapping("/test")
+    public ResponseEntity<UserEntity> test(){
+        return ResponseEntity.ok(userService.getCurrentUser());
+    }
 }
