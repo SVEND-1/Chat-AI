@@ -29,7 +29,7 @@ public class SupportTicketEntity {
     @JoinColumn(name = "support_id")
     private UserEntity support;
 
-    private String subject;
+    private String title;
 
     @Enumerated(EnumType.STRING)
     private SupportStatus status;
@@ -42,4 +42,16 @@ public class SupportTicketEntity {
 
     @Column(name = "closed_at")
     private LocalDateTime closedAt;
+
+    @PrePersist
+    public void onCreate() {
+        createdAt = LocalDateTime.now();
+        updatedAt = LocalDateTime.now();
+    }
+
+    @PreUpdate
+    public void onUpdate() {
+        updatedAt = LocalDateTime.now();
+    }
+
 }
