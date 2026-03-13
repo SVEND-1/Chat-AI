@@ -5,7 +5,7 @@ import type { RegisterFormProps } from "../../types/auth/auth.types";
 import AuthContainer from "../../components/auth/AuthContainer";
 import AuthTitle from "../../components/auth/AuthTitle";
 import AuthSubtitle from "../../components/auth/AuthSubtitle";
-import RegisterForm from "../../components/auth/RegisterForm";
+import RegisterForm from "../../components/auth/register/";
 import * as React from "react";
 import "../../style/auth.css";
 import "../../style/AuthForm.css";

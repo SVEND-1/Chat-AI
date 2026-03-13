@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import { verifyResetCode } from "../../api/authApi.ts";
-import AuthContainer from "../../components/auth/AuthContainer.tsx";
-import AuthTitle from "../../components/auth/AuthTitle.tsx";
-import AuthSubtitle from "../../components/auth/AuthSubtitle.tsx";
-import VerifyResetCodeForm from "../../components/auth/VerifyResetCodeForm.tsx";
+import { verifyResetCode } from "../../api/authApi";
+import AuthContainer from "../../components/auth/AuthContainer";
+import AuthTitle from "../../components/auth/AuthTitle";
+import AuthSubtitle from "../../components/auth/AuthSubtitle";
+import VerifyResetCodeForm from "../../components/auth/reset-password/VerifyResetCodeForm";
 
 export default function VerifyResetCode() {
     const [searchParams] = useSearchParams();

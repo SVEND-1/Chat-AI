@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import { verifyRegister } from "../../api/authApi.ts";
+import { verifyRegister } from "../../api/authApi";
 import "../../style/auth.css";
 import "../../style/AuthForm.css";
 
