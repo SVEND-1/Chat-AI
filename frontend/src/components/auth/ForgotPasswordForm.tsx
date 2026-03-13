@@ -1,5 +1,5 @@
-import Field from "../auth/Field";
-import Button from "../auth/Button";
+import Field from "../auth/global/Field";
+import Button from "../auth/global/Button";
 import type {ForgotPasswordFormProps} from "../../types/auth/auth.types";
 
 export default function ForgotPasswordForm({

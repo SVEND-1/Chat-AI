@@ -1,5 +1,5 @@
-import Field from "./Field";
-import Button from "./Button";
+import Field from "../auth/global/Field";
+import Button from "../auth/global/Button";
 import type {LoginFormProps} from "../../types/auth/auth.types";
 
 export default function LoginForm({

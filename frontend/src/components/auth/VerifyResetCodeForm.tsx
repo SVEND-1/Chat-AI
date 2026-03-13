@@ -1,5 +1,5 @@
-import Field from "./Field";
-import Button from "./Button";
+import Field from "../auth/global/Field";
+import Button from "../auth/global/Button";
 
 const VerifyResetCodeForm = ({ code, setCode, handleSubmit, navigate }: any) => {
     return (

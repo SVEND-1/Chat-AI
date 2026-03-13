@@ -1,7 +1,12 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
+import svgr from 'vite-plugin-svgr'
+
 export default defineConfig({
-    plugins: [react()],
+    plugins: [
+        react(),
+        svgr() // Добавляем плагин для SVG
+    ],
     server: {
         host: "localhost",
         port: 5173,
