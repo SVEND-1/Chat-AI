@@ -1,4 +1,26 @@
+version: '3.8'
+
 services:
+  postgres:
+    image: postgres:15
+    container_name: postgres-chatai
+    environment:
+      POSTGRES_DB: ChatAI
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: dani123l
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - app-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
   kafka:
     image: confluentinc/cp-kafka:7.6.0
     container_name: kafka
@@ -9,7 +31,7 @@ services:
       KAFKA_PROCESS_ROLES: broker,controller
       KAFKA_CONTROLLER_QUORUM_VOTERS: 1@kafka:9093
       KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9092,CONTROLLER://0.0.0.0:9093
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092 #если че поменять на localhost
       KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
@@ -19,6 +41,37 @@ services:
       CLUSTER_ID: MkU3OEVBNTcwNTJENDM2Qk
     networks:
       - app-network
+    healthcheck:
+      test: ["CMD-SHELL", "kafka-topics --bootstrap-server localhost:9092 --list"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+    container_name: spring-backend
+    depends_on:
+      postgres:
+        condition: service_healthy
+      kafka:
+        condition: service_healthy
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/ChatAI
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_Password=dani123l
+      - KAFKA_BOOTSTRAP_SERVERS=kafka:9092
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+      - SPRING_JPA_SHOW_SQL=true
+    ports:
+      - "8080:8080"
+    networks:
+      - app-network
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
 
 networks:
   app-network:
