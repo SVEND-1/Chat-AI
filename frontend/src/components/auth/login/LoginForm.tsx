@@ -1,6 +1,6 @@
-import Field from "../../global/Field";
-import Button from "../../global/Button";
 import type {LoginFormProps} from "../../../types/auth/auth.types";
+import Field from "../global/Field";
+import Button from "../global/Button";
 
 export default function LoginForm({
                                       email,

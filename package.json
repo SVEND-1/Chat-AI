@@ -4,6 +4,7 @@
     "react-router-dom": "^7.13.1"
   },
   "devDependencies": {
+    "@types/node": "^25.5.0",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3"
   }

@@ -1,6 +1,6 @@
-import Field from "../../global/Field";
-import Button from "../../global/Button";
 import type {ResetPasswordFormProps} from "../../../types/auth/auth.types";
+import Field from "../global/Field";
+import Button from "../global/Button";
 
 export default function ResetPasswordForm({
                                               newPassword,
