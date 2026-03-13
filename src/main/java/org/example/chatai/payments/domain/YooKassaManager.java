@@ -3,6 +3,7 @@ package org.example.chatai.payments.domain;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.common.errors.ApiException;
 import org.example.chatai.payments.db.PaymentEntity;
+import org.example.chatai.users.domain.UserService;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 import ru.loolzaaa.youkassa.model.Payment;
@@ -18,9 +19,12 @@ import java.util.List;
 public class YooKassaManager {
 
     private final PaymentService paymentService;
+    private final UserService userService;
+    private final String RETURN_URL = "http://localhost:5173/succeeded-payment";
 
-    public YooKassaManager(@Lazy PaymentService paymentService) {
+    public YooKassaManager(@Lazy PaymentService paymentService, UserService userService) {
         this.paymentService = paymentService;
+        this.userService = userService;
     }
 
     public Payment createYooKassaPayment(PaymentProcessor paymentProcessor, String idempotencyKey){
@@ -31,7 +35,7 @@ public class YooKassaManager {
 
         Confirmation confirmation = Confirmation.builder()
                 .type(Confirmation.Type.REDIRECT)
-                .returnUrl("http://localhost:8080/")
+                .returnUrl(RETURN_URL)
                 .build();
 
         Payment payment = Payment.builder()
@@ -51,12 +55,12 @@ public class YooKassaManager {
         }
 
         Customer customer = Customer.builder()
-                .email("s5090@inbox.ru")
+                .email(userService.getCurrentUser().getEmail())
                 .build();
 
         Amount paymentAmount = payment.getAmount();
         Amount itemAmount = Amount.builder()
-                .value(paymentAmount.getValue())  // ← Реальная сумма
+                .value(paymentAmount.getValue())
                 .currency(paymentAmount.getCurrency())
                 .build();
 

@@ -3,6 +3,7 @@ package org.example.chatai.payments.domain;
 import jakarta.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.common.errors.ApiException;
+import org.example.chatai.payments.api.dto.response.PaymentCreateResponse;
 import org.example.chatai.payments.api.dto.response.PaymentPageResponse;
 import org.example.chatai.payments.api.dto.response.PaymentResponse;
 import org.example.chatai.payments.db.PaymentEntity;
@@ -58,6 +59,7 @@ public class PaymentService {
         log.info("YooKassa инициализирована");
     }
 
+    //================================Controller Methods================================================
     public PaymentResponse findPaymentDto(String paymentId){
         return paymentMapper.convertEntityToPaymentResponse(findPayment(paymentId));
     }
@@ -66,37 +68,29 @@ public class PaymentService {
         return paymentMapper.toPageResponse(paymentManager.findAllPaymentsByUser(page,size));
     }
 
-    public PaymentEntity findByPaymentId(String paymentId){
-        return paymentRepository.findByPaymentId(paymentId);
-    }
-
-    public Payment findPayment(String paymentId) {
-        return yooKassaManager.findPayment(paymentProcessor,paymentId);
-    }
-
     public Receipt findReceipt(String paymentId){
         return yooKassaManager.findReceipt(receiptProcessor,paymentId);
     }
 
-    public PaymentEntity save(PaymentEntity payment) {
-        return paymentRepository.save(payment);
-    }
-
     @Transactional
-    public Payment createPayment() {//TODO если у фронтенда не получиться с оплатой сделатьь через куки
+    public PaymentCreateResponse createPayment() {//TODO если у фронтенда не получиться с оплатой сделатьь через куки
         String idempotencyKey = UUID.randomUUID().toString();
         try {
             Payment saved = yooKassaManager.createYooKassaPayment(paymentProcessor,idempotencyKey);
 
             paymentManager.savePayment(idempotencyKey,saved);
 
-            return saved;
+            return new PaymentCreateResponse(
+                    saved.getId(),
+                    saved.getConfirmation().getConfirmationUrl()
+            );
         } catch (ApiException e) {
             log.error("Ошибка создания платежа: {}", e.getMessage());
             throw new RuntimeException("Не удалось создать платеж", e);
         }
     }
 
+    //TODO УЗНАТЬ ЧТО НАДО УКАЗЫВАТЬ В ЧЕКЕ
     @Transactional
     public Receipt createReceipt(String paymentId) {
         try {
@@ -109,5 +103,17 @@ public class PaymentService {
         }
     }
 
+    //================================Service Methods================================================
 
+    public PaymentEntity findByPaymentId(String paymentId){
+        return paymentRepository.findByPaymentId(paymentId);
+    }
+
+    public Payment findPayment(String paymentId) {
+        return yooKassaManager.findPayment(paymentProcessor,paymentId);
+    }
+
+    public PaymentEntity save(PaymentEntity payment) {
+        return paymentRepository.save(payment);
+    }
 }

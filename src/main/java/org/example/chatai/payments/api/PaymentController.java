@@ -1,17 +1,14 @@
 package org.example.chatai.payments.api;
 
+import org.example.chatai.payments.api.dto.response.PaymentCreateResponse;
 import org.example.chatai.payments.api.dto.response.PaymentPageResponse;
 import org.example.chatai.payments.api.dto.response.PaymentResponse;
 import org.example.chatai.payments.domain.PaymentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ru.loolzaaa.youkassa.model.Payment;
 import ru.loolzaaa.youkassa.model.Receipt;
-import ru.loolzaaa.youkassa.pojo.Recipient;
 
-import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/api/payments")
@@ -55,13 +52,8 @@ public class PaymentController {
 
 
     @PostMapping("/")
-    public ResponseEntity<Map<String, String>> createPayment() {
-        Payment payment = paymentService.createPayment();
-
-        return ResponseEntity.ok(Map.of(
-                "paymentId", payment.getId(),
-                "confirmationUrl", payment.getConfirmation().getConfirmationUrl()//TODO В ФРОНТЕНДЕ ПЕРЕКИНУТЬ СЮДА НАДО
-        ));
+    public ResponseEntity<PaymentCreateResponse> createPayment() {
+        return ResponseEntity.ok(paymentService.createPayment());
     }
 
 }

@@ -20,14 +20,12 @@ import java.time.LocalDateTime;
 public class PaymentManager {
 
     private final UserService userService;
-    private final UserMapper userMapper;
     private final PaymentRepository paymentRepository;
     private final PaymentService paymentService;
 
-    public PaymentManager(UserService userService, UserMapper userMapper,
+    public PaymentManager(UserService userService,
                           PaymentRepository paymentRepository,@Lazy PaymentService paymentService) {
         this.userService = userService;
-        this.userMapper = userMapper;
         this.paymentRepository = paymentRepository;
         this.paymentService = paymentService;
     }
@@ -35,8 +33,7 @@ public class PaymentManager {
     public void savePayment(String idempotencyKey, Payment saved) {
         PaymentEntity paymentEntity = PaymentEntity.builder()
                 .idempotencyKey(idempotencyKey)
-                .user(userMapper.convertDtoToEntity(userService.findUserByEmail("s5090@inbox.ru")))
-//                    .user(userService.getCurrentUser())
+                .user(userService.getCurrentUser())
                 .paymentId(saved.getId())
                 .createdAt(LocalDateTime.now())
                 .build();
@@ -51,7 +48,7 @@ public class PaymentManager {
     }
 
     public Page<PaymentResponse> findAllPaymentsByUser(int page, int size) {
-        UserEntity user = userMapper.convertDtoToEntity(userService.findUserByEmail("s5090@inbox.ru"));
+        UserEntity user = userService.getCurrentUser();
 
         Pageable pageable = PageRequest.of(page, size);
 

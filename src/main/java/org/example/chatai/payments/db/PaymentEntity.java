@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 @Builder
 @Entity
 @Table(name = "payments")
-public class PaymentEntity {
+public class PaymentEntity {//TODO сделать так чтобы один и тот же платеж нельзя было несколько раз использовать
 
     @Id
     private String idempotencyKey;
