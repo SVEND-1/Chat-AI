@@ -1,15 +1,14 @@
 package org.example.chatai.supportTickets.api.controllers;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.example.chatai.supportTickets.api.dto.requests.SupportTicketCreateRequest;
 import org.example.chatai.supportTickets.api.dto.responses.SupportTicketResponse;
 import org.example.chatai.supportTickets.domain.services.SupportTicketService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -21,10 +20,19 @@ public class SupportTicketController {
     private final SupportTicketService supportTicketService;
 
     @PostMapping
+    public ResponseEntity<SupportTicketResponse> createTicket(
+            @RequestBody @Valid SupportTicketCreateRequest request
+    ) {
+        log.info("Called method: createTicket");
+
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .body(supportTicketService.createTicket(request));
+    }
 
     @GetMapping
     public ResponseEntity<List<SupportTicketResponse>> getAllTickets() {
-        log.info("Called getAllTickets method");
+        log.info("Called method: getAllTickets");
 
         return ResponseEntity
                 .status(HttpStatus.OK)
