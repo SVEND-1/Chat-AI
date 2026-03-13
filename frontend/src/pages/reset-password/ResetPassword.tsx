@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import { resetPassword } from "../../api/authApi.ts";
-import AuthContainer from "../../components/auth/AuthContainer.tsx";
-import AuthTitle from "../../components/auth/AuthTitle.tsx";
-import AuthSubtitle from "../../components/auth/AuthSubtitle.tsx";
-import ResetPasswordForm from "../../components/auth/ResetPasswordForm.tsx";
+import { resetPassword } from "../../api/authApi";
+import AuthContainer from "../../components/auth/global/AuthContainer";
+import AuthTitle from "../../components/auth/global/AuthTitle";
+import AuthSubtitle from "../../components/auth/global/AuthSubtitle";
+import ResetPasswordForm from "../../components/auth/reset-password/ResetPasswordForm";
 import "../../style/AuthForm.css";
 import "../../style/auth.css";
 

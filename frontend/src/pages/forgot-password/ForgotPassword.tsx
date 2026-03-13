@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { forgotPassword } from "../../api/authApi";
-import AuthContainer from "../../components/auth/AuthContainer";
-import AuthTitle from "../../components/auth/AuthTitle";
-import AuthSubtitle from "../../components/auth/AuthSubtitle";
+import AuthContainer from "../../components/auth/global/AuthContainer";
+import AuthTitle from "../../components/auth/global/AuthTitle";
+import AuthSubtitle from "../../components/auth/global/AuthSubtitle";
 import ForgotPasswordForm from "../../components/auth/forgot-password/ForgotPasswordForm";
 import "../../style/AuthForm.css";
 import "../../styles/auth.css";

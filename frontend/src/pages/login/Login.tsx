@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { login } from "../../api/authApi.ts";
-import AuthContainer from "../../components/auth/AuthContainer.tsx";
-import AuthTitle from "../../components/auth/AuthTitle.tsx";
-import AuthSubtitle from "../../components/auth/AuthSubtitle.tsx";
-import LoginForm from "../../components/auth/LoginForm.tsx";
+import { login } from "../../api/authApi";
+import AuthContainer from "../../components/auth/global/AuthContainer";
+import AuthTitle from "../../components/auth/global/AuthTitle";
+import AuthSubtitle from "../../components/auth/global/AuthSubtitle";
+import LoginForm from "../../components/auth/login/LoginForm";
 import type { LoginResponse } from "../../api/authApi.ts";
 
 export default function Login() {
