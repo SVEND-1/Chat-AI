@@ -31,11 +31,14 @@ public class SupportTicketController {
     }
 
     @GetMapping
-    public ResponseEntity<List<SupportTicketResponse>> getAllTickets() {
-        log.info("Called method: getAllTickets");
+    public ResponseEntity<List<SupportTicketResponse>> getAllTickets(
+            @RequestParam(name = "pageSize", required = false) int pageSize,
+            @RequestParam(name = "pageNum", required = false) int pageNum
+    ) {
+        log.info("Called method: getAllTickets with pageSize: {}, pageNum: {}", pageSize, pageNum);
 
         return ResponseEntity
                 .status(HttpStatus.OK)
-                .body(supportTicketService.getAllTickets());
+                .body(supportTicketService.getAllTicketsByUser(pageSize, pageNum));
     }
 }

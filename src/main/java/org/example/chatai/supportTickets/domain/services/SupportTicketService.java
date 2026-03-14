@@ -10,6 +10,7 @@ import org.example.chatai.supportTickets.domain.mappers.SupportTicketMapper;
 import org.example.chatai.users.db.Role;
 import org.example.chatai.users.db.UserEntity;
 import org.example.chatai.users.domain.UserService;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -24,8 +25,15 @@ public class SupportTicketService {
 
     //====================================CONTROLLER METHODS=======================================================
 
-    public List<SupportTicketResponse> getAllTickets() {
-        List<SupportTicketEntity> supportTicketEntities = supportTicketRepository.findAll();
+    public List<SupportTicketResponse> getAllTicketsByUser(
+            Integer pageSize,
+            Integer pageNum
+    ) {
+        UserEntity currentUser = userService.getCurrentUser();
+        Pageable pageable = assemblePageable(pageSize, pageNum);
+
+        List<SupportTicketEntity> supportTicketEntities =
+                supportTicketRepository.findAllByUserId(currentUser.getId(), pageable);
 
         return supportTicketEntities.stream()
                 .map(supportTicketMapper::convertEntityToResponse)
@@ -78,5 +86,13 @@ public class SupportTicketService {
             throw new RuntimeException("User's support ticket already open");
         }
 
+    }
+
+    private Pageable assemblePageable(Integer pageSize, Integer pageNum) {
+        int pageSizeForPageable = pageSize == null ? 5 : pageSize;
+        int pageNumForPageable = pageNum == null ? 0 : pageNum;
+        return Pageable
+                .ofSize(pageSizeForPageable)
+                .withPage(pageNumForPageable);
     }
 }
