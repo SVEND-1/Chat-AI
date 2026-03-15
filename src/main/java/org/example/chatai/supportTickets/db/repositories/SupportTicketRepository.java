@@ -3,7 +3,6 @@ package org.example.chatai.supportTickets.db.repositories;
 import org.example.chatai.supportTickets.db.entities.SupportTicketEntity;
 import org.example.chatai.supportTickets.db.enums.SupportStatus;
 import org.example.chatai.users.db.UserEntity;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -14,6 +13,16 @@ import java.util.List;
 
 @Repository
 public interface SupportTicketRepository extends JpaRepository<SupportTicketEntity, Long> {
+    @Query("""
+            SELECT u FROM UserEntity u
+            WHERE u.role = 'SUPPORT'
+            AND NOT EXISTS (
+                SELECT 1 FROM SupportTicketEntity t
+                WHERE t.support = u
+            )
+            """)
+    List<UserEntity> findSupportWithNoTickets();
+
     @Query("""
             SELECT t.support
             FROM SupportTicketEntity t

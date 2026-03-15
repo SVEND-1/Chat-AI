@@ -31,6 +31,7 @@ public class UserEntity {
     private String password;
 
     @Column(name = "role")
+    @Enumerated(EnumType.STRING)
     private Role role;
 
     @OneToMany(mappedBy = "user",cascade = CascadeType.ALL, fetch = FetchType.EAGER)

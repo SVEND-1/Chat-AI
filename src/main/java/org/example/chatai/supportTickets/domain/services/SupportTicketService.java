@@ -1,6 +1,7 @@
 package org.example.chatai.supportTickets.domain.services;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.example.chatai.supportTickets.api.dto.requests.SupportTicketCreateRequest;
 import org.example.chatai.supportTickets.api.dto.responses.SupportTicketResponse;
 import org.example.chatai.supportTickets.db.entities.SupportTicketEntity;
@@ -18,6 +19,7 @@ import java.util.Random;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class SupportTicketService {
     private final SupportTicketRepository supportTicketRepository;
     private final SupportTicketMapper supportTicketMapper;
@@ -45,7 +47,10 @@ public class SupportTicketService {
 
         checkRightUser(user);
 
-        List<UserEntity> supports = supportTicketRepository.getMinimumCountOfOpenTicketsBySupportId();
+        List<UserEntity> supports =
+                supportTicketRepository.findSupportWithNoTickets().isEmpty() ?
+                        supportTicketRepository.getMinimumCountOfOpenTicketsBySupportId() :
+                        supportTicketRepository.findSupportWithNoTickets();
 
         if (supports.isEmpty()) {
             throw new RuntimeException("HOOOOOOW??? I think you haven't any users with role SUPPORT");
