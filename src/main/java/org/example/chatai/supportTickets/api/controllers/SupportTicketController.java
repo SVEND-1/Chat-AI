@@ -32,8 +32,8 @@ public class SupportTicketController {
 
     @GetMapping
     public ResponseEntity<List<SupportTicketResponse>> getAllTickets(
-            @RequestParam(name = "pageSize", required = false) int pageSize,
-            @RequestParam(name = "pageNum", required = false) int pageNum
+            @RequestParam(name = "pageSize", required = false) Integer pageSize,
+            @RequestParam(name = "pageNum", required = false) Integer pageNum
     ) {
         log.info("Called method: getAllTickets with pageSize: {}, pageNum: {}", pageSize, pageNum);
 
