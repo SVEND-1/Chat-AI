@@ -29,10 +29,13 @@ public interface SupportTicketRepository extends JpaRepository<SupportTicketEnti
             WHERE t.status = 'OPEN'
             GROUP BY t.support
             HAVING COUNT(t) = (
-                SELECT MIN(COUNT(t2))
-                FROM SupportTicketEntity t2
-                WHERE t2.status = 'OPEN'
-                GROUP BY t2.support
+                SELECT MIN(c.cnt)
+                FROM (
+                    SELECT COUNT(t2) AS cnt
+                    FROM SupportTicketEntity t2
+                    WHERE t2.status = 'OPEN'
+                    GROUP BY t2.support
+                ) AS c
             )
             """)
     List<UserEntity> getMinimumCountOfOpenTicketsBySupportId();

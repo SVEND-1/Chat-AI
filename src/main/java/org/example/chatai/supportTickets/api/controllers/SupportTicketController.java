@@ -41,4 +41,15 @@ public class SupportTicketController {
                 .status(HttpStatus.OK)
                 .body(supportTicketService.getAllTicketsByUser(pageSize, pageNum));
     }
+
+    @PatchMapping("/{id}")
+    public ResponseEntity<SupportTicketResponse> closeTicket(
+            @PathVariable("id") Long id
+    ) {
+        log.info("Called method: closeTicket with id: {}", id);
+
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(supportTicketService.closeTicket(id));
+    }
 }
