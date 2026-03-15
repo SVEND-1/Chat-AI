@@ -1,11 +1,10 @@
 package org.example.chatai.payments.domain;
 
-import org.example.chatai.payments.api.dto.response.PaymentResponse;
+import org.example.chatai.payments.api.dto.response.payment.PaymentResponse;
 import org.example.chatai.payments.db.PaymentEntity;
 import org.example.chatai.payments.db.PaymentRepository;
 import org.example.chatai.users.db.UserEntity;
 import org.example.chatai.users.domain.UserService;
-import org.example.chatai.users.domain.mapper.UserMapper;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -41,11 +40,6 @@ public class PaymentManager {
         paymentService.save(paymentEntity);
     }
 
-    public void saveReceipt(String paymentId, Receipt saved) {
-        PaymentEntity paymentEntity = paymentService.findByPaymentId(paymentId);
-        paymentEntity.setReceiptId(saved.getId());
-        paymentService.save(paymentEntity);
-    }
 
     public Page<PaymentResponse> findAllPaymentsByUser(int page, int size) {
         UserEntity user = userService.getCurrentUser();

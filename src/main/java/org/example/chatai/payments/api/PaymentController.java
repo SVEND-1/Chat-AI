@@ -1,8 +1,9 @@
 package org.example.chatai.payments.api;
 
-import org.example.chatai.payments.api.dto.response.PaymentCreateResponse;
-import org.example.chatai.payments.api.dto.response.PaymentPageResponse;
-import org.example.chatai.payments.api.dto.response.PaymentResponse;
+import org.example.chatai.payments.api.dto.response.payment.PaymentCreateResponse;
+import org.example.chatai.payments.api.dto.response.payment.PaymentPageResponse;
+import org.example.chatai.payments.api.dto.response.payment.PaymentResponse;
+import org.example.chatai.payments.api.dto.response.receipt.ReceiptResponse;
 import org.example.chatai.payments.domain.PaymentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -36,22 +37,9 @@ public class PaymentController {
         return ResponseEntity.ok(paymentService.findPaymentDto(paymentId));
     }
 
-    @PostMapping("/{paymentId}")
-    public ResponseEntity<Receipt> getCheck(
-            @PathVariable String paymentId
-    ){
-        return ResponseEntity.ok(paymentService.createReceipt(paymentId));
-    }
-
-    @GetMapping("/{paymentId}/receipt")
-    public ResponseEntity<Receipt> getReceipt(
-            @PathVariable String paymentId
-    ){
-        return ResponseEntity.ok(paymentService.findReceipt(paymentId));
-    }
 
 
-    @PostMapping("/")
+    @PostMapping
     public ResponseEntity<PaymentCreateResponse> createPayment() {
         return ResponseEntity.ok(paymentService.createPayment());
     }

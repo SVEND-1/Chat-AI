@@ -4,7 +4,7 @@ import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.example.chatai.payments.api.dto.response.PaymentResponse;
+import org.example.chatai.payments.api.dto.response.payment.PaymentResponse;
 import org.example.chatai.payments.domain.PaymentService;
 import org.example.chatai.subscriptions.api.dto.response.SubscriptionDetailResponse;
 import org.example.chatai.subscriptions.db.Status;
@@ -12,17 +12,13 @@ import org.example.chatai.subscriptions.db.SubscriptionEntity;
 import org.example.chatai.subscriptions.db.SubscriptionRepository;
 import org.example.chatai.users.db.UserEntity;
 import org.example.chatai.users.domain.UserService;
-import org.example.chatai.users.domain.mapper.UserMapper;
-import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Month;
-import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Slf4j
 @Service

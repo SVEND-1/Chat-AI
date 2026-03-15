@@ -2,6 +2,7 @@ package org.example.chatai.payments.domain;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.common.errors.ApiException;
+import org.example.chatai.payments.api.dto.response.receipt.ReceiptResponse;
 import org.example.chatai.payments.db.PaymentEntity;
 import org.example.chatai.users.domain.UserService;
 import org.springframework.context.annotation.Lazy;
@@ -21,11 +22,24 @@ public class YooKassaManager {
     private final PaymentService paymentService;
     private final UserService userService;
     private final String RETURN_URL = "http://localhost:5173/succeeded-payment";
+    private final ReceiptManager receiptManager;
 
-    public YooKassaManager(@Lazy PaymentService paymentService, UserService userService) {
+    public YooKassaManager(@Lazy PaymentService paymentService, UserService userService, ReceiptManager receiptManager) {
         this.paymentService = paymentService;
         this.userService = userService;
+        this.receiptManager = receiptManager;
     }
+
+
+    public Payment findPayment(PaymentProcessor paymentProcessor,String paymentId) {
+        try {
+            return paymentProcessor.findById(paymentId);
+        } catch (ApiException e) {
+            log.error("Ошибка поиска платежа {}: {}", paymentId, e.getMessage());
+            throw new RuntimeException("Платеж не найден", e);
+        }
+    }
+
 
     public Payment createYooKassaPayment(PaymentProcessor paymentProcessor, String idempotencyKey){
         Amount amount = Amount.builder()
@@ -47,6 +61,7 @@ public class YooKassaManager {
 
         return paymentProcessor.create(payment, idempotencyKey);
     }
+
 
     public Receipt createYooKassaReceipt(ReceiptProcessor receiptProcessor, String paymentId) {
         Payment payment = paymentService.findPayment(paymentId);
@@ -88,27 +103,17 @@ public class YooKassaManager {
         return receiptProcessor.create(receipt, null);
     }
 
-    public Payment findPayment(PaymentProcessor paymentProcessor,String paymentId) {
-        try {
-            return paymentProcessor.findById(paymentId);
-        } catch (ApiException e) {
-            log.error("Ошибка поиска платежа {}: {}", paymentId, e.getMessage());
-            throw new RuntimeException("Платеж не найден", e);
-        }
-    }
-
-    public Receipt findReceipt(ReceiptProcessor receiptProcessor,String paymentId){
+    public ReceiptResponse findReceiptDTO(ReceiptProcessor receiptProcessor, String paymentId){
         try {
             PaymentEntity payment = paymentService.findByPaymentId(paymentId);
-            return receiptProcessor.findById(payment.getReceiptId());
+            Receipt receipt = receiptProcessor.findById(payment.getReceiptId());
+            return receiptManager.convertEntityToDto(receipt);
         }
         catch (Exception e){
             log.error("Ошибка поиска чека,ex={}", e.getMessage());
             throw new RuntimeException("Чек не найден", e);
         }
-
     }
-
 
     private String getSettlementType(Payment payment) {
         return switch (payment.getPaymentMethod().getType()) {
@@ -124,5 +129,6 @@ public class YooKassaManager {
                     Settlement.Type.CASHLESS;
         };
     }
+
 
 }

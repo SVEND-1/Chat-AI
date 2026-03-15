@@ -3,9 +3,10 @@ package org.example.chatai.payments.domain;
 import jakarta.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.common.errors.ApiException;
-import org.example.chatai.payments.api.dto.response.PaymentCreateResponse;
-import org.example.chatai.payments.api.dto.response.PaymentPageResponse;
-import org.example.chatai.payments.api.dto.response.PaymentResponse;
+import org.example.chatai.payments.api.dto.response.payment.PaymentCreateResponse;
+import org.example.chatai.payments.api.dto.response.payment.PaymentPageResponse;
+import org.example.chatai.payments.api.dto.response.payment.PaymentResponse;
+import org.example.chatai.payments.api.dto.response.receipt.ReceiptResponse;
 import org.example.chatai.payments.db.PaymentEntity;
 import org.example.chatai.payments.db.PaymentRepository;
 import org.springframework.beans.factory.annotation.Value;
@@ -27,6 +28,7 @@ public class PaymentService {
     private final PaymentMapper paymentMapper;
     private final YooKassaManager yooKassaManager;
     private final PaymentManager paymentManager;
+    private final ReceiptManager receiptManager;
     @Value("${shop_id}")
     private String shopId;
 
@@ -38,11 +40,12 @@ public class PaymentService {
     private PaymentProcessor paymentProcessor;
     private ReceiptProcessor receiptProcessor;
 
-    public PaymentService(PaymentRepository paymentRepository, PaymentMapper paymentMapper, YooKassaManager yooKassaManager, PaymentManager paymentManager) {
+    public PaymentService(PaymentRepository paymentRepository, PaymentMapper paymentMapper, YooKassaManager yooKassaManager, PaymentManager paymentManager, ReceiptManager receiptManager) {
         this.paymentRepository = paymentRepository;
         this.paymentMapper = paymentMapper;
         this.yooKassaManager = yooKassaManager;
         this.paymentManager = paymentManager;
+        this.receiptManager = receiptManager;
     }
 
     @PostConstruct
@@ -68,8 +71,8 @@ public class PaymentService {
         return paymentMapper.toPageResponse(paymentManager.findAllPaymentsByUser(page,size));
     }
 
-    public Receipt findReceipt(String paymentId){
-        return yooKassaManager.findReceipt(receiptProcessor,paymentId);
+    public ReceiptResponse findReceipt(String paymentId){
+        return yooKassaManager.findReceiptDTO(receiptProcessor,paymentId);
     }
 
     @Transactional
@@ -95,7 +98,7 @@ public class PaymentService {
     public Receipt createReceipt(String paymentId) {
         try {
             Receipt saved = yooKassaManager.createYooKassaReceipt(receiptProcessor,paymentId);
-            paymentManager.saveReceipt(paymentId,saved);
+            receiptManager.saveReceipt(paymentId,saved);
             return saved;
         } catch (ApiException e) {
             log.error("Ошибка создания чека для платежа {}: {}", paymentId, e.getMessage());

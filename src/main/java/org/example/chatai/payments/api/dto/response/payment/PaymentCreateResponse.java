@@ -1,4 +1,4 @@
-package org.example.chatai.payments.api.dto.response;
+package org.example.chatai.payments.api.dto.response.payment;
 
 public record PaymentCreateResponse(
         String paymentId,
