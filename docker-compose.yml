@@ -76,10 +76,7 @@ services:
       - SPRING_DATASOURCE_USERNAME=admin
       - SPRING_DATASOURCE_PASSWORD=admin123
       - KAFKA_BOOTSTRAP_SERVERS=kafka:9092
-      - MINIO_ENDPOINT=http://minio:9000
-      - MINIO_ACCESS_KEY=admin
-      - MINIO_SECRET_KEY=strongpassword123
-      - OLLAMA_URL=http://gemma3:270m
+      - OLLAMA_URL=http://ollama:11434
       - OLLAMA_MODEL=llama3.2:1b
 
     depends_on:

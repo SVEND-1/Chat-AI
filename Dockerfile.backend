@@ -7,7 +7,7 @@ RUN mvn dependency:go-offline -B
 COPY src ./src
 
 # Указываем конкретный main класс при сборке
-RUN mvn clean package -DskipTests -Dstart-class=org.example.hackaton.HackatonApplication
+RUN mvn clean package -DskipTests
 
 FROM eclipse-temurin:21-jre
 WORKDIR /app
