@@ -28,6 +28,10 @@ public class SubscriptionService {
     private final SubscriptionRepository subscriptionRepository;
     private final UserService userService;
 
+    public SubscriptionEntity findByUserEmail(String userEmail) {
+        return subscriptionRepository.findByUserEmail(userEmail).orElseThrow(() -> new EntityNotFoundException("Подписка не найдена не найден"));
+    }
+
     public SubscriptionDetailResponse getSubscription(Long id) {
         if (id == null) {
             return null;
