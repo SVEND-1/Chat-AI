@@ -1,4 +1,4 @@
-package org.example.chatai.payments.api.dto.response;
+package org.example.chatai.payments.api.dto.response.payment;
 
 import java.util.List;
 

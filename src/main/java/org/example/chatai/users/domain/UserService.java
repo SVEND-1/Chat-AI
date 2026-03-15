@@ -3,17 +3,19 @@ package org.example.chatai.users.domain;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.example.chatai.config.JwtTokenProvider;
+import org.example.chatai.supportTickets.db.entities.SupportTicketEntity;
+import org.example.chatai.supportTickets.db.enums.SupportStatus;
 import org.example.chatai.users.api.dto.users.request.UserCreateRequest;
 import org.example.chatai.users.api.dto.users.response.UserDTO;
 import org.example.chatai.users.db.UserEntity;
 import org.example.chatai.users.db.UserRepository;
 import org.example.chatai.users.domain.mapper.UserMapper;
 import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
+import java.time.LocalDateTime;
 
 @Slf4j
 @Service
@@ -22,14 +24,15 @@ public class UserService {
 
     private final UserRepository userRepository;
     private final UserMapper userMapper;
+    private final JwtTokenProvider jwtTokenProvider;
 
     public UserEntity getCurrentUser() {
-        UserDTO dto = (UserDTO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        UserEntity user = userRepository.findByEmailEqualsIgnoreCase(dto.email());
+        String token = jwtTokenProvider.getCurrentToken();
+        String email = jwtTokenProvider.getEmailFromToken(token);
+        UserEntity user = userRepository.findByEmailEqualsIgnoreCase(email);
         notFoundUser(user);
         return user;
     }
-
 
     public UserDTO findUserByEmail(String email) {
         if (email == null) {
