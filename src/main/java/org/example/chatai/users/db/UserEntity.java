@@ -2,6 +2,7 @@ package org.example.chatai.users.db;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.example.chatai.chat.db.ChatEntity;
 import org.example.chatai.payments.db.PaymentEntity;
 import org.example.chatai.subscriptions.db.SubscriptionEntity;
 
@@ -38,4 +39,7 @@ public class UserEntity {
 
     @OneToOne(mappedBy = "user")
     private SubscriptionEntity subscription;
+
+    @OneToMany(mappedBy = "user")
+    private List<ChatEntity> chats = new ArrayList<>();
 }
