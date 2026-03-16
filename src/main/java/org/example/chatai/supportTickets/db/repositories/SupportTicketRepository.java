@@ -10,6 +10,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface SupportTicketRepository extends JpaRepository<SupportTicketEntity, Long> {
@@ -51,5 +52,14 @@ public interface SupportTicketRepository extends JpaRepository<SupportTicketEnti
     List<SupportTicketEntity> findAllByUserId(
             @Param("userId") Long userId,
             Pageable pageable
+    );
+
+    @Query("""
+            SELECT t FROM SupportTicketEntity t
+            LEFT JOIN FETCH t.user
+            WHERE t.id = :id
+            """)
+    Optional<SupportTicketEntity> findByIdWithUser(
+            @Param("id") Long id
     );
 }

@@ -1,7 +1,7 @@
 package org.example.chatai.supportTickets.api.dto.responses;
 
-import org.example.chatai.users.db.UserEntity;
 import org.example.chatai.supportTickets.db.enums.SupportStatus;
+import org.example.chatai.users.db.UserEntity;
 
 import java.time.LocalDateTime;
 

@@ -2,8 +2,8 @@ package org.example.chatai.supportTickets.db.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.example.chatai.users.db.UserEntity;
 import org.example.chatai.supportTickets.db.enums.SupportStatus;
+import org.example.chatai.users.db.UserEntity;
 
 import java.time.LocalDateTime;
 

@@ -3,6 +3,7 @@ package org.example.chatai.supportTickets.domain.services;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.example.chatai.supportTickets.api.dto.requests.SupportTicketCreateRequest;
+import org.example.chatai.supportTickets.api.dto.responses.SupportStatusResponse;
 import org.example.chatai.supportTickets.api.dto.responses.SupportTicketResponse;
 import org.example.chatai.supportTickets.db.entities.SupportTicketEntity;
 import org.example.chatai.supportTickets.db.enums.SupportStatus;
@@ -67,6 +68,23 @@ public class SupportTicketService {
                 .toList();
     }
 
+    public SupportTicketResponse getTicketById(Long id) {
+        SupportTicketEntity ticketEntity = supportTicketRepository.findByIdWithUser(id)
+                .orElseThrow(() -> new RuntimeException("Ticket not found"));
+        UserEntity currentUser = userService.getCurrentUser();
+
+        checkHavingUserTicket(ticketEntity, currentUser);
+
+        return supportTicketMapper.convertEntityToResponse(ticketEntity);
+    }
+
+    public SupportStatusResponse getTicketStatusById(Long id) {
+        SupportTicketEntity ticketEntity = supportTicketRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Ticket not found"));
+
+        return new SupportStatusResponse(ticketEntity.getStatus());
+    }
+
     public SupportTicketResponse closeTicket(Long id) {
         SupportTicketEntity ticketEntity = supportTicketRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Ticket not found"));
@@ -115,6 +133,12 @@ public class SupportTicketService {
         return Pageable
                 .ofSize(pageSizeForPageable)
                 .withPage(pageNumForPageable);
+    }
+
+    private void checkHavingUserTicket(SupportTicketEntity ticketEntity, UserEntity currentUser) {
+        if (!ticketEntity.getUser().getId().equals(currentUser.getId())) {
+            throw new RuntimeException("It's not your ticket");
+        }
     }
 
     private void checkForClosingTicket(

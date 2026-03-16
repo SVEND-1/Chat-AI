@@ -4,6 +4,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.example.chatai.supportTickets.api.dto.requests.SupportTicketCreateRequest;
+import org.example.chatai.supportTickets.api.dto.responses.SupportStatusResponse;
 import org.example.chatai.supportTickets.api.dto.responses.SupportTicketResponse;
 import org.example.chatai.supportTickets.domain.services.SupportTicketService;
 import org.springframework.http.HttpStatus;
@@ -40,6 +41,28 @@ public class SupportTicketController {
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(supportTicketService.getAllTicketsByUser(pageSize, pageNum));
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<SupportTicketResponse> getTicketById(
+            @PathVariable Long id
+    ) {
+        log.info("Called method: getTicketById with id: {}", id);
+
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(supportTicketService.getTicketById(id));
+    }
+
+    @GetMapping("/status/{id}")
+    public ResponseEntity<SupportStatusResponse> getTicketStatusById(
+            @PathVariable Long id
+    ) {
+        log.info("Called method: getStatusById with id: {}", id);
+
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(supportTicketService.getTicketStatusById(id));
     }
 
     @PatchMapping("/{id}")
