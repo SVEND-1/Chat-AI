@@ -1,6 +1,6 @@
 import type { RegisterFormProps } from "../../../types/auth/auth.types";
-import Field from "../../global/Field";
-import Button from "../../global/Button";
+import Field from "../global/Field";
+import Button from "../global/Button";
 
 export default function RegisterForm({ form, setForm, handleSubmit, navigate }: RegisterFormProps) {
     const isFormValid = form.email.trim() && form.password.trim() && form.name.trim();
