@@ -16,6 +16,7 @@ import java.time.LocalDateTime;
 public class PaymentEntity {//TODO сделать так чтобы один и тот же платеж нельзя было несколько раз использовать
 
     @Id
+    @Column(name = "idempotency_key")
     private String idempotencyKey;
 
     @Column(name = "payment_id")
@@ -27,6 +28,6 @@ public class PaymentEntity {//TODO сделать так чтобы один и 
     @ManyToOne
     private UserEntity user;
 
-    @Column(name = "create_at")
+    @Column(name = "created_at")
     private LocalDateTime createdAt = LocalDateTime.now();
 }

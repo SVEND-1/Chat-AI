@@ -63,25 +63,25 @@ public class PaymentService {
     }
 
     //================================Controller Methods================================================
-    public PaymentResponse findPaymentDto(String paymentId){
+    public PaymentResponse findPaymentDto(String paymentId) {
         return paymentMapper.convertEntityToPaymentResponse(findPayment(paymentId));
     }
 
     public PaymentPageResponse findAllPaymentsByUser(int page, int size) {
-        return paymentMapper.toPageResponse(paymentManager.findAllPaymentsByUser(page,size));
+        return paymentMapper.toPageResponse(paymentManager.findAllPaymentsByUser(page, size));
     }
 
-    public ReceiptResponse findReceipt(String paymentId){
-        return yooKassaManager.findReceiptDTO(receiptProcessor,paymentId);
+    public ReceiptResponse findReceipt(String paymentId) {
+        return yooKassaManager.findReceiptDTO(receiptProcessor, paymentId);
     }
 
     @Transactional
     public PaymentCreateResponse createPayment() {//TODO если у фронтенда не получиться с оплатой сделатьь через куки
         String idempotencyKey = UUID.randomUUID().toString();
         try {
-            Payment saved = yooKassaManager.createYooKassaPayment(paymentProcessor,idempotencyKey);
+            Payment saved = yooKassaManager.createYooKassaPayment(paymentProcessor, idempotencyKey);
 
-            paymentManager.savePayment(idempotencyKey,saved);
+            paymentManager.savePayment(idempotencyKey, saved);
 
             return new PaymentCreateResponse(
                     saved.getId(),
@@ -97,8 +97,8 @@ public class PaymentService {
     @Transactional
     public Receipt createReceipt(String paymentId) {
         try {
-            Receipt saved = yooKassaManager.createYooKassaReceipt(receiptProcessor,paymentId);
-            receiptManager.saveReceipt(paymentId,saved);
+            Receipt saved = yooKassaManager.createYooKassaReceipt(receiptProcessor, paymentId);
+            receiptManager.saveReceipt(paymentId, saved);
             return saved;
         } catch (ApiException e) {
             log.error("Ошибка создания чека для платежа {}: {}", paymentId, e.getMessage());
@@ -108,12 +108,12 @@ public class PaymentService {
 
     //================================Service Methods================================================
 
-    public PaymentEntity findByPaymentId(String paymentId){
+    public PaymentEntity findByPaymentId(String paymentId) {
         return paymentRepository.findByPaymentId(paymentId);
     }
 
     public Payment findPayment(String paymentId) {
-        return yooKassaManager.findPayment(paymentProcessor,paymentId);
+        return yooKassaManager.findPayment(paymentProcessor, paymentId);
     }
 
     public PaymentEntity save(PaymentEntity payment) {
