@@ -1,16 +1,25 @@
 import React from 'react';
 import '../../style/subscription/CloseButton.css';
+import { useNavigate } from 'react-router-dom';
 
 interface CloseButtonProps {
     onClose?: () => void;
 }
 
+
 const CloseButton: React.FC<CloseButtonProps> = ({ onClose }) => {
+
+    const navigate = useNavigate();
+
     const handleClose = (): void => {
-        console.log('Close clicked');
+
         if (onClose) {
             onClose();
+
         }
+
+        navigate('/chat');
+
     };
 
     return (

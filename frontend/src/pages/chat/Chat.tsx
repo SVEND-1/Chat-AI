@@ -1,7 +1,9 @@
 import { useState, useEffect, useRef } from "react";
-import { Link } from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import "../../style/chat.css";
 import logoIcon from '../../assets/icons/icon.svg'
+import SettingsModal from "../../components/Chat/settingModal/SettingModal";
+
 
 interface Message {
     id: number;
@@ -16,11 +18,16 @@ interface ChatRoom {
     messages: Message[];
 }
 
+
+
 export default function Chat() {
+    const navigate = useNavigate();
     const [chatRooms, setChatRooms] = useState<ChatRoom[]>([]);
     const [currentChatId, setCurrentChatId] = useState<string | null>(null);
     const [input, setInput] = useState("");
     const [showProfileMenu, setShowProfileMenu] = useState(false);
+
+    const [showSettingsModal, setShowSettingsModal] = useState(false);
 
     const inputRef = useRef<HTMLInputElement>(null);
     const messagesEndRef = useRef<HTMLDivElement>(null);
@@ -96,6 +103,17 @@ export default function Chat() {
     const toggleProfileMenu = () => {
         setShowProfileMenu(!showProfileMenu);
     };
+
+    // Функции для открытия/закрытия
+    const openSettingsModal = () => {
+        setShowProfileMenu(false);
+        setShowSettingsModal(true);
+    };
+
+    const closeSettingsModal = () => {
+        setShowSettingsModal(false);
+    };
+
 
     return (
         <div className="app">
@@ -186,7 +204,10 @@ export default function Chat() {
 
                         {showProfileMenu && (
                             <div className="profile-menu">
-                                <Link to="/settings" className="profile-menu-item">
+                                <button
+                                    className="profile-menu-item"
+                                    onClick={openSettingsModal}
+                                >
                                     <svg viewBox="0 0 24 24" strokeWidth="1.5" width="18" height="18">
                                         <path
                                             stroke="currentColor"
@@ -202,7 +223,7 @@ export default function Chat() {
                                         />
                                     </svg>
                                     Настройки
-                                </Link>
+                                </button>
                                 <Link to="/support" className="profile-menu-item">
                                     <svg viewBox="0 0 24 24" strokeWidth="1.5" width="18" height="18">
                                         <path
@@ -316,6 +337,9 @@ export default function Chat() {
                     )}
                 </div>
             </div>
+            {showSettingsModal && (
+                <SettingsModal onClose={closeSettingsModal} />
+            )}
         </div>
     );
 }

@@ -1,9 +1,12 @@
 import axios from "axios";
 
+
 const API = axios.create({
     baseURL: "http://localhost:8080/api/auth",
     withCredentials: true,
 });
+
+
 
 
 export interface LoginResponse {
@@ -91,3 +94,4 @@ export const verifyResetCode = (resetId: string, code: string) =>
 export const resetPassword = (data: ResetPasswordRequest) =>
     API.post<ResetPasswordResponse>("/password/reset", data);
 
+export default API;

@@ -1,0 +1,345 @@
+/* Modal.css - общие стили для всех модальных окон */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.75);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    backdrop-filter: blur(4px);
+}
+
+.modal-content {
+    background-color: #1a1a1a;
+    border: 1px solid #2a2a2a;
+    border-radius: 16px;
+    width: 90%;
+    max-width: 800px;
+    max-height: 80vh;
+    overflow: hidden;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+    animation: modal-appear 0.3s ease;
+}
+
+@keyframes modal-appear {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.modal-header {
+    padding: 20px 24px;
+    border-bottom: 1px solid #2a2a2a;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(135deg, rgba(0, 102, 255, 0.1), rgba(102, 204, 255, 0.1));
+}
+
+.modal-header h2 {
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: 600;
+    background: linear-gradient(135deg, #0066ff, #66ccff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.modal-close {
+    background: none;
+    border: none;
+    color: #8a8a8a;
+    font-size: 28px;
+    cursor: pointer;
+    padding: 0;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+}
+
+.modal-close:hover {
+    background-color: #2a2a2a;
+    color: #ffffff;
+}
+
+.modal-body {
+    display: flex;
+    height: 100%;
+    max-height: calc(80vh - 80px);
+}
+
+/* Сайдбар модального окна */
+.modal-sidebar {
+    width: 200px;
+    background-color: #141414;
+    border-right: 1px solid #2a2a2a;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.modal-sidebar-btn {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    background: transparent;
+    border: none;
+    border-radius: 10px;
+    color: #b0b0b0;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-align: left;
+    width: 100%;
+}
+
+.modal-sidebar-btn:hover {
+    background-color: #2a2a2a;
+    color: #ffffff;
+}
+
+.modal-sidebar-btn.active {
+    background: linear-gradient(135deg, #0066ff, #66ccff);
+    color: #ffffff;
+}
+
+.modal-sidebar-btn svg {
+    width: 20px;
+    height: 20px;
+    stroke: currentColor;
+    fill: none;
+}
+
+/* Контент модального окна */
+.modal-content-area {
+    flex: 1;
+    padding: 24px;
+    overflow-y: auto;
+    background-color: #1a1a1a;
+    scrollbar-width: thin;
+    scrollbar-color: #404040 #1a1a1a;
+}
+
+.modal-content-area::-webkit-scrollbar {
+    width: 6px;
+}
+
+.modal-content-area::-webkit-scrollbar-track {
+    background: #1a1a1a;
+}
+
+.modal-content-area::-webkit-scrollbar-thumb {
+    background-color: #404040;
+    border-radius: 3px;
+}
+
+.modal-content-area::-webkit-scrollbar-thumb:hover {
+    background-color: #4a4a4a;
+}
+
+/* Секции настроек */
+.settings-section {
+    margin-bottom: 32px;
+}
+
+.settings-section h3 {
+    color: #8a8a8a;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 16px;
+}
+
+.settings-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid #2a2a2a;
+}
+
+.settings-item:last-child {
+    border-bottom: none;
+}
+
+.settings-item-label {
+    color: #e5e5e5;
+    font-size: 15px;
+    font-weight: 500;
+}
+
+/* Переключатели */
+.theme-toggle {
+    display: flex;
+    gap: 8px;
+    background-color: #141414;
+    border-radius: 30px;
+    padding: 4px;
+}
+
+.theme-toggle-btn {
+    padding: 8px 16px;
+    border-radius: 30px;
+    border: none;
+    background: transparent;
+    color: #b0b0b0;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.theme-toggle-btn.active {
+    background: linear-gradient(135deg, #0066ff, #66ccff);
+    color: #ffffff;
+}
+
+/* Селект */
+.select-input {
+    background-color: #141414;
+    border: 1px solid #2a2a2a;
+    border-radius: 8px;
+    padding: 8px 32px 8px 12px;
+    color: #e5e5e5;
+    font-size: 14px;
+    cursor: pointer;
+    outline: none;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%238a8a8a' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 8px center;
+}
+
+.select-input:focus {
+    border-color: #0066ff;
+}
+
+/* Карточки для "О нас" */
+.about-card {
+    background-color: #141414;
+    border: 1px solid #2a2a2a;
+    border-radius: 12px;
+    padding: 24px;
+    text-align: center;
+}
+
+.about-logo {
+    width: 64px;
+    height: 64px;
+    margin: 0 auto 16px;
+    filter: drop-shadow(0 0 20px rgba(0, 102, 255, 0.3));
+}
+
+.about-title {
+    font-size: 24px;
+    font-weight: 600;
+    background: linear-gradient(135deg, #0066ff, #66ccff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 8px;
+}
+
+.about-version {
+    color: #8a8a8a;
+    font-size: 14px;
+    margin-bottom: 16px;
+}
+
+.about-description {
+    color: #b0b0b0;
+    font-size: 15px;
+    line-height: 1.6;
+    margin-bottom: 24px;
+}
+
+/* Ссылки */
+.legal-links {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.legal-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 16px;
+    background-color: #141414;
+    border: 1px solid #2a2a2a;
+    border-radius: 10px;
+    color: #e5e5e5;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.legal-link:hover {
+    border-color: #0066ff;
+    transform: translateX(4px);
+}
+
+.legal-link-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.legal-link-left svg {
+    stroke: currentColor;
+    fill: none;
+}
+
+.legal-link-arrow {
+    color: #8a8a8a;
+}
+
+.legal-link-arrow svg {
+    stroke: currentColor;
+    fill: none;
+}
+
+/* Кнопка профиля */
+.profile-button {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px;
+    background: linear-gradient(135deg, rgba(0, 102, 255, 0.1), rgba(102, 204, 255, 0.1));
+    border: 1px solid #0066ff;
+    border-radius: 12px;
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    width: 100%;
+    margin-top: 16px;
+}
+
+.profile-button:hover {
+    background: linear-gradient(135deg, rgba(0, 102, 255, 0.2), rgba(102, 204, 255, 0.2));
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px rgba(0, 102, 255, 0.2);
+}
+
+.profile-button svg {
+    stroke: currentColor;
+    fill: none;
+}
