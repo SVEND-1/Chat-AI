@@ -19,10 +19,9 @@ public class SubscriptionController {
     }
 
     @PostMapping("/{paymentId}")
-    public ResponseEntity<?> subscribe(
+    public ResponseEntity<String> subscribe(
             @PathVariable String paymentId
     ) {
-        String payment = subscriptionService.createSubscription(paymentId);
-        return ResponseEntity.ok().body(payment);
+        return ResponseEntity.ok().body(subscriptionService.createSubscription(paymentId));
     }
 }

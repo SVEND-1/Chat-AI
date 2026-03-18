@@ -2,7 +2,10 @@ package org.example.chatai.chat.domain;
 
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.text.StrBuilder;
+import org.example.chatai.chat.api.dto.response.ChatAIResponse;
+import org.example.chatai.chat.api.dto.response.ListChatAI;
 import org.example.chatai.chat.db.ChatEntity;
 import org.example.chatai.chat.db.ChatRepository;
 import org.example.chatai.users.domain.UserService;
@@ -19,6 +22,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@Slf4j
 @Repository
 @RequiredArgsConstructor
 public class ChatService {
@@ -27,33 +31,27 @@ public class ChatService {
     private final UserService userService;
     private final AIManager aiManager;
 
-    public List<ChatEntity> findAll() {
-        return chatRepository.findAll();
-    }
-
-    public List<String> findAllByUser() {
+    public List<ListChatAI> findAllByUser() {
         return chatRepository.findByUserId(userService.getCurrentUser().getId())
                 .stream()
-                .map(ChatEntity::getTitle)
+                .map(el -> new ListChatAI(
+                        el.getId(),
+                        el.getTitle()
+                ))
                 .toList();
     }
 
     public ChatEntity findChat(Long chatId) {
-        return chatRepository.findById(chatId).orElseThrow(() -> new EntityNotFoundException("Пользователь не найден"));
+        isValid(chatId);
+        return chatRepository.findById(chatId).orElseThrow(() -> new EntityNotFoundException("Чат не найден"));
     }
 
-    public Map<String,String> findChatMessages(Long chatId) {
-        ChatEntity chatEntity = findChat(chatId);
-
-        StrBuilder strBuilder = new StrBuilder();
-        for (String message : aiManager.findMessagesChat(String.valueOf(chatId))){
-            strBuilder.append(message);
-        }
-
-        Map<String,String> result = new HashMap<>();
-        result.put("chat",chatEntity.getTitle());
-        result.put("content",strBuilder.toString());
-        return result;
+    public ChatAIResponse findChatMessages(Long chatId) {
+        isValid(chatId);
+        return new ChatAIResponse(
+                findChat(chatId).getTitle(),
+                aiManager.findMessagesChat(String.valueOf(chatId))
+        );
     }
 
     public String save(String title) {
@@ -62,7 +60,7 @@ public class ChatService {
             chatEntity.setTitle(title);
             chatEntity.setUser(userService.getCurrentUser());
             chatRepository.save(chatEntity);
-            return "Успешно";
+            return title;
         }
         catch (Exception e){
             return e.getMessage();
@@ -75,7 +73,7 @@ public class ChatService {
 
     public String delete(Long chatId) {
         try {
-            chatRepository.deleteById(chatId);
+            chatRepository.deleteById(chatId);//Добавить ещё удаление из нейронки сообщений
             return "Успешно";
         }
         catch (Exception e){
@@ -83,5 +81,12 @@ public class ChatService {
         }
     }
 
+    private void isValid(Long chatId) {
+        ChatEntity chatEntity = chatRepository.findById(chatId).orElseThrow(() -> new EntityNotFoundException("Чат не найден"));
+        if(!chatEntity.getUser().getId().equals(userService.getCurrentUser().getId())){
+            log.warn("Пользователь не является владельцем чата");
+            throw new RuntimeException("Пользователь не является владельцем чата");
+        }
+    }
 
 }

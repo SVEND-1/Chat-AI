@@ -23,11 +23,13 @@ public class YooKassaManager {
     private final UserService userService;
     private final String RETURN_URL = "http://localhost:5173/succeeded-payment";
     private final ReceiptManager receiptManager;
+    private final ReceiptMapper receiptMapper;
 
-    public YooKassaManager(@Lazy PaymentService paymentService, UserService userService, ReceiptManager receiptManager) {
+    public YooKassaManager(@Lazy PaymentService paymentService, UserService userService, ReceiptManager receiptManager, ReceiptMapper receiptMapper) {
         this.paymentService = paymentService;
         this.userService = userService;
         this.receiptManager = receiptManager;
+        this.receiptMapper = receiptMapper;
     }
 
 
@@ -107,7 +109,7 @@ public class YooKassaManager {
         try {
             PaymentEntity payment = paymentService.findByPaymentId(paymentId);
             Receipt receipt = receiptProcessor.findById(payment.getReceiptId());
-            return receiptManager.convertEntityToDto(receipt);
+            return receiptMapper.convertReceiptToReceiptResponse(receipt);
         }
         catch (Exception e){
             log.error("Ошибка поиска чека,ex={}", e.getMessage());

@@ -3,6 +3,7 @@ package org.example.chatai.chat.domain;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.example.chatai.chat.api.dto.response.ChatAIMessage;
 import org.example.chatai.chat.db.ChatEntity;
 import org.example.chatai.chat.db.ChatRepository;
 import org.example.chatai.subscriptions.db.Status;
@@ -50,10 +51,13 @@ public class AIManager {
         log.info("Chat Memory:{}", counters.get("1"));
     }
 
-    public List<String> findMessagesChat(String chatIdStr){
+    public List<ChatAIMessage> findMessagesChat(String chatIdStr){
         return chatMemory.get(chatIdStr,MAX_MESSAGES)
                 .stream()
-                .map(Content::getText)
+                .map(el -> new ChatAIMessage(
+                        el.getText(),
+                        el.getMessageType()
+                ))
                 .toList();
     }
 
@@ -84,7 +88,8 @@ public class AIManager {
 
             return response;
         }catch (Exception e){
-            return null;
+            log.error(e.getMessage());
+            return Flux.empty();
         }
     }
 
