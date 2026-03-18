@@ -5,34 +5,35 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(0, 0, 0, 0.75);
+    background-color: rgba(0, 0, 0, 0.85);
     display: flex;
     align-items: center;
     justify-content: center;
     z-index: 1000;
-    backdrop-filter: blur(4px);
+    backdrop-filter: blur(8px);
+    padding: 16px;
 }
 
 .modal-content {
     background-color: #1a1a1a;
     border: 1px solid #2a2a2a;
-    border-radius: 16px;
-    width: 90%;
-    max-width: 800px;
-    max-height: 80vh;
+    border-radius: 24px;
+    width: 100%;
+    max-width: 900px;
+    max-height: 90vh;
     overflow: hidden;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
     animation: modal-appear 0.3s ease;
 }
 
 @keyframes modal-appear {
     from {
         opacity: 0;
-        transform: scale(0.95);
+        transform: scale(0.95) translateY(10px);
     }
     to {
         opacity: 1;
-        transform: scale(1);
+        transform: scale(1) translateY(0);
     }
 }
 
@@ -56,41 +57,49 @@
 }
 
 .modal-close {
-    background: none;
+    background: #2a2a2a;
     border: none;
-    color: #8a8a8a;
+    color: #ffffff;
     font-size: 28px;
     cursor: pointer;
-    padding: 0;
-    width: 32px;
-    height: 32px;
+    width: 35px;
+    height: 35px;
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 8px;
-    transition: all 0.2s ease;
+    border-radius: 30%;
+    transition: all 0.5s ease;
+    line-height: 1;
+    outline: none;
 }
 
 .modal-close:hover {
-    background-color: #2a2a2a;
-    color: #ffffff;
+    background: linear-gradient(135deg, #0066ff, #66ccff);
+    transform: scale(1.05);
+    outline: none;
+}
+
+.modal-close:active {
+    transform: scale(0.95);
+    outline: none;
 }
 
 .modal-body {
     display: flex;
     height: 100%;
-    max-height: calc(80vh - 80px);
+    max-height: calc(90vh - 80px);
 }
 
 /* Сайдбар модального окна */
 .modal-sidebar {
-    width: 200px;
+    width: 220px;
     background-color: #141414;
     border-right: 1px solid #2a2a2a;
-    padding: 16px;
+    padding: 20px 12px;
     display: flex;
     flex-direction: column;
     gap: 8px;
+    outline: none;
 }
 
 .modal-sidebar-btn {
@@ -100,7 +109,7 @@
     padding: 12px 16px;
     background: transparent;
     border: none;
-    border-radius: 10px;
+    border-radius: 12px;
     color: #b0b0b0;
     font-size: 14px;
     font-weight: 500;
@@ -108,16 +117,20 @@
     transition: all 0.2s ease;
     text-align: left;
     width: 100%;
+    outline: none;
 }
 
 .modal-sidebar-btn:hover {
     background-color: #2a2a2a;
     color: #ffffff;
+    outline: none;
 }
 
 .modal-sidebar-btn.active {
     background: linear-gradient(135deg, #0066ff, #66ccff);
     color: #ffffff;
+    box-shadow: 0 4px 12px rgba(0, 102, 255, 0.3);
+    outline: none;
 }
 
 .modal-sidebar-btn svg {
@@ -125,6 +138,8 @@
     height: 20px;
     stroke: currentColor;
     fill: none;
+    flex-shrink: 0;
+    outline: none;
 }
 
 /* Контент модального окна */
@@ -171,7 +186,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 12px 0;
+    padding: 16px 0;
     border-bottom: 1px solid #2a2a2a;
 }
 
@@ -192,6 +207,7 @@
     background-color: #141414;
     border-radius: 30px;
     padding: 4px;
+    outline: none;
 }
 
 .theme-toggle-btn {
@@ -204,19 +220,21 @@
     font-weight: 500;
     cursor: pointer;
     transition: all 0.2s ease;
+    outline: none;
 }
 
 .theme-toggle-btn.active {
     background: linear-gradient(135deg, #0066ff, #66ccff);
     color: #ffffff;
+    outline: none;
 }
 
 /* Селект */
 .select-input {
     background-color: #141414;
     border: 1px solid #2a2a2a;
-    border-radius: 8px;
-    padding: 8px 32px 8px 12px;
+    border-radius: 10px;
+    padding: 10px 36px 10px 12px;
     color: #e5e5e5;
     font-size: 14px;
     cursor: pointer;
@@ -224,7 +242,8 @@
     appearance: none;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%238a8a8a' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
     background-repeat: no-repeat;
-    background-position: right 8px center;
+    background-position: right 12px center;
+    min-width: 140px;
 }
 
 .select-input:focus {
@@ -235,20 +254,20 @@
 .about-card {
     background-color: #141414;
     border: 1px solid #2a2a2a;
-    border-radius: 12px;
-    padding: 24px;
+    border-radius: 16px;
+    padding: 32px 24px;
     text-align: center;
 }
 
 .about-logo {
-    width: 64px;
-    height: 64px;
-    margin: 0 auto 16px;
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 20px;
     filter: drop-shadow(0 0 20px rgba(0, 102, 255, 0.3));
 }
 
 .about-title {
-    font-size: 24px;
+    font-size: 28px;
     font-weight: 600;
     background: linear-gradient(135deg, #0066ff, #66ccff);
     -webkit-background-clip: text;
@@ -260,7 +279,7 @@
 .about-version {
     color: #8a8a8a;
     font-size: 14px;
-    margin-bottom: 16px;
+    margin-bottom: 20px;
 }
 
 .about-description {
@@ -268,23 +287,26 @@
     font-size: 15px;
     line-height: 1.6;
     margin-bottom: 24px;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 /* Ссылки */
 .legal-links {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 12px;
 }
 
 .legal-link {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 12px 16px;
+    padding: 14px 18px;
     background-color: #141414;
     border: 1px solid #2a2a2a;
-    border-radius: 10px;
+    border-radius: 12px;
     color: #e5e5e5;
     text-decoration: none;
     transition: all 0.2s ease;
@@ -293,6 +315,7 @@
 .legal-link:hover {
     border-color: #0066ff;
     transform: translateX(4px);
+    background-color: #1f1f1f;
 }
 
 .legal-link-left {
@@ -304,6 +327,7 @@
 .legal-link-left svg {
     stroke: currentColor;
     fill: none;
+    flex-shrink: 0;
 }
 
 .legal-link-arrow {
@@ -315,31 +339,348 @@
     fill: none;
 }
 
-/* Кнопка профиля */
+/* ИСПРАВЛЕННАЯ КНОПКА ПРОФИЛЯ */
 .profile-button {
     display: flex;
     align-items: center;
+    justify-content: flex-start;
     gap: 12px;
-    padding: 16px;
-    background: linear-gradient(135deg, rgba(0, 102, 255, 0.1), rgba(102, 204, 255, 0.1));
+    padding: 14px 18px;
+    margin-top: 16px;
+    background: linear-gradient(135deg, rgba(0, 102, 255, 0.15), rgba(102, 204, 255, 0.15));
     border: 1px solid #0066ff;
-    border-radius: 12px;
+    border-radius: 14px;
     color: #ffffff;
-    font-size: 16px;
+    font-size: 15px;
     font-weight: 500;
     cursor: pointer;
     transition: all 0.2s ease;
     width: 100%;
-    margin-top: 16px;
+    text-align: left;
+    position: relative;
+    outline: none;
 }
 
 .profile-button:hover {
-    background: linear-gradient(135deg, rgba(0, 102, 255, 0.2), rgba(102, 204, 255, 0.2));
+    background: linear-gradient(135deg, rgba(0, 102, 255, 0.25), rgba(102, 204, 255, 0.25));
+    border-color: #66ccff;
     transform: translateY(-2px);
-    box-shadow: 0 4px 20px rgba(0, 102, 255, 0.2);
+    box-shadow: 0 8px 20px rgba(0, 102, 255, 0.3);
+    outline: none;
+}
+
+.profile-button:active {
+    transform: translateY(0);
+    outline: none;
 }
 
 .profile-button svg {
     stroke: currentColor;
     fill: none;
+    flex-shrink: 0;
+    outline: none;
+}
+
+.profile-button .arrow-icon {
+    margin-left: auto;
+    opacity: 0.7;
+    transition: transform 0.2s ease;
+    outline: none;
+}
+
+.profile-button:hover .arrow-icon {
+    transform: translateX(4px);
+    opacity: 1;
+    outline: none;
+}
+
+/* МОБИЛЬНАЯ АДАПТАЦИЯ */
+@media (max-width: 768px) {
+    .modal-content {
+        max-height: 95vh;
+        border-radius: 20px;
+    }
+
+    .modal-body {
+        flex-direction: column;
+    }
+
+    .modal-sidebar {
+        width: 100%;
+        border-right: none;
+        border-bottom: 1px solid #2a2a2a;
+        padding: 16px;
+        flex-direction: row;
+        overflow-x: auto;
+        gap: 8px;
+        scrollbar-width: thin;
+        -webkit-overflow-scrolling: touch;
+        outline: none;
+    }
+
+    .modal-sidebar::-webkit-scrollbar {
+        height: 3px;
+        outline: none;
+    }
+
+    .modal-sidebar::-webkit-scrollbar-thumb {
+        background-color: #404040;
+        border-radius: 3px;
+        outline: none;
+    }
+
+    .modal-sidebar-btn {
+        flex-shrink: 0;
+        padding: 10px 16px;
+        white-space: nowrap;
+        width: auto;
+        outline: none;
+    }
+
+    .modal-sidebar-btn svg {
+        width: 18px;
+        height: 18px;
+        outline: none;
+    }
+
+    .modal-content-area {
+        padding: 20px;
+    }
+
+    .profile-button {
+        margin-top: 8px;
+        padding: 12px 16px;
+        outline: none;
+    }
+
+    .settings-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+        outline: none;
+    }
+
+    .theme-toggle,
+    .select-input {
+        width: 100%;
+        outline: none;
+    }
+
+    .select-input {
+        min-width: 100%;
+    }
+
+    .theme-toggle {
+        justify-content: stretch;
+        outline: none;
+    }
+
+    .theme-toggle-btn {
+        flex: 1;
+        text-align: center;
+        outline: none;
+    }
+
+    .about-card {
+        padding: 24px 16px;
+    }
+
+    .about-logo {
+        width: 60px;
+        height: 60px;
+    }
+
+    .about-title {
+        font-size: 24px;
+    }
+
+    .legal-link {
+        padding: 12px 16px;
+    }
+
+    .legal-link-left span {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .modal-header {
+        padding: 16px 20px;
+    }
+
+    .modal-header h2 {
+        font-size: 1.25rem;
+    }
+
+    .modal-close {
+        width: 32px;
+        height: 32px;
+        font-size: 20px;
+    }
+
+    .modal-sidebar {
+        padding: 12px;
+        outline: none;
+    }
+
+    .modal-sidebar-btn {
+        padding: 8px 14px;
+        font-size: 13px;
+        outline: none;
+    }
+
+    .modal-sidebar-btn svg {
+        width: 16px;
+        height: 16px;
+        outline: none;
+    }
+
+    .modal-content-area {
+        padding: 16px;
+    }
+
+    .settings-item-label {
+        font-size: 14px;
+    }
+
+    .profile-button {
+        font-size: 14px;
+        padding: 12px 14px;
+        outline: none;
+    }
+
+    .about-description {
+        font-size: 14px;
+    }
+}
+
+/* Для очень маленьких экранов */
+@media (max-width: 360px) {
+    .modal-sidebar-btn span {
+        display: none;
+        outline: none;
+    }
+
+    .modal-sidebar-btn {
+        padding: 10px;
+        justify-content: center;
+        outline: none;
+    }
+
+    .modal-sidebar-btn svg {
+        width: 20px;
+        height: 20px;
+        margin: 0;
+        outline: none;
+    }
+}
+
+/* Стили для светлой темы */
+[data-theme="light"] .modal-content,
+[data-theme="light"] .modal-content-area {
+    background-color: #ffffff;
+    border-color: #e5e5e5;
+    outline: none;
+}
+
+[data-theme="light"] .modal-sidebar {
+    background-color: #f8f8f8;
+    border-color: #e5e5e5;
+    outline: none;
+}
+
+[data-theme="light"] .modal-sidebar-btn {
+    color: #4a4a4a;
+    outline: none;
+}
+
+[data-theme="light"] .modal-sidebar-btn:hover {
+    background-color: #e5e5e5;
+    color: #1a1a1a;
+    outline: none;
+}
+
+[data-theme="light"] .modal-header {
+    background: linear-gradient(135deg, rgba(0, 102, 255, 0.05), rgba(102, 204, 255, 0.05));
+    border-color: #e5e5e5;
+    outline: none;
+}
+
+[data-theme="light"] .modal-close {
+    background-color: #f0f0f0;
+    color: #333;
+    outline: none;
+}
+
+[data-theme="light"] .modal-close:hover {
+    color: #ffffff;
+    outline: none;
+}
+
+[data-theme="light"] .settings-item {
+    border-bottom-color: #e5e5e5;
+    outline: none;
+}
+
+[data-theme="light"] .settings-item-label {
+    color: #1a1a1a;
+    outline: none;
+}
+
+[data-theme="light"] .theme-toggle {
+    background-color: #f0f0f0;
+    outline: none;
+}
+
+[data-theme="light"] .theme-toggle-btn {
+    color: #4a4a4a;
+    outline: none;
+}
+
+[data-theme="light"] .theme-toggle-btn.active {
+    color: #ffffff;
+    outline: none;
+}
+
+[data-theme="light"] .select-input {
+    background-color: #ffffff;
+    border-color: #e5e5e5;
+    color: #1a1a1a;
+    outline: none;
+}
+
+[data-theme="light"] .about-card {
+    background-color: #f8f8f8;
+    border-color: #e5e5e5;
+    outline: none;
+}
+
+[data-theme="light"] .about-description {
+    color: #4a4a4a;
+    outline: none;
+}
+
+[data-theme="light"] .legal-link {
+    background-color: #f8f8f8;
+    border-color: #e5e5e5;
+    color: #1a1a1a;
+    outline: none;
+}
+
+[data-theme="light"] .legal-link:hover {
+    border-color: #0066ff;
+    background-color: #f0f0f0;
+    outline: none;
+}
+
+[data-theme="light"] .profile-button {
+    background: linear-gradient(135deg, rgba(0, 102, 255, 0.1), rgba(102, 204, 255, 0.1));
+    border-color: #0066ff;
+    color: #1a1a1a;
+    outline: none;
+}
+
+[data-theme="light"] .profile-button:hover {
+    background: linear-gradient(135deg, rgba(0, 102, 255, 0.2), rgba(102, 204, 255, 0.2));
+    outline: none;
 }

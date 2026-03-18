@@ -7,6 +7,7 @@ import ForgotPassword from "./pages/forgot-password/ForgotPassword";
 import ResetPassword from "./pages/reset-password/ResetPassword";
 import Chat from "./pages/chat/Chat";
 import SubscriptionPage from "./pages/subscription/SubscriptionPage";
+import Profile from "./pages/profile/Profile";
 
 
 
@@ -23,6 +24,7 @@ function App() {
                 <Route path="/reset-password" element={<ResetPassword />} />
                 <Route path="/chat" element={<Chat />}/>
                 <Route path="/subscription" element={<SubscriptionPage />}/>
+                <Route path="/profile" element={<Profile />}/>
             </Routes>
         </BrowserRouter>
     );

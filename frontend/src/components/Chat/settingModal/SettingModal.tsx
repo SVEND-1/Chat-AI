@@ -79,12 +79,12 @@ const SettingsModal: React.FC<SettingsModalProps> = ({ onClose }) => {
                             className="profile-button"
                             onClick={handleProfileClick}
                         >
-                            <svg viewBox="0 0 24 24" strokeWidth="1.5">
+                            <svg viewBox="0 0 24 24" strokeWidth="1.5" width="20" height="20">
                                 <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round"
                                       d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
                             </svg>
-                            Перейти в профиль
-                            <svg viewBox="0 0 24 24" strokeWidth="1.5" width="16" height="16" style={{ marginLeft: 'auto' }}>
+                            <span>Перейти в профиль</span>
+                            <svg viewBox="0 0 24 24" strokeWidth="1.5" width="18" height="18" className="arrow-icon">
                                 <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
                             </svg>
                         </button>

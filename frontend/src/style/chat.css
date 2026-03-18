@@ -34,6 +34,7 @@ body {
     flex-direction: column;
     padding: 12px;
     position: relative;
+    outline: none;
 }
 
 .logo {
@@ -66,11 +67,13 @@ body {
     width: 100%;
     text-align: left;
     margin-bottom: 20px;
+    outline: none;
 }
 
 .create-chat-btn:hover {
     border-color: var(--grad-start);
     box-shadow: 0 0 15px rgba(0, 102, 255, 0.2);
+    outline: none;
 }
 
 .create-chat-btn svg {
@@ -78,6 +81,7 @@ body {
     height: 20px;
     stroke: currentColor;
     fill: none;
+    outline: none;
 }
 
 /* ========== СПИСОК ЧАТОВ В САЙДБАРЕ ========== */
@@ -86,6 +90,7 @@ body {
     overflow-y: auto;
     scrollbar-width: none;
     -ms-overflow-style: none;
+    outline: none;
 }
 
 .chat-list::-webkit-scrollbar {
@@ -101,6 +106,7 @@ body {
     letter-spacing: 0.5px;
     margin-bottom: 10px;
     padding-left: 8px;
+    outline: none;
 }
 
 .chat-item-wrapper {
@@ -125,22 +131,26 @@ body {
     transition: all 0.2s ease;
     flex: 1;
     text-align: left;
+    outline: none;
 }
 
 .chat-item:hover {
     background-color: #2a2a2a;
     color: #ffffff;
+    outline: none;
 }
 
 .chat-item.active {
     background: var(--gradient);
     color: #ffffff;
+    outline: none;
 }
 
 .chat-item svg {
     stroke: currentColor;
     fill: none;
     flex-shrink: 0;
+    outline: none;
 }
 
 .chat-name {
@@ -148,6 +158,7 @@ body {
     overflow: hidden;
     text-overflow: ellipsis;
     max-width: 120px;
+    outline: none;
 }
 
 /* Кнопка удаления чата */
@@ -163,15 +174,18 @@ body {
     padding: 6px;
     margin-right: 4px;
     transition: all 0.2s ease;
+    outline: none;
 }
 
 .delete-chat-btn:hover {
     color: #ff4444;
+    outline: none;
 }
 
 .delete-chat-btn svg {
     stroke: currentColor;
     fill: none;
+    outline: none;
 }
 
 /* ========== ФУТЕР САЙДБАРА ========== */
@@ -180,6 +194,7 @@ body {
     display: flex;
     flex-direction: column;
     gap: 8px;
+    outline: none;
 }
 
 /* Кнопка подписки */
@@ -214,6 +229,7 @@ body {
 /* ========== СТИЛИ ДЛЯ ПРОФИЛЯ ========== */
 .profile-section {
     position: relative;
+    outline: none;
 }
 
 .profile-btn {
@@ -232,11 +248,13 @@ body {
     width: 100%;
     text-align: left;
     text-decoration: none;
+    outline: none;
 }
 
 .profile-btn:hover {
     background-color: #2a2a2a;
     color: #ffffff;
+    outline: none;
 }
 
 .profile-avatar {
@@ -245,6 +263,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    outline: none;
 }
 
 .profile-avatar svg {
@@ -252,6 +271,7 @@ body {
     height: 24px;
     stroke: currentColor;
     fill: none;
+    outline: none;
 }
 
 /* Выпадающее меню профиля */
@@ -267,6 +287,7 @@ body {
     padding: 8px;
     box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.5);
     z-index: 100;
+    outline: none;
 }
 
 .profile-menu-item {
@@ -284,20 +305,24 @@ body {
     width: 100%;
     border: none;
     background: transparent;
+    outline: none;
 }
 
 .profile-menu-item:hover {
     background: var(--gradient);
     color: #ffffff;
+    outline: none;
 }
 
 .profile-menu-item.logout:hover {
     background: linear-gradient(135deg, #ff4444, #ff8888);
+    outline: none;
 }
 
 .profile-menu-item svg {
     stroke: currentColor;
     fill: none;
+    outline: none;
 }
 
 /* ========== ОСНОВНОЙ КОНТЕНТ ========== */
@@ -474,17 +499,20 @@ body {
     cursor: pointer;
     transition: all 0.2s ease;
     padding: 0;
+    outline: none;
 }
 
 .send-btn:hover:not(:disabled) {
     transform: scale(1.05);
     box-shadow: 0 0 20px rgba(0, 102, 255, 0.4);
+    outline: none;
 }
 
 .send-btn:disabled {
     background: #2a2a2a;
     color: #5a5a5a;
     cursor: not-allowed;
+    outline: none;
 }
 
 .send-btn svg {
@@ -492,6 +520,7 @@ body {
     fill: none;
     width: 20px;
     height: 20px;
+    outline: none;
 }
 
 /* ========== ПУСТОЕ СОСТОЯНИЕ ========== */
@@ -586,6 +615,7 @@ body {
     .subscribe-btn span,
     .chat-list-title {
         display: none;
+        outline: none;
     }
 
     .create-chat-btn,
@@ -593,6 +623,7 @@ body {
     .subscribe-btn {
         justify-content: center;
         padding: 12px;
+        outline: none;
     }
 
     .chat-item-wrapper {
@@ -616,12 +647,14 @@ body {
     .subscribe-btn svg {
         width: 24px;
         height: 24px;
+        outline: none;
     }
 
     .profile-menu {
         left: auto;
         right: 0;
         min-width: 180px;
+        outline: none;
     }
 
     .messages-wrapper,
