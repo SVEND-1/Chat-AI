@@ -145,15 +145,33 @@ public class SupportTicketService {
             SupportTicketEntity ticketEntity,
             UserEntity currentUser
     ) {
+        checkForCurrentUser(ticketEntity, currentUser);
 
+        if (ticketEntity.getStatus() == SupportStatus.CLOSED) {
+            throw new RuntimeException("Ticket is already closed");
+        }
+    }
+
+    private void checkForCurrentUser(
+            SupportTicketEntity ticketEntity,
+            UserEntity currentUser
+    ) {
+        log.info("Checking user's current ticket");
         if (!ticketEntity.getUser().getId().equals(currentUser.getId()) &&
                 (!ticketEntity.getSupport().getId().equals(currentUser.getId()))
         ) {
             throw new RuntimeException("It's not your ticket");
         }
+    }
 
-        if (ticketEntity.getStatus() == SupportStatus.CLOSED) {
-            throw new RuntimeException("Ticket is already closed");
-        }
+    //====================================METHODS FOR OTHER SERVICES=======================================================
+    public SupportTicketEntity getSupportTicketByIdWithCheckUser(Long id, UserEntity currentUser) {
+        log.info("Getting support ticket with id {}", id);
+        SupportTicketEntity ticketEntity = supportTicketRepository.findByIdWithUser(id)
+                .orElseThrow(() -> new RuntimeException("Ticket not found"));
+
+        checkForCurrentUser(ticketEntity, currentUser);
+
+        return ticketEntity;
     }
 }
