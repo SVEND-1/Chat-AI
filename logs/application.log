@@ -2992,3 +2992,1210 @@ java.lang.RuntimeException: Ticket not found
 2026-03-18T13:41:57.433+03:00  INFO 16232 --- [ChatAI] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
 2026-03-18T13:41:57.433+03:00  INFO 16232 --- [ChatAI] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-3 - Shutdown initiated...
 2026-03-18T13:41:57.435+03:00  INFO 16232 --- [ChatAI] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-3 - Shutdown completed.
+2026-03-18T14:03:50.730+03:00  INFO 21560 --- [ChatAI] [restartedMain] org.example.chatai.ChatAiApplication     : Starting ChatAiApplication using Java 21.0.9 with PID 21560 (F:\Programing\Projects\Chat AI\target\classes started by dratu in F:\Programing\Projects\Chat AI)
+2026-03-18T14:03:50.731+03:00  INFO 21560 --- [ChatAI] [restartedMain] org.example.chatai.ChatAiApplication     : No active profile set, falling back to 1 default profile: "default"
+2026-03-18T14:03:50.753+03:00  INFO 21560 --- [ChatAI] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2026-03-18T14:03:50.753+03:00  INFO 21560 --- [ChatAI] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2026-03-18T14:03:51.225+03:00  INFO 21560 --- [ChatAI] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-03-18T14:03:51.298+03:00  INFO 21560 --- [ChatAI] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 69 ms. Found 6 JPA repository interfaces.
+2026-03-18T14:03:51.670+03:00  INFO 21560 --- [ChatAI] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2026-03-18T14:03:51.676+03:00  INFO 21560 --- [ChatAI] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-03-18T14:03:51.676+03:00  INFO 21560 --- [ChatAI] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.19]
+2026-03-18T14:03:51.707+03:00  INFO 21560 --- [ChatAI] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2026-03-18T14:03:51.707+03:00  INFO 21560 --- [ChatAI] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 953 ms
+2026-03-18T14:03:51.741+03:00  INFO 21560 --- [ChatAI] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-03-18T14:03:51.827+03:00  INFO 21560 --- [ChatAI] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@3849f767
+2026-03-18T14:03:51.828+03:00  INFO 21560 --- [ChatAI] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-03-18T14:03:51.874+03:00  INFO 21560 --- [ChatAI] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-03-18T14:03:51.902+03:00  INFO 21560 --- [ChatAI] [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.4.4.Final
+2026-03-18T14:03:51.916+03:00  INFO 21560 --- [ChatAI] [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-03-18T14:03:52.021+03:00  INFO 21560 --- [ChatAI] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-03-18T14:03:52.047+03:00  WARN 21560 --- [ChatAI] [restartedMain] org.hibernate.orm.deprecation            : HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-03-18T14:03:52.559+03:00  INFO 21560 --- [ChatAI] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-03-18T14:03:52.626+03:00  INFO 21560 --- [ChatAI] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-03-18T14:03:53.137+03:00  INFO 21560 --- [ChatAI] [restartedMain] o.e.c.payments.domain.PaymentService     : Инициализация YooKassa: shopId=1298329, secretKey=48 chars
+2026-03-18T14:03:53.161+03:00  INFO 21560 --- [ChatAI] [restartedMain] o.e.c.payments.domain.PaymentService     : YooKassa инициализирована
+2026-03-18T14:03:53.239+03:00  INFO 21560 --- [ChatAI] [restartedMain] o.example.chatai.chat.domain.AIManager   : Chat Memory:null
+2026-03-18T14:03:53.243+03:00  WARN 21560 --- [ChatAI] [restartedMain] o.s.aop.framework.CglibAopProxy          : Unable to proxy interface-implementing method [public final void org.springframework.web.filter.OncePerRequestFilter.doFilter(jakarta.servlet.ServletRequest,jakarta.servlet.ServletResponse,jakarta.servlet.FilterChain) throws jakarta.servlet.ServletException,java.io.IOException] because it is marked as final, consider using interface-based JDK proxies instead.
+2026-03-18T14:03:53.244+03:00  WARN 21560 --- [ChatAI] [restartedMain] o.s.aop.framework.CglibAopProxy          : Unable to proxy interface-implementing method [public final void org.springframework.web.filter.GenericFilterBean.init(jakarta.servlet.FilterConfig) throws jakarta.servlet.ServletException] because it is marked as final, consider using interface-based JDK proxies instead.
+2026-03-18T14:03:53.291+03:00  INFO 21560 --- [ChatAI] [restartedMain] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-03-18T14:03:53.735+03:00  INFO 21560 --- [ChatAI] [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@11e20646, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@3eadecb7, org.springframework.security.web.context.SecurityContextHolderFilter@29aba471, org.springframework.security.web.header.HeaderWriterFilter@42ef7b9e, org.springframework.web.filter.CorsFilter@7fe3411c, org.springframework.security.web.authentication.logout.LogoutFilter@25e8db17, org.example.chatai.config.JwtFilter@95935cc, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@37cc28bc, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@71b4cd06, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@5a60f4d9, org.springframework.security.web.session.SessionManagementFilter@110a911e, org.springframework.security.web.access.ExceptionTranslationFilter@4a76f78e, org.springframework.security.web.access.intercept.AuthorizationFilter@6ae56d4b]
+2026-03-18T14:03:53.926+03:00  INFO 21560 --- [ChatAI] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2026-03-18T14:03:53.961+03:00  INFO 21560 --- [ChatAI] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path ''
+2026-03-18T14:03:53.985+03:00  INFO 21560 --- [ChatAI] [restartedMain] o.a.k.clients.consumer.ConsumerConfig    : ConsumerConfig values: 
+	allow.auto.create.topics = true
+	auto.commit.interval.ms = 5000
+	auto.include.jmx.reporter = true
+	auto.offset.reset = latest
+	bootstrap.servers = [localhost:9092]
+	check.crcs = true
+	client.dns.lookup = use_all_dns_ips
+	client.id = consumer-notify-group-1
+	client.rack = 
+	connections.max.idle.ms = 540000
+	default.api.timeout.ms = 60000
+	enable.auto.commit = false
+	exclude.internal.topics = true
+	fetch.max.bytes = 52428800
+	fetch.max.wait.ms = 500
+	fetch.min.bytes = 1
+	group.id = notify-group
+	group.instance.id = null
+	heartbeat.interval.ms = 3000
+	interceptor.classes = []
+	internal.leave.group.on.close = true
+	internal.throw.on.fetch.stable.offset.unsupported = false
+	isolation.level = read_uncommitted
+	key.deserializer = class org.apache.kafka.common.serialization.StringDeserializer
+	max.partition.fetch.bytes = 1048576
+	max.poll.interval.ms = 300000
+	max.poll.records = 500
+	metadata.max.age.ms = 300000
+	metric.reporters = []
+	metrics.num.samples = 2
+	metrics.recording.level = INFO
+	metrics.sample.window.ms = 30000
+	partition.assignment.strategy = [class org.apache.kafka.clients.consumer.RangeAssignor, class org.apache.kafka.clients.consumer.CooperativeStickyAssignor]
+	receive.buffer.bytes = 65536
+	reconnect.backoff.max.ms = 1000
+	reconnect.backoff.ms = 50
+	request.timeout.ms = 30000
+	retry.backoff.ms = 100
+	sasl.client.callback.handler.class = null
+	sasl.jaas.config = null
+	sasl.kerberos.kinit.cmd = /usr/bin/kinit
+	sasl.kerberos.min.time.before.relogin = 60000
+	sasl.kerberos.service.name = null
+	sasl.kerberos.ticket.renew.jitter = 0.05
+	sasl.kerberos.ticket.renew.window.factor = 0.8
+	sasl.login.callback.handler.class = null
+	sasl.login.class = null
+	sasl.login.connect.timeout.ms = null
+	sasl.login.read.timeout.ms = null
+	sasl.login.refresh.buffer.seconds = 300
+	sasl.login.refresh.min.period.seconds = 60
+	sasl.login.refresh.window.factor = 0.8
+	sasl.login.refresh.window.jitter = 0.05
+	sasl.login.retry.backoff.max.ms = 10000
+	sasl.login.retry.backoff.ms = 100
+	sasl.mechanism = GSSAPI
+	sasl.oauthbearer.clock.skew.seconds = 30
+	sasl.oauthbearer.expected.audience = null
+	sasl.oauthbearer.expected.issuer = null
+	sasl.oauthbearer.jwks.endpoint.refresh.ms = 3600000
+	sasl.oauthbearer.jwks.endpoint.retry.backoff.max.ms = 10000
+	sasl.oauthbearer.jwks.endpoint.retry.backoff.ms = 100
+	sasl.oauthbearer.jwks.endpoint.url = null
+	sasl.oauthbearer.scope.claim.name = scope
+	sasl.oauthbearer.sub.claim.name = sub
+	sasl.oauthbearer.token.endpoint.url = null
+	security.protocol = PLAINTEXT
+	security.providers = null
+	send.buffer.bytes = 131072
+	session.timeout.ms = 45000
+	socket.connection.setup.timeout.max.ms = 30000
+	socket.connection.setup.timeout.ms = 10000
+	ssl.cipher.suites = null
+	ssl.enabled.protocols = [TLSv1.2, TLSv1.3]
+	ssl.endpoint.identification.algorithm = https
+	ssl.engine.factory.class = null
+	ssl.key.password = null
+	ssl.keymanager.algorithm = SunX509
+	ssl.keystore.certificate.chain = null
+	ssl.keystore.key = null
+	ssl.keystore.location = null
+	ssl.keystore.password = null
+	ssl.keystore.type = JKS
+	ssl.protocol = TLSv1.3
+	ssl.provider = null
+	ssl.secure.random.implementation = null
+	ssl.trustmanager.algorithm = PKIX
+	ssl.truststore.certificates = null
+	ssl.truststore.location = null
+	ssl.truststore.password = null
+	ssl.truststore.type = JKS
+	value.deserializer = class org.springframework.kafka.support.serializer.JsonDeserializer
+
+2026-03-18T14:03:54.035+03:00  INFO 21560 --- [ChatAI] [restartedMain] o.a.kafka.common.utils.AppInfoParser     : Kafka version: 3.6.1
+2026-03-18T14:03:54.035+03:00  INFO 21560 --- [ChatAI] [restartedMain] o.a.kafka.common.utils.AppInfoParser     : Kafka commitId: 5e3c2b738d253ff5
+2026-03-18T14:03:54.035+03:00  INFO 21560 --- [ChatAI] [restartedMain] o.a.kafka.common.utils.AppInfoParser     : Kafka startTimeMs: 1773831834034
+2026-03-18T14:03:54.037+03:00  INFO 21560 --- [ChatAI] [restartedMain] fkaConsumerFactory$ExtendedKafkaConsumer : [Consumer clientId=consumer-notify-group-1, groupId=notify-group] Subscribed to topic(s): notifyUser
+2026-03-18T14:03:54.046+03:00  INFO 21560 --- [ChatAI] [restartedMain] org.example.chatai.ChatAiApplication     : Started ChatAiApplication in 3.514 seconds (process running for 3.987)
+2026-03-18T14:03:54.186+03:00  INFO 21560 --- [ChatAI] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] org.apache.kafka.clients.Metadata        : [Consumer clientId=consumer-notify-group-1, groupId=notify-group] Cluster ID: MkU3OEVBNTcwNTJENDM2Qg
+2026-03-18T14:03:54.187+03:00  INFO 21560 --- [ChatAI] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-notify-group-1, groupId=notify-group] Discovered group coordinator localhost:9092 (id: 2147483646 rack: null)
+2026-03-18T14:03:54.188+03:00  INFO 21560 --- [ChatAI] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-notify-group-1, groupId=notify-group] (Re-)joining group
+2026-03-18T14:03:54.196+03:00  INFO 21560 --- [ChatAI] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-notify-group-1, groupId=notify-group] Request joining group due to: need to re-join with the given member-id: consumer-notify-group-1-a3f2c5cc-024e-4921-a2a4-29b7a3442eb0
+2026-03-18T14:03:54.197+03:00  INFO 21560 --- [ChatAI] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-notify-group-1, groupId=notify-group] Request joining group due to: rebalance failed due to 'The group member needs to have a valid member id before actually entering a consumer group.' (MemberIdRequiredException)
+2026-03-18T14:03:54.197+03:00  INFO 21560 --- [ChatAI] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-notify-group-1, groupId=notify-group] (Re-)joining group
+2026-03-18T14:03:57.199+03:00  INFO 21560 --- [ChatAI] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-notify-group-1, groupId=notify-group] Successfully joined group with generation Generation{generationId=235, memberId='consumer-notify-group-1-a3f2c5cc-024e-4921-a2a4-29b7a3442eb0', protocol='range'}
+2026-03-18T14:03:57.202+03:00  INFO 21560 --- [ChatAI] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-notify-group-1, groupId=notify-group] Finished assignment for group at generation 235: {consumer-notify-group-1-a3f2c5cc-024e-4921-a2a4-29b7a3442eb0=Assignment(partitions=[notifyUser-0])}
+2026-03-18T14:03:57.206+03:00  INFO 21560 --- [ChatAI] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-notify-group-1, groupId=notify-group] Successfully synced group in generation Generation{generationId=235, memberId='consumer-notify-group-1-a3f2c5cc-024e-4921-a2a4-29b7a3442eb0', protocol='range'}
+2026-03-18T14:03:57.207+03:00  INFO 21560 --- [ChatAI] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-notify-group-1, groupId=notify-group] Notifying assignor about the new Assignment(partitions=[notifyUser-0])
+2026-03-18T14:03:57.208+03:00  INFO 21560 --- [ChatAI] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-notify-group-1, groupId=notify-group] Adding newly assigned partitions: notifyUser-0
+2026-03-18T14:03:57.214+03:00  INFO 21560 --- [ChatAI] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-notify-group-1, groupId=notify-group] Setting offset for partition notifyUser-0 to the committed offset FetchPosition{offset=13, offsetEpoch=Optional.empty, currentLeader=LeaderAndEpoch{leader=Optional[localhost:9092 (id: 1 rack: null)], epoch=2}}
+2026-03-18T14:03:57.215+03:00  INFO 21560 --- [ChatAI] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.s.k.l.KafkaMessageListenerContainer    : notify-group: partitions assigned: [notifyUser-0]
+2026-03-18T14:04:02.687+03:00  INFO 21560 --- [ChatAI] [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-03-18T14:04:02.687+03:00  INFO 21560 --- [ChatAI] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-03-18T14:04:02.688+03:00  INFO 21560 --- [ChatAI] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2026-03-18T14:04:02.711+03:00  INFO 21560 --- [ChatAI] [http-nio-8080-exec-1] o.e.c.s.a.c.SupportMessageController     : Called method: getAllMessagesFromTicket with support_ticket_id 1
+2026-03-18T14:04:02.712+03:00  INFO 21560 --- [ChatAI] [http-nio-8080-exec-1] o.e.chatai.users.domain.UserService      : Getting jwt
+2026-03-18T14:04:02.713+03:00  INFO 21560 --- [ChatAI] [http-nio-8080-exec-1] o.e.chatai.users.domain.UserService      : Getting email
+2026-03-18T14:04:02.735+03:00  INFO 21560 --- [ChatAI] [http-nio-8080-exec-1] o.e.chatai.users.domain.UserService      : Getting currentUser
+2026-03-18T14:04:02.756+03:00  INFO 21560 --- [ChatAI] [http-nio-8080-exec-1] o.e.c.s.d.services.SupportTicketService  : Getting support ticket with id 1
+2026-03-18T14:04:02.767+03:00  INFO 21560 --- [ChatAI] [http-nio-8080-exec-1] o.e.c.s.d.services.SupportTicketService  : Checking user's current ticket
+2026-03-18T14:04:24.251+03:00  INFO 21560 --- [ChatAI] [http-nio-8080-exec-2] o.e.c.s.a.c.SupportMessageController     : Calling method: createMessage with support_ticket_id 1 and request SupportMessageCreateRequest[message=GOYDA!!!]
+2026-03-18T14:04:24.251+03:00  INFO 21560 --- [ChatAI] [http-nio-8080-exec-2] o.e.chatai.users.domain.UserService      : Getting jwt
+2026-03-18T14:04:24.252+03:00  INFO 21560 --- [ChatAI] [http-nio-8080-exec-2] o.e.chatai.users.domain.UserService      : Getting email
+2026-03-18T14:04:24.252+03:00  INFO 21560 --- [ChatAI] [http-nio-8080-exec-2] o.e.chatai.users.domain.UserService      : Getting currentUser
+2026-03-18T14:04:24.255+03:00  INFO 21560 --- [ChatAI] [http-nio-8080-exec-2] o.e.c.s.d.services.SupportTicketService  : Getting support ticket with id 1
+2026-03-18T14:04:24.259+03:00  INFO 21560 --- [ChatAI] [http-nio-8080-exec-2] o.e.c.s.d.services.SupportTicketService  : Checking user's current ticket
+2026-03-18T14:04:32.100+03:00  INFO 21560 --- [ChatAI] [http-nio-8080-exec-3] o.e.c.s.a.c.SupportMessageController     : Called method: getAllUserMessagesFromTicket with id 1
+2026-03-18T14:04:32.100+03:00  INFO 21560 --- [ChatAI] [http-nio-8080-exec-3] o.e.chatai.users.domain.UserService      : Getting jwt
+2026-03-18T14:04:32.100+03:00  INFO 21560 --- [ChatAI] [http-nio-8080-exec-3] o.e.chatai.users.domain.UserService      : Getting email
+2026-03-18T14:04:32.101+03:00  INFO 21560 --- [ChatAI] [http-nio-8080-exec-3] o.e.chatai.users.domain.UserService      : Getting currentUser
+2026-03-18T14:04:32.104+03:00  INFO 21560 --- [ChatAI] [http-nio-8080-exec-3] o.e.c.s.d.services.SupportTicketService  : Getting support ticket with id 1
+2026-03-18T14:04:32.107+03:00  INFO 21560 --- [ChatAI] [http-nio-8080-exec-3] o.e.c.s.d.services.SupportTicketService  : Checking user's current ticket
+2026-03-18T14:04:36.859+03:00  INFO 21560 --- [ChatAI] [http-nio-8080-exec-4] o.e.c.s.a.c.SupportMessageController     : Called method: getAllSupportMessagesFromTicket with id 1
+2026-03-18T14:04:36.859+03:00  INFO 21560 --- [ChatAI] [http-nio-8080-exec-4] o.e.chatai.users.domain.UserService      : Getting jwt
+2026-03-18T14:04:36.859+03:00  INFO 21560 --- [ChatAI] [http-nio-8080-exec-4] o.e.chatai.users.domain.UserService      : Getting email
+2026-03-18T14:04:36.860+03:00  INFO 21560 --- [ChatAI] [http-nio-8080-exec-4] o.e.chatai.users.domain.UserService      : Getting currentUser
+2026-03-18T14:04:36.864+03:00  INFO 21560 --- [ChatAI] [http-nio-8080-exec-4] o.e.c.s.d.services.SupportTicketService  : Getting support ticket with id 1
+2026-03-18T14:04:36.867+03:00  INFO 21560 --- [ChatAI] [http-nio-8080-exec-4] o.e.c.s.d.services.SupportTicketService  : Checking user's current ticket
+2026-03-18T14:04:43.078+03:00  INFO 21560 --- [ChatAI] [http-nio-8080-exec-5] o.e.c.s.a.c.SupportMessageController     : Called method: getLastMessageFromTicket with support_ticket_id 1
+2026-03-18T14:04:43.078+03:00  INFO 21560 --- [ChatAI] [http-nio-8080-exec-5] o.e.chatai.users.domain.UserService      : Getting jwt
+2026-03-18T14:04:43.078+03:00  INFO 21560 --- [ChatAI] [http-nio-8080-exec-5] o.e.chatai.users.domain.UserService      : Getting email
+2026-03-18T14:04:43.080+03:00  INFO 21560 --- [ChatAI] [http-nio-8080-exec-5] o.e.chatai.users.domain.UserService      : Getting currentUser
+2026-03-18T14:04:43.083+03:00  INFO 21560 --- [ChatAI] [http-nio-8080-exec-5] o.e.c.s.d.services.SupportTicketService  : Getting support ticket with id 1
+2026-03-18T14:04:43.086+03:00  INFO 21560 --- [ChatAI] [http-nio-8080-exec-5] o.e.c.s.d.services.SupportTicketService  : Checking user's current ticket
+2026-03-18T14:04:47.195+03:00  INFO 21560 --- [ChatAI] [http-nio-8080-exec-6] o.e.c.s.a.c.SupportMessageController     : Called method: getLastMessageFromTicket with support_ticket_id 2
+2026-03-18T14:04:47.195+03:00  INFO 21560 --- [ChatAI] [http-nio-8080-exec-6] o.e.chatai.users.domain.UserService      : Getting jwt
+2026-03-18T14:04:47.195+03:00  INFO 21560 --- [ChatAI] [http-nio-8080-exec-6] o.e.chatai.users.domain.UserService      : Getting email
+2026-03-18T14:04:47.196+03:00  INFO 21560 --- [ChatAI] [http-nio-8080-exec-6] o.e.chatai.users.domain.UserService      : Getting currentUser
+2026-03-18T14:04:47.198+03:00  INFO 21560 --- [ChatAI] [http-nio-8080-exec-6] o.e.c.s.d.services.SupportTicketService  : Getting support ticket with id 2
+2026-03-18T14:04:47.200+03:00  INFO 21560 --- [ChatAI] [http-nio-8080-exec-6] o.e.c.s.a.c.SupportMessageController     : Called method: getLastMessageFromTicket with support_ticket_id 2
+2026-03-18T14:04:47.200+03:00  INFO 21560 --- [ChatAI] [http-nio-8080-exec-6] o.e.chatai.users.domain.UserService      : Getting jwt
+2026-03-18T14:04:47.200+03:00  INFO 21560 --- [ChatAI] [http-nio-8080-exec-6] o.e.chatai.users.domain.UserService      : Getting email
+2026-03-18T14:04:47.201+03:00  INFO 21560 --- [ChatAI] [http-nio-8080-exec-6] o.e.chatai.users.domain.UserService      : Getting currentUser
+2026-03-18T14:04:47.203+03:00  INFO 21560 --- [ChatAI] [http-nio-8080-exec-6] o.e.c.s.d.services.SupportTicketService  : Getting support ticket with id 2
+2026-03-18T14:04:47.204+03:00 ERROR 21560 --- [ChatAI] [http-nio-8080-exec-6] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed: java.lang.RuntimeException: Ticket not found] with root cause
+
+java.lang.RuntimeException: Ticket not found
+	at org.example.chatai.supportTickets.domain.services.SupportTicketService.lambda$getSupportTicketByIdWithCheckUser$3(SupportTicketService.java:171) ~[classes/:na]
+	at java.base/java.util.Optional.orElseThrow(Optional.java:403) ~[na:na]
+	at org.example.chatai.supportTickets.domain.services.SupportTicketService.getSupportTicketByIdWithCheckUser(SupportTicketService.java:171) ~[classes/:na]
+	at org.example.chatai.supportMessages.domain.services.SupportMessageService.getLastMessageFromTicket(SupportMessageService.java:80) ~[classes/:na]
+	at org.example.chatai.supportMessages.api.controllers.SupportMessageController.getLastMessageFromTicket(SupportMessageController.java:53) ~[classes/:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:255) ~[spring-web-6.1.5.jar:6.1.5]
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:188) ~[spring-web-6.1.5.jar:6.1.5]
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:118) ~[spring-webmvc-6.1.5.jar:6.1.5]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:925) ~[spring-webmvc-6.1.5.jar:6.1.5]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:830) ~[spring-webmvc-6.1.5.jar:6.1.5]
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87) ~[spring-webmvc-6.1.5.jar:6.1.5]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089) ~[spring-webmvc-6.1.5.jar:6.1.5]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979) ~[spring-webmvc-6.1.5.jar:6.1.5]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014) ~[spring-webmvc-6.1.5.jar:6.1.5]
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:903) ~[spring-webmvc-6.1.5.jar:6.1.5]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:564) ~[tomcat-embed-core-10.1.19.jar:6.0]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885) ~[spring-webmvc-6.1.5.jar:6.1.5]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658) ~[tomcat-embed-core-10.1.19.jar:6.0]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:205) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:108) ~[spring-web-6.1.5.jar:6.1.5]
+	at org.springframework.security.web.FilterChainProxy.lambda$doFilterInternal$3(FilterChainProxy.java:231) ~[spring-security-web-6.2.3.jar:6.2.3]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:365) ~[spring-security-web-6.2.3.jar:6.2.3]
+	at org.example.chatai.config.JwtFilter.doFilterInternal(JwtFilter.java:78) ~[classes/:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:351) ~[spring-aop-6.1.5.jar:6.1.5]
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:713) ~[spring-aop-6.1.5.jar:6.1.5]
+	at org.example.chatai.config.JwtFilter$$SpringCGLIB$$0.doFilterInternal(<generated>) ~[classes/:na]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.5.jar:6.1.5]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.3.jar:6.2.3]
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:107) ~[spring-security-web-6.2.3.jar:6.2.3]
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:93) ~[spring-security-web-6.2.3.jar:6.2.3]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.3.jar:6.2.3]
+	at org.springframework.web.filter.CorsFilter.doFilterInternal(CorsFilter.java:91) ~[spring-web-6.1.5.jar:6.1.5]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.5.jar:6.1.5]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.3.jar:6.2.3]
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90) ~[spring-security-web-6.2.3.jar:6.2.3]
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75) ~[spring-security-web-6.2.3.jar:6.2.3]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.5.jar:6.1.5]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.3.jar:6.2.3]
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:82) ~[spring-security-web-6.2.3.jar:6.2.3]
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:69) ~[spring-security-web-6.2.3.jar:6.2.3]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.3.jar:6.2.3]
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:62) ~[spring-security-web-6.2.3.jar:6.2.3]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.5.jar:6.1.5]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.3.jar:6.2.3]
+	at org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42) ~[spring-security-web-6.2.3.jar:6.2.3]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.5.jar:6.1.5]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.3.jar:6.2.3]
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:233) ~[spring-security-web-6.2.3.jar:6.2.3]
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:191) ~[spring-security-web-6.2.3.jar:6.2.3]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113) ~[spring-web-6.1.5.jar:6.1.5]
+	at org.springframework.web.servlet.handler.HandlerMappingIntrospector.lambda$createCacheFilter$3(HandlerMappingIntrospector.java:195) ~[spring-webmvc-6.1.5.jar:6.1.5]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113) ~[spring-web-6.1.5.jar:6.1.5]
+	at org.springframework.web.filter.CompositeFilter.doFilter(CompositeFilter.java:74) ~[spring-web-6.1.5.jar:6.1.5]
+	at org.springframework.security.config.annotation.web.configuration.WebMvcSecurityConfiguration$CompositeFilterChainProxy.doFilter(WebMvcSecurityConfiguration.java:230) ~[spring-security-config-6.2.3.jar:6.2.3]
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:352) ~[spring-web-6.1.5.jar:6.1.5]
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:268) ~[spring-web-6.1.5.jar:6.1.5]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-6.1.5.jar:6.1.5]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.5.jar:6.1.5]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-6.1.5.jar:6.1.5]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.5.jar:6.1.5]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201) ~[spring-web-6.1.5.jar:6.1.5]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.5.jar:6.1.5]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:344) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:391) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:896) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1744) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at java.base/java.lang.Thread.run(Thread.java:1583) ~[na:na]
+
+2026-03-18T14:04:50.176+03:00  INFO 21560 --- [ChatAI] [http-nio-8080-exec-7] o.e.c.s.a.c.SupportMessageController     : Called method: getLastMessageFromTicket with support_ticket_id 1
+2026-03-18T14:04:50.176+03:00  INFO 21560 --- [ChatAI] [http-nio-8080-exec-7] o.e.chatai.users.domain.UserService      : Getting jwt
+2026-03-18T14:04:50.176+03:00  INFO 21560 --- [ChatAI] [http-nio-8080-exec-7] o.e.chatai.users.domain.UserService      : Getting email
+2026-03-18T14:04:50.177+03:00  INFO 21560 --- [ChatAI] [http-nio-8080-exec-7] o.e.chatai.users.domain.UserService      : Getting currentUser
+2026-03-18T14:04:50.180+03:00  INFO 21560 --- [ChatAI] [http-nio-8080-exec-7] o.e.c.s.d.services.SupportTicketService  : Getting support ticket with id 1
+2026-03-18T14:04:50.183+03:00  INFO 21560 --- [ChatAI] [http-nio-8080-exec-7] o.e.c.s.d.services.SupportTicketService  : Checking user's current ticket
+2026-03-18T14:05:01.013+03:00  INFO 21560 --- [ChatAI] [http-nio-8080-exec-8] o.e.c.s.a.c.SupportTicketController      : Called method: getAllTickets with pageSize: null, pageNum: null
+2026-03-18T14:05:01.013+03:00  INFO 21560 --- [ChatAI] [http-nio-8080-exec-8] o.e.chatai.users.domain.UserService      : Getting jwt
+2026-03-18T14:05:01.013+03:00  INFO 21560 --- [ChatAI] [http-nio-8080-exec-8] o.e.chatai.users.domain.UserService      : Getting email
+2026-03-18T14:05:01.014+03:00  INFO 21560 --- [ChatAI] [http-nio-8080-exec-8] o.e.chatai.users.domain.UserService      : Getting currentUser
+2026-03-18T14:05:13.080+03:00  INFO 21560 --- [ChatAI] [http-nio-8080-exec-9] o.e.c.s.a.c.SupportTicketController      : Called method: getTicketById with id: 2
+2026-03-18T14:05:13.083+03:00  INFO 21560 --- [ChatAI] [http-nio-8080-exec-9] o.e.c.s.a.c.SupportTicketController      : Called method: getTicketById with id: 2
+2026-03-18T14:05:13.083+03:00 ERROR 21560 --- [ChatAI] [http-nio-8080-exec-9] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed: java.lang.RuntimeException: Ticket not found] with root cause
+
+java.lang.RuntimeException: Ticket not found
+	at org.example.chatai.supportTickets.domain.services.SupportTicketService.lambda$getTicketById$0(SupportTicketService.java:73) ~[classes/:na]
+	at java.base/java.util.Optional.orElseThrow(Optional.java:403) ~[na:na]
+	at org.example.chatai.supportTickets.domain.services.SupportTicketService.getTicketById(SupportTicketService.java:73) ~[classes/:na]
+	at org.example.chatai.supportTickets.api.controllers.SupportTicketController.getTicketById(SupportTicketController.java:54) ~[classes/:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:255) ~[spring-web-6.1.5.jar:6.1.5]
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:188) ~[spring-web-6.1.5.jar:6.1.5]
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:118) ~[spring-webmvc-6.1.5.jar:6.1.5]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:925) ~[spring-webmvc-6.1.5.jar:6.1.5]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:830) ~[spring-webmvc-6.1.5.jar:6.1.5]
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87) ~[spring-webmvc-6.1.5.jar:6.1.5]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089) ~[spring-webmvc-6.1.5.jar:6.1.5]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979) ~[spring-webmvc-6.1.5.jar:6.1.5]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014) ~[spring-webmvc-6.1.5.jar:6.1.5]
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:903) ~[spring-webmvc-6.1.5.jar:6.1.5]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:564) ~[tomcat-embed-core-10.1.19.jar:6.0]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885) ~[spring-webmvc-6.1.5.jar:6.1.5]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658) ~[tomcat-embed-core-10.1.19.jar:6.0]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:205) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:108) ~[spring-web-6.1.5.jar:6.1.5]
+	at org.springframework.security.web.FilterChainProxy.lambda$doFilterInternal$3(FilterChainProxy.java:231) ~[spring-security-web-6.2.3.jar:6.2.3]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:365) ~[spring-security-web-6.2.3.jar:6.2.3]
+	at org.example.chatai.config.JwtFilter.doFilterInternal(JwtFilter.java:78) ~[classes/:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:351) ~[spring-aop-6.1.5.jar:6.1.5]
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:713) ~[spring-aop-6.1.5.jar:6.1.5]
+	at org.example.chatai.config.JwtFilter$$SpringCGLIB$$0.doFilterInternal(<generated>) ~[classes/:na]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.5.jar:6.1.5]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.3.jar:6.2.3]
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:107) ~[spring-security-web-6.2.3.jar:6.2.3]
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:93) ~[spring-security-web-6.2.3.jar:6.2.3]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.3.jar:6.2.3]
+	at org.springframework.web.filter.CorsFilter.doFilterInternal(CorsFilter.java:91) ~[spring-web-6.1.5.jar:6.1.5]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.5.jar:6.1.5]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.3.jar:6.2.3]
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90) ~[spring-security-web-6.2.3.jar:6.2.3]
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75) ~[spring-security-web-6.2.3.jar:6.2.3]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.5.jar:6.1.5]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.3.jar:6.2.3]
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:82) ~[spring-security-web-6.2.3.jar:6.2.3]
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:69) ~[spring-security-web-6.2.3.jar:6.2.3]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.3.jar:6.2.3]
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:62) ~[spring-security-web-6.2.3.jar:6.2.3]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.5.jar:6.1.5]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.3.jar:6.2.3]
+	at org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42) ~[spring-security-web-6.2.3.jar:6.2.3]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.5.jar:6.1.5]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.3.jar:6.2.3]
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:233) ~[spring-security-web-6.2.3.jar:6.2.3]
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:191) ~[spring-security-web-6.2.3.jar:6.2.3]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113) ~[spring-web-6.1.5.jar:6.1.5]
+	at org.springframework.web.servlet.handler.HandlerMappingIntrospector.lambda$createCacheFilter$3(HandlerMappingIntrospector.java:195) ~[spring-webmvc-6.1.5.jar:6.1.5]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113) ~[spring-web-6.1.5.jar:6.1.5]
+	at org.springframework.web.filter.CompositeFilter.doFilter(CompositeFilter.java:74) ~[spring-web-6.1.5.jar:6.1.5]
+	at org.springframework.security.config.annotation.web.configuration.WebMvcSecurityConfiguration$CompositeFilterChainProxy.doFilter(WebMvcSecurityConfiguration.java:230) ~[spring-security-config-6.2.3.jar:6.2.3]
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:352) ~[spring-web-6.1.5.jar:6.1.5]
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:268) ~[spring-web-6.1.5.jar:6.1.5]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-6.1.5.jar:6.1.5]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.5.jar:6.1.5]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-6.1.5.jar:6.1.5]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.5.jar:6.1.5]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201) ~[spring-web-6.1.5.jar:6.1.5]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.5.jar:6.1.5]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:344) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:391) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:896) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1744) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at java.base/java.lang.Thread.run(Thread.java:1583) ~[na:na]
+
+2026-03-18T14:05:16.790+03:00  INFO 21560 --- [ChatAI] [http-nio-8080-exec-10] o.e.c.s.a.c.SupportTicketController      : Called method: getTicketById with id: 1
+2026-03-18T14:05:16.792+03:00  INFO 21560 --- [ChatAI] [http-nio-8080-exec-10] o.e.chatai.users.domain.UserService      : Getting jwt
+2026-03-18T14:05:16.792+03:00  INFO 21560 --- [ChatAI] [http-nio-8080-exec-10] o.e.chatai.users.domain.UserService      : Getting email
+2026-03-18T14:05:16.793+03:00  INFO 21560 --- [ChatAI] [http-nio-8080-exec-10] o.e.chatai.users.domain.UserService      : Getting currentUser
+2026-03-18T14:05:16.796+03:00  INFO 21560 --- [ChatAI] [http-nio-8080-exec-10] o.e.c.s.a.c.SupportTicketController      : Called method: getTicketById with id: 1
+2026-03-18T14:05:16.798+03:00  INFO 21560 --- [ChatAI] [http-nio-8080-exec-10] o.e.chatai.users.domain.UserService      : Getting jwt
+2026-03-18T14:05:16.798+03:00  INFO 21560 --- [ChatAI] [http-nio-8080-exec-10] o.e.chatai.users.domain.UserService      : Getting email
+2026-03-18T14:05:16.799+03:00  INFO 21560 --- [ChatAI] [http-nio-8080-exec-10] o.e.chatai.users.domain.UserService      : Getting currentUser
+2026-03-18T14:05:16.802+03:00 ERROR 21560 --- [ChatAI] [http-nio-8080-exec-10] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed: java.lang.RuntimeException: It's not your ticket] with root cause
+
+java.lang.RuntimeException: It's not your ticket
+	at org.example.chatai.supportTickets.domain.services.SupportTicketService.checkHavingUserTicket(SupportTicketService.java:140) ~[classes/:na]
+	at org.example.chatai.supportTickets.domain.services.SupportTicketService.getTicketById(SupportTicketService.java:76) ~[classes/:na]
+	at org.example.chatai.supportTickets.api.controllers.SupportTicketController.getTicketById(SupportTicketController.java:54) ~[classes/:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:255) ~[spring-web-6.1.5.jar:6.1.5]
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:188) ~[spring-web-6.1.5.jar:6.1.5]
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:118) ~[spring-webmvc-6.1.5.jar:6.1.5]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:925) ~[spring-webmvc-6.1.5.jar:6.1.5]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:830) ~[spring-webmvc-6.1.5.jar:6.1.5]
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87) ~[spring-webmvc-6.1.5.jar:6.1.5]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089) ~[spring-webmvc-6.1.5.jar:6.1.5]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979) ~[spring-webmvc-6.1.5.jar:6.1.5]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014) ~[spring-webmvc-6.1.5.jar:6.1.5]
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:903) ~[spring-webmvc-6.1.5.jar:6.1.5]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:564) ~[tomcat-embed-core-10.1.19.jar:6.0]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885) ~[spring-webmvc-6.1.5.jar:6.1.5]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658) ~[tomcat-embed-core-10.1.19.jar:6.0]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:205) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:108) ~[spring-web-6.1.5.jar:6.1.5]
+	at org.springframework.security.web.FilterChainProxy.lambda$doFilterInternal$3(FilterChainProxy.java:231) ~[spring-security-web-6.2.3.jar:6.2.3]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:365) ~[spring-security-web-6.2.3.jar:6.2.3]
+	at org.example.chatai.config.JwtFilter.doFilterInternal(JwtFilter.java:78) ~[classes/:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:351) ~[spring-aop-6.1.5.jar:6.1.5]
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:713) ~[spring-aop-6.1.5.jar:6.1.5]
+	at org.example.chatai.config.JwtFilter$$SpringCGLIB$$0.doFilterInternal(<generated>) ~[classes/:na]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.5.jar:6.1.5]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.3.jar:6.2.3]
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:107) ~[spring-security-web-6.2.3.jar:6.2.3]
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:93) ~[spring-security-web-6.2.3.jar:6.2.3]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.3.jar:6.2.3]
+	at org.springframework.web.filter.CorsFilter.doFilterInternal(CorsFilter.java:91) ~[spring-web-6.1.5.jar:6.1.5]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.5.jar:6.1.5]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.3.jar:6.2.3]
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90) ~[spring-security-web-6.2.3.jar:6.2.3]
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75) ~[spring-security-web-6.2.3.jar:6.2.3]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.5.jar:6.1.5]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.3.jar:6.2.3]
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:82) ~[spring-security-web-6.2.3.jar:6.2.3]
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:69) ~[spring-security-web-6.2.3.jar:6.2.3]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.3.jar:6.2.3]
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:62) ~[spring-security-web-6.2.3.jar:6.2.3]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.5.jar:6.1.5]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.3.jar:6.2.3]
+	at org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42) ~[spring-security-web-6.2.3.jar:6.2.3]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.5.jar:6.1.5]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.3.jar:6.2.3]
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:233) ~[spring-security-web-6.2.3.jar:6.2.3]
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:191) ~[spring-security-web-6.2.3.jar:6.2.3]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113) ~[spring-web-6.1.5.jar:6.1.5]
+	at org.springframework.web.servlet.handler.HandlerMappingIntrospector.lambda$createCacheFilter$3(HandlerMappingIntrospector.java:195) ~[spring-webmvc-6.1.5.jar:6.1.5]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113) ~[spring-web-6.1.5.jar:6.1.5]
+	at org.springframework.web.filter.CompositeFilter.doFilter(CompositeFilter.java:74) ~[spring-web-6.1.5.jar:6.1.5]
+	at org.springframework.security.config.annotation.web.configuration.WebMvcSecurityConfiguration$CompositeFilterChainProxy.doFilter(WebMvcSecurityConfiguration.java:230) ~[spring-security-config-6.2.3.jar:6.2.3]
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:352) ~[spring-web-6.1.5.jar:6.1.5]
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:268) ~[spring-web-6.1.5.jar:6.1.5]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-6.1.5.jar:6.1.5]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.5.jar:6.1.5]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-6.1.5.jar:6.1.5]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.5.jar:6.1.5]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201) ~[spring-web-6.1.5.jar:6.1.5]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.5.jar:6.1.5]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:344) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:391) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:896) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1744) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at java.base/java.lang.Thread.run(Thread.java:1583) ~[na:na]
+
+2026-03-18T14:05:22.715+03:00  INFO 21560 --- [ChatAI] [http-nio-8080-exec-1] o.e.c.s.a.c.SupportTicketController      : Called method: getTicketById with id: 3
+2026-03-18T14:05:22.717+03:00  INFO 21560 --- [ChatAI] [http-nio-8080-exec-1] o.e.c.s.a.c.SupportTicketController      : Called method: getTicketById with id: 3
+2026-03-18T14:05:22.718+03:00 ERROR 21560 --- [ChatAI] [http-nio-8080-exec-1] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed: java.lang.RuntimeException: Ticket not found] with root cause
+
+java.lang.RuntimeException: Ticket not found
+	at org.example.chatai.supportTickets.domain.services.SupportTicketService.lambda$getTicketById$0(SupportTicketService.java:73) ~[classes/:na]
+	at java.base/java.util.Optional.orElseThrow(Optional.java:403) ~[na:na]
+	at org.example.chatai.supportTickets.domain.services.SupportTicketService.getTicketById(SupportTicketService.java:73) ~[classes/:na]
+	at org.example.chatai.supportTickets.api.controllers.SupportTicketController.getTicketById(SupportTicketController.java:54) ~[classes/:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:255) ~[spring-web-6.1.5.jar:6.1.5]
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:188) ~[spring-web-6.1.5.jar:6.1.5]
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:118) ~[spring-webmvc-6.1.5.jar:6.1.5]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:925) ~[spring-webmvc-6.1.5.jar:6.1.5]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:830) ~[spring-webmvc-6.1.5.jar:6.1.5]
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87) ~[spring-webmvc-6.1.5.jar:6.1.5]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089) ~[spring-webmvc-6.1.5.jar:6.1.5]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979) ~[spring-webmvc-6.1.5.jar:6.1.5]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014) ~[spring-webmvc-6.1.5.jar:6.1.5]
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:903) ~[spring-webmvc-6.1.5.jar:6.1.5]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:564) ~[tomcat-embed-core-10.1.19.jar:6.0]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885) ~[spring-webmvc-6.1.5.jar:6.1.5]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658) ~[tomcat-embed-core-10.1.19.jar:6.0]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:205) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:108) ~[spring-web-6.1.5.jar:6.1.5]
+	at org.springframework.security.web.FilterChainProxy.lambda$doFilterInternal$3(FilterChainProxy.java:231) ~[spring-security-web-6.2.3.jar:6.2.3]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:365) ~[spring-security-web-6.2.3.jar:6.2.3]
+	at org.example.chatai.config.JwtFilter.doFilterInternal(JwtFilter.java:78) ~[classes/:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:351) ~[spring-aop-6.1.5.jar:6.1.5]
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:713) ~[spring-aop-6.1.5.jar:6.1.5]
+	at org.example.chatai.config.JwtFilter$$SpringCGLIB$$0.doFilterInternal(<generated>) ~[classes/:na]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.5.jar:6.1.5]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.3.jar:6.2.3]
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:107) ~[spring-security-web-6.2.3.jar:6.2.3]
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:93) ~[spring-security-web-6.2.3.jar:6.2.3]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.3.jar:6.2.3]
+	at org.springframework.web.filter.CorsFilter.doFilterInternal(CorsFilter.java:91) ~[spring-web-6.1.5.jar:6.1.5]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.5.jar:6.1.5]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.3.jar:6.2.3]
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90) ~[spring-security-web-6.2.3.jar:6.2.3]
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75) ~[spring-security-web-6.2.3.jar:6.2.3]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.5.jar:6.1.5]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.3.jar:6.2.3]
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:82) ~[spring-security-web-6.2.3.jar:6.2.3]
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:69) ~[spring-security-web-6.2.3.jar:6.2.3]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.3.jar:6.2.3]
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:62) ~[spring-security-web-6.2.3.jar:6.2.3]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.5.jar:6.1.5]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.3.jar:6.2.3]
+	at org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42) ~[spring-security-web-6.2.3.jar:6.2.3]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.5.jar:6.1.5]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.3.jar:6.2.3]
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:233) ~[spring-security-web-6.2.3.jar:6.2.3]
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:191) ~[spring-security-web-6.2.3.jar:6.2.3]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113) ~[spring-web-6.1.5.jar:6.1.5]
+	at org.springframework.web.servlet.handler.HandlerMappingIntrospector.lambda$createCacheFilter$3(HandlerMappingIntrospector.java:195) ~[spring-webmvc-6.1.5.jar:6.1.5]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113) ~[spring-web-6.1.5.jar:6.1.5]
+	at org.springframework.web.filter.CompositeFilter.doFilter(CompositeFilter.java:74) ~[spring-web-6.1.5.jar:6.1.5]
+	at org.springframework.security.config.annotation.web.configuration.WebMvcSecurityConfiguration$CompositeFilterChainProxy.doFilter(WebMvcSecurityConfiguration.java:230) ~[spring-security-config-6.2.3.jar:6.2.3]
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:352) ~[spring-web-6.1.5.jar:6.1.5]
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:268) ~[spring-web-6.1.5.jar:6.1.5]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-6.1.5.jar:6.1.5]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.5.jar:6.1.5]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-6.1.5.jar:6.1.5]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.5.jar:6.1.5]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201) ~[spring-web-6.1.5.jar:6.1.5]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.5.jar:6.1.5]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:344) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:391) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:896) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1744) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at java.base/java.lang.Thread.run(Thread.java:1583) ~[na:na]
+
+2026-03-18T14:05:52.016+03:00  INFO 21560 --- [ChatAI] [http-nio-8080-exec-2] o.e.c.s.a.c.SupportTicketController      : Called method: getTicketById with id: 1
+2026-03-18T14:05:52.019+03:00  INFO 21560 --- [ChatAI] [http-nio-8080-exec-2] o.e.chatai.users.domain.UserService      : Getting jwt
+2026-03-18T14:05:52.019+03:00  INFO 21560 --- [ChatAI] [http-nio-8080-exec-2] o.e.chatai.users.domain.UserService      : Getting email
+2026-03-18T14:05:52.020+03:00  INFO 21560 --- [ChatAI] [http-nio-8080-exec-2] o.e.chatai.users.domain.UserService      : Getting currentUser
+2026-03-18T14:05:52.022+03:00  INFO 21560 --- [ChatAI] [http-nio-8080-exec-2] o.e.c.s.a.c.SupportTicketController      : Called method: getTicketById with id: 1
+2026-03-18T14:05:52.024+03:00  INFO 21560 --- [ChatAI] [http-nio-8080-exec-2] o.e.chatai.users.domain.UserService      : Getting jwt
+2026-03-18T14:05:52.024+03:00  INFO 21560 --- [ChatAI] [http-nio-8080-exec-2] o.e.chatai.users.domain.UserService      : Getting email
+2026-03-18T14:05:52.025+03:00  INFO 21560 --- [ChatAI] [http-nio-8080-exec-2] o.e.chatai.users.domain.UserService      : Getting currentUser
+2026-03-18T14:05:52.027+03:00 ERROR 21560 --- [ChatAI] [http-nio-8080-exec-2] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed: java.lang.RuntimeException: It's not your ticket] with root cause
+
+java.lang.RuntimeException: It's not your ticket
+	at org.example.chatai.supportTickets.domain.services.SupportTicketService.checkHavingUserTicket(SupportTicketService.java:140) ~[classes/:na]
+	at org.example.chatai.supportTickets.domain.services.SupportTicketService.getTicketById(SupportTicketService.java:76) ~[classes/:na]
+	at org.example.chatai.supportTickets.api.controllers.SupportTicketController.getTicketById(SupportTicketController.java:54) ~[classes/:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:255) ~[spring-web-6.1.5.jar:6.1.5]
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:188) ~[spring-web-6.1.5.jar:6.1.5]
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:118) ~[spring-webmvc-6.1.5.jar:6.1.5]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:925) ~[spring-webmvc-6.1.5.jar:6.1.5]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:830) ~[spring-webmvc-6.1.5.jar:6.1.5]
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87) ~[spring-webmvc-6.1.5.jar:6.1.5]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089) ~[spring-webmvc-6.1.5.jar:6.1.5]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979) ~[spring-webmvc-6.1.5.jar:6.1.5]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014) ~[spring-webmvc-6.1.5.jar:6.1.5]
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:903) ~[spring-webmvc-6.1.5.jar:6.1.5]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:564) ~[tomcat-embed-core-10.1.19.jar:6.0]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885) ~[spring-webmvc-6.1.5.jar:6.1.5]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658) ~[tomcat-embed-core-10.1.19.jar:6.0]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:205) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:108) ~[spring-web-6.1.5.jar:6.1.5]
+	at org.springframework.security.web.FilterChainProxy.lambda$doFilterInternal$3(FilterChainProxy.java:231) ~[spring-security-web-6.2.3.jar:6.2.3]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:365) ~[spring-security-web-6.2.3.jar:6.2.3]
+	at org.example.chatai.config.JwtFilter.doFilterInternal(JwtFilter.java:78) ~[classes/:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:351) ~[spring-aop-6.1.5.jar:6.1.5]
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:713) ~[spring-aop-6.1.5.jar:6.1.5]
+	at org.example.chatai.config.JwtFilter$$SpringCGLIB$$0.doFilterInternal(<generated>) ~[classes/:na]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.5.jar:6.1.5]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.3.jar:6.2.3]
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:107) ~[spring-security-web-6.2.3.jar:6.2.3]
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:93) ~[spring-security-web-6.2.3.jar:6.2.3]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.3.jar:6.2.3]
+	at org.springframework.web.filter.CorsFilter.doFilterInternal(CorsFilter.java:91) ~[spring-web-6.1.5.jar:6.1.5]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.5.jar:6.1.5]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.3.jar:6.2.3]
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90) ~[spring-security-web-6.2.3.jar:6.2.3]
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75) ~[spring-security-web-6.2.3.jar:6.2.3]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.5.jar:6.1.5]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.3.jar:6.2.3]
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:82) ~[spring-security-web-6.2.3.jar:6.2.3]
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:69) ~[spring-security-web-6.2.3.jar:6.2.3]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.3.jar:6.2.3]
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:62) ~[spring-security-web-6.2.3.jar:6.2.3]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.5.jar:6.1.5]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.3.jar:6.2.3]
+	at org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42) ~[spring-security-web-6.2.3.jar:6.2.3]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.5.jar:6.1.5]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.3.jar:6.2.3]
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:233) ~[spring-security-web-6.2.3.jar:6.2.3]
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:191) ~[spring-security-web-6.2.3.jar:6.2.3]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113) ~[spring-web-6.1.5.jar:6.1.5]
+	at org.springframework.web.servlet.handler.HandlerMappingIntrospector.lambda$createCacheFilter$3(HandlerMappingIntrospector.java:195) ~[spring-webmvc-6.1.5.jar:6.1.5]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113) ~[spring-web-6.1.5.jar:6.1.5]
+	at org.springframework.web.filter.CompositeFilter.doFilter(CompositeFilter.java:74) ~[spring-web-6.1.5.jar:6.1.5]
+	at org.springframework.security.config.annotation.web.configuration.WebMvcSecurityConfiguration$CompositeFilterChainProxy.doFilter(WebMvcSecurityConfiguration.java:230) ~[spring-security-config-6.2.3.jar:6.2.3]
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:352) ~[spring-web-6.1.5.jar:6.1.5]
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:268) ~[spring-web-6.1.5.jar:6.1.5]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-6.1.5.jar:6.1.5]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.5.jar:6.1.5]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-6.1.5.jar:6.1.5]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.5.jar:6.1.5]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201) ~[spring-web-6.1.5.jar:6.1.5]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.5.jar:6.1.5]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:344) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:391) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:896) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1744) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at java.base/java.lang.Thread.run(Thread.java:1583) ~[na:na]
+
+2026-03-18T14:09:40.780+03:00  INFO 21560 --- [ChatAI] [File Watcher] rtingClassPathChangeChangedEventListener : Restarting due to 1 class path change (0 additions, 1 deletion, 0 modifications)
+2026-03-18T14:09:40.783+03:00  INFO 21560 --- [ChatAI] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-notify-group-1, groupId=notify-group] Revoke previously assigned partitions notifyUser-0
+2026-03-18T14:09:40.783+03:00  INFO 21560 --- [ChatAI] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.s.k.l.KafkaMessageListenerContainer    : notify-group: partitions revoked: [notifyUser-0]
+2026-03-18T14:09:40.784+03:00  INFO 21560 --- [ChatAI] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-notify-group-1, groupId=notify-group] Member consumer-notify-group-1-a3f2c5cc-024e-4921-a2a4-29b7a3442eb0 sending LeaveGroup request to coordinator localhost:9092 (id: 2147483646 rack: null) due to the consumer unsubscribed from all topics
+2026-03-18T14:09:40.784+03:00  INFO 21560 --- [ChatAI] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-notify-group-1, groupId=notify-group] Resetting generation and member id due to: consumer pro-actively leaving the group
+2026-03-18T14:09:40.784+03:00  INFO 21560 --- [ChatAI] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-notify-group-1, groupId=notify-group] Request joining group due to: consumer pro-actively leaving the group
+2026-03-18T14:09:40.784+03:00  INFO 21560 --- [ChatAI] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] fkaConsumerFactory$ExtendedKafkaConsumer : [Consumer clientId=consumer-notify-group-1, groupId=notify-group] Unsubscribed all topics or patterns and assigned partitions
+2026-03-18T14:09:40.784+03:00  INFO 21560 --- [ChatAI] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-notify-group-1, groupId=notify-group] Resetting generation and member id due to: consumer pro-actively leaving the group
+2026-03-18T14:09:40.784+03:00  INFO 21560 --- [ChatAI] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-notify-group-1, groupId=notify-group] Request joining group due to: consumer pro-actively leaving the group
+2026-03-18T14:09:40.793+03:00  INFO 21560 --- [ChatAI] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.apache.kafka.common.metrics.Metrics    : Metrics scheduler closed
+2026-03-18T14:09:40.793+03:00  INFO 21560 --- [ChatAI] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.apache.kafka.common.metrics.Metrics    : Closing reporter org.apache.kafka.common.metrics.JmxReporter
+2026-03-18T14:09:40.793+03:00  INFO 21560 --- [ChatAI] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.apache.kafka.common.metrics.Metrics    : Metrics reporters closed
+2026-03-18T14:09:40.796+03:00  INFO 21560 --- [ChatAI] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.a.kafka.common.utils.AppInfoParser     : App info kafka.consumer for consumer-notify-group-1 unregistered
+2026-03-18T14:09:40.796+03:00  INFO 21560 --- [ChatAI] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.s.k.l.KafkaMessageListenerContainer    : notify-group: Consumer stopped
+2026-03-18T14:09:40.811+03:00  INFO 21560 --- [ChatAI] [Thread-18] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-03-18T14:09:40.813+03:00  INFO 21560 --- [ChatAI] [Thread-18] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2026-03-18T14:09:40.815+03:00  INFO 21560 --- [ChatAI] [Thread-18] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2026-03-18T14:09:40.925+03:00  INFO 21560 --- [ChatAI] [restartedMain] org.example.chatai.ChatAiApplication     : Starting ChatAiApplication using Java 21.0.9 with PID 21560 (F:\Programing\Projects\Chat AI\target\classes started by dratu in F:\Programing\Projects\Chat AI)
+2026-03-18T14:09:40.925+03:00  INFO 21560 --- [ChatAI] [restartedMain] org.example.chatai.ChatAiApplication     : No active profile set, falling back to 1 default profile: "default"
+2026-03-18T14:09:41.118+03:00  INFO 21560 --- [ChatAI] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-03-18T14:09:41.132+03:00  INFO 21560 --- [ChatAI] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 13 ms. Found 6 JPA repository interfaces.
+2026-03-18T14:09:41.202+03:00  INFO 21560 --- [ChatAI] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2026-03-18T14:09:41.203+03:00  INFO 21560 --- [ChatAI] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-03-18T14:09:41.203+03:00  INFO 21560 --- [ChatAI] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.19]
+2026-03-18T14:09:41.221+03:00  INFO 21560 --- [ChatAI] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2026-03-18T14:09:41.221+03:00  INFO 21560 --- [ChatAI] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 295 ms
+2026-03-18T14:09:41.241+03:00  INFO 21560 --- [ChatAI] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Starting...
+2026-03-18T14:09:41.281+03:00  INFO 21560 --- [ChatAI] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-2 - Added connection org.postgresql.jdbc.PgConnection@6012b9e4
+2026-03-18T14:09:41.282+03:00  INFO 21560 --- [ChatAI] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Start completed.
+2026-03-18T14:09:41.297+03:00  INFO 21560 --- [ChatAI] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-03-18T14:09:41.299+03:00  INFO 21560 --- [ChatAI] [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-03-18T14:09:41.302+03:00  INFO 21560 --- [ChatAI] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-03-18T14:09:41.307+03:00  WARN 21560 --- [ChatAI] [restartedMain] org.hibernate.orm.deprecation            : HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-03-18T14:09:41.397+03:00  INFO 21560 --- [ChatAI] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-03-18T14:09:41.448+03:00  INFO 21560 --- [ChatAI] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-03-18T14:09:41.596+03:00  INFO 21560 --- [ChatAI] [restartedMain] o.e.c.payments.domain.PaymentService     : Инициализация YooKassa: shopId=1298329, secretKey=48 chars
+2026-03-18T14:09:41.598+03:00  INFO 21560 --- [ChatAI] [restartedMain] o.e.c.payments.domain.PaymentService     : YooKassa инициализирована
+2026-03-18T14:09:41.620+03:00  INFO 21560 --- [ChatAI] [restartedMain] o.example.chatai.chat.domain.AIManager   : Chat Memory:null
+2026-03-18T14:09:41.625+03:00  WARN 21560 --- [ChatAI] [restartedMain] o.s.aop.framework.CglibAopProxy          : Unable to proxy interface-implementing method [public final void org.springframework.web.filter.OncePerRequestFilter.doFilter(jakarta.servlet.ServletRequest,jakarta.servlet.ServletResponse,jakarta.servlet.FilterChain) throws jakarta.servlet.ServletException,java.io.IOException] because it is marked as final, consider using interface-based JDK proxies instead.
+2026-03-18T14:09:41.625+03:00  WARN 21560 --- [ChatAI] [restartedMain] o.s.aop.framework.CglibAopProxy          : Unable to proxy interface-implementing method [public final void org.springframework.web.filter.GenericFilterBean.init(jakarta.servlet.FilterConfig) throws jakarta.servlet.ServletException] because it is marked as final, consider using interface-based JDK proxies instead.
+2026-03-18T14:09:41.736+03:00  INFO 21560 --- [ChatAI] [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@32247ae2, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@14fa5aa9, org.springframework.security.web.context.SecurityContextHolderFilter@7cbcdad7, org.springframework.security.web.header.HeaderWriterFilter@74307855, org.springframework.web.filter.CorsFilter@f53e82d, org.springframework.security.web.authentication.logout.LogoutFilter@50cec6c1, org.example.chatai.config.JwtFilter@650acb2e, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@1e68f3b2, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@69edd2fa, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@69c7a54d, org.springframework.security.web.session.SessionManagementFilter@334088c, org.springframework.security.web.access.ExceptionTranslationFilter@6eb190f2, org.springframework.security.web.access.intercept.AuthorizationFilter@e1f23dd]
+2026-03-18T14:09:41.795+03:00  INFO 21560 --- [ChatAI] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2026-03-18T14:09:41.812+03:00  INFO 21560 --- [ChatAI] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path ''
+2026-03-18T14:09:41.813+03:00  INFO 21560 --- [ChatAI] [restartedMain] o.a.k.clients.consumer.ConsumerConfig    : ConsumerConfig values: 
+	allow.auto.create.topics = true
+	auto.commit.interval.ms = 5000
+	auto.include.jmx.reporter = true
+	auto.offset.reset = latest
+	bootstrap.servers = [localhost:9092]
+	check.crcs = true
+	client.dns.lookup = use_all_dns_ips
+	client.id = consumer-notify-group-2
+	client.rack = 
+	connections.max.idle.ms = 540000
+	default.api.timeout.ms = 60000
+	enable.auto.commit = false
+	exclude.internal.topics = true
+	fetch.max.bytes = 52428800
+	fetch.max.wait.ms = 500
+	fetch.min.bytes = 1
+	group.id = notify-group
+	group.instance.id = null
+	heartbeat.interval.ms = 3000
+	interceptor.classes = []
+	internal.leave.group.on.close = true
+	internal.throw.on.fetch.stable.offset.unsupported = false
+	isolation.level = read_uncommitted
+	key.deserializer = class org.apache.kafka.common.serialization.StringDeserializer
+	max.partition.fetch.bytes = 1048576
+	max.poll.interval.ms = 300000
+	max.poll.records = 500
+	metadata.max.age.ms = 300000
+	metric.reporters = []
+	metrics.num.samples = 2
+	metrics.recording.level = INFO
+	metrics.sample.window.ms = 30000
+	partition.assignment.strategy = [class org.apache.kafka.clients.consumer.RangeAssignor, class org.apache.kafka.clients.consumer.CooperativeStickyAssignor]
+	receive.buffer.bytes = 65536
+	reconnect.backoff.max.ms = 1000
+	reconnect.backoff.ms = 50
+	request.timeout.ms = 30000
+	retry.backoff.ms = 100
+	sasl.client.callback.handler.class = null
+	sasl.jaas.config = null
+	sasl.kerberos.kinit.cmd = /usr/bin/kinit
+	sasl.kerberos.min.time.before.relogin = 60000
+	sasl.kerberos.service.name = null
+	sasl.kerberos.ticket.renew.jitter = 0.05
+	sasl.kerberos.ticket.renew.window.factor = 0.8
+	sasl.login.callback.handler.class = null
+	sasl.login.class = null
+	sasl.login.connect.timeout.ms = null
+	sasl.login.read.timeout.ms = null
+	sasl.login.refresh.buffer.seconds = 300
+	sasl.login.refresh.min.period.seconds = 60
+	sasl.login.refresh.window.factor = 0.8
+	sasl.login.refresh.window.jitter = 0.05
+	sasl.login.retry.backoff.max.ms = 10000
+	sasl.login.retry.backoff.ms = 100
+	sasl.mechanism = GSSAPI
+	sasl.oauthbearer.clock.skew.seconds = 30
+	sasl.oauthbearer.expected.audience = null
+	sasl.oauthbearer.expected.issuer = null
+	sasl.oauthbearer.jwks.endpoint.refresh.ms = 3600000
+	sasl.oauthbearer.jwks.endpoint.retry.backoff.max.ms = 10000
+	sasl.oauthbearer.jwks.endpoint.retry.backoff.ms = 100
+	sasl.oauthbearer.jwks.endpoint.url = null
+	sasl.oauthbearer.scope.claim.name = scope
+	sasl.oauthbearer.sub.claim.name = sub
+	sasl.oauthbearer.token.endpoint.url = null
+	security.protocol = PLAINTEXT
+	security.providers = null
+	send.buffer.bytes = 131072
+	session.timeout.ms = 45000
+	socket.connection.setup.timeout.max.ms = 30000
+	socket.connection.setup.timeout.ms = 10000
+	ssl.cipher.suites = null
+	ssl.enabled.protocols = [TLSv1.2, TLSv1.3]
+	ssl.endpoint.identification.algorithm = https
+	ssl.engine.factory.class = null
+	ssl.key.password = null
+	ssl.keymanager.algorithm = SunX509
+	ssl.keystore.certificate.chain = null
+	ssl.keystore.key = null
+	ssl.keystore.location = null
+	ssl.keystore.password = null
+	ssl.keystore.type = JKS
+	ssl.protocol = TLSv1.3
+	ssl.provider = null
+	ssl.secure.random.implementation = null
+	ssl.trustmanager.algorithm = PKIX
+	ssl.truststore.certificates = null
+	ssl.truststore.location = null
+	ssl.truststore.password = null
+	ssl.truststore.type = JKS
+	value.deserializer = class org.springframework.kafka.support.serializer.JsonDeserializer
+
+2026-03-18T14:09:41.816+03:00  INFO 21560 --- [ChatAI] [restartedMain] o.a.kafka.common.utils.AppInfoParser     : Kafka version: 3.6.1
+2026-03-18T14:09:41.816+03:00  INFO 21560 --- [ChatAI] [restartedMain] o.a.kafka.common.utils.AppInfoParser     : Kafka commitId: 5e3c2b738d253ff5
+2026-03-18T14:09:41.816+03:00  INFO 21560 --- [ChatAI] [restartedMain] o.a.kafka.common.utils.AppInfoParser     : Kafka startTimeMs: 1773832181816
+2026-03-18T14:09:41.816+03:00  INFO 21560 --- [ChatAI] [restartedMain] fkaConsumerFactory$ExtendedKafkaConsumer : [Consumer clientId=consumer-notify-group-2, groupId=notify-group] Subscribed to topic(s): notifyUser
+2026-03-18T14:09:41.822+03:00  INFO 21560 --- [ChatAI] [restartedMain] org.example.chatai.ChatAiApplication     : Started ChatAiApplication in 0.913 seconds (process running for 351.761)
+2026-03-18T14:09:41.822+03:00  INFO 21560 --- [ChatAI] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] org.apache.kafka.clients.Metadata        : [Consumer clientId=consumer-notify-group-2, groupId=notify-group] Cluster ID: MkU3OEVBNTcwNTJENDM2Qg
+2026-03-18T14:09:41.823+03:00  INFO 21560 --- [ChatAI] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-notify-group-2, groupId=notify-group] Discovered group coordinator localhost:9092 (id: 2147483646 rack: null)
+2026-03-18T14:09:41.823+03:00  INFO 21560 --- [ChatAI] [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2026-03-18T14:09:41.824+03:00  INFO 21560 --- [ChatAI] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-notify-group-2, groupId=notify-group] (Re-)joining group
+2026-03-18T14:09:41.826+03:00  INFO 21560 --- [ChatAI] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-notify-group-2, groupId=notify-group] Request joining group due to: need to re-join with the given member-id: consumer-notify-group-2-c4722634-4dc7-4007-bcc2-e98af9f7d6e0
+2026-03-18T14:09:41.826+03:00  INFO 21560 --- [ChatAI] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-notify-group-2, groupId=notify-group] Request joining group due to: rebalance failed due to 'The group member needs to have a valid member id before actually entering a consumer group.' (MemberIdRequiredException)
+2026-03-18T14:09:41.826+03:00  INFO 21560 --- [ChatAI] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-notify-group-2, groupId=notify-group] (Re-)joining group
+2026-03-18T14:09:43.220+03:00  INFO 21560 --- [ChatAI] [File Watcher] rtingClassPathChangeChangedEventListener : Restarting due to 1 class path change (1 addition, 0 deletions, 0 modifications)
+2026-03-18T14:09:43.221+03:00  INFO 21560 --- [ChatAI] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-notify-group-2, groupId=notify-group] Member consumer-notify-group-2-c4722634-4dc7-4007-bcc2-e98af9f7d6e0 sending LeaveGroup request to coordinator localhost:9092 (id: 2147483646 rack: null) due to the consumer unsubscribed from all topics
+2026-03-18T14:09:43.221+03:00  INFO 21560 --- [ChatAI] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-notify-group-2, groupId=notify-group] Resetting generation and member id due to: consumer pro-actively leaving the group
+2026-03-18T14:09:43.221+03:00  INFO 21560 --- [ChatAI] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-notify-group-2, groupId=notify-group] Request joining group due to: consumer pro-actively leaving the group
+2026-03-18T14:09:43.221+03:00  INFO 21560 --- [ChatAI] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] fkaConsumerFactory$ExtendedKafkaConsumer : [Consumer clientId=consumer-notify-group-2, groupId=notify-group] Unsubscribed all topics or patterns and assigned partitions
+2026-03-18T14:09:43.221+03:00  INFO 21560 --- [ChatAI] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-notify-group-2, groupId=notify-group] Resetting generation and member id due to: consumer pro-actively leaving the group
+2026-03-18T14:09:43.221+03:00  INFO 21560 --- [ChatAI] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-notify-group-2, groupId=notify-group] Request joining group due to: consumer pro-actively leaving the group
+2026-03-18T14:09:44.837+03:00  INFO 21560 --- [ChatAI] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.apache.kafka.common.metrics.Metrics    : Metrics scheduler closed
+2026-03-18T14:09:44.837+03:00  INFO 21560 --- [ChatAI] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.apache.kafka.common.metrics.Metrics    : Closing reporter org.apache.kafka.common.metrics.JmxReporter
+2026-03-18T14:09:44.837+03:00  INFO 21560 --- [ChatAI] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.apache.kafka.common.metrics.Metrics    : Metrics reporters closed
+2026-03-18T14:09:44.838+03:00  INFO 21560 --- [ChatAI] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.a.kafka.common.utils.AppInfoParser     : App info kafka.consumer for consumer-notify-group-2 unregistered
+2026-03-18T14:09:44.838+03:00  INFO 21560 --- [ChatAI] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.s.k.l.KafkaMessageListenerContainer    : notify-group: Consumer stopped
+2026-03-18T14:09:44.843+03:00  INFO 21560 --- [ChatAI] [Thread-20] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-03-18T14:09:44.843+03:00  INFO 21560 --- [ChatAI] [Thread-20] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Shutdown initiated...
+2026-03-18T14:09:44.844+03:00  INFO 21560 --- [ChatAI] [Thread-20] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Shutdown completed.
+2026-03-18T14:09:44.916+03:00  INFO 21560 --- [ChatAI] [restartedMain] org.example.chatai.ChatAiApplication     : Starting ChatAiApplication using Java 21.0.9 with PID 21560 (F:\Programing\Projects\Chat AI\target\classes started by dratu in F:\Programing\Projects\Chat AI)
+2026-03-18T14:09:44.916+03:00  INFO 21560 --- [ChatAI] [restartedMain] org.example.chatai.ChatAiApplication     : No active profile set, falling back to 1 default profile: "default"
+2026-03-18T14:09:45.035+03:00  INFO 21560 --- [ChatAI] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-03-18T14:09:45.048+03:00  INFO 21560 --- [ChatAI] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 12 ms. Found 6 JPA repository interfaces.
+2026-03-18T14:09:45.122+03:00  INFO 21560 --- [ChatAI] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2026-03-18T14:09:45.123+03:00  INFO 21560 --- [ChatAI] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-03-18T14:09:45.123+03:00  INFO 21560 --- [ChatAI] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.19]
+2026-03-18T14:09:45.140+03:00  INFO 21560 --- [ChatAI] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2026-03-18T14:09:45.140+03:00  INFO 21560 --- [ChatAI] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 223 ms
+2026-03-18T14:09:45.155+03:00  INFO 21560 --- [ChatAI] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-3 - Starting...
+2026-03-18T14:09:45.190+03:00  INFO 21560 --- [ChatAI] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-3 - Added connection org.postgresql.jdbc.PgConnection@4f448b65
+2026-03-18T14:09:45.190+03:00  INFO 21560 --- [ChatAI] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-3 - Start completed.
+2026-03-18T14:09:45.201+03:00  INFO 21560 --- [ChatAI] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-03-18T14:09:45.202+03:00  INFO 21560 --- [ChatAI] [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-03-18T14:09:45.204+03:00  INFO 21560 --- [ChatAI] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-03-18T14:09:45.208+03:00  WARN 21560 --- [ChatAI] [restartedMain] org.hibernate.orm.deprecation            : HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-03-18T14:09:45.267+03:00  INFO 21560 --- [ChatAI] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-03-18T14:09:45.320+03:00  INFO 21560 --- [ChatAI] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-03-18T14:09:45.419+03:00  INFO 21560 --- [ChatAI] [restartedMain] o.e.c.payments.domain.PaymentService     : Инициализация YooKassa: shopId=1298329, secretKey=48 chars
+2026-03-18T14:09:45.420+03:00  INFO 21560 --- [ChatAI] [restartedMain] o.e.c.payments.domain.PaymentService     : YooKassa инициализирована
+2026-03-18T14:09:45.437+03:00  INFO 21560 --- [ChatAI] [restartedMain] o.example.chatai.chat.domain.AIManager   : Chat Memory:null
+2026-03-18T14:09:45.441+03:00  WARN 21560 --- [ChatAI] [restartedMain] o.s.aop.framework.CglibAopProxy          : Unable to proxy interface-implementing method [public final void org.springframework.web.filter.OncePerRequestFilter.doFilter(jakarta.servlet.ServletRequest,jakarta.servlet.ServletResponse,jakarta.servlet.FilterChain) throws jakarta.servlet.ServletException,java.io.IOException] because it is marked as final, consider using interface-based JDK proxies instead.
+2026-03-18T14:09:45.441+03:00  WARN 21560 --- [ChatAI] [restartedMain] o.s.aop.framework.CglibAopProxy          : Unable to proxy interface-implementing method [public final void org.springframework.web.filter.GenericFilterBean.init(jakarta.servlet.FilterConfig) throws jakarta.servlet.ServletException] because it is marked as final, consider using interface-based JDK proxies instead.
+2026-03-18T14:09:45.535+03:00  INFO 21560 --- [ChatAI] [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@563e2e09, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@6387459b, org.springframework.security.web.context.SecurityContextHolderFilter@281479bb, org.springframework.security.web.header.HeaderWriterFilter@249e4aa, org.springframework.web.filter.CorsFilter@34835056, org.springframework.security.web.authentication.logout.LogoutFilter@3861bda8, org.example.chatai.config.JwtFilter@3b0dc539, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@7d6621f2, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@30c7f640, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@1f269e5e, org.springframework.security.web.session.SessionManagementFilter@2fd58448, org.springframework.security.web.access.ExceptionTranslationFilter@62b6f231, org.springframework.security.web.access.intercept.AuthorizationFilter@7bbeefd9]
+2026-03-18T14:09:45.587+03:00  INFO 21560 --- [ChatAI] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2026-03-18T14:09:45.596+03:00  INFO 21560 --- [ChatAI] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path ''
+2026-03-18T14:09:45.597+03:00  INFO 21560 --- [ChatAI] [restartedMain] o.a.k.clients.consumer.ConsumerConfig    : ConsumerConfig values: 
+	allow.auto.create.topics = true
+	auto.commit.interval.ms = 5000
+	auto.include.jmx.reporter = true
+	auto.offset.reset = latest
+	bootstrap.servers = [localhost:9092]
+	check.crcs = true
+	client.dns.lookup = use_all_dns_ips
+	client.id = consumer-notify-group-3
+	client.rack = 
+	connections.max.idle.ms = 540000
+	default.api.timeout.ms = 60000
+	enable.auto.commit = false
+	exclude.internal.topics = true
+	fetch.max.bytes = 52428800
+	fetch.max.wait.ms = 500
+	fetch.min.bytes = 1
+	group.id = notify-group
+	group.instance.id = null
+	heartbeat.interval.ms = 3000
+	interceptor.classes = []
+	internal.leave.group.on.close = true
+	internal.throw.on.fetch.stable.offset.unsupported = false
+	isolation.level = read_uncommitted
+	key.deserializer = class org.apache.kafka.common.serialization.StringDeserializer
+	max.partition.fetch.bytes = 1048576
+	max.poll.interval.ms = 300000
+	max.poll.records = 500
+	metadata.max.age.ms = 300000
+	metric.reporters = []
+	metrics.num.samples = 2
+	metrics.recording.level = INFO
+	metrics.sample.window.ms = 30000
+	partition.assignment.strategy = [class org.apache.kafka.clients.consumer.RangeAssignor, class org.apache.kafka.clients.consumer.CooperativeStickyAssignor]
+	receive.buffer.bytes = 65536
+	reconnect.backoff.max.ms = 1000
+	reconnect.backoff.ms = 50
+	request.timeout.ms = 30000
+	retry.backoff.ms = 100
+	sasl.client.callback.handler.class = null
+	sasl.jaas.config = null
+	sasl.kerberos.kinit.cmd = /usr/bin/kinit
+	sasl.kerberos.min.time.before.relogin = 60000
+	sasl.kerberos.service.name = null
+	sasl.kerberos.ticket.renew.jitter = 0.05
+	sasl.kerberos.ticket.renew.window.factor = 0.8
+	sasl.login.callback.handler.class = null
+	sasl.login.class = null
+	sasl.login.connect.timeout.ms = null
+	sasl.login.read.timeout.ms = null
+	sasl.login.refresh.buffer.seconds = 300
+	sasl.login.refresh.min.period.seconds = 60
+	sasl.login.refresh.window.factor = 0.8
+	sasl.login.refresh.window.jitter = 0.05
+	sasl.login.retry.backoff.max.ms = 10000
+	sasl.login.retry.backoff.ms = 100
+	sasl.mechanism = GSSAPI
+	sasl.oauthbearer.clock.skew.seconds = 30
+	sasl.oauthbearer.expected.audience = null
+	sasl.oauthbearer.expected.issuer = null
+	sasl.oauthbearer.jwks.endpoint.refresh.ms = 3600000
+	sasl.oauthbearer.jwks.endpoint.retry.backoff.max.ms = 10000
+	sasl.oauthbearer.jwks.endpoint.retry.backoff.ms = 100
+	sasl.oauthbearer.jwks.endpoint.url = null
+	sasl.oauthbearer.scope.claim.name = scope
+	sasl.oauthbearer.sub.claim.name = sub
+	sasl.oauthbearer.token.endpoint.url = null
+	security.protocol = PLAINTEXT
+	security.providers = null
+	send.buffer.bytes = 131072
+	session.timeout.ms = 45000
+	socket.connection.setup.timeout.max.ms = 30000
+	socket.connection.setup.timeout.ms = 10000
+	ssl.cipher.suites = null
+	ssl.enabled.protocols = [TLSv1.2, TLSv1.3]
+	ssl.endpoint.identification.algorithm = https
+	ssl.engine.factory.class = null
+	ssl.key.password = null
+	ssl.keymanager.algorithm = SunX509
+	ssl.keystore.certificate.chain = null
+	ssl.keystore.key = null
+	ssl.keystore.location = null
+	ssl.keystore.password = null
+	ssl.keystore.type = JKS
+	ssl.protocol = TLSv1.3
+	ssl.provider = null
+	ssl.secure.random.implementation = null
+	ssl.trustmanager.algorithm = PKIX
+	ssl.truststore.certificates = null
+	ssl.truststore.location = null
+	ssl.truststore.password = null
+	ssl.truststore.type = JKS
+	value.deserializer = class org.springframework.kafka.support.serializer.JsonDeserializer
+
+2026-03-18T14:09:45.599+03:00  INFO 21560 --- [ChatAI] [restartedMain] o.a.kafka.common.utils.AppInfoParser     : Kafka version: 3.6.1
+2026-03-18T14:09:45.599+03:00  INFO 21560 --- [ChatAI] [restartedMain] o.a.kafka.common.utils.AppInfoParser     : Kafka commitId: 5e3c2b738d253ff5
+2026-03-18T14:09:45.599+03:00  INFO 21560 --- [ChatAI] [restartedMain] o.a.kafka.common.utils.AppInfoParser     : Kafka startTimeMs: 1773832185599
+2026-03-18T14:09:45.599+03:00  INFO 21560 --- [ChatAI] [restartedMain] fkaConsumerFactory$ExtendedKafkaConsumer : [Consumer clientId=consumer-notify-group-3, groupId=notify-group] Subscribed to topic(s): notifyUser
+2026-03-18T14:09:45.603+03:00  INFO 21560 --- [ChatAI] [restartedMain] org.example.chatai.ChatAiApplication     : Started ChatAiApplication in 0.699 seconds (process running for 355.542)
+2026-03-18T14:09:45.603+03:00  INFO 21560 --- [ChatAI] [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2026-03-18T14:09:45.604+03:00  INFO 21560 --- [ChatAI] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] org.apache.kafka.clients.Metadata        : [Consumer clientId=consumer-notify-group-3, groupId=notify-group] Cluster ID: MkU3OEVBNTcwNTJENDM2Qg
+2026-03-18T14:09:45.604+03:00  INFO 21560 --- [ChatAI] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-notify-group-3, groupId=notify-group] Discovered group coordinator localhost:9092 (id: 2147483646 rack: null)
+2026-03-18T14:09:45.605+03:00  INFO 21560 --- [ChatAI] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-notify-group-3, groupId=notify-group] (Re-)joining group
+2026-03-18T14:09:45.607+03:00  INFO 21560 --- [ChatAI] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-notify-group-3, groupId=notify-group] Request joining group due to: need to re-join with the given member-id: consumer-notify-group-3-9a530b1a-f145-4ed3-a436-9d4141cad22d
+2026-03-18T14:09:45.607+03:00  INFO 21560 --- [ChatAI] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-notify-group-3, groupId=notify-group] Request joining group due to: rebalance failed due to 'The group member needs to have a valid member id before actually entering a consumer group.' (MemberIdRequiredException)
+2026-03-18T14:09:45.607+03:00  INFO 21560 --- [ChatAI] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-notify-group-3, groupId=notify-group] (Re-)joining group
+2026-03-18T14:09:48.610+03:00  INFO 21560 --- [ChatAI] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-notify-group-3, groupId=notify-group] Successfully joined group with generation Generation{generationId=239, memberId='consumer-notify-group-3-9a530b1a-f145-4ed3-a436-9d4141cad22d', protocol='range'}
+2026-03-18T14:09:48.610+03:00  INFO 21560 --- [ChatAI] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-notify-group-3, groupId=notify-group] Finished assignment for group at generation 239: {consumer-notify-group-3-9a530b1a-f145-4ed3-a436-9d4141cad22d=Assignment(partitions=[notifyUser-0])}
+2026-03-18T14:09:48.612+03:00  INFO 21560 --- [ChatAI] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-notify-group-3, groupId=notify-group] Successfully synced group in generation Generation{generationId=239, memberId='consumer-notify-group-3-9a530b1a-f145-4ed3-a436-9d4141cad22d', protocol='range'}
+2026-03-18T14:09:48.612+03:00  INFO 21560 --- [ChatAI] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-notify-group-3, groupId=notify-group] Notifying assignor about the new Assignment(partitions=[notifyUser-0])
+2026-03-18T14:09:48.612+03:00  INFO 21560 --- [ChatAI] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-notify-group-3, groupId=notify-group] Adding newly assigned partitions: notifyUser-0
+2026-03-18T14:09:48.615+03:00  INFO 21560 --- [ChatAI] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-notify-group-3, groupId=notify-group] Setting offset for partition notifyUser-0 to the committed offset FetchPosition{offset=13, offsetEpoch=Optional.empty, currentLeader=LeaderAndEpoch{leader=Optional[localhost:9092 (id: 1 rack: null)], epoch=2}}
+2026-03-18T14:09:48.615+03:00  INFO 21560 --- [ChatAI] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.s.k.l.KafkaMessageListenerContainer    : notify-group: partitions assigned: [notifyUser-0]
+2026-03-18T14:09:50.713+03:00  INFO 21560 --- [ChatAI] [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-03-18T14:09:50.713+03:00  INFO 21560 --- [ChatAI] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-03-18T14:09:50.714+03:00  INFO 21560 --- [ChatAI] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2026-03-18T14:09:50.716+03:00  INFO 21560 --- [ChatAI] [http-nio-8080-exec-1] o.e.c.s.a.c.SupportTicketController      : Called method: getTicketById with id: 1
+2026-03-18T14:09:50.716+03:00  INFO 21560 --- [ChatAI] [http-nio-8080-exec-1] o.e.chatai.users.domain.UserService      : Getting jwt
+2026-03-18T14:09:50.717+03:00  INFO 21560 --- [ChatAI] [http-nio-8080-exec-1] o.e.chatai.users.domain.UserService      : Getting email
+2026-03-18T14:09:50.718+03:00  INFO 21560 --- [ChatAI] [http-nio-8080-exec-1] o.e.chatai.users.domain.UserService      : Getting currentUser
+2026-03-18T14:09:50.723+03:00  INFO 21560 --- [ChatAI] [http-nio-8080-exec-1] o.e.c.s.d.services.SupportTicketService  : Getting support ticket with id 1
+2026-03-18T14:09:50.728+03:00  INFO 21560 --- [ChatAI] [http-nio-8080-exec-1] o.e.c.s.d.services.SupportTicketService  : Checking user's current ticket
+2026-03-18T14:09:52.093+03:00  INFO 21560 --- [ChatAI] [File Watcher] rtingClassPathChangeChangedEventListener : Restarting due to 1 class path change (0 additions, 1 deletion, 0 modifications)
+2026-03-18T14:09:52.095+03:00  INFO 21560 --- [ChatAI] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-notify-group-3, groupId=notify-group] Revoke previously assigned partitions notifyUser-0
+2026-03-18T14:09:52.095+03:00  INFO 21560 --- [ChatAI] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.s.k.l.KafkaMessageListenerContainer    : notify-group: partitions revoked: [notifyUser-0]
+2026-03-18T14:09:52.095+03:00  INFO 21560 --- [ChatAI] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-notify-group-3, groupId=notify-group] Member consumer-notify-group-3-9a530b1a-f145-4ed3-a436-9d4141cad22d sending LeaveGroup request to coordinator localhost:9092 (id: 2147483646 rack: null) due to the consumer unsubscribed from all topics
+2026-03-18T14:09:52.095+03:00  INFO 21560 --- [ChatAI] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-notify-group-3, groupId=notify-group] Resetting generation and member id due to: consumer pro-actively leaving the group
+2026-03-18T14:09:52.095+03:00  INFO 21560 --- [ChatAI] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-notify-group-3, groupId=notify-group] Request joining group due to: consumer pro-actively leaving the group
+2026-03-18T14:09:52.095+03:00  INFO 21560 --- [ChatAI] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] fkaConsumerFactory$ExtendedKafkaConsumer : [Consumer clientId=consumer-notify-group-3, groupId=notify-group] Unsubscribed all topics or patterns and assigned partitions
+2026-03-18T14:09:52.095+03:00  INFO 21560 --- [ChatAI] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-notify-group-3, groupId=notify-group] Resetting generation and member id due to: consumer pro-actively leaving the group
+2026-03-18T14:09:52.095+03:00  INFO 21560 --- [ChatAI] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-notify-group-3, groupId=notify-group] Request joining group due to: consumer pro-actively leaving the group
+2026-03-18T14:09:52.128+03:00  INFO 21560 --- [ChatAI] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.apache.kafka.common.metrics.Metrics    : Metrics scheduler closed
+2026-03-18T14:09:52.128+03:00  INFO 21560 --- [ChatAI] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.apache.kafka.common.metrics.Metrics    : Closing reporter org.apache.kafka.common.metrics.JmxReporter
+2026-03-18T14:09:52.128+03:00  INFO 21560 --- [ChatAI] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.apache.kafka.common.metrics.Metrics    : Metrics reporters closed
+2026-03-18T14:09:52.129+03:00  INFO 21560 --- [ChatAI] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.a.kafka.common.utils.AppInfoParser     : App info kafka.consumer for consumer-notify-group-3 unregistered
+2026-03-18T14:09:52.129+03:00  INFO 21560 --- [ChatAI] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.s.k.l.KafkaMessageListenerContainer    : notify-group: Consumer stopped
+2026-03-18T14:09:52.135+03:00  INFO 21560 --- [ChatAI] [Thread-37] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-03-18T14:09:52.135+03:00  INFO 21560 --- [ChatAI] [Thread-37] com.zaxxer.hikari.HikariDataSource       : HikariPool-3 - Shutdown initiated...
+2026-03-18T14:09:52.137+03:00  INFO 21560 --- [ChatAI] [Thread-37] com.zaxxer.hikari.HikariDataSource       : HikariPool-3 - Shutdown completed.
+2026-03-18T14:09:52.194+03:00  INFO 21560 --- [ChatAI] [restartedMain] org.example.chatai.ChatAiApplication     : Starting ChatAiApplication using Java 21.0.9 with PID 21560 (F:\Programing\Projects\Chat AI\target\classes started by dratu in F:\Programing\Projects\Chat AI)
+2026-03-18T14:09:52.194+03:00  INFO 21560 --- [ChatAI] [restartedMain] org.example.chatai.ChatAiApplication     : No active profile set, falling back to 1 default profile: "default"
+2026-03-18T14:09:52.392+03:00  INFO 21560 --- [ChatAI] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-03-18T14:09:52.407+03:00  INFO 21560 --- [ChatAI] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 15 ms. Found 6 JPA repository interfaces.
+2026-03-18T14:09:52.475+03:00  INFO 21560 --- [ChatAI] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2026-03-18T14:09:52.475+03:00  INFO 21560 --- [ChatAI] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-03-18T14:09:52.475+03:00  INFO 21560 --- [ChatAI] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.19]
+2026-03-18T14:09:52.492+03:00  INFO 21560 --- [ChatAI] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2026-03-18T14:09:52.492+03:00  INFO 21560 --- [ChatAI] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 297 ms
+2026-03-18T14:09:52.506+03:00  INFO 21560 --- [ChatAI] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-4 - Starting...
+2026-03-18T14:09:52.542+03:00  INFO 21560 --- [ChatAI] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-4 - Added connection org.postgresql.jdbc.PgConnection@7f36521b
+2026-03-18T14:09:52.542+03:00  INFO 21560 --- [ChatAI] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-4 - Start completed.
+2026-03-18T14:09:52.551+03:00  INFO 21560 --- [ChatAI] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-03-18T14:09:52.553+03:00  INFO 21560 --- [ChatAI] [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-03-18T14:09:52.555+03:00  INFO 21560 --- [ChatAI] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-03-18T14:09:52.560+03:00  WARN 21560 --- [ChatAI] [restartedMain] org.hibernate.orm.deprecation            : HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-03-18T14:09:52.619+03:00  INFO 21560 --- [ChatAI] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-03-18T14:09:52.667+03:00  INFO 21560 --- [ChatAI] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-03-18T14:09:52.799+03:00  INFO 21560 --- [ChatAI] [restartedMain] o.e.c.payments.domain.PaymentService     : Инициализация YooKassa: shopId=1298329, secretKey=48 chars
+2026-03-18T14:09:52.800+03:00  INFO 21560 --- [ChatAI] [restartedMain] o.e.c.payments.domain.PaymentService     : YooKassa инициализирована
+2026-03-18T14:09:52.824+03:00  INFO 21560 --- [ChatAI] [restartedMain] o.example.chatai.chat.domain.AIManager   : Chat Memory:null
+2026-03-18T14:09:52.829+03:00  WARN 21560 --- [ChatAI] [restartedMain] o.s.aop.framework.CglibAopProxy          : Unable to proxy interface-implementing method [public final void org.springframework.web.filter.OncePerRequestFilter.doFilter(jakarta.servlet.ServletRequest,jakarta.servlet.ServletResponse,jakarta.servlet.FilterChain) throws jakarta.servlet.ServletException,java.io.IOException] because it is marked as final, consider using interface-based JDK proxies instead.
+2026-03-18T14:09:52.829+03:00  WARN 21560 --- [ChatAI] [restartedMain] o.s.aop.framework.CglibAopProxy          : Unable to proxy interface-implementing method [public final void org.springframework.web.filter.GenericFilterBean.init(jakarta.servlet.FilterConfig) throws jakarta.servlet.ServletException] because it is marked as final, consider using interface-based JDK proxies instead.
+2026-03-18T14:09:52.880+03:00  WARN 21560 --- [ChatAI] [restartedMain] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'supportMessageController' defined in file [F:\Programing\Projects\Chat AI\target\classes\org\example\chatai\supportMessages\api\controllers\SupportMessageController.class]: Unsatisfied dependency expressed through constructor parameter 0: Error creating bean with name 'supportMessageService' defined in file [F:\Programing\Projects\Chat AI\target\classes\org\example\chatai\supportMessages\domain\services\SupportMessageService.class]: Unsatisfied dependency expressed through constructor parameter 3: No qualifying bean of type 'org.example.chatai.supportTickets.domain.services.SupportTicketService' available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {}
+2026-03-18T14:09:52.881+03:00  INFO 21560 --- [ChatAI] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-03-18T14:09:52.882+03:00  INFO 21560 --- [ChatAI] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-4 - Shutdown initiated...
+2026-03-18T14:09:52.891+03:00  INFO 21560 --- [ChatAI] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-4 - Shutdown completed.
+2026-03-18T14:09:52.891+03:00  INFO 21560 --- [ChatAI] [restartedMain] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2026-03-18T14:09:52.895+03:00  INFO 21560 --- [ChatAI] [restartedMain] .s.b.a.l.ConditionEvaluationReportLogger : 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2026-03-18T14:09:52.907+03:00 ERROR 21560 --- [ChatAI] [restartedMain] o.s.b.d.LoggingFailureAnalysisReporter   : 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Parameter 3 of constructor in org.example.chatai.supportMessages.domain.services.SupportMessageService required a bean of type 'org.example.chatai.supportTickets.domain.services.SupportTicketService' that could not be found.
+
+
+Action:
+
+Consider defining a bean of type 'org.example.chatai.supportTickets.domain.services.SupportTicketService' in your configuration.
+
+2026-03-18T14:09:54.338+03:00  INFO 21560 --- [ChatAI] [restartedMain] org.example.chatai.ChatAiApplication     : Starting ChatAiApplication using Java 21.0.9 with PID 21560 (F:\Programing\Projects\Chat AI\target\classes started by dratu in F:\Programing\Projects\Chat AI)
+2026-03-18T14:09:54.339+03:00  INFO 21560 --- [ChatAI] [restartedMain] org.example.chatai.ChatAiApplication     : No active profile set, falling back to 1 default profile: "default"
+2026-03-18T14:09:54.470+03:00  INFO 21560 --- [ChatAI] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-03-18T14:09:54.482+03:00  INFO 21560 --- [ChatAI] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 10 ms. Found 6 JPA repository interfaces.
+2026-03-18T14:09:54.538+03:00  INFO 21560 --- [ChatAI] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2026-03-18T14:09:54.539+03:00  INFO 21560 --- [ChatAI] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-03-18T14:09:54.539+03:00  INFO 21560 --- [ChatAI] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.19]
+2026-03-18T14:09:54.556+03:00  INFO 21560 --- [ChatAI] [restartedMain] o.a.c.c.C.[Tomcat-1].[localhost].[/]     : Initializing Spring embedded WebApplicationContext
+2026-03-18T14:09:54.556+03:00  INFO 21560 --- [ChatAI] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 217 ms
+2026-03-18T14:09:54.569+03:00  INFO 21560 --- [ChatAI] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-5 - Starting...
+2026-03-18T14:09:54.604+03:00  INFO 21560 --- [ChatAI] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-5 - Added connection org.postgresql.jdbc.PgConnection@26229cd9
+2026-03-18T14:09:54.604+03:00  INFO 21560 --- [ChatAI] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-5 - Start completed.
+2026-03-18T14:09:54.615+03:00  INFO 21560 --- [ChatAI] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-03-18T14:09:54.616+03:00  INFO 21560 --- [ChatAI] [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-03-18T14:09:54.618+03:00  INFO 21560 --- [ChatAI] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-03-18T14:09:54.623+03:00  WARN 21560 --- [ChatAI] [restartedMain] org.hibernate.orm.deprecation            : HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-03-18T14:09:54.670+03:00  INFO 21560 --- [ChatAI] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-03-18T14:09:54.714+03:00  INFO 21560 --- [ChatAI] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-03-18T14:09:54.817+03:00  INFO 21560 --- [ChatAI] [restartedMain] o.e.c.payments.domain.PaymentService     : Инициализация YooKassa: shopId=1298329, secretKey=48 chars
+2026-03-18T14:09:54.818+03:00  INFO 21560 --- [ChatAI] [restartedMain] o.e.c.payments.domain.PaymentService     : YooKassa инициализирована
+2026-03-18T14:09:54.837+03:00  INFO 21560 --- [ChatAI] [restartedMain] o.example.chatai.chat.domain.AIManager   : Chat Memory:null
+2026-03-18T14:09:54.840+03:00  WARN 21560 --- [ChatAI] [restartedMain] o.s.aop.framework.CglibAopProxy          : Unable to proxy interface-implementing method [public final void org.springframework.web.filter.OncePerRequestFilter.doFilter(jakarta.servlet.ServletRequest,jakarta.servlet.ServletResponse,jakarta.servlet.FilterChain) throws jakarta.servlet.ServletException,java.io.IOException] because it is marked as final, consider using interface-based JDK proxies instead.
+2026-03-18T14:09:54.841+03:00  WARN 21560 --- [ChatAI] [restartedMain] o.s.aop.framework.CglibAopProxy          : Unable to proxy interface-implementing method [public final void org.springframework.web.filter.GenericFilterBean.init(jakarta.servlet.FilterConfig) throws jakarta.servlet.ServletException] because it is marked as final, consider using interface-based JDK proxies instead.
+2026-03-18T14:09:54.931+03:00  INFO 21560 --- [ChatAI] [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@6c446da3, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@9e6f69a, org.springframework.security.web.context.SecurityContextHolderFilter@7968064d, org.springframework.security.web.header.HeaderWriterFilter@45094659, org.springframework.web.filter.CorsFilter@2b2ce97c, org.springframework.security.web.authentication.logout.LogoutFilter@3ccd160, org.example.chatai.config.JwtFilter@37e4b61e, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@4201ebbe, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@4d354629, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@3983bf46, org.springframework.security.web.session.SessionManagementFilter@2b2b98d9, org.springframework.security.web.access.ExceptionTranslationFilter@31d1507e, org.springframework.security.web.access.intercept.AuthorizationFilter@293e8550]
+2026-03-18T14:09:54.980+03:00  INFO 21560 --- [ChatAI] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2026-03-18T14:09:54.988+03:00  INFO 21560 --- [ChatAI] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path ''
+2026-03-18T14:09:54.988+03:00  INFO 21560 --- [ChatAI] [restartedMain] o.a.k.clients.consumer.ConsumerConfig    : ConsumerConfig values: 
+	allow.auto.create.topics = true
+	auto.commit.interval.ms = 5000
+	auto.include.jmx.reporter = true
+	auto.offset.reset = latest
+	bootstrap.servers = [localhost:9092]
+	check.crcs = true
+	client.dns.lookup = use_all_dns_ips
+	client.id = consumer-notify-group-4
+	client.rack = 
+	connections.max.idle.ms = 540000
+	default.api.timeout.ms = 60000
+	enable.auto.commit = false
+	exclude.internal.topics = true
+	fetch.max.bytes = 52428800
+	fetch.max.wait.ms = 500
+	fetch.min.bytes = 1
+	group.id = notify-group
+	group.instance.id = null
+	heartbeat.interval.ms = 3000
+	interceptor.classes = []
+	internal.leave.group.on.close = true
+	internal.throw.on.fetch.stable.offset.unsupported = false
+	isolation.level = read_uncommitted
+	key.deserializer = class org.apache.kafka.common.serialization.StringDeserializer
+	max.partition.fetch.bytes = 1048576
+	max.poll.interval.ms = 300000
+	max.poll.records = 500
+	metadata.max.age.ms = 300000
+	metric.reporters = []
+	metrics.num.samples = 2
+	metrics.recording.level = INFO
+	metrics.sample.window.ms = 30000
+	partition.assignment.strategy = [class org.apache.kafka.clients.consumer.RangeAssignor, class org.apache.kafka.clients.consumer.CooperativeStickyAssignor]
+	receive.buffer.bytes = 65536
+	reconnect.backoff.max.ms = 1000
+	reconnect.backoff.ms = 50
+	request.timeout.ms = 30000
+	retry.backoff.ms = 100
+	sasl.client.callback.handler.class = null
+	sasl.jaas.config = null
+	sasl.kerberos.kinit.cmd = /usr/bin/kinit
+	sasl.kerberos.min.time.before.relogin = 60000
+	sasl.kerberos.service.name = null
+	sasl.kerberos.ticket.renew.jitter = 0.05
+	sasl.kerberos.ticket.renew.window.factor = 0.8
+	sasl.login.callback.handler.class = null
+	sasl.login.class = null
+	sasl.login.connect.timeout.ms = null
+	sasl.login.read.timeout.ms = null
+	sasl.login.refresh.buffer.seconds = 300
+	sasl.login.refresh.min.period.seconds = 60
+	sasl.login.refresh.window.factor = 0.8
+	sasl.login.refresh.window.jitter = 0.05
+	sasl.login.retry.backoff.max.ms = 10000
+	sasl.login.retry.backoff.ms = 100
+	sasl.mechanism = GSSAPI
+	sasl.oauthbearer.clock.skew.seconds = 30
+	sasl.oauthbearer.expected.audience = null
+	sasl.oauthbearer.expected.issuer = null
+	sasl.oauthbearer.jwks.endpoint.refresh.ms = 3600000
+	sasl.oauthbearer.jwks.endpoint.retry.backoff.max.ms = 10000
+	sasl.oauthbearer.jwks.endpoint.retry.backoff.ms = 100
+	sasl.oauthbearer.jwks.endpoint.url = null
+	sasl.oauthbearer.scope.claim.name = scope
+	sasl.oauthbearer.sub.claim.name = sub
+	sasl.oauthbearer.token.endpoint.url = null
+	security.protocol = PLAINTEXT
+	security.providers = null
+	send.buffer.bytes = 131072
+	session.timeout.ms = 45000
+	socket.connection.setup.timeout.max.ms = 30000
+	socket.connection.setup.timeout.ms = 10000
+	ssl.cipher.suites = null
+	ssl.enabled.protocols = [TLSv1.2, TLSv1.3]
+	ssl.endpoint.identification.algorithm = https
+	ssl.engine.factory.class = null
+	ssl.key.password = null
+	ssl.keymanager.algorithm = SunX509
+	ssl.keystore.certificate.chain = null
+	ssl.keystore.key = null
+	ssl.keystore.location = null
+	ssl.keystore.password = null
+	ssl.keystore.type = JKS
+	ssl.protocol = TLSv1.3
+	ssl.provider = null
+	ssl.secure.random.implementation = null
+	ssl.trustmanager.algorithm = PKIX
+	ssl.truststore.certificates = null
+	ssl.truststore.location = null
+	ssl.truststore.password = null
+	ssl.truststore.type = JKS
+	value.deserializer = class org.springframework.kafka.support.serializer.JsonDeserializer
+
+2026-03-18T14:09:54.990+03:00  INFO 21560 --- [ChatAI] [restartedMain] o.a.kafka.common.utils.AppInfoParser     : Kafka version: 3.6.1
+2026-03-18T14:09:54.990+03:00  INFO 21560 --- [ChatAI] [restartedMain] o.a.kafka.common.utils.AppInfoParser     : Kafka commitId: 5e3c2b738d253ff5
+2026-03-18T14:09:54.990+03:00  INFO 21560 --- [ChatAI] [restartedMain] o.a.kafka.common.utils.AppInfoParser     : Kafka startTimeMs: 1773832194990
+2026-03-18T14:09:54.990+03:00  INFO 21560 --- [ChatAI] [restartedMain] fkaConsumerFactory$ExtendedKafkaConsumer : [Consumer clientId=consumer-notify-group-4, groupId=notify-group] Subscribed to topic(s): notifyUser
+2026-03-18T14:09:54.994+03:00  INFO 21560 --- [ChatAI] [restartedMain] org.example.chatai.ChatAiApplication     : Started ChatAiApplication in 0.666 seconds (process running for 364.934)
+2026-03-18T14:09:54.995+03:00  INFO 21560 --- [ChatAI] [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2026-03-18T14:09:54.995+03:00  INFO 21560 --- [ChatAI] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] org.apache.kafka.clients.Metadata        : [Consumer clientId=consumer-notify-group-4, groupId=notify-group] Cluster ID: MkU3OEVBNTcwNTJENDM2Qg
+2026-03-18T14:09:54.995+03:00  INFO 21560 --- [ChatAI] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-notify-group-4, groupId=notify-group] Discovered group coordinator localhost:9092 (id: 2147483646 rack: null)
+2026-03-18T14:09:54.996+03:00  INFO 21560 --- [ChatAI] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-notify-group-4, groupId=notify-group] (Re-)joining group
+2026-03-18T14:09:54.998+03:00  INFO 21560 --- [ChatAI] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-notify-group-4, groupId=notify-group] Request joining group due to: need to re-join with the given member-id: consumer-notify-group-4-dc83f493-aab4-4fdb-b053-17a004db1759
+2026-03-18T14:09:54.998+03:00  INFO 21560 --- [ChatAI] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-notify-group-4, groupId=notify-group] Request joining group due to: rebalance failed due to 'The group member needs to have a valid member id before actually entering a consumer group.' (MemberIdRequiredException)
+2026-03-18T14:09:54.998+03:00  INFO 21560 --- [ChatAI] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-notify-group-4, groupId=notify-group] (Re-)joining group
+2026-03-18T14:09:58.000+03:00  INFO 21560 --- [ChatAI] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-notify-group-4, groupId=notify-group] Successfully joined group with generation Generation{generationId=241, memberId='consumer-notify-group-4-dc83f493-aab4-4fdb-b053-17a004db1759', protocol='range'}
+2026-03-18T14:09:58.000+03:00  INFO 21560 --- [ChatAI] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-notify-group-4, groupId=notify-group] Finished assignment for group at generation 241: {consumer-notify-group-4-dc83f493-aab4-4fdb-b053-17a004db1759=Assignment(partitions=[notifyUser-0])}
+2026-03-18T14:09:58.002+03:00  INFO 21560 --- [ChatAI] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-notify-group-4, groupId=notify-group] Successfully synced group in generation Generation{generationId=241, memberId='consumer-notify-group-4-dc83f493-aab4-4fdb-b053-17a004db1759', protocol='range'}
+2026-03-18T14:09:58.002+03:00  INFO 21560 --- [ChatAI] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-notify-group-4, groupId=notify-group] Notifying assignor about the new Assignment(partitions=[notifyUser-0])
+2026-03-18T14:09:58.003+03:00  INFO 21560 --- [ChatAI] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-notify-group-4, groupId=notify-group] Adding newly assigned partitions: notifyUser-0
+2026-03-18T14:09:58.004+03:00  INFO 21560 --- [ChatAI] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-notify-group-4, groupId=notify-group] Setting offset for partition notifyUser-0 to the committed offset FetchPosition{offset=13, offsetEpoch=Optional.empty, currentLeader=LeaderAndEpoch{leader=Optional[localhost:9092 (id: 1 rack: null)], epoch=2}}
+2026-03-18T14:09:58.004+03:00  INFO 21560 --- [ChatAI] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.s.k.l.KafkaMessageListenerContainer    : notify-group: partitions assigned: [notifyUser-0]
+2026-03-18T14:10:00.428+03:00  INFO 21560 --- [ChatAI] [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat-1].[localhost].[/]     : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-03-18T14:10:00.428+03:00  INFO 21560 --- [ChatAI] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-03-18T14:10:00.429+03:00  INFO 21560 --- [ChatAI] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2026-03-18T14:10:00.432+03:00  INFO 21560 --- [ChatAI] [http-nio-8080-exec-1] o.e.c.s.a.c.SupportTicketController      : Called method: getTicketById with id: 1
+2026-03-18T14:10:00.432+03:00  INFO 21560 --- [ChatAI] [http-nio-8080-exec-1] o.e.chatai.users.domain.UserService      : Getting jwt
+2026-03-18T14:10:00.432+03:00  INFO 21560 --- [ChatAI] [http-nio-8080-exec-1] o.e.chatai.users.domain.UserService      : Getting email
+2026-03-18T14:10:00.433+03:00  INFO 21560 --- [ChatAI] [http-nio-8080-exec-1] o.e.chatai.users.domain.UserService      : Getting currentUser
+2026-03-18T14:10:00.437+03:00  INFO 21560 --- [ChatAI] [http-nio-8080-exec-1] o.e.c.s.d.services.SupportTicketService  : Getting support ticket with id 1
+2026-03-18T14:10:00.441+03:00  INFO 21560 --- [ChatAI] [http-nio-8080-exec-1] o.e.c.s.d.services.SupportTicketService  : Checking user's current ticket

@@ -69,11 +69,9 @@ public class SupportTicketService {
     }
 
     public SupportTicketResponse getTicketById(Long id) {
-        SupportTicketEntity ticketEntity = supportTicketRepository.findByIdWithUser(id)
-                .orElseThrow(() -> new RuntimeException("Ticket not found"));
         UserEntity currentUser = userService.getCurrentUser();
 
-        checkHavingUserTicket(ticketEntity, currentUser);
+        SupportTicketEntity ticketEntity = getSupportTicketByIdWithCheckUser(id, currentUser);
 
         return supportTicketMapper.convertEntityToResponse(ticketEntity);
     }
@@ -133,12 +131,6 @@ public class SupportTicketService {
         return Pageable
                 .ofSize(pageSizeForPageable)
                 .withPage(pageNumForPageable);
-    }
-
-    private void checkHavingUserTicket(SupportTicketEntity ticketEntity, UserEntity currentUser) {
-        if (!ticketEntity.getUser().getId().equals(currentUser.getId())) {
-            throw new RuntimeException("It's not your ticket");
-        }
     }
 
     private void checkForClosingTicket(
