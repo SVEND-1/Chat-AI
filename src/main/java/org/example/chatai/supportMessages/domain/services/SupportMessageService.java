@@ -11,9 +11,12 @@ import org.example.chatai.supportTickets.db.entities.SupportTicketEntity;
 import org.example.chatai.supportTickets.db.enums.SupportStatus;
 import org.example.chatai.supportTickets.db.repositories.SupportTicketRepository;
 import org.example.chatai.supportTickets.domain.services.SupportTicketService;
+import org.example.chatai.users.db.Role;
 import org.example.chatai.users.db.UserEntity;
 import org.example.chatai.users.domain.UserService;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -40,7 +43,7 @@ public class SupportMessageService {
                         currentUser
                 );
 
-        if (supportTicketService.hasSupportStatus(ticketEntity, SupportStatus.CLOSED)) {
+        if (ticketEntity.getStatus() == SupportStatus.CLOSED) {
             throw new RuntimeException("Ticket has been closed");
         }
 
@@ -54,6 +57,67 @@ public class SupportMessageService {
         return supportMessageMapper.convertEntityToResponse(
                 supportMessageRepository.save(messageEntity)
         );
+    }
+
+    public List<SupportMessageResponse> getAllMessagesFromTicket(Long supportTicketId) {
+        UserEntity currentUser = userService.getCurrentUser();
+        SupportTicketEntity ticketEntity =
+                supportTicketService.getSupportTicketByIdWithCheckUser(
+                        supportTicketId,
+                        currentUser
+                );
+
+        List<SupportMessageEntity> messagesFromTicket = supportMessageRepository.findAllBySupportTicket(ticketEntity);
+
+        return messagesFromTicket.stream()
+                .map(supportMessageMapper::convertEntityToResponse)
+                .toList();
+    }
+
+    public SupportMessageResponse getLastMessageFromTicket(Long supportTicketId) {
+        UserEntity currentUser = userService.getCurrentUser();
+        SupportTicketEntity ticketEntity =
+                supportTicketService.getSupportTicketByIdWithCheckUser(
+                        supportTicketId,
+                        currentUser
+                );
+
+        SupportMessageEntity lastMessage =
+                supportMessageRepository.findLastMessageBySupportTicket(ticketEntity);
+
+        return supportMessageMapper.convertEntityToResponse(lastMessage);
+    }
+
+    public List<SupportMessageResponse> getAllUserMessagesFromTicket(Long supportTicketId) {
+        UserEntity currentUser = userService.getCurrentUser();
+        SupportTicketEntity ticketEntity =
+                supportTicketService.getSupportTicketByIdWithCheckUser(
+                        supportTicketId,
+                        currentUser
+                );
+
+        List<SupportMessageEntity> userMessages =
+                supportMessageRepository.findAllBySupportTicketAndSenderType(ticketEntity, Role.USER);
+
+        return userMessages.stream()
+                .map(supportMessageMapper::convertEntityToResponse)
+                .toList();
+    }
+
+    public List<SupportMessageResponse> getAllSupportMessagesFromTicket(Long supportTicketId) {
+        UserEntity currentUser = userService.getCurrentUser();
+        SupportTicketEntity ticketEntity =
+                supportTicketService.getSupportTicketByIdWithCheckUser(
+                        supportTicketId,
+                        currentUser
+                );
+
+        List<SupportMessageEntity> userMessages =
+                supportMessageRepository.findAllBySupportTicketAndSenderType(ticketEntity, Role.SUPPORT);
+
+        return userMessages.stream()
+                .map(supportMessageMapper::convertEntityToResponse)
+                .toList();
     }
 
     //====================================SERVICE METHODS=======================================================

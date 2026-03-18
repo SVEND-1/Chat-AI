@@ -147,7 +147,7 @@ public class SupportTicketService {
     ) {
         checkForCurrentUser(ticketEntity, currentUser);
 
-        if (hasSupportStatus(ticketEntity, SupportStatus.CLOSED)) {
+        if (ticketEntity.getStatus() == SupportStatus.CLOSED) {
             throw new RuntimeException("Ticket is already closed");
         }
     }
@@ -173,9 +173,5 @@ public class SupportTicketService {
         checkForCurrentUser(ticketEntity, currentUser);
 
         return ticketEntity;
-    }
-
-    public boolean hasSupportStatus(SupportTicketEntity ticketEntity, SupportStatus status) {
-        return ticketEntity.getStatus() == status;
     }
 }
