@@ -1,0 +1,53 @@
+.pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+}
+
+.pagination__button {
+    background: #2a2a2a;
+    border: 1px solid #404040;
+    color: #e5e5e5;
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+.pagination__button:hover:not(:disabled) {
+    border-color: #0066ff;
+    color: #0066ff;
+}
+
+.pagination__button:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+
+.pagination__info {
+    color: #b0b0b0;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+/* Стили для загрузки в списке */
+.payment-list__loading {
+    padding: 40px;
+    text-align: center;
+    color: #8a8a8a;
+    font-size: 16px;
+}
+
+.payment-list__loading-more {
+    padding: 16px;
+    text-align: center;
+    color: #8a8a8a;
+    font-size: 14px;
+    border-top: 1px solid #2a2a2a;
+}

@@ -1,0 +1,56 @@
+.payment-history-page {
+    display: flex;
+    width: 100vw; /* Используем всю ширину окна */
+    height: 100vh;
+    background-color: #0f0f0f;
+    color: #e5e5e5;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+    margin: 0;
+    padding: 0;
+    overflow: hidden; /* Запрещаем скролл на уровне страницы */
+}
+
+.payment-history-page__sidebar {
+    width: 20%;
+    min-width: 300px;
+    max-width: 400px; /* Ограничиваем максимальную ширину */
+    height: 100vh;
+    border-right: 1px solid #2a2a2a;
+    display: flex;
+    flex-direction: column;
+    background-color: #1a1a1a;
+    flex-shrink: 0; /* Запрещаем сжиматься */
+}
+
+.payment-history-page__content {
+    flex: 1; /* Занимает все оставшееся место */
+    width: 80%; /* Запасной вариант */
+    height: 100vh;
+    overflow-y: auto;
+    background-color: #0f0f0f;
+    padding: 0; /* Убираем паддинг */
+}
+
+.payment-history-page__content-inner {
+    max-width: 900px; /* Ограничиваем контент по ширине */
+    margin: 0 auto;
+    padding: 24px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.payment-history-page__pagination {
+    padding: 16px;
+    border-top: 1px solid #2a2a2a;
+    background-color: #1a1a1a;
+    flex-shrink: 0;
+}
+
+.payment-history-page__placeholder {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #8a8a8a;
+    font-size: 18px;
+}
