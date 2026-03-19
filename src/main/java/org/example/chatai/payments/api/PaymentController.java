@@ -37,8 +37,6 @@ public class PaymentController {
         return ResponseEntity.ok(paymentService.findPaymentDto(paymentId));
     }
 
-
-
     @PostMapping
     public ResponseEntity<PaymentCreateResponse> createPayment() {
         return ResponseEntity.ok(paymentService.createPayment());

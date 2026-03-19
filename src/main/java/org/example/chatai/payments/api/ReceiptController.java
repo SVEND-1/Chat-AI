@@ -21,7 +21,7 @@ public class ReceiptController {
     }
 
     @PostMapping("/{paymentId}")
-    public ResponseEntity<Receipt> createReceipt(
+    public ResponseEntity<ReceiptResponse> createReceipt(
             @PathVariable String paymentId
     ){
         return ResponseEntity.ok(paymentService.createReceipt(paymentId));

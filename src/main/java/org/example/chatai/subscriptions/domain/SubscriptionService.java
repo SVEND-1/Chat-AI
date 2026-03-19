@@ -29,7 +29,7 @@ public class SubscriptionService {
     private final UserService userService;
 
     public SubscriptionEntity findByUserEmail(String userEmail) {
-        return subscriptionRepository.findByUserEmail(userEmail).orElseThrow(() -> new EntityNotFoundException("Подписка не найдена не найден"));
+        return subscriptionRepository.findByUserEmail(userEmail).orElse(null);
     }
 
     public SubscriptionDetailResponse getSubscription(Long id) {
@@ -37,6 +37,12 @@ public class SubscriptionService {
             return null;
         }
         SubscriptionEntity sub = subscriptionRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Подписка не найдена"));
+
+        if(!sub.getUser().getId().equals(userService.getCurrentUser().getId())){
+            log.warn("Пользователь не является владельцем подписки");
+            throw new RuntimeException("Пользователь не является владельцем подписки");
+        }
+
         String endDate =
                 sub.getEndDate().getDayOfMonth() + " " +
                 switchMonthTranslationInRussian(sub.getEndDate().getMonth())  + " " +
@@ -88,6 +94,7 @@ public class SubscriptionService {
         if (paymentId == null || paymentId.trim().isEmpty()) {
             return "Неверный paymentId";
         }
+        paymentService.isValidUser(paymentId);
 
         PaymentResponse payment = paymentService.findPaymentDto(paymentId);
         if (!"succeeded".equals(payment.status())) {
@@ -144,5 +151,6 @@ public class SubscriptionService {
                 return "месяц не указан";
         }
     }
+
 
 }
