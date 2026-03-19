@@ -1,0 +1,166 @@
+.profile-page {
+    min-height: 100vh;
+    width: 100vw;
+    max-width: 100%;
+    background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+    padding: 36px 54px;
+    margin: 0;
+    position: relative;
+    left: 0;
+    right: 0;
+    box-sizing: border-box;
+}
+
+.profile-container {
+    max-width: 1300px;
+    margin: 0 auto;
+    width: 100%;
+    height: 100%;
+}
+
+.profile-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 36px;
+}
+
+.profile-title {
+    font-size: 2.25rem;
+    font-weight: 600;
+    background: linear-gradient(135deg, #0066ff, #66ccff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin: 0;
+    text-align: left;
+}
+
+.back-to-chat-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 14px 28px;
+    background: linear-gradient(135deg, #0066ff, #66ccff);
+    border: none;
+    border-radius: 30px;
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+    box-shadow: 0 4px 15px rgba(0, 102, 255, 0.4);
+}
+
+.back-to-chat-button svg {
+    width: 20px;
+    height: 20px;
+    transition: transform 0.2s ease;
+}
+
+.back-to-chat-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 102, 255, 0.6);
+    background: linear-gradient(135deg, #0052cc, #4db8ff);
+}
+
+.back-to-chat-button:hover svg {
+    transform: translateX(-4px);
+}
+
+.profile-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 36px; /* Было 27px → увеличено до 36px */
+    width: 100%;
+}
+
+.profile-left {
+    display: flex;
+    flex-direction: column;
+    gap: 25px; /* ✅ Новый отступ между UserInfo и RoleRequest */
+}
+
+.profile-right {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* ✅ Новый отступ между SubscriptionInfo, PasswordChange, PaymentHistory */
+}
+
+
+.profile-loading {
+    min-height: 100vh;
+    width: 100vw;
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: #0f0f0f;
+    margin: 0;
+    position: relative;
+    left: 0;
+    right: 0;
+}
+
+/* Адаптивность */
+@media (max-width: 992px) {
+    .profile-grid {
+        grid-template-columns: 1fr;
+        gap: 22px;
+    }
+
+    .profile-page {
+        padding: 27px;
+    }
+}
+
+@media (max-width: 768px) {
+    .profile-page {
+        padding: 18px;
+    }
+
+    .profile-header {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 15px;
+        margin-bottom: 24px;
+    }
+
+    .profile-title {
+        font-size: 1.8rem;
+    }
+
+    .back-to-chat-button {
+        padding: 12px 24px;
+        font-size: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .profile-page {
+        padding: 14px;
+    }
+
+    .profile-header {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 15px;
+    }
+
+    .profile-title {
+        font-size: 1.6rem;
+        text-align: center;
+    }
+
+    .back-to-chat-button {
+        width: 100%;
+        justify-content: center;
+        padding: 14px 20px;
+    }
+}
+
+

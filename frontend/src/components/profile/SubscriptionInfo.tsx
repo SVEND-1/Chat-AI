@@ -63,7 +63,7 @@ const SubscriptionInfo: React.FC<SubscriptionInfoProps> = ({ subscription }) => 
                 )}
 
                 <div className="subscription-renew">
-                    <span className="renew-label">Автопродление:</span>
+
                     <span className={`renew-value ${subscription.autoRenew ? 'enabled' : 'disabled'}`}>
                         {subscription.autoRenew ? 'Включено' : 'Отключено'}
                     </span>

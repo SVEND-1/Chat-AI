@@ -23,6 +23,9 @@ export interface RoleRequestData {
     message?: string;
     createdAt: string;
     reviewedAt?: string;
+    // Новые поля для ответа администратора
+    adminResponse?: string;
+    adminResponseDate?: string;
 }
 
 export interface PaymentHistoryItem {

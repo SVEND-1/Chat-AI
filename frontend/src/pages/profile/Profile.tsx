@@ -1,6 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import '../../style/profile/profile.css';
+import '../../style/profile/profile-main.css';
+import '../../style/profile/profile-card.css';
+import '../../style/profile/user-info.css';
+import '../../style/profile/role-request.css';
+import '../../style/profile/subscription-info.css';
+import '../../style/profile/action-card.css';
 
 // Импортируем компоненты
 import UserInfo from '../../components/profile/UserInfo';
@@ -23,17 +28,15 @@ const Profile: React.FC = () => {
 
     // Загрузка данных (имитация)
     useEffect(() => {
-        // TODO: Заменить на реальный API запрос
         const fetchUserData = async () => {
             try {
-                // Имитация загрузки
                 setTimeout(() => {
                     setUserData({
                         id: '1',
                         name: 'Иван Петров',
                         email: 'ivan.petrov@example.com',
                         role: 'user',
-                        createdAt: '2024-01-15T10:00:00Z'
+                        createdAt: '2026-01-15T10:00:00Z'
                     });
 
                     setSubscription({
@@ -48,9 +51,11 @@ const Profile: React.FC = () => {
                         id: 'req1',
                         userId: '1',
                         requestedRole: 'support',
-                        status: 'pending',
-                        message: 'Хочу помогать пользователям',
-                        createdAt: '2024-02-01T14:30:00Z'
+                        status: 'rejected', // изменил на rejected для демонстрации ответа админа
+                        message: 'Имею опыт работы в техподдержке 2 года.',
+                        createdAt: '2024-02-01T14:30:00Z',
+                        adminResponse: 'Спасибо за заявку! К сожалению, на текущий момент у нас полный штат сотрудников. Попробуйте через 3 месяца.',
+                        adminResponseDate: '2024-02-05T10:00:00Z'
                     });
 
                     setLoading(false);
@@ -75,17 +80,18 @@ const Profile: React.FC = () => {
 
     const handleRoleRequestSubmit = async (message: string) => {
         try {
-            // TODO: API запрос
             console.log('Заявка на роль support:', message);
-            // Обновляем статус заявки
-            setRoleRequest({
+            const newRequest: RoleRequestData = {
                 id: 'req1',
                 userId: '1',
                 requestedRole: 'support',
                 status: 'pending',
                 message: message,
-                createdAt: new Date().toISOString()
-            });
+                createdAt: new Date().toISOString(),
+                adminResponse: undefined,
+                adminResponseDate: undefined
+            };
+            setRoleRequest(newRequest);
         } catch (error) {
             console.error('Ошибка отправки заявки:', error);
         }
@@ -134,25 +140,22 @@ const Profile: React.FC = () => {
                 </div>
 
                 <div className="profile-grid">
-                    {/* Левая колонка - основная информация */}
+                    {/* Левая колонка */}
                     <div className="profile-left">
                         {userData && <UserInfo userData={userData} />}
-
                         {userData?.role !== 'support' && (
                             <RoleRequest
-                                existingRequest={roleRequest}
-                                onSubmit={handleRoleRequestSubmit}
-                                userRole={userData?.role || 'user'}
+                                // existingRequest={roleRequest}
+                                // onSubmit={handleRoleRequestSubmit}
+                                // userRole={userData?.role || 'user'}
                             />
                         )}
                     </div>
 
-                    {/* Правая колонка - подписка и действия */}
+                    {/* Правая колонка */}
                     <div className="profile-right">
                         {subscription && <SubscriptionInfo subscription={subscription} />}
-
                         <PasswordChange onNavigate={handlePasswordChange} />
-
                         <PaymentHistory onNavigate={handlePaymentHistory} />
                     </div>
                 </div>

@@ -6,14 +6,6 @@ interface UserInfoProps {
 }
 
 const UserInfo: React.FC<UserInfoProps> = ({ userData }) => {
-    const formatDate = (dateString: string) => {
-        return new Date(dateString).toLocaleDateString('ru-RU', {
-            day: 'numeric',
-            month: 'long',
-            year: 'numeric'
-        });
-    };
-
     const getRoleName = (role: string) => {
         const roles = {
             user: 'Пользователь',
@@ -53,11 +45,6 @@ const UserInfo: React.FC<UserInfoProps> = ({ userData }) => {
                     <span className={`detail-value role-badge role-${userData.role}`}>
                         {getRoleName(userData.role)}
                     </span>
-                </div>
-
-                <div className="detail-item">
-                    <span className="detail-label">На сайте с:</span>
-                    <span className="detail-value">{formatDate(userData.createdAt)}</span>
                 </div>
             </div>
         </div>

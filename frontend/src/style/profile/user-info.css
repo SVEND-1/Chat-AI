@@ -1,0 +1,88 @@
+.user-info-card {
+    display: flex;
+    flex-direction: column;
+}
+
+.user-avatar {
+    width: 108px;
+    height: 108px;
+    margin: 0 auto 22px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 3px solid #0066ff;
+    box-shadow: 0 0 27px rgba(0, 102, 255, 0.4);
+}
+
+.user-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.avatar-placeholder {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #0066ff, #66ccff);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 43px;
+    font-weight: 600;
+    color: white;
+}
+
+.user-details {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.detail-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #2a2a2a;
+}
+
+.detail-item:last-child {
+    border-bottom: none;
+}
+
+.detail-label {
+    color: #8a8a8a;
+    font-size: 12.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.detail-value {
+    color: #e5e5e5;
+    font-size: 14.5px;
+    font-weight: 500;
+}
+
+.role-badge {
+    padding: 5px 14px;
+    border-radius: 27px;
+    font-size: 12.5px;
+    font-weight: 600;
+    display: inline-block;
+}
+
+.role-user {
+    background: rgba(0, 102, 255, 0.15);
+    color: #0066ff;
+    border: 1px solid #0066ff;
+}
+
+.role-support {
+    background: rgba(102, 204, 255, 0.15);
+    color: #66ccff;
+    border: 1px solid #66ccff;
+}
+
+.role-admin {
+    background: linear-gradient(135deg, #0066ff, #66ccff);
+    color: white;
+}
