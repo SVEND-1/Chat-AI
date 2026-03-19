@@ -32,7 +32,6 @@ public class SubscriptionService {
         return subscriptionRepository.findByUserEmail(userEmail).orElse(null);
     }
 
-
     public SubscriptionDetailResponse getSubscription(Long id) {
         if (id == null) {
             return null;

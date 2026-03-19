@@ -1,6 +1,7 @@
 package org.example.chatai.chat.domain;
 
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.text.StrBuilder;
@@ -71,9 +72,12 @@ public class ChatService {
         return aiManager.sendMessageToAI(chatId, question);
     }
 
+    @Transactional
     public String delete(Long chatId) {
+        isValid(chatId);
         try {
-            chatRepository.deleteById(chatId);//Добавить ещё удаление из нейронки сообщений
+            aiManager.deleted(String.valueOf(chatId));
+            chatRepository.deleteById(chatId);
             return "Успешно";
         }
         catch (Exception e){

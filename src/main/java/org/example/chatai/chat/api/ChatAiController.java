@@ -42,4 +42,8 @@ public class ChatAiController {
         return ResponseEntity.ok(chatService.sendMessageToAI(chatId,question));
     }
 
+    @DeleteMapping("/{chatId}")
+    public ResponseEntity<String> deleteChat(@PathVariable Long chatId) {
+        return ResponseEntity.ok(chatService.delete(chatId));
+    }
 }
