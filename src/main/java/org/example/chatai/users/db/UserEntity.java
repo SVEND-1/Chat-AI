@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.example.chatai.chat.db.ChatEntity;
 import org.example.chatai.payments.db.PaymentEntity;
+import org.example.chatai.roleApplication.db.RoleApplicationEntity;
 import org.example.chatai.subscriptions.db.SubscriptionEntity;
 
 import java.util.ArrayList;
@@ -44,4 +45,7 @@ public class UserEntity {
 
     @OneToMany(mappedBy = "user")
     private List<ChatEntity> chats = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user")
+    private List<RoleApplicationEntity> roleApplicationEntities = new ArrayList<>();
 }

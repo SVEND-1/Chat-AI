@@ -11,5 +11,5 @@ import java.util.List;
 public interface PaymentRepository extends JpaRepository<PaymentEntity, Long> {
     Page<PaymentEntity> findAllByUserEmail(String userEmail, Pageable pageable);
 
-    PaymentEntity findByPaymentId(String paymentId);
+    PaymentEntity findByPaymentId(String paymentId);//TODO СДелать OPTION
 }
