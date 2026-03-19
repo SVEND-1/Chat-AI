@@ -84,6 +84,7 @@ public class AIManager {
             if (!isValid(chatIdStr)) {
                 return Flux.empty();
             }
+            Long start = System.currentTimeMillis();
 
             UserMessage userMessage = new UserMessage(question);
             chatMemory.add(String.valueOf(chatIdStr),userMessage);
@@ -91,19 +92,17 @@ public class AIManager {
 
             Prompt prompt = new Prompt(chatMemory.get(String.valueOf(chatIdStr),MAX_MESSAGES));//Оптимизировать
 
-
-            Long start = System.currentTimeMillis();
             Flux<String> response = chatModel.stream(prompt)
                     .map(chuck -> chuck.getResult().getOutput().getText());
-            Long end = System.currentTimeMillis();
-
-            stat(start,end);
 
             response.collectList().subscribe(fullResponse -> {
                 AssistantMessage assistantMessage = new AssistantMessage(String.join("", fullResponse));
                 chatMemory.add(String.valueOf(chatIdStr),assistantMessage);
                 addMessageCount(chatIdStr);
             });
+
+            Long end = System.currentTimeMillis();
+            stat(start,end);
 
             return response;
         }catch (Exception e){
