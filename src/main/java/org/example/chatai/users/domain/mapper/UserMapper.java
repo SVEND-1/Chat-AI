@@ -6,6 +6,8 @@ import org.example.chatai.users.api.dto.users.response.UserDefaultResponse;
 import org.example.chatai.users.db.UserEntity;
 import org.mapstruct.Mapper;
 
+import java.util.List;
+
 @Mapper(componentModel = "spring")
 public interface UserMapper {
     UserRegistrationResponse convertEntityToDto(UserEntity user);
@@ -14,5 +16,7 @@ public interface UserMapper {
 
     UserEntity convertDtoToEntity(UserRegistrationResponse userRegistrationResponse);
 
-    UserDefaultResponse convertEntityToUserSupportTicketResponse(UserEntity userEntity);
+    UserDefaultResponse convertEntityToUserDefaultResponse(UserEntity userEntity);
+
+    List<UserDefaultResponse> convertEntitiesToUserDefaultResponses(List<UserEntity> userEntityList);
 }
