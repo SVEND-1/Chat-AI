@@ -1,4 +1,10 @@
 package org.example.chatai.globalException;
 
-public class ErrorResponse {
+import java.time.LocalDateTime;
+
+public record ErrorResponse(
+        String message,
+        String detailedMessage,
+        LocalDateTime errorTime
+) {
 }

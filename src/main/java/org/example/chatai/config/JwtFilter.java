@@ -4,7 +4,7 @@ import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import org.example.chatai.users.api.dto.users.response.UserDTO;
+import org.example.chatai.users.api.dto.users.response.UserRegistrationResponse;
 import org.example.chatai.users.domain.UserService;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -61,7 +61,7 @@ public class JwtFilter extends OncePerRequestFilter {
             String email = jwtTokenProvider.getEmailFromToken(token);
 
             if (email != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-                UserDTO user = userService.findUserByEmail(email);
+                UserRegistrationResponse user = userService.findUserByEmail(email);
 
                 List<SimpleGrantedAuthority> authorities = Collections.singletonList(user.role().toAuthority());
 

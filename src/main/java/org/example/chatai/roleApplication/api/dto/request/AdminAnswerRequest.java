@@ -1,4 +1,9 @@
 package org.example.chatai.roleApplication.api.dto.request;
 
-public class AdminAnswerRequest {
+import org.example.chatai.roleApplication.db.StatusRole;
+
+public record AdminAnswerRequest(
+        String answerAdmin,
+        StatusRole statusRole
+) {
 }
