@@ -7,6 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.text.StrBuilder;
 import org.example.chatai.chat.api.dto.response.ChatAIResponse;
 import org.example.chatai.chat.api.dto.response.ListChatAI;
+import org.example.chatai.chat.api.exception.ChatOwnershipException;
 import org.example.chatai.chat.db.ChatEntity;
 import org.example.chatai.chat.db.ChatRepository;
 import org.example.chatai.users.domain.UserService;
@@ -64,6 +65,7 @@ public class ChatService {
             return title;
         }
         catch (Exception e){
+            log.error("Не удалось сохранить чат");
             return e.getMessage();
         }
     }
@@ -89,7 +91,7 @@ public class ChatService {
         ChatEntity chatEntity = chatRepository.findById(chatId).orElseThrow(() -> new EntityNotFoundException("Чат не найден"));
         if(!chatEntity.getUser().getId().equals(userService.getCurrentUser().getId())){
             log.warn("Пользователь не является владельцем чата");
-            throw new RuntimeException("Пользователь не является владельцем чата");
+            throw new ChatOwnershipException("Пользователь не является владельцем чата");
         }
     }
 

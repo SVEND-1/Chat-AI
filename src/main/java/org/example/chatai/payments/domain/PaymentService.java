@@ -7,6 +7,7 @@ import org.example.chatai.payments.api.dto.response.payment.PaymentCreateRespons
 import org.example.chatai.payments.api.dto.response.payment.PaymentPageResponse;
 import org.example.chatai.payments.api.dto.response.payment.PaymentResponse;
 import org.example.chatai.payments.api.dto.response.receipt.ReceiptResponse;
+import org.example.chatai.payments.api.exception.PaymentOwnershipException;
 import org.example.chatai.payments.db.PaymentEntity;
 import org.example.chatai.payments.db.PaymentRepository;
 import org.example.chatai.users.domain.UserService;
@@ -100,7 +101,6 @@ public class PaymentService {
         }
     }
 
-    //TODO УЗНАТЬ ЧТО НАДО УКАЗЫВАТЬ В ЧЕКЕ
     @Transactional
     public ReceiptResponse createReceipt(String paymentId) {
         isValidUser(paymentId);
@@ -128,10 +128,11 @@ public class PaymentService {
         return paymentRepository.save(payment);
     }
 
+
     public void isValidUser(String paymentId) {
         if(!findByPaymentId(paymentId).getUser().getId().equals(userService.getCurrentUser().getId())){
             log.warn("Пользователь не является владельцем платежа");
-            throw new RuntimeException("Пользователь не является владельцем платежа");
+            throw new PaymentOwnershipException("Пользователь не является владельцем платежа");
         }
     }
 }

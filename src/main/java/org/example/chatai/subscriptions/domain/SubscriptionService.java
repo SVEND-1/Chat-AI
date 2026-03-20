@@ -7,6 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.example.chatai.payments.api.dto.response.payment.PaymentResponse;
 import org.example.chatai.payments.domain.PaymentService;
 import org.example.chatai.subscriptions.api.dto.response.SubscriptionDetailResponse;
+import org.example.chatai.subscriptions.api.exception.SubscriptionOwnershipException;
 import org.example.chatai.subscriptions.db.Status;
 import org.example.chatai.subscriptions.db.SubscriptionEntity;
 import org.example.chatai.subscriptions.db.SubscriptionRepository;
@@ -40,7 +41,7 @@ public class SubscriptionService {
 
         if(!sub.getUser().getId().equals(userService.getCurrentUser().getId())){
             log.warn("Пользователь не является владельцем подписки");
-            throw new RuntimeException("Пользователь не является владельцем подписки");
+            throw new SubscriptionOwnershipException("Пользователь не является владельцем подписки");
         }
 
         String endDate =
@@ -56,24 +57,29 @@ public class SubscriptionService {
 
     @Transactional
     public String createSubscription(String paymentId) {
-        String validationError = validateSubscription(paymentId);
-        if (validationError != null) {
-            return validationError;
+        try {
+            String validationError = validateSubscription(paymentId);
+            if (validationError != null) {
+                return validationError;
+            }
+
+            UserEntity user = userService.getCurrentUser();
+            Optional<SubscriptionEntity> optionalSub = subscriptionRepository
+                    .findByUserEmail(user.getEmail());
+
+            SubscriptionEntity sub = optionalSub.orElseGet(() ->
+                    SubscriptionEntity.builder().user(user).build());
+
+            sub.setActive(Status.ACTIVE);
+            sub.setPaymentId(paymentId);
+            sub.setEndDate(LocalDateTime.now().plusMinutes(3));
+            subscriptionRepository.save(sub);
+
+            return "Успешно";
+        }catch (Exception e){
+            log.error("Не удалось оформить подписку,paymentId={},ex={}",paymentId,e.getMessage());
+            throw new RuntimeException(e.getMessage());
         }
-
-        UserEntity user = userService.getCurrentUser();
-        Optional<SubscriptionEntity> optionalSub = subscriptionRepository
-                .findByUserEmail(user.getEmail());
-
-        SubscriptionEntity sub = optionalSub.orElseGet(() ->
-                SubscriptionEntity.builder().user(user).build());
-
-        sub.setActive(Status.ACTIVE);
-        sub.setPaymentId(paymentId);
-        sub.setEndDate(LocalDateTime.now().plusMinutes(3));
-        subscriptionRepository.save(sub);
-
-        return "Успешно";
     }
 
     //@Scheduled(cron = "0 0 0 * * *") раз в день //TODO в проде это поставить

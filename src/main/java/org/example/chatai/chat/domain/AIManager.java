@@ -106,7 +106,7 @@ public class AIManager {
 
             return response;
         }catch (Exception e){
-            log.error(e.getMessage());
+            log.error("Не удалось отправить сообщение в чат chatId={},ex={}",chatId,e.getMessage());
             return Flux.empty();
         }
     }
@@ -116,7 +116,7 @@ public class AIManager {
         try {
             chatMemory.clear(chatIdStr);
         }catch (Exception e){
-            log.error(e.getMessage());
+            log.error("Не удалось удалить чат с id={},ex={}",chatIdStr,e.getMessage());
             throw new RuntimeException(e.getMessage());
         }
     }
@@ -141,7 +141,7 @@ public class AIManager {
 
             objectMapper.writeValue(new File(GLOBAL_STATS_FILE), dto);
         } catch (Exception e) {
-            log.error("Failed to save global stats", e);
+            log.error("Не удалось сохранить глобальную статистику,ex={}", e.getMessage());
         }
     }
 
@@ -154,7 +154,7 @@ public class AIManager {
                 globalResponseCount.set(dto.responseCount());
             }
         } catch (Exception e) {
-            log.error("Failed to load global stats", e);
+            log.error("Не удалось загрузить глобальную статистику,ex={}", e.getMessage());
         }
     }
 
