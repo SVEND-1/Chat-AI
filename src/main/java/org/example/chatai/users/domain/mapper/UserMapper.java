@@ -2,6 +2,7 @@ package org.example.chatai.users.domain.mapper;
 
 import org.example.chatai.users.api.dto.users.request.UserCreateRequest;
 import org.example.chatai.users.api.dto.users.response.UserDTO;
+import org.example.chatai.users.api.dto.users.response.UserSupportTicketResponse;
 import org.example.chatai.users.db.UserEntity;
 import org.mapstruct.Mapper;
 
@@ -12,4 +13,6 @@ public interface UserMapper {
     UserCreateRequest convertDtoToCreateRequest(UserEntity user);
 
     UserEntity convertDtoToEntity(UserDTO userDTO);
+
+    UserSupportTicketResponse convertEntityToUserSupportTicketResponse(UserEntity userEntity);
 }

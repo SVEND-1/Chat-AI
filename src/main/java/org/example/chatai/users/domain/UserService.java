@@ -27,8 +27,11 @@ public class UserService {
     private final JwtTokenProvider jwtTokenProvider;
 
     public UserEntity getCurrentUser() {
+        log.info("Getting jwt");
         String token = jwtTokenProvider.getCurrentToken();
+        log.info("Getting email");
         String email = jwtTokenProvider.getEmailFromToken(token);
+        log.info("Getting currentUser");
         UserEntity user = userRepository.findByEmailEqualsIgnoreCase(email);
         notFoundUser(user);
         return user;

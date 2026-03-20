@@ -25,56 +25,14 @@ public class ReceiptManager {
     }
 
     public void saveReceipt(String paymentId, Receipt saved) {
-        PaymentEntity paymentEntity = paymentService.findByPaymentId(paymentId);
-        paymentEntity.setReceiptId(saved.getId());
-        paymentService.save(paymentEntity);
+        try {
+            PaymentEntity paymentEntity = paymentService.findByPaymentId(paymentId);
+            paymentEntity.setReceiptId(saved.getId());
+            paymentService.save(paymentEntity);
+        }catch (Exception e) {
+            log.error("Не удалось сохранить чек id={},ex={}",saved.getId(),e.getMessage());
+        }
     }
 
-    public ReceiptResponse convertEntityToDto(Receipt receipt) {
-        List<ReceiptItem> items = receipt.getItems()
-                .stream()
-                .map(ReceiptManager::convertReceiptItem)
-                .toList();
 
-        List<SettlementReceipt> settlements = receipt.getSettlements()
-                .stream()
-                .map(ReceiptManager::convertSettlementReceipt)
-                .toList();
-
-        return new ReceiptResponse(
-                receipt.getId(),
-                receipt.getType(),
-                receipt.getPaymentId(),
-                receipt.getStatus(),
-                "999",
-
-                receipt.getFiscalDocumentNumber(),
-                receipt.getFiscalStorageNumber(),
-                receipt.getFiscalAttribute(),
-                receipt.getRegisteredAt(),
-                receipt.getFiscalProviderId(),
-
-                items,
-                settlements,
-
-                "ChatAI"
-        );
-    }
-    private static ReceiptItem convertReceiptItem(Item el) {
-        return new ReceiptItem(
-                el.getDescription(),
-                el.getQuantity(),
-                el.getAmount().getValue(),
-                el.getAmount().getCurrency(),
-                el.getVatCode()
-        );
-    }
-
-    private static SettlementReceipt convertSettlementReceipt(Settlement el) {
-        return new SettlementReceipt(
-                el.getType(),
-                el.getAmount().getValue(),
-                el.getAmount().getCurrency()
-        );
-    }
 }

@@ -1,13 +1,10 @@
 package org.example.chatai.supportMessages.db.entities;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.example.chatai.supportTickets.db.entities.SupportTicketEntity;
+import org.example.chatai.users.db.Role;
 import org.example.chatai.users.db.UserEntity;
-import org.example.chatai.supportMessages.db.enums.SenderType;
 
 import java.time.LocalDateTime;
 
@@ -17,6 +14,8 @@ import java.time.LocalDateTime;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
+@ToString
 public class SupportMessageEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,10 +31,15 @@ public class SupportMessageEntity {
 
     @Column(name = "sender_type")
     @Enumerated(EnumType.STRING)
-    private SenderType senderType;
+    private Role senderType;
 
     private String message;
 
     @Column(name = "created_at")
     private LocalDateTime createdAt;
+
+    @PrePersist
+    public void onCreate() {
+        createdAt = LocalDateTime.now();
+    }
 }

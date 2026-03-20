@@ -23,11 +23,13 @@ public class YooKassaManager {
     private final UserService userService;
     private final String RETURN_URL = "http://localhost:5173/succeeded-payment";
     private final ReceiptManager receiptManager;
+    private final ReceiptMapper receiptMapper;
 
-    public YooKassaManager(@Lazy PaymentService paymentService, UserService userService, ReceiptManager receiptManager) {
+    public YooKassaManager(@Lazy PaymentService paymentService, UserService userService, ReceiptManager receiptManager, ReceiptMapper receiptMapper) {
         this.paymentService = paymentService;
         this.userService = userService;
         this.receiptManager = receiptManager;
+        this.receiptMapper = receiptMapper;
     }
 
 
@@ -42,72 +44,82 @@ public class YooKassaManager {
 
 
     public Payment createYooKassaPayment(PaymentProcessor paymentProcessor, String idempotencyKey){
-        Amount amount = Amount.builder()
-                .value("1.00")
-                .currency(Currency.RUB)
-                .build();
+        try {
+            Amount amount = Amount.builder()
+                    .value("1.00")
+                    .currency(Currency.RUB)
+                    .build();
 
-        Confirmation confirmation = Confirmation.builder()
-                .type(Confirmation.Type.REDIRECT)
-                .returnUrl(RETURN_URL)
-                .build();
+            Confirmation confirmation = Confirmation.builder()
+                    .type(Confirmation.Type.REDIRECT)
+                    .returnUrl(RETURN_URL)
+                    .build();
 
-        Payment payment = Payment.builder()
-                .amount(amount)
-                .description("Оплата подписки Premium")
-                .confirmation(confirmation)
-                .capture(true)
-                .build();
+            Payment payment = Payment.builder()
+                    .amount(amount)
+                    .description("Оплата подписки Premium")
+                    .confirmation(confirmation)
+                    .capture(true)
+                    .build();
 
-        return paymentProcessor.create(payment, idempotencyKey);
+            return paymentProcessor.create(payment, idempotencyKey);
+        }catch (Exception e){
+            log.error("Не удалось создать платеж yookassa,ex={}", e.getMessage());
+            throw new RuntimeException(e.getMessage(), e);
+        }
     }
 
 
     public Receipt createYooKassaReceipt(ReceiptProcessor receiptProcessor, String paymentId) {
-        Payment payment = paymentService.findPayment(paymentId);
-        if (!"succeeded".equals(payment.getStatus())) {
-            log.warn("Чек создается для неуспешного платежа: {}", paymentId);
+        try {
+            Payment payment = paymentService.findPayment(paymentId);
+            if (!"succeeded".equals(payment.getStatus())) {
+                log.warn("Чек создается для неуспешного платежа: {}", paymentId);
+            }
+
+            Customer customer = Customer.builder()
+                    .email(userService.getCurrentUser().getEmail())
+                    .build();
+
+            Amount paymentAmount = payment.getAmount();
+            Amount itemAmount = Amount.builder()
+                    .value(paymentAmount.getValue())
+                    .currency(paymentAmount.getCurrency())
+                    .build();
+
+            Item item = Item.builder()
+                    .description("Оплата подписки Premium")
+                    .amount(itemAmount)
+                    .vatCode(1) // Без НДС
+                    .quantity("1")
+                    .build();
+
+            Settlement settlement = Settlement.builder()
+                    .type(getSettlementType(payment))
+                    .amount(itemAmount)
+                    .build();
+
+            Receipt receipt = Receipt.builder()
+                    .type(Receipt.Type.PAYMENT)
+                    .paymentId(paymentId)
+                    .customer(customer)
+                    .items(List.of(item))
+                    .settlements(List.of(settlement))
+                    .send(true)
+                    .build();
+
+            return receiptProcessor.create(receipt, null);
+        }catch (Exception e){
+            log.error("Не удалось создать чек через yookassa,ex={}", e.getMessage());
+            throw new RuntimeException(e.getMessage(), e);
         }
-
-        Customer customer = Customer.builder()
-                .email(userService.getCurrentUser().getEmail())
-                .build();
-
-        Amount paymentAmount = payment.getAmount();
-        Amount itemAmount = Amount.builder()
-                .value(paymentAmount.getValue())
-                .currency(paymentAmount.getCurrency())
-                .build();
-
-        Item item = Item.builder()
-                .description("Оплата подписки Premium")
-                .amount(itemAmount)
-                .vatCode(1) // Без НДС
-                .quantity("1")
-                .build();
-
-        Settlement settlement = Settlement.builder()
-                .type(getSettlementType(payment))
-                .amount(itemAmount)
-                .build();
-
-        Receipt receipt = Receipt.builder()
-                .type(Receipt.Type.PAYMENT)
-                .paymentId(paymentId)
-                .customer(customer)
-                .items(List.of(item))
-                .settlements(List.of(settlement))
-                .send(true)
-                .build();
-
-        return receiptProcessor.create(receipt, null);
     }
 
     public ReceiptResponse findReceiptDTO(ReceiptProcessor receiptProcessor, String paymentId){
         try {
             PaymentEntity payment = paymentService.findByPaymentId(paymentId);
             Receipt receipt = receiptProcessor.findById(payment.getReceiptId());
-            return receiptManager.convertEntityToDto(receipt);
+            return receiptMapper.convertReceiptToReceiptResponse(receipt);
         }
         catch (Exception e){
             log.error("Ошибка поиска чека,ex={}", e.getMessage());

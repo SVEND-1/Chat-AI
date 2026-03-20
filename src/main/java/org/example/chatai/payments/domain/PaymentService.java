@@ -7,8 +7,10 @@ import org.example.chatai.payments.api.dto.response.payment.PaymentCreateRespons
 import org.example.chatai.payments.api.dto.response.payment.PaymentPageResponse;
 import org.example.chatai.payments.api.dto.response.payment.PaymentResponse;
 import org.example.chatai.payments.api.dto.response.receipt.ReceiptResponse;
+import org.example.chatai.payments.api.exception.PaymentOwnershipException;
 import org.example.chatai.payments.db.PaymentEntity;
 import org.example.chatai.payments.db.PaymentRepository;
+import org.example.chatai.users.domain.UserService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -29,6 +31,8 @@ public class PaymentService {
     private final YooKassaManager yooKassaManager;
     private final PaymentManager paymentManager;
     private final ReceiptManager receiptManager;
+    private final UserService userService;
+    private final ReceiptMapper receiptMapper;
     @Value("${shop_id}")
     private String shopId;
 
@@ -40,12 +44,14 @@ public class PaymentService {
     private PaymentProcessor paymentProcessor;
     private ReceiptProcessor receiptProcessor;
 
-    public PaymentService(PaymentRepository paymentRepository, PaymentMapper paymentMapper, YooKassaManager yooKassaManager, PaymentManager paymentManager, ReceiptManager receiptManager) {
+    public PaymentService(PaymentRepository paymentRepository, PaymentMapper paymentMapper, YooKassaManager yooKassaManager, PaymentManager paymentManager, ReceiptManager receiptManager, UserService userService, ReceiptMapper receiptMapper) {
         this.paymentRepository = paymentRepository;
         this.paymentMapper = paymentMapper;
         this.yooKassaManager = yooKassaManager;
         this.paymentManager = paymentManager;
         this.receiptManager = receiptManager;
+        this.userService = userService;
+        this.receiptMapper = receiptMapper;
     }
 
     @PostConstruct
@@ -64,6 +70,7 @@ public class PaymentService {
 
     //================================Controller Methods================================================
     public PaymentResponse findPaymentDto(String paymentId){
+        isValidUser(paymentId);
         return paymentMapper.convertEntityToPaymentResponse(findPayment(paymentId));
     }
 
@@ -72,6 +79,7 @@ public class PaymentService {
     }
 
     public ReceiptResponse findReceipt(String paymentId){
+        isValidUser(paymentId);
         return yooKassaManager.findReceiptDTO(receiptProcessor,paymentId);
     }
 
@@ -93,13 +101,13 @@ public class PaymentService {
         }
     }
 
-    //TODO УЗНАТЬ ЧТО НАДО УКАЗЫВАТЬ В ЧЕКЕ
     @Transactional
-    public Receipt createReceipt(String paymentId) {
+    public ReceiptResponse createReceipt(String paymentId) {
+        isValidUser(paymentId);
         try {
             Receipt saved = yooKassaManager.createYooKassaReceipt(receiptProcessor,paymentId);
             receiptManager.saveReceipt(paymentId,saved);
-            return saved;
+            return receiptMapper.convertReceiptToReceiptResponse(saved);
         } catch (ApiException e) {
             log.error("Ошибка создания чека для платежа {}: {}", paymentId, e.getMessage());
             throw new RuntimeException("Не удалось создать чек", e);
@@ -118,5 +126,13 @@ public class PaymentService {
 
     public PaymentEntity save(PaymentEntity payment) {
         return paymentRepository.save(payment);
+    }
+
+
+    public void isValidUser(String paymentId) {
+        if(!findByPaymentId(paymentId).getUser().getId().equals(userService.getCurrentUser().getId())){
+            log.warn("Пользователь не является владельцем платежа");
+            throw new PaymentOwnershipException("Пользователь не является владельцем платежа");
+        }
     }
 }
