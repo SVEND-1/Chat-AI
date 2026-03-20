@@ -3,8 +3,10 @@ package org.example.chatai.roleApplication.api;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.example.chatai.roleApplication.api.dto.request.AdminAnswerRequest;
+import org.example.chatai.roleApplication.api.dto.request.RoleApplicationSearchFilter;
 import org.example.chatai.roleApplication.api.dto.request.RoleCreateRequest;
 import org.example.chatai.roleApplication.api.dto.response.RoleResponse;
+import org.example.chatai.roleApplication.db.StatusRole;
 import org.example.chatai.roleApplication.domain.RoleService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -37,9 +39,25 @@ public class RoleController {
     }
 
     @GetMapping
-    public ResponseEntity<List<RoleResponse>> getRoles() {
-        return ResponseEntity.ok(roleService.findAllByUser());
+    public ResponseEntity<List<RoleResponse>> getAllRolesWithFilter(
+            @RequestParam(name = "page-size", required = false) Integer pageSize,
+            @RequestParam(name = "page-number", required = false) Integer pageNumber,
+            @RequestParam(name = "status-role", required = false) StatusRole statusRole
+    ) {
+        log.info("Called method: getAllRolesWithFilter with pageSize {} and pageNumber {} and statusRole {}", pageSize, pageNumber, statusRole);
+
+        RoleApplicationSearchFilter filter = new RoleApplicationSearchFilter(
+                pageSize,
+                pageNumber,
+                statusRole
+        );
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(roleService.getAllRolesWithFilter(filter));
     }
 
-
+    @GetMapping("/user")
+    public ResponseEntity<List<RoleResponse>> getUserRoles() {
+        return ResponseEntity.ok(roleService.findAllByUser());
+    }
 }

@@ -3,6 +3,7 @@ package org.example.chatai.roleApplication.domain;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.example.chatai.roleApplication.api.dto.request.AdminAnswerRequest;
+import org.example.chatai.roleApplication.api.dto.request.RoleApplicationSearchFilter;
 import org.example.chatai.roleApplication.api.dto.request.RoleCreateRequest;
 import org.example.chatai.roleApplication.api.dto.response.RoleResponse;
 import org.example.chatai.roleApplication.api.exception.InvalidUserStatusException;
@@ -13,6 +14,7 @@ import org.example.chatai.users.db.Role;
 import org.example.chatai.users.db.UserEntity;
 import org.example.chatai.users.db.UserRepository;
 import org.example.chatai.users.domain.UserService;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -63,8 +65,6 @@ public class RoleService {
 
     // Богдан
 
-    //Найти все заявки с фильтром gok
-
     //Ответить на заявку
     public RoleResponse getAdminAnswer(Long id, AdminAnswerRequest request) {
         UserEntity currentUser = userService.getCurrentUser();
@@ -90,6 +90,22 @@ public class RoleService {
         return roleMapper.convertEntityToDTO(
                 roleRepository.save(roleApplicationEntity)
         );
+    }
+
+    //Найти все заявки с фильтром
+    public List<RoleResponse> getAllRolesWithFilter(RoleApplicationSearchFilter filter) {
+        UserEntity currentUser = userService.getCurrentUser();
+        checkIsAdmin(currentUser);
+
+        Pageable pageable = assemblePageable(
+                filter.pageSize(),
+                filter.pageNumber()
+        );
+
+        List<RoleApplicationEntity> roleApplicationEntities =
+                roleRepository.findAllByFilter(filter.statusRole(), pageable);
+
+        return roleMapper.convertEntityListToDTO(roleApplicationEntities);
     }
 
     //====================================SERVICE METHODS=======================================================
@@ -134,4 +150,12 @@ public class RoleService {
                 Role.SUPPORT : Role.USER;
     }
 
+    private Pageable assemblePageable(Integer pageSize, Integer pageNumber) {
+        int pageSizeForPageable = pageSize == null ? 5 : pageSize;
+        int pageNumForPageable = pageNumber == null ? 0 : pageNumber;
+
+        return Pageable
+                .ofSize(pageSizeForPageable)
+                .withPage(pageNumForPageable);
+    }
 }
