@@ -3,6 +3,7 @@ package org.example.chatai.adminStatistics.domain.services;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.example.chatai.adminStatistics.api.dto.requests.AdminStatsAllUsersFilter;
+import org.example.chatai.adminStatistics.api.dto.responses.SubscriptionsPercentResponse;
 import org.example.chatai.adminStatistics.api.dto.responses.UsersAmountResponse;
 import org.example.chatai.users.api.dto.users.response.UserDefaultResponse;
 import org.example.chatai.users.db.Role;
@@ -59,6 +60,21 @@ public class AdminStatisticsService {
         checkIsSupport(user);
 
         return userMapper.convertEntityToUserDefaultResponse(user);
+    }
+
+    public SubscriptionsPercentResponse getSubscriptionsPercent() {
+        UserEntity currentUser = userService.getCurrentUser();
+        checkIsAdmin(currentUser);
+
+        Long usersAmount = userRepository.countUserEntitiesByRole(Role.USER);
+        if (usersAmount == 0) {
+            return new SubscriptionsPercentResponse(0L);
+        }
+
+        Long subscriptionsAmount = userRepository.countUsersByRoleWithActivePayment();
+        Long subscriptionPercent = (subscriptionsAmount * 100) / usersAmount;
+
+        return new SubscriptionsPercentResponse(subscriptionPercent);
     }
 
     //====================================SERVICE METHODS=======================================================

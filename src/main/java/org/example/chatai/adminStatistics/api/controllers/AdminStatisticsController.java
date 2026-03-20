@@ -3,6 +3,7 @@ package org.example.chatai.adminStatistics.api.controllers;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.example.chatai.adminStatistics.api.dto.requests.AdminStatsAllUsersFilter;
+import org.example.chatai.adminStatistics.api.dto.responses.SubscriptionsPercentResponse;
 import org.example.chatai.adminStatistics.api.dto.responses.UsersAmountResponse;
 import org.example.chatai.adminStatistics.domain.services.AdminStatisticsService;
 import org.example.chatai.users.api.dto.users.response.UserDefaultResponse;
@@ -67,4 +68,12 @@ public class AdminStatisticsController {
     }
 
     // Количество активных подписок в %
+    @GetMapping("/subscriptions")
+    public ResponseEntity<SubscriptionsPercentResponse> getSubscriptionsPercent() {
+        log.info("Called method: getSubscriptionsPercent");
+
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(adminStatisticsService.getSubscriptionsPercent());
+    }
 }
