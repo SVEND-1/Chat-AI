@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.example.chatai.roleApplication.api.dto.request.RoleCreateRequest;
 import org.example.chatai.roleApplication.api.dto.response.RoleResponse;
+import org.example.chatai.roleApplication.api.exception.InvalidUserStatusException;
 import org.example.chatai.roleApplication.db.RoleApplicationEntity;
 import org.example.chatai.roleApplication.db.RoleRepository;
 import org.example.chatai.roleApplication.db.StatusRole;
@@ -39,10 +40,12 @@ public class RoleService {
     public String save(RoleCreateRequest request) {
         try {
             UserEntity user = userService.getCurrentUser();
+
             if(!isValid(user)){
                 log.warn("Пользователь является сотрудником или у него есть уже активная заявка");
-                throw new RuntimeException();//TODO написать своё исключение
+                throw new InvalidUserStatusException("Пользователь является сотрудником или у него есть уже активная заявка");
             }
+
             RoleApplicationEntity roleApplication =  RoleApplicationEntity.builder()
                     .messageUser(request.message())
                     .statusRole(StatusRole.WAITING)
@@ -52,6 +55,7 @@ public class RoleService {
             roleRepository.save(roleApplication);
             return "Успешно";
         }catch (Exception e) {
+            log.error("Не удалось сохранить заявкау на роль,ex={}",e.getMessage());
             throw new RuntimeException(e.getMessage());
         }
     }

@@ -19,10 +19,10 @@ public class RoleApplicationEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "message_user")
+    @Column(name = "message_user",length = 1000)
     private String messageUser;
 
-    @Column(name = "answer_admin")
+    @Column(name = "answer_admin",length = 1000)
     private String answerAdmin;
 
     @Enumerated(EnumType.STRING)
