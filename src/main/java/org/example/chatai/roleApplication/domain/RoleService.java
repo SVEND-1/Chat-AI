@@ -63,7 +63,7 @@ public class RoleService {
 
     // Богдан
 
-    //Найти все заявки с фильтром
+    //Найти все заявки с фильтром gok
 
     //Ответить на заявку
     public RoleResponse getAdminAnswer(Long id, AdminAnswerRequest request) {
