@@ -29,12 +29,12 @@ public class AdminStatisticsService {
 
     //====================================CONTROLLER METHODS=======================================================
 
-
     public UsersAmountResponse getUsersAmountByFilter(Role role) {
         UserEntity currentUser = userService.getCurrentUser();
         checkIsAdmin(currentUser);
 
         Long usersAmount = userRepository.countUserEntitiesByRole(role);
+        log.debug("Found users amount: {}", usersAmount);
 
         return new UsersAmountResponse(usersAmount);
     }
@@ -49,6 +49,7 @@ public class AdminStatisticsService {
         );
 
         List<UserEntity> users = userRepository.findAllByRole(filter.role(), pageable);
+        log.debug("Found users: {}", users.size());
 
         return userMapper.convertEntitiesToUserDefaultResponses(users);
     }
@@ -59,6 +60,7 @@ public class AdminStatisticsService {
 
         UserEntity user = userRepository.findByEmailIgnoreCase(email)
                 .orElseThrow(() -> new EntityNotFoundException("User with email " + email + " not found"));
+        log.debug("Found support by email");
         checkIsSupport(user);
 
         return userMapper.convertEntityToUserDefaultResponse(user);
@@ -69,12 +71,16 @@ public class AdminStatisticsService {
         checkIsAdmin(currentUser);
 
         Long usersAmount = userRepository.countUserEntitiesByRole(Role.USER);
+        log.debug("Found users with role USER: {}", usersAmount);
         if (usersAmount == 0) {
+            log.debug("No users with role USER");
             return new SubscriptionsPercentResponse(0L);
         }
 
         Long subscriptionsAmount = userRepository.countUsersByRoleWithActivePayment();
+        log.debug("Found users with role USER with active payment: {}", subscriptionsAmount);
         Long subscriptionPercent = (subscriptionsAmount * 100) / usersAmount;
+        log.debug("Found subscription percent {}", subscriptionPercent);
 
         return new SubscriptionsPercentResponse(subscriptionPercent);
     }
@@ -82,6 +88,7 @@ public class AdminStatisticsService {
     //====================================SERVICE METHODS=======================================================
 
     private void checkIsAdmin(UserEntity user) {
+        log.debug("Checking user is admin");
         if (!user.getRole().equals(Role.ADMIN)) {
             throw new AdminStatisticsException("You are not admin!");
         }
@@ -97,6 +104,7 @@ public class AdminStatisticsService {
     }
 
     private void checkIsSupport(UserEntity user) {
+        log.debug("Checking user is support");
         if (!user.getRole().equals(Role.SUPPORT)) {
             throw new AdminStatisticsException("This user is not support");
         }

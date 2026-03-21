@@ -69,12 +69,14 @@ public class RoleService {
 
     //Ответить на заявку
     public RoleResponse getAdminAnswer(Long id, AdminAnswerRequest request) {
+        log.debug("Attempting to get admin answer");
         UserEntity currentUser = userService.getCurrentUser();
         checkIsAdmin(currentUser);
 
         RoleApplicationEntity roleApplicationEntity =
                 roleRepository.findById(id)
                         .orElseThrow(() -> new EntityNotFoundException("Request support not found"));
+        log.debug("Found role application");
 
         checkRequestSupportIsWaiting(roleApplicationEntity);
 
@@ -83,19 +85,20 @@ public class RoleService {
             UserEntity user = roleApplicationEntity.getUser();
             user.setRole(role);
             userRepository.save(user);
+            log.debug("User's role changed successfully");
         }
 
         roleApplicationEntity.setAnswerAdmin(request.answerAdmin());
         roleApplicationEntity.setStatusRole(request.statusRole());
         roleApplicationEntity.setAnsweredAt(LocalDateTime.now());
 
-        return roleMapper.convertEntityToDTO(
-                roleRepository.save(roleApplicationEntity)
-        );
+        RoleApplicationEntity savedEntity = roleRepository.save(roleApplicationEntity);
+        log.debug("Role application saved successfully");
+        return roleMapper.convertEntityToDTO(savedEntity);
     }
 
     //Найти все заявки с фильтром
-    public List<RoleResponse> getAllRolesWithFilter(RoleApplicationSearchFilter filter) {
+    public List<RoleResponse> getAllRoleApplicationsWithFilter(RoleApplicationSearchFilter filter) {
         UserEntity currentUser = userService.getCurrentUser();
         checkIsAdmin(currentUser);
 
@@ -106,6 +109,7 @@ public class RoleService {
 
         List<RoleApplicationEntity> roleApplicationEntities =
                 roleRepository.findAllByFilter(filter.statusRole(), pageable);
+        log.debug("Found role applications with filter");
 
         return roleMapper.convertEntityListToDTO(roleApplicationEntities);
     }
@@ -132,18 +136,21 @@ public class RoleService {
     // Богдан
 
     private void checkIsAdmin(UserEntity user) {
+        log.debug("Checking user is admin");
         if (!user.getRole().equals(Role.ADMIN)) {
             throw new RoleApplicationException("You are not admin!");
         }
     }
 
     private void checkRequestSupportIsWaiting(RoleApplicationEntity roleApplicationEntity) {
+        log.debug("Checking request support is waiting");
         if (!roleApplicationEntity.getStatusRole().equals(StatusRole.WAITING)) {
             throw new RoleApplicationException("Your request has already been processed");
         }
     }
 
     private Role getRoleByAdminDecision(StatusRole statusRole) {
+        log.debug("Getting role by admin decision");
         if (statusRole.equals(StatusRole.WAITING)) {
             throw new RoleApplicationException("You can't set status WAITING!");
         }

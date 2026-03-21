@@ -53,7 +53,7 @@ public class RoleController {
         );
         return ResponseEntity
                 .status(HttpStatus.OK)
-                .body(roleService.getAllRolesWithFilter(filter));
+                .body(roleService.getAllRoleApplicationsWithFilter(filter));
     }
 
     @GetMapping("/user")
