@@ -1,5 +1,6 @@
 package org.example.chatai.roleApplication.api;
 
+import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.example.chatai.roleApplication.api.dto.request.AdminAnswerRequest;
@@ -21,6 +22,13 @@ import java.util.List;
 public class RoleController {
     private final RoleService roleService;
 
+    @Operation(summary = "Получить все заявки пользователя на смену роли")
+    @GetMapping
+    public ResponseEntity<List<RoleResponse>> getRoles() {
+        return ResponseEntity.ok(roleService.findAllByUser());
+    }
+
+    @Operation(summary = "Создать заявку на смену роли")
     @PostMapping
     public ResponseEntity<String> created(@RequestBody RoleCreateRequest request) {
         return ResponseEntity.ok(roleService.save(request));
@@ -44,6 +52,7 @@ public class RoleController {
             @RequestParam(name = "page-number", required = false) Integer pageNumber,
             @RequestParam(name = "status-role", required = false) StatusRole statusRole
     ) {
+        //БОГДАН логи лучше перенеси в service,а filter принимай @RequestBody
         log.info("Called method: getAllRolesWithFilter with pageSize {} and pageNumber {} and statusRole {}", pageSize, pageNumber, statusRole);
 
         RoleApplicationSearchFilter filter = new RoleApplicationSearchFilter(

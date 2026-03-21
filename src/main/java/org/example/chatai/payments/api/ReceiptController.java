@@ -1,5 +1,6 @@
 package org.example.chatai.payments.api;
 
+import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import org.example.chatai.payments.api.dto.response.receipt.ReceiptResponse;
 import org.example.chatai.payments.domain.PaymentService;
@@ -13,6 +14,7 @@ import ru.loolzaaa.youkassa.model.Receipt;
 public class ReceiptController {
     private final PaymentService paymentService;
 
+    @Operation(summary = "Получить информацию о чеке")
     @GetMapping("/{paymentId}")
     public ResponseEntity<ReceiptResponse> getReceipt(
             @PathVariable String paymentId
@@ -20,6 +22,7 @@ public class ReceiptController {
         return ResponseEntity.ok(paymentService.findReceipt(paymentId));
     }
 
+    @Operation(summary = "Создать чек")
     @PostMapping("/{paymentId}")
     public ResponseEntity<ReceiptResponse> createReceipt(
             @PathVariable String paymentId
