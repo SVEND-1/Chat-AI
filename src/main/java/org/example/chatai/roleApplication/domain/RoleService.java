@@ -1,5 +1,6 @@
 package org.example.chatai.roleApplication.domain;
 
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.example.chatai.roleApplication.api.dto.request.AdminAnswerRequest;
@@ -10,6 +11,7 @@ import org.example.chatai.roleApplication.api.exception.InvalidUserStatusExcepti
 import org.example.chatai.roleApplication.db.RoleApplicationEntity;
 import org.example.chatai.roleApplication.db.RoleRepository;
 import org.example.chatai.roleApplication.db.StatusRole;
+import org.example.chatai.roleApplication.domain.exceptions.RoleApplicationException;
 import org.example.chatai.users.db.Role;
 import org.example.chatai.users.db.UserEntity;
 import org.example.chatai.users.db.UserRepository;
@@ -72,7 +74,7 @@ public class RoleService {
 
         RoleApplicationEntity roleApplicationEntity =
                 roleRepository.findById(id)
-                        .orElseThrow(() -> new RuntimeException("Request support not found"));
+                        .orElseThrow(() -> new EntityNotFoundException("Request support not found"));
 
         checkRequestSupportIsWaiting(roleApplicationEntity);
 
@@ -131,19 +133,19 @@ public class RoleService {
 
     private void checkIsAdmin(UserEntity user) {
         if (!user.getRole().equals(Role.ADMIN)) {
-            throw new RuntimeException("You are not admin!");
+            throw new RoleApplicationException("You are not admin!");
         }
     }
 
     private void checkRequestSupportIsWaiting(RoleApplicationEntity roleApplicationEntity) {
         if (!roleApplicationEntity.getStatusRole().equals(StatusRole.WAITING)) {
-            throw new RuntimeException("Your request has already been processed");
+            throw new RoleApplicationException("Your request has already been processed");
         }
     }
 
     private Role getRoleByAdminDecision(StatusRole statusRole) {
         if (statusRole.equals(StatusRole.WAITING)) {
-            throw new RuntimeException("You can't set status WAITING!");
+            throw new RoleApplicationException("You can't set status WAITING!");
         }
 
         return statusRole.equals(StatusRole.APPROVED) ?

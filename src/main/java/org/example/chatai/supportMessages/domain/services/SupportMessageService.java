@@ -6,6 +6,7 @@ import org.example.chatai.supportMessages.api.dto.requests.SupportMessageCreateR
 import org.example.chatai.supportMessages.api.dto.responses.SupportMessageResponse;
 import org.example.chatai.supportMessages.db.entities.SupportMessageEntity;
 import org.example.chatai.supportMessages.db.repositories.SupportMessageRepository;
+import org.example.chatai.supportMessages.domain.exceptions.SupportMessageException;
 import org.example.chatai.supportMessages.domain.mappers.SupportMessageMapper;
 import org.example.chatai.supportTickets.db.entities.SupportTicketEntity;
 import org.example.chatai.supportTickets.db.enums.SupportStatus;
@@ -44,7 +45,7 @@ public class SupportMessageService {
                 );
 
         if (ticketEntity.getStatus() == SupportStatus.CLOSED) {
-            throw new RuntimeException("Ticket has been closed");
+            throw new SupportMessageException("Ticket has been closed");
         }
 
         SupportMessageEntity messageEntity = SupportMessageEntity.builder()

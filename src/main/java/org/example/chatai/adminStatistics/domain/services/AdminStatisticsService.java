@@ -1,10 +1,12 @@
 package org.example.chatai.adminStatistics.domain.services;
 
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.example.chatai.adminStatistics.api.dto.requests.AdminStatsAllUsersFilter;
 import org.example.chatai.adminStatistics.api.dto.responses.SubscriptionsPercentResponse;
 import org.example.chatai.adminStatistics.api.dto.responses.UsersAmountResponse;
+import org.example.chatai.adminStatistics.domain.exceptions.AdminStatisticsException;
 import org.example.chatai.users.api.dto.users.response.UserDefaultResponse;
 import org.example.chatai.users.db.Role;
 import org.example.chatai.users.db.UserEntity;
@@ -56,7 +58,7 @@ public class AdminStatisticsService {
         checkIsAdmin(currentUser);
 
         UserEntity user = userRepository.findByEmailIgnoreCase(email)
-                .orElseThrow(() -> new RuntimeException("User with email " + email + " not found"));
+                .orElseThrow(() -> new EntityNotFoundException("User with email " + email + " not found"));
         checkIsSupport(user);
 
         return userMapper.convertEntityToUserDefaultResponse(user);
@@ -81,7 +83,7 @@ public class AdminStatisticsService {
 
     private void checkIsAdmin(UserEntity user) {
         if (!user.getRole().equals(Role.ADMIN)) {
-            throw new RuntimeException("You are not admin!");
+            throw new AdminStatisticsException("You are not admin!");
         }
     }
 
@@ -96,7 +98,7 @@ public class AdminStatisticsService {
 
     private void checkIsSupport(UserEntity user) {
         if (!user.getRole().equals(Role.SUPPORT)) {
-            throw new RuntimeException("This user is not support");
+            throw new AdminStatisticsException("This user is not support");
         }
     }
 }
