@@ -1,5 +1,6 @@
 package org.example.chatai.supportTickets.domain.services;
 
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.example.chatai.supportTickets.api.dto.requests.SupportTicketCreateRequest;
@@ -8,6 +9,7 @@ import org.example.chatai.supportTickets.api.dto.responses.SupportTicketResponse
 import org.example.chatai.supportTickets.db.entities.SupportTicketEntity;
 import org.example.chatai.supportTickets.db.enums.SupportStatus;
 import org.example.chatai.supportTickets.db.repositories.SupportTicketRepository;
+import org.example.chatai.supportTickets.domain.exceptions.SupportTicketException;
 import org.example.chatai.supportTickets.domain.mappers.SupportTicketMapper;
 import org.example.chatai.users.db.Role;
 import org.example.chatai.users.db.UserEntity;
@@ -32,6 +34,7 @@ public class SupportTicketService {
     //====================================CONTROLLER METHODS=======================================================
 
     public SupportTicketResponse createTicket(SupportTicketCreateRequest request) {
+        log.debug("Attempting to create ticket for user");
         UserEntity user = userService.getCurrentUser();
         checkForCreatingTicket(user);
 
@@ -39,8 +42,10 @@ public class SupportTicketService {
                 supportTicketRepository.getMinimumCountOfOpenTicketsBySupportId().isEmpty() ?
                         userRepository.findByRole(Role.SUPPORT) :
                         supportTicketRepository.getMinimumCountOfOpenTicketsBySupportId();
+        log.debug("Found users with role SUPPORT with minimum open tickets: {}", supports.size());
 
         UserEntity currentSupport = getRandomSupportByMinimumTickets(supports);
+        log.debug("Assigned support to this ticket");
 
         SupportTicketEntity supportTicketEntity = SupportTicketEntity.builder()
                 .user(user)
@@ -48,9 +53,9 @@ public class SupportTicketService {
                 .title(request.title())
                 .build();
 
-        return supportTicketMapper.convertEntityToResponse(
-                supportTicketRepository.save(supportTicketEntity)
-        );
+        SupportTicketEntity savedEntity = supportTicketRepository.save(supportTicketEntity);
+        log.debug("Created support ticket");
+        return supportTicketMapper.convertEntityToResponse(savedEntity);
     }
 
     public List<SupportTicketResponse> getAllTicketsByUser(
@@ -58,58 +63,60 @@ public class SupportTicketService {
             Integer pageNum
     ) {
         UserEntity currentUser = userService.getCurrentUser();
+        log.debug("Attempting to get all tickets for user");
         Pageable pageable = assemblePageable(pageSize, pageNum);
 
         List<SupportTicketEntity> supportTicketEntities =
                 supportTicketRepository.findAllByUserId(currentUser.getId(), pageable);
+        log.debug("Found support tickets: {}", supportTicketEntities.size());
 
-        return supportTicketEntities.stream()
-                .map(supportTicketMapper::convertEntityToResponse)
-                .toList();
+        return supportTicketMapper.convertEntityListToResponseList(supportTicketEntities);
     }
 
     public SupportTicketResponse getTicketById(Long id) {
         UserEntity currentUser = userService.getCurrentUser();
+        log.debug("Attempting to get ticket by id");
 
         SupportTicketEntity ticketEntity = getSupportTicketByIdWithCheckUser(id, currentUser);
+        log.debug("Found support ticket for method getTicketById");
 
         return supportTicketMapper.convertEntityToResponse(ticketEntity);
     }
 
     public SupportStatusResponse getTicketStatusById(Long id) {
         SupportTicketEntity ticketEntity = supportTicketRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Ticket not found"));
+                .orElseThrow(() -> new EntityNotFoundException("Ticket not found"));
 
         return new SupportStatusResponse(ticketEntity.getStatus());
     }
 
     public SupportTicketResponse closeTicket(Long id) {
         SupportTicketEntity ticketEntity = supportTicketRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Ticket not found"));
+                .orElseThrow(() -> new EntityNotFoundException("Ticket not found"));
         UserEntity currentUser = userService.getCurrentUser();
         checkForClosingTicket(ticketEntity, currentUser);
 
         ticketEntity.setStatus(SupportStatus.CLOSED);
         ticketEntity.setClosedAt(LocalDateTime.now());
 
-        return supportTicketMapper.convertEntityToResponse(
-                supportTicketRepository.save(ticketEntity)
-        );
+        SupportTicketEntity savedEntity = supportTicketRepository.save(ticketEntity);
+        log.debug("Support ticket was successfully closed");
+        return supportTicketMapper.convertEntityToResponse(savedEntity);
     }
 
     //====================================SERVICE METHODS=======================================================
 
     private void checkForCreatingTicket(UserEntity user) {
         if (!userRepository.existsByRole(Role.SUPPORT)) {
-            throw new RuntimeException("HOOOOOOW??? I think you haven't any users with role SUPPORT");
+            throw new SupportTicketException("HOOOOOOW??? I think you haven't any users with role SUPPORT");
         }
 
         if (user.getRole() != Role.USER) {
-            throw new RuntimeException("Only users can create a support ticket");
+            throw new SupportTicketException("Only users can create a support ticket");
         }
 
         if (supportTicketRepository.existsByUserIdAndStatus(user.getId(), SupportStatus.OPEN)) {
-            throw new RuntimeException("User's support ticket already open");
+            throw new SupportTicketException("User's support ticket already open");
         }
 
     }
@@ -137,10 +144,11 @@ public class SupportTicketService {
             SupportTicketEntity ticketEntity,
             UserEntity currentUser
     ) {
+        log.debug("Checking for closing ticket");
         checkForCurrentUser(ticketEntity, currentUser);
 
         if (ticketEntity.getStatus() == SupportStatus.CLOSED) {
-            throw new RuntimeException("Ticket is already closed");
+            throw new SupportTicketException("Ticket is already closed");
         }
     }
 
@@ -148,19 +156,19 @@ public class SupportTicketService {
             SupportTicketEntity ticketEntity,
             UserEntity currentUser
     ) {
-        log.info("Checking user's current ticket");
+        log.debug("Checking user's current ticket");
         if (!ticketEntity.getUser().getId().equals(currentUser.getId()) &&
                 (!ticketEntity.getSupport().getId().equals(currentUser.getId()))
         ) {
-            throw new RuntimeException("It's not your ticket");
+            throw new SupportTicketException("It's not your ticket");
         }
     }
 
     //====================================METHODS FOR OTHER SERVICES=======================================================
     public SupportTicketEntity getSupportTicketByIdWithCheckUser(Long id, UserEntity currentUser) {
-        log.info("Getting support ticket with id {}", id);
+        log.debug("Getting support ticket with id {}", id);
         SupportTicketEntity ticketEntity = supportTicketRepository.findByIdWithUser(id)
-                .orElseThrow(() -> new RuntimeException("Ticket not found"));
+                .orElseThrow(() -> new EntityNotFoundException("Ticket not found"));
 
         checkForCurrentUser(ticketEntity, currentUser);
 

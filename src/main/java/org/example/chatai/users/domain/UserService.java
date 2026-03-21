@@ -4,18 +4,14 @@ import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.example.chatai.config.JwtTokenProvider;
-import org.example.chatai.supportTickets.db.entities.SupportTicketEntity;
-import org.example.chatai.supportTickets.db.enums.SupportStatus;
 import org.example.chatai.users.api.dto.users.request.UserCreateRequest;
-import org.example.chatai.users.api.dto.users.response.UserDTO;
+import org.example.chatai.users.api.dto.users.response.UserRegistrationResponse;
 import org.example.chatai.users.db.UserEntity;
 import org.example.chatai.users.db.UserRepository;
 import org.example.chatai.users.domain.mapper.UserMapper;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.time.LocalDateTime;
 
 @Slf4j
 @Service
@@ -27,17 +23,14 @@ public class UserService {
     private final JwtTokenProvider jwtTokenProvider;
 
     public UserEntity getCurrentUser() {
-        log.info("Getting jwt");
         String token = jwtTokenProvider.getCurrentToken();
-        log.info("Getting email");
         String email = jwtTokenProvider.getEmailFromToken(token);
-        log.info("Getting currentUser");
         UserEntity user = userRepository.findByEmailEqualsIgnoreCase(email);
         notFoundUser(user);
         return user;
     }
 
-    public UserDTO findUserByEmail(String email) {
+    public UserRegistrationResponse findUserByEmail(String email) {
         if (email == null) {
             log.debug("Пустой email,поиск пользователя не возможен");
             throw new IllegalArgumentException("Пустой email пользователя");
@@ -47,7 +40,7 @@ public class UserService {
         return userMapper.convertEntityToDto(user);
     }
 
-    public UserDTO save(UserCreateRequest request) {
+    public UserRegistrationResponse save(UserCreateRequest request) {
         try {
             log.info("Сохранения пользователя с email={}", request.email());
             UserEntity savedUser = UserEntity.builder()
@@ -65,7 +58,7 @@ public class UserService {
     }
 
     @Transactional
-    public UserDTO update(Long id, UserEntity userToUpdate) {
+    public UserRegistrationResponse update(Long id, UserEntity userToUpdate) {
         try {
             log.info("Обновление пользователя с id={}", id);
             UserEntity user = userRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Пользователь не найден"));
@@ -88,7 +81,7 @@ public class UserService {
 
 
     @Transactional
-    public UserDTO changePassword(Long id, String newPassword) {
+    public UserRegistrationResponse changePassword(Long id, String newPassword) {
         try {
             log.info("Обновление пароля у пользователя с id={}", id);
             UserEntity user = userRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Пользователь не найден"));

@@ -1,7 +1,7 @@
 package org.example.chatai.config;
 
 
-import org.example.chatai.users.api.dto.users.response.UserDTO;
+import org.example.chatai.users.api.dto.users.response.UserRegistrationResponse;
 import org.example.chatai.users.domain.UserService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -124,7 +124,7 @@ public class SecurityConfig {
 
             @Override
             public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-                UserDTO user = userService.findUserByEmail(username);
+                UserRegistrationResponse user = userService.findUserByEmail(username);
                 if(user == null)
                     throw new UsernameNotFoundException(username);
                 Set<SimpleGrantedAuthority> roles = Collections.singleton(user.role().toAuthority());

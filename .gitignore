@@ -32,9 +32,11 @@ build/
 ### VS Code ###
 .vscode/
 
-# Environment files
+logs
+
 .env
 .env.local
 .env.development
 .env.production
-logs
+
+src/test

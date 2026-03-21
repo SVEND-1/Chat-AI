@@ -29,12 +29,17 @@ public class RoleApplicationEntity {
     @Column(name = "status_role")
     private StatusRole statusRole;
 
-    @Column(name = "created_time")
-    private LocalDateTime createdTime;
+    @Column(name = "created_at")
+    private LocalDateTime createdAt;
 
-    @Column(name = "answer_time")
-    private LocalDateTime answerTime;
+    @Column(name = "answered_at")
+    private LocalDateTime answeredAt;
 
     @ManyToOne
     private UserEntity user;
+
+    @PrePersist
+    public void onCreate() {
+        createdAt = LocalDateTime.now();
+    }
 }
