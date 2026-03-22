@@ -26,8 +26,8 @@ public class RoleController {
     private final RoleService roleService;
 
     @Operation(summary = "Получить все заявки пользователя на смену роли")
-    @GetMapping
-    public ResponseEntity<List<RoleResponse>> getRoles() {
+    @GetMapping("/user")
+    public ResponseEntity<List<RoleResponse>> getRolesForCurrentUser() {
         return ResponseEntity.ok(roleService.findAllByUser());
     }
 
@@ -68,10 +68,5 @@ public class RoleController {
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(roleService.getAllRoleApplicationsWithFilter(filter));
-    }
-
-    @GetMapping("/user")
-    public ResponseEntity<List<RoleResponse>> getUserRoles() {
-        return ResponseEntity.ok(roleService.findAllByUser());
     }
 }
