@@ -14,7 +14,6 @@ import java.time.LocalDateTime;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
 public class SupportTicketEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
