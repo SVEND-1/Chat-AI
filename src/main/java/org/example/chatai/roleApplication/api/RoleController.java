@@ -1,6 +1,8 @@
 package org.example.chatai.roleApplication.api;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.example.chatai.roleApplication.api.dto.request.AdminAnswerRequest;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@Tag(name = "Заявки на роль SUPPORT")
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/roles")
@@ -34,8 +37,10 @@ public class RoleController {
         return ResponseEntity.ok(roleService.save(request));
     }
 
+    @Operation(summary = "Ответить на заявку на получение должности SUPPORT (только для ADMIN!)")
     @PostMapping("/{id}")
     public ResponseEntity<RoleResponse> adminAnswer(
+            @Parameter(description = "Id заявки в статусе WAITING на должность SUPPORT")
             @PathVariable("id") Long id,
             @RequestBody AdminAnswerRequest request
     ) {
@@ -46,13 +51,13 @@ public class RoleController {
                 .body(roleService.getAdminAnswer(id, request));
     }
 
+    @Operation(summary = "Получить все заявки с фильтром по их статусу (только для ADMIN!)")
     @GetMapping
     public ResponseEntity<List<RoleResponse>> getAllRolesWithFilter(
             @RequestParam(name = "page-size", required = false) Integer pageSize,
             @RequestParam(name = "page-number", required = false) Integer pageNumber,
             @RequestParam(name = "status-role", required = false) StatusRole statusRole
     ) {
-        //БОГДАН логи лучше перенеси в service,а filter принимай @RequestBody
         log.info("Called method: getAllRolesWithFilter with pageSize {} and pageNumber {} and statusRole {}", pageSize, pageNumber, statusRole);
 
         RoleApplicationSearchFilter filter = new RoleApplicationSearchFilter(

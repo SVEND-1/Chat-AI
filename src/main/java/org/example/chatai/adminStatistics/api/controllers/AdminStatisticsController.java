@@ -1,5 +1,7 @@
 package org.example.chatai.adminStatistics.api.controllers;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.example.chatai.adminStatistics.api.dto.requests.AdminStatsAllUsersFilter;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+@Tag(name = "Статистика для админа", description = "Все операции могут выполняться только с ролью ADMIN")
 @RestController
 @RequestMapping("api/admin-stats")
 @RequiredArgsConstructor
@@ -24,6 +27,7 @@ import java.util.List;
 public class AdminStatisticsController {
     private final AdminStatisticsService adminStatisticsService;
 
+    @Operation(summary = "Получение количества всех пользователей с фильтром по ролям")
     @GetMapping("/users-amount")
     public ResponseEntity<UsersAmountResponse> getUsersAmount(
             @RequestParam(name = "role", required = false) Role role
@@ -35,7 +39,7 @@ public class AdminStatisticsController {
                 .body(adminStatisticsService.getUsersAmountByFilter(role));
     }
 
-    // Список всех людей с фильтром по ролям
+    @Operation(summary = "Список всех пользователей с фильтром по ролям")
     @GetMapping("/users")
     public ResponseEntity<List<UserDefaultResponse>> getAllUsers(
             @RequestParam(name = "pageSize", required = false) Integer pageSize,
@@ -55,7 +59,7 @@ public class AdminStatisticsController {
                 .body(adminStatisticsService.getAllUsersByFilter(filter));
     }
 
-    // Поиск сотрудника поддержки по email
+    @Operation(summary = "Поиск сотрудника поддержки по email")
     @GetMapping("/support")
     public ResponseEntity<UserDefaultResponse> getSupportByEmail(
             @RequestParam("email") String email
@@ -67,7 +71,7 @@ public class AdminStatisticsController {
                 .body(adminStatisticsService.getSupportByEmail(email));
     }
 
-    // Количество активных подписок в %
+    @Operation(summary = "Количество пользователей с активными подписками в %")
     @GetMapping("/subscriptions")
     public ResponseEntity<SubscriptionsPercentResponse> getSubscriptionsPercent() {
         log.info("Called method: getSubscriptionsPercent");
