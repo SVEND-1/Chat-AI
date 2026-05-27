@@ -46,7 +46,7 @@ public class RoleController {
                 .body(roleService.getAdminAnswer(id, request));
     }
 
-    @GetMapping
+    @GetMapping("/filter")
     public ResponseEntity<List<RoleResponse>> getAllRolesWithFilter(
             @RequestParam(name = "page-size", required = false) Integer pageSize,
             @RequestParam(name = "page-number", required = false) Integer pageNumber,

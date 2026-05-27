@@ -1,5 +1,5 @@
 import React from 'react';
-import '../../style/subscription/FeaturesList.css';
+import '../../../style/subscription/FeaturesList.css';
 
 interface FeaturesListProps {
     features: string[];

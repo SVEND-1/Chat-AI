@@ -1,19 +1,20 @@
 import React from 'react';
 import PriceDisplay from './PriceDisplay';
 import FeaturesList from './FeaturesList';
-import '../../style/subscription/SubscriptionCard.css';
+import '../../../style/subscription/SubscriptionCard.css';
 
-const SubscriptionCard: React.FC = () => {
+interface Props {
+    isLoading: boolean;
+    onSubscribe: () => void;
+}
+
+const SubscriptionCard: React.FC<Props> = ({ isLoading, onSubscribe }) => {
     const features: string[] = [
         'Неограниченное количество сообщений',
         'Приоритетная поддержка 24/7',
         'Доступ к GPT-4 модели',
         'Загрузка файлов до 100MB'
     ];
-
-    const handleSubscribe = (): void => {
-        console.log('Subscribe clicked');
-    };
 
     return (
         <div className="subscription-card">
@@ -26,8 +27,10 @@ const SubscriptionCard: React.FC = () => {
                                 <stop offset="100%" stopColor="#66ccff" />
                             </linearGradient>
                         </defs>
-                        <path d="M10.24,4A12,12 0 0 0 3,15 12,12 0 0 0 15,27 12,12 0 0 0 25.9,20 12,12 0 0 1 21.14,21 12,12 0 0 1 9.14,9 12,12 0 0 1 10.24,4Z"
-                              fill="url(#cardGrad)" />
+                        <path
+                            d="M10.24,4A12,12 0 0 0 3,15 12,12 0 0 0 15,27 12,12 0 0 0 25.9,20 12,12 0 0 1 21.14,21 12,12 0 0 1 9.14,9 12,12 0 0 1 10.24,4Z"
+                            fill="url(#cardGrad)"
+                        />
                     </svg>
                 </div>
                 <h2 className="subscription-card__title">AI Assistant Pro</h2>
@@ -38,10 +41,13 @@ const SubscriptionCard: React.FC = () => {
 
             <FeaturesList features={features} />
 
-            <button className="subscription-card__button" onClick={handleSubscribe}>
-                Оформить подписку
+            <button
+                className="subscription-card__button"
+                onClick={onSubscribe}
+                disabled={isLoading}
+            >
+                {isLoading ? 'Обработка...' : 'Оформить подписку'}
             </button>
-
         </div>
     );
 };

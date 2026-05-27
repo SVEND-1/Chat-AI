@@ -31,7 +31,7 @@ export default function VerifyRegister() {
 
             if (response.data.success) {
                 alert("Регистрация подтверждена");
-                navigate("/dashboard");
+                navigate("/chat");
             } else {
                 alert(response.data.message || "Ошибка подтверждения");
             }

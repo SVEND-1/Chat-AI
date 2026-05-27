@@ -1,5 +1,5 @@
 import React from 'react';
-import '../../style/subscription/PriceDisplay.css';
+import '../../../style/subscription/PriceDisplay.css';
 
 interface PriceDisplayProps {
     amount: number;
