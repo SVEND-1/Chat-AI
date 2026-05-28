@@ -11,6 +11,7 @@ import Profile from "./pages/profile/Profile";
 import {ReceiptsPage} from "./pages/receipt/ReceiptPage";
 import SuccessSubscriptionPage from "./pages/subscription/succesSubscription/SuccessSubscriptionPage";
 import PaymentHistoryPage from "./pages/payment-history/PaymentHistoryPage";
+import AdminPage from "./pages/admin/AdminPage";
 
 
 
@@ -31,6 +32,7 @@ function App() {
                 <Route path="/receipts" element={<ReceiptsPage />}/>
                 <Route path="/succeeded-payment" element={<SuccessSubscriptionPage />} />
                 <Route path="/payment-history" element={<PaymentHistoryPage />} />
+                <Route path="/admin" element={<AdminPage />} />
             </Routes>
         </BrowserRouter>
     );
