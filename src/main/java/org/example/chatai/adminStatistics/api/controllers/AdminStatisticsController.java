@@ -1,19 +1,18 @@
 package org.example.chatai.adminStatistics.api.controllers;
 
+import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.example.chatai.adminStatistics.api.dto.requests.AdminStatsAllUsersFilter;
 import org.example.chatai.adminStatistics.api.dto.responses.SubscriptionsPercentResponse;
 import org.example.chatai.adminStatistics.api.dto.responses.UsersAmountResponse;
 import org.example.chatai.adminStatistics.domain.services.AdminStatisticsService;
+import org.example.chatai.subscriptions.domain.SubscriptionService;
 import org.example.chatai.users.api.dto.users.response.UserDefaultResponse;
 import org.example.chatai.users.db.Role;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -23,6 +22,7 @@ import java.util.List;
 @Slf4j
 public class AdminStatisticsController {
     private final AdminStatisticsService adminStatisticsService;
+    private final SubscriptionService subscriptionService;
 
     @GetMapping("/users-amount")
     public ResponseEntity<UsersAmountResponse> getUsersAmount(
@@ -75,5 +75,13 @@ public class AdminStatisticsController {
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(adminStatisticsService.getSubscriptionsPercent());
+    }
+
+    @Operation(summary = "Выдача пользователю подписки из админа")
+    @PostMapping("/{email}/subscriptions")
+    public ResponseEntity<String> giveSubscriptions(
+            @PathVariable String email
+    ){
+        return ResponseEntity.ok(subscriptionService.giveSubscribeFromAdmin(email));
     }
 }
