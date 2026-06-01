@@ -17,7 +17,7 @@ import org.example.chatai.users.api.dto.auth.response.LoginResponse;
 import org.example.chatai.users.api.dto.auth.response.PasswordResetResponse;
 import org.example.chatai.users.api.dto.auth.response.RegistrationResponse;
 import org.example.chatai.users.api.dto.auth.response.SimpleResponse;
-import org.example.chatai.users.api.dto.users.response.UserDTO;
+import org.example.chatai.users.api.dto.users.response.UserRegistrationResponse;
 import org.example.chatai.users.db.Role;
 import org.example.chatai.users.db.UserEntity;
 import org.example.chatai.users.domain.mapper.UserMapper;
@@ -64,7 +64,7 @@ public class AuthService {
                     )
             );
 
-            UserDTO user = userService.findUserByEmail(loginRequest.email());
+            UserRegistrationResponse user = userService.findUserByEmail(loginRequest.email());
             String jwt = jwtTokenProvider.createToken(user.email(), user.role().name());
             Cookie cookie = new Cookie("jwtToken", jwt);
             cookie.setHttpOnly(true);
@@ -182,7 +182,7 @@ public class AuthService {
 
             UserEntity user = data.user;
             user.setRole(Role.USER);
-            UserDTO savedUser = userService.save(userMapper.convertDtoToCreateRequest(user));
+            UserRegistrationResponse savedUser = userService.save(userMapper.convertDtoToCreateRequest(user));
 
 
             String token = jwtTokenProvider.createToken(savedUser.email(), savedUser.role().name());
@@ -245,7 +245,7 @@ public class AuthService {
         try {
             log.info("Запрос на восстановление пароля для email={}", email);
 
-            UserDTO user = userService.findUserByEmail(email);
+            UserRegistrationResponse user = userService.findUserByEmail(email);
             if (user == null) {
                 log.warn("Пользователь не найден: {}", email);
                 return new SimpleResponse(false, "Пользователь с таким email не найден");
@@ -313,15 +313,15 @@ public class AuthService {
                 return new SimpleResponse(false, "Пароли не совпадают");
             }
 
-            UserDTO user = userService.findUserByEmail(data.email);
+            UserRegistrationResponse user = userService.findUserByEmail(data.email);
             if (user == null) {
                 log.error("Пользователь не найден");
                 return new SimpleResponse(false, "Пользователь не найден");
             }
 
-            UserDTO userDTO = userService.changePassword(user.id(), passwordEncoder.encode(request.newPassword()));
+            UserRegistrationResponse userRegistrationResponse = userService.changePassword(user.id(), passwordEncoder.encode(request.newPassword()));
 
-            if(userDTO == null) {
+            if(userRegistrationResponse == null) {
                 log.error("Не получилось сменить пароль");
                 return new SimpleResponse(false,"Не получилось сменить пароль");
             }

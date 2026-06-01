@@ -1,7 +1,7 @@
 package org.example.chatai.payments.domain;
 
-import org.example.chatai.payments.api.dto.response.PaymentPageResponse;
-import org.example.chatai.payments.api.dto.response.PaymentResponse;
+import org.example.chatai.payments.api.dto.response.payment.PaymentPageResponse;
+import org.example.chatai.payments.api.dto.response.payment.PaymentResponse;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.springframework.data.domain.Page;

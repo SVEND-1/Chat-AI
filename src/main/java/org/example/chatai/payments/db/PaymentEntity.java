@@ -13,9 +13,10 @@ import java.time.LocalDateTime;
 @Builder
 @Entity
 @Table(name = "payments")
-public class PaymentEntity {
+public class PaymentEntity {//TODO сделать так чтобы один и тот же платеж нельзя было несколько раз использовать
 
     @Id
+    @Column(name = "idempotency_key")
     private String idempotencyKey;
 
     @Column(name = "payment_id")
@@ -27,6 +28,6 @@ public class PaymentEntity {
     @ManyToOne
     private UserEntity user;
 
-    @Column(name = "create_at")
+    @Column(name = "created_at")
     private LocalDateTime createdAt = LocalDateTime.now();
 }
