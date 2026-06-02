@@ -1,0 +1,501 @@
+/* ========================================================
+   support-chat.css  —  полный редизайн для двухпанельного чата
+   ======================================================== */
+
+:root {
+    --grad-start: #0066ff;
+    --grad-end: #66ccff;
+    --gradient: linear-gradient(135deg, var(--grad-start), var(--grad-end));
+
+    --sc-bg: #0f0f0f;
+    --sc-surface: #1a1a1a;
+    --sc-sidebar-bg: #121212;
+    --sc-border: #2a2a2a;
+    --sc-text: #e5e5e5;
+    --sc-text-muted: #8a8a8a;
+    --sc-text-dim: #5a5a5a;
+    --sc-bubble-other: #242424;
+    --sc-bubble-own: var(--gradient);
+    --sc-radius-bubble: 18px;
+}
+
+/* Общие стили */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: var(--sc-bg);
+}
+
+/* Контейнер логина */
+.sc-login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: var(--sc-bg);
+}
+
+.sc-login-card {
+    background: var(--sc-surface);
+    padding: 2rem;
+    border-radius: 24px;
+    border: 1px solid var(--sc-border);
+    width: 320px;
+    text-align: center;
+}
+
+.sc-login-card h2 {
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    background: var(--gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.sc-login-card input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 12px;
+    background: var(--sc-bg);
+    border: 1px solid var(--sc-border);
+    border-radius: 30px;
+    color: var(--sc-text);
+    outline: none;
+}
+
+.sc-login-card input:focus {
+    border-color: var(--grad-start);
+}
+
+.sc-login-card button {
+    width: 100%;
+    padding: 12px;
+    background: var(--gradient);
+    border: none;
+    border-radius: 30px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.sc-login-card button:hover {
+    transform: scale(1.02);
+    box-shadow: 0 0 12px rgba(0, 102, 255, 0.5);
+}
+
+.sc-login-error {
+    color: #f87171;
+    font-size: 13px;
+    margin-bottom: 12px;
+}
+
+.sc-login-hint {
+    margin-top: 20px;
+    font-size: 12px;
+    color: var(--sc-text-dim);
+    text-align: left;
+}
+
+/* Основная структура */
+.sc-root {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 100%;
+    background: var(--sc-bg);
+    color: var(--sc-text);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    overflow: hidden;
+}
+
+.sc-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 24px;
+    background: var(--sc-surface);
+    border-bottom: 1px solid var(--sc-border);
+    flex-shrink: 0;
+}
+
+.sc-header-left {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.sc-user-role {
+    font-weight: 500;
+    background: var(--gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.sc-logout-btn {
+    background: transparent;
+    border: 1px solid var(--sc-border);
+    padding: 6px 14px;
+    border-radius: 30px;
+    color: var(--sc-text-muted);
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.sc-logout-btn:hover {
+    border-color: #ef4444;
+    color: #ef4444;
+}
+
+/* Статус */
+.sc-status {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.sc-status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+}
+
+.sc-status--connecting .sc-status-dot {
+    background: #f0a500;
+    animation: sc-pulse 1.2s infinite;
+}
+
+.sc-status--connected .sc-status-dot {
+    background: #22c55e;
+}
+
+.sc-status--disconnected .sc-status-dot {
+    background: #f0a500;
+    animation: sc-pulse 1.2s infinite;
+}
+
+.sc-status--error .sc-status-dot {
+    background: #ef4444;
+}
+
+@keyframes sc-pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.35; }
+}
+
+.sc-error-banner {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    background: rgba(239, 68, 68, 0.12);
+    border-bottom: 1px solid rgba(239, 68, 68, 0.25);
+    color: #f87171;
+    font-size: 13px;
+}
+
+/* Двухпанечная раскладка */
+.sc-layout {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+}
+
+/* Боковая панель */
+.sc-sidebar {
+    width: 280px;
+    background: var(--sc-sidebar-bg);
+    border-right: 1px solid var(--sc-border);
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+}
+
+.sc-sidebar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px;
+    border-bottom: 1px solid var(--sc-border);
+}
+
+.sc-sidebar-header h3 {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.sc-new-ticket-btn {
+    background: var(--gradient);
+    border: none;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sc-new-ticket-form {
+    padding: 12px;
+    border-bottom: 1px solid var(--sc-border);
+    display: flex;
+    gap: 8px;
+}
+
+.sc-new-ticket-form input {
+    flex: 1;
+    background: var(--sc-bg);
+    border: 1px solid var(--sc-border);
+    border-radius: 30px;
+    padding: 6px 12px;
+    color: var(--sc-text);
+    outline: none;
+}
+
+.sc-new-ticket-form button {
+    background: var(--gradient);
+    border: none;
+    border-radius: 30px;
+    padding: 6px 12px;
+    color: white;
+    cursor: pointer;
+}
+
+.sc-ticket-list {
+    flex: 1;
+    overflow-y: auto;
+}
+
+.sc-ticket-item {
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--sc-border);
+    cursor: pointer;
+    transition: background 0.1s;
+}
+
+.sc-ticket-item:hover {
+    background: rgba(255, 255, 255, 0.03);
+}
+
+.sc-ticket-item--active {
+    background: rgba(0, 102, 255, 0.1);
+    border-left: 3px solid var(--grad-start);
+}
+
+.sc-ticket-title {
+    font-weight: 500;
+    margin-bottom: 4px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.sc-ticket-status {
+    font-size: 12px;
+    color: var(--sc-text-muted);
+}
+
+.sc-ticket-status[data-status="OPEN"] { color: #22c55e; }
+.sc-ticket-status[data-status="IN_PROGRESS"] { color: #f0a500; }
+.sc-ticket-status[data-status="CLOSED"] { color: #6b7280; }
+
+.sc-no-tickets {
+    padding: 24px;
+    text-align: center;
+    color: var(--sc-text-dim);
+}
+
+/* Область чата */
+.sc-chat-area {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.sc-no-ticket-selected {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--sc-text-dim);
+}
+
+/* Сообщения (почти как раньше, но адаптировано) */
+.sc-messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    scrollbar-width: thin;
+}
+
+.sc-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    flex: 1;
+    color: var(--sc-text-dim);
+    text-align: center;
+}
+
+.sc-msg {
+    display: flex;
+    flex-direction: column;
+    max-width: 70%;
+    animation: sc-fadein 0.18s ease;
+}
+
+.sc-msg--own {
+    align-self: flex-end;
+    align-items: flex-end;
+}
+
+.sc-msg--other {
+    align-self: flex-start;
+    align-items: flex-start;
+}
+
+.sc-sender-info {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 4px;
+    padding-left: 4px;
+}
+
+.sc-sender-email {
+    font-size: 12px;
+    color: var(--sc-text-muted);
+}
+
+.sc-badge {
+    font-size: 11px;
+    padding: 1px 7px;
+    border-radius: 20px;
+    background: rgba(0, 102, 255, 0.15);
+    color: var(--grad-end);
+    border: 1px solid rgba(0, 102, 255, 0.3);
+}
+
+.sc-bubble {
+    display: flex;
+    flex-direction: column;
+    padding: 10px 14px;
+    border-radius: var(--sc-radius-bubble);
+    position: relative;
+}
+
+.sc-msg--own .sc-bubble {
+    background: var(--sc-bubble-own);
+    border-bottom-right-radius: 5px;
+}
+
+.sc-msg--other .sc-bubble {
+    background: var(--sc-bubble-other);
+    border: 1px solid var(--sc-border);
+    border-bottom-left-radius: 5px;
+}
+
+.sc-bubble-text {
+    font-size: 15px;
+    line-height: 1.5;
+    color: #ffffff;
+    word-break: break-word;
+    margin-bottom: 4px;
+}
+
+.sc-bubble-time {
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.5);
+    align-self: flex-end;
+}
+
+/* Поле ввода */
+.sc-input-area {
+    padding: 16px 24px 24px;
+    flex-shrink: 0;
+}
+
+.sc-input-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--sc-surface);
+    border: 1px solid var(--sc-border);
+    border-radius: 30px;
+    padding: 4px 4px 4px 20px;
+}
+
+.sc-input-wrapper:focus-within:not(.sc-input-wrapper--disabled) {
+    border-color: var(--grad-start);
+    box-shadow: 0 0 0 2px rgba(0, 102, 255, 0.18);
+}
+
+.sc-input-wrapper--disabled {
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+.sc-input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    color: var(--sc-text);
+    font-size: 15px;
+    padding: 11px 0;
+    outline: none;
+}
+
+.sc-send-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    border: none;
+    background: var(--sc-border);
+    color: var(--sc-text-dim);
+    cursor: not-allowed;
+    transition: 0.2s;
+}
+
+.sc-send-btn--active {
+    background: var(--gradient);
+    color: white;
+    cursor: pointer;
+}
+
+.sc-send-btn--active:hover {
+    transform: scale(1.07);
+    box-shadow: 0 0 18px rgba(0, 102, 255, 0.35);
+}
+
+@keyframes sc-fadein {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 700px) {
+    .sc-sidebar {
+        width: 240px;
+    }
+    .sc-msg {
+        max-width: 85%;
+    }
+}

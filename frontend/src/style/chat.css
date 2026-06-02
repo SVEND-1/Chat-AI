@@ -721,3 +721,124 @@ body {
         height: 40px;
     }
 }
+/* Анимация печатания */
+.typing-indicator {
+    display: flex;
+    gap: 4px;
+    padding: 8px 0;
+}
+
+.typing-indicator span {
+    width: 8px;
+    height: 8px;
+    background-color: #ffffff;
+    border-radius: 50%;
+    animation: typing 1.4s infinite ease-in-out;
+}
+
+.typing-indicator span:nth-child(1) {
+    animation-delay: 0s;
+}
+
+.typing-indicator span:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.typing-indicator span:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+@keyframes typing {
+    0%, 60%, 100% {
+        transform: translateY(0);
+        opacity: 0.4;
+    }
+    30% {
+        transform: translateY(-10px);
+        opacity: 1;
+    }
+}
+
+/* Лоадер */
+.loader {
+    width: 40px;
+    height: 40px;
+    border: 3px solid #2a2a2a;
+    border-top-color: var(--grad-start);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    margin: 0 auto 20px;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Анимация для новых сообщений */
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.message {
+    animation: slideIn 0.3s ease-out;
+}
+
+/* Стили для сообщения "Печатает..." */
+.message-content:has(.typing-indicator) {
+    background-color: #2a2a2a;
+    min-width: 60px;
+}
+
+/* Отключенное состояние кнопки */
+.send-btn.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Стили для кнопки при отправке */
+.send-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* Улучшенные стили для скролла */
+.messages-wrapper {
+    scroll-behavior: smooth;
+}
+
+/* Плавное появление сообщений */
+.message-content {
+    transition: all 0.2s ease;
+}
+
+.message-content:hover {
+    transform: translateX(2px);
+}
+
+/* Стили для длинных сообщений */
+.message-text {
+    word-break: break-word;
+    white-space: pre-wrap;
+}
+
+/* Адаптация для мобильных */
+@media (max-width: 768px) {
+    .typing-indicator span {
+        width: 6px;
+        height: 6px;
+    }
+
+    .message-content:hover {
+        transform: none;
+    }
+}

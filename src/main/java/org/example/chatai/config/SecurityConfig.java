@@ -53,28 +53,29 @@ public class SecurityConfig {
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
 
                 .authorizeHttpRequests(auth ->
-                    auth
-                            .requestMatchers(
-                            "/", "/login", "/codeEmail", "/forgotPassword",
-                            "/recoveryPassword", "/register", "/api/auth/**",
-                            "/error","/*.html", "/*.css", "/*.js","/**",
-                            "/api/support-ticket", "api/support-message"
-                            ).permitAll()
+                        auth
+                                .requestMatchers(
+                                        "/", "/login", "/codeEmail", "/forgotPassword",
+                                        "/recoveryPassword", "/register", "/api/auth/**",
+                                        "/error","/*.html", "/*.css", "/*.js","/**",
+                                        "/api/support-ticket", "api/support-message",
+                                        "/ws/support/**"   // WebSocket endpoint (аутентификация через JWT в handshake)
+                                ).permitAll()
 
-                            .requestMatchers(
-                                    "/admin", "/api/admin/role-request/**",   "/swagger-ui/**",
-                                    "/swagger-ui.html", "/v3/api-docs/**", "/swagger-resources/**",
-                                    "/webjars/**"
-                            )
-                            .permitAll()
+                                .requestMatchers(
+                                        "/admin", "/api/admin/role-request/**",   "/swagger-ui/**",
+                                        "/swagger-ui.html", "/v3/api-docs/**", "/swagger-resources/**",
+                                        "/webjars/**"
+                                )
+                                .permitAll()
 
-                            .requestMatchers(
-                                    "/test","/chooseTest","/createTest","/result","/dashboard",
-                                    "/api/user-test/**","/api/user-answer","/api/users/**","/api/tests/**",
-                                    "/api/questions","/tests/jwt"
-                            ).authenticated()
+                                .requestMatchers(
+                                        "/test","/chooseTest","/createTest","/result","/dashboard",
+                                        "/api/user-test/**","/api/user-answer","/api/users/**","/api/tests/**",
+                                        "/api/questions","/tests/jwt"
+                                ).authenticated()
 
-                            .anyRequest().permitAll()
+                                .anyRequest().permitAll()
                 )
 
                 .exceptionHandling(exception -> exception
