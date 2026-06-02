@@ -2,6 +2,7 @@ package org.example.chatai.users.api;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import org.example.chatai.users.api.dto.auth.request.LoginRequest;
@@ -79,4 +80,18 @@ public class AuthController {
             HttpServletResponse response) {
         return ResponseEntity.ok(authService.resetPassword(request, response));
     }
+
+    @Operation(summary = "Получить текущий JWT токен из cookie (для WebSocket-подключения)")
+    @GetMapping("/token")
+    public ResponseEntity<?> getToken(HttpServletRequest request) {
+        if (request.getCookies() != null) {
+            for (jakarta.servlet.http.Cookie cookie : request.getCookies()) {
+                if ("jwtToken".equals(cookie.getName())) {
+                    return ResponseEntity.ok(java.util.Map.of("token", cookie.getValue()));
+                }
+            }
+        }
+        return ResponseEntity.status(401).body(java.util.Map.of("error", "Not authenticated"));
+    }
 }
+

@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WS Support Tester</title>
+
+  <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@stomp/stompjs@7/bundles/stomp.umd.min.js"></script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0f1117;
+      --bg2: #1a1d27;
+      --bg3: #242838;
+      --border: #2e3347;
+      --text: #e8eaf0;
+      --muted: #7b82a0;
+      --accent: #5b8af0;
+      --accent-dim: #1e2d52;
+      --green: #3ecf72;
+      --green-dim: #0f2d1c;
+      --red: #f05b5b;
+      --red-dim: #2d0f0f;
+      --yellow: #f0c05b;
+    }
+
+    body {
+      font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+      background: var(--bg);
+      color: var(--text);
+      height: 100vh;
+      display: grid;
+      grid-template-rows: 48px 1fr;
+      overflow: hidden;
+    }
+
+    /* ─── топбар ─────────────────────────── */
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
+      border-bottom: 1px solid var(--border);
+      background: var(--bg2);
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+    }
+
+    .topbar-logo { color: var(--accent); }
+
+    .pill {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      padding: 4px 12px;
+      border-radius: 99px;
+      border: 1px solid var(--border);
+      font-size: 11px;
+      font-weight: 400;
+      color: var(--muted);
+      transition: all .25s;
+    }
+    .pill .dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: var(--muted);
+      transition: background .3s;
+    }
+    .pill.ok  { border-color: var(--green); color: var(--green); }
+    .pill.ok  .dot { background: var(--green); box-shadow: 0 0 6px var(--green); }
+    .pill.err { border-color: var(--red);   color: var(--red);   }
+    .pill.err .dot { background: var(--red); }
+
+    /* ─── основной грид ──────────────────── */
+    .layout {
+      display: grid;
+      grid-template-columns: 300px 1fr;
+      overflow: hidden;
+    }
+
+    /* ─── левая панель ───────────────────── */
+    .sidebar {
+      border-right: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      background: var(--bg2);
+    }
+
+    .section {
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .section-label {
+      font-size: 9px;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 10px;
+    }
+
+    input {
+      width: 100%;
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      color: var(--text);
+      font-family: inherit;
+      font-size: 12px;
+      padding: 7px 10px;
+      outline: none;
+      margin-bottom: 8px;
+      transition: border-color .15s;
+    }
+    input:focus { border-color: var(--accent); }
+    input:last-of-type { margin-bottom: 0; }
+
+    .btn {
+      width: 100%;
+      padding: 8px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--text);
+      font-family: inherit;
+      font-size: 12px;
+      font-weight: 500;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      transition: all .15s;
+      margin-top: 10px;
+    }
+    .btn:hover { background: var(--bg3); border-color: var(--accent); color: var(--accent); }
+    .btn.red  { border-color: var(--red);   color: var(--red); }
+    .btn.red:hover { background: var(--red-dim); }
+    .btn:disabled { opacity: .35; cursor: not-allowed; pointer-events: none; }
+
+    .hint {
+      font-size: 10px;
+      color: var(--muted);
+      line-height: 1.6;
+      margin-top: 8px;
+    }
+
+    /* ─── лог ─────────────────────────────── */
+    .log {
+      flex: 1;
+      overflow-y: auto;
+      padding: 10px;
+      font-size: 10.5px;
+      line-height: 1.7;
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+    }
+
+    .log-label {
+      font-size: 9px;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      padding: 12px 16px 4px;
+    }
+
+    .le {
+      padding: 2px 8px;
+      border-radius: 3px;
+      border-left: 2px solid transparent;
+      word-break: break-all;
+      color: var(--muted);
+    }
+    .le.ok   { border-color: var(--green); color: var(--green); background: var(--green-dim); }
+    .le.err  { border-color: var(--red);   color: var(--red);   background: var(--red-dim); }
+    .le.recv { border-color: var(--accent); color: var(--accent); background: var(--accent-dim); }
+    .le .t   { opacity: .45; margin-right: 5px; }
+
+    /* ─── правая — чат ───────────────────── */
+    .chat {
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      background: var(--bg);
+    }
+
+    .chat-hdr {
+      padding: 12px 20px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: var(--bg2);
+    }
+
+    .chat-hdr-info { flex: 1; }
+    .chat-hdr-id   { font-size: 10px; color: var(--muted); }
+    .chat-hdr-title { font-size: 13px; }
+
+    .badge {
+      font-size: 9px;
+      padding: 3px 10px;
+      border-radius: 99px;
+      letter-spacing: .06em;
+      font-weight: 600;
+    }
+    .badge.open   { background: var(--green-dim);  color: var(--green); border: 1px solid var(--green); }
+    .badge.closed { background: var(--bg3);         color: var(--muted); border: 1px solid var(--border); }
+
+    .messages {
+      flex: 1;
+      overflow-y: auto;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .empty {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted);
+      font-size: 12px;
+      gap: 10px;
+      opacity: .5;
+    }
+
+    .empty-icon { font-size: 40px; }
+
+    .msg-row { display: flex; gap: 10px; align-items: flex-end; }
+    .msg-row.user { flex-direction: row-reverse; }
+
+    .avatar {
+      width: 30px; height: 30px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 10px; font-weight: 700;
+      flex-shrink: 0;
+    }
+    .avatar.u { background: var(--accent-dim); color: var(--accent); border: 1px solid var(--accent); }
+    .avatar.s { background: var(--bg3); color: var(--muted); border: 1px solid var(--border); }
+
+    .bubble {
+      max-width: 65%;
+      padding: 9px 13px;
+      border-radius: 12px;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+    .bubble.user    { background: var(--accent-dim); color: var(--accent); border: 1px solid var(--accent); border-bottom-right-radius: 3px; }
+    .bubble.support { background: var(--bg3); color: var(--text); border: 1px solid var(--border); border-bottom-left-radius: 3px; }
+
+    .msg-meta { font-size: 10px; color: var(--muted); margin-top: 4px; padding: 0 5px; }
+    .msg-row.user .msg-meta { text-align: right; }
+
+    .sys-msg {
+      text-align: center;
+      font-size: 10px;
+      color: var(--muted);
+      padding: 4px 0;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    /* ─── поле ввода ────────────────────── */
+    .input-area {
+      padding: 14px 16px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      gap: 8px;
+      background: var(--bg2);
+    }
+
+    textarea {
+      flex: 1;
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text);
+      font-family: inherit;
+      font-size: 13px;
+      padding: 9px 13px;
+      resize: none;
+      outline: none;
+      min-height: 40px;
+      max-height: 120px;
+      line-height: 1.5;
+      transition: border-color .15s;
+    }
+    textarea:focus { border-color: var(--accent); }
+    textarea:disabled { opacity: .4; cursor: not-allowed; }
+
+    .send-btn {
+      padding: 9px 16px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--text);
+      font-family: inherit;
+      font-size: 12px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all .15s;
+      white-space: nowrap;
+    }
+    .send-btn:hover:not(:disabled) { border-color: var(--accent); color: var(--accent); background: var(--accent-dim); }
+    .send-btn:active:not(:disabled) { transform: scale(.97); }
+    .send-btn:disabled { opacity: .35; cursor: not-allowed; }
+
+    .close-btn {
+      padding: 9px 14px;
+      border-radius: 8px;
+      border: 1px solid var(--red);
+      background: transparent;
+      color: var(--red);
+      font-family: inherit;
+      font-size: 11px;
+      cursor: pointer;
+      transition: all .15s;
+      white-space: nowrap;
+    }
+    .close-btn:hover:not(:disabled) { background: var(--red-dim); }
+    .close-btn:disabled { opacity: .3; cursor: not-allowed; }
+
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+  </style>
+</head>
+<body>
+
+<div class="topbar">
+  <span class="topbar-logo">▸ WS Support Tester</span>
+  <div class="pill" id="status-pill">
+    <div class="dot"></div>
+    <span id="status-txt">disconnected</span>
+  </div>
+</div>
+
+<div class="layout">
+
+  <!-- ─── Левая панель ──────────────────── -->
+  <div class="sidebar">
+
+    <div class="section">
+      <div class="section-label">подключение</div>
+      <input id="inp-url"      value="/ws/support"  placeholder="WS endpoint (относительный или полный)" />
+      <input id="inp-ticket"   value="1"            placeholder="Ticket ID" type="number" min="1" />
+      <p class="hint">
+        Токен берётся автоматически из cookie через <code>/api/auth/token</code>.<br>
+        Убедитесь что вы залогинены.
+      </p>
+      <button class="btn" id="btn-connect" onclick="toggleConnect()">⚡ connect</button>
+    </div>
+
+    <div class="log-label">лог событий</div>
+    <div class="log" id="log"></div>
+
+  </div>
+
+  <!-- ─── Правая — чат ──────────────────── -->
+  <div class="chat">
+
+    <div class="chat-hdr">
+      <div class="chat-header-info">
+        <div class="chat-hdr-id">ticket #<span id="hdr-id">—</span></div>
+        <div class="chat-hdr-title" id="hdr-title">не подключено</div>
+      </div>
+      <span class="badge open" id="hdr-badge" style="display:none">OPEN</span>
+    </div>
+
+    <div class="messages" id="messages">
+      <div class="empty" id="empty-state">
+        <div class="empty-icon">◌</div>
+        <span>введите ticket ID и нажмите connect</span>
+      </div>
+    </div>
+
+    <div class="input-area">
+      <textarea id="chat-input" placeholder="сообщение... (Enter — отправить, Shift+Enter — перенос)" disabled
+        onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendMsg();}"
+        oninput="this.style.height='';this.style.height=Math.min(this.scrollHeight,120)+'px'"></textarea>
+      <button class="send-btn" id="btn-send" disabled onclick="sendMsg()">→ send</button>
+      <button class="close-btn" id="btn-close" disabled onclick="closeTicket()">закрыть тикет</button>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  /* ─── состояние ──────────────────────── */
+  let client       = null;
+  let connected    = false;
+  let ticketClosed = false;
+  let ticketId     = null;
+
+  /* ─── утилиты ────────────────────────── */
+  function ts() { return new Date().toTimeString().slice(0, 8); }
+
+  function esc(s) {
+    return String(s)
+      .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  }
+
+  function log(msg, type = '') {
+    const p = document.getElementById('log');
+    const el = document.createElement('div');
+    el.className = 'le ' + type;
+    el.innerHTML = `<span class="t">${ts()}</span>${esc(msg)}`;
+    p.appendChild(el);
+    p.scrollTop = p.scrollHeight;
+  }
+
+  function setStatus(cls, txt) {
+    const pill = document.getElementById('status-pill');
+    pill.className = 'pill ' + cls;
+    document.getElementById('status-txt').textContent = txt;
+  }
+
+  function addSysMsg(text) {
+    const m = document.getElementById('messages');
+    const el = document.createElement('div');
+    el.className = 'sys-msg';
+    el.textContent = text;
+    m.appendChild(el);
+    m.scrollTop = m.scrollHeight;
+  }
+
+  function renderMsg(data, selfSent) {
+    const msgs = document.getElementById('messages');
+    document.getElementById('empty-state')?.remove();
+
+    const senderType = data.senderType || (selfSent ? 'USER' : 'SUPPORT');
+    const isUser     = senderType === 'USER';
+    const name       = data.sender?.name || (isUser ? 'YOU' : 'SUPPORT');
+    const initials   = name.split(' ').map(w => w[0]).join('').toUpperCase().slice(0, 2) || '?';
+    const text       = data.message || JSON.stringify(data);
+    const time       = data.createdAt
+      ? new Date(data.createdAt).toLocaleTimeString('ru', { hour:'2-digit', minute:'2-digit' })
+      : ts();
+
+    const row = document.createElement('div');
+    row.className = 'msg-row ' + (isUser ? 'user' : 'support');
+    row.innerHTML = `
+      <div class="avatar ${isUser ? 'u' : 's'}">${esc(initials)}</div>
+      <div>
+        <div class="bubble ${isUser ? 'user' : 'support'}">${esc(text)}</div>
+        <div class="msg-meta">${esc(name)} · ${time}</div>
+      </div>`;
+    msgs.appendChild(row);
+    msgs.scrollTop = msgs.scrollHeight;
+  }
+
+  /* ─── управление UI ────────────────── */
+  function setUI(isConnected) {
+    connected = isConnected;
+    const btnC  = document.getElementById('btn-connect');
+    const inp   = document.getElementById('chat-input');
+    const btnS  = document.getElementById('btn-send');
+    const btnCl = document.getElementById('btn-close');
+    const badge = document.getElementById('hdr-badge');
+
+    if (isConnected) {
+      btnC.className = 'btn red';
+      btnC.textContent = '✕ disconnect';
+      inp.disabled  = ticketClosed;
+      btnS.disabled = ticketClosed;
+      btnCl.disabled= ticketClosed;
+      badge.style.display = '';
+      document.getElementById('hdr-id').textContent    = ticketId;
+      document.getElementById('hdr-title').textContent = 'чат с поддержкой';
+    } else {
+      btnC.className = 'btn';
+      btnC.textContent = '⚡ connect';
+      inp.disabled  = true;
+      btnS.disabled = true;
+      btnCl.disabled= true;
+      badge.style.display = 'none';
+      document.getElementById('hdr-id').textContent    = '—';
+      document.getElementById('hdr-title').textContent = 'не подключено';
+    }
+  }
+
+  /* ─── подключение ────────────────────── */
+  async function toggleConnect() {
+    connected ? disconnect() : await connect();
+  }
+
+  async function connect() {
+    const url = document.getElementById('inp-url').value.trim();
+    ticketId  = document.getElementById('inp-ticket').value.trim();
+
+    if (!url || !ticketId) {
+      log('Заполните URL и Ticket ID', 'err'); return;
+    }
+
+    setStatus('', 'loading token...');
+    log('Запрашиваем токен через /api/auth/token...');
+
+    let token;
+    try {
+      const res = await fetch('/api/auth/token', { credentials: 'include' });
+      if (!res.ok) {
+        log('Не удалось получить токен. Вы залогинены? HTTP ' + res.status, 'err');
+        setStatus('err', 'auth error');
+        return;
+      }
+      const data = await res.json();
+      token = data.token;
+      if (!token) throw new Error('empty token');
+      log('Токен получен ✓', 'ok');
+    } catch (e) {
+      log('Ошибка при получении токена: ' + e.message, 'err');
+      setStatus('err', 'auth error');
+      return;
+    }
+
+    ticketClosed = false;
+    setStatus('', 'connecting...');
+    log(`Подключение к ${url}, ticket #${ticketId}...`);
+
+    client = new StompJs.Client({
+      webSocketFactory: () => new SockJS(url),
+      connectHeaders: { token },          // передаём JWT через STOMP-заголовок
+      reconnectDelay: 0,
+      debug: s => {
+        if (/CONNECT|CONNECTED|ERROR|SUBSCRIBE|DISCONNECT/i.test(s)) {
+          log('[STOMP] ' + s.replace(/\n/g,' ').slice(0, 150));
+        }
+      },
+
+      onConnect: () => {
+        setStatus('ok', 'connected');
+        setUI(true);
+        log('Подключено!', 'ok');
+
+        // ← новые сообщения
+        client.subscribe(`/topic/support/${ticketId}`, frame => {
+          try {
+            const d = JSON.parse(frame.body);
+            log(`← message id=${d.id} from=${d.senderType}`, 'recv');
+            renderMsg(d, false);
+          } catch { log('← recv: ' + frame.body.slice(0, 80), 'recv'); }
+        });
+
+        // ← изменение статуса
+        client.subscribe(`/topic/support/${ticketId}/status`, frame => {
+          try {
+            const d = JSON.parse(frame.body);
+            log(`← status: ${d.status}`, d.status === 'CLOSED' ? 'err' : 'ok');
+            if (d.status === 'CLOSED') {
+              ticketClosed = true;
+              document.getElementById('chat-input').disabled = true;
+              document.getElementById('btn-send').disabled   = true;
+              document.getElementById('btn-close').disabled  = true;
+              const b = document.getElementById('hdr-badge');
+              b.textContent = 'CLOSED'; b.className = 'badge closed';
+              document.getElementById('hdr-title').textContent = 'тикет закрыт';
+              addSysMsg('🔒 тикет закрыт');
+            }
+          } catch { log('← status raw: ' + frame.body.slice(0, 80)); }
+        });
+
+        // Загружаем историю сообщений
+        loadHistory();
+      },
+
+      onStompError: frame => {
+        const msg = frame.headers?.message || 'STOMP error';
+        log('STOMP error: ' + msg, 'err');
+        setStatus('err', 'stomp error');
+        setUI(false);
+      },
+
+      onDisconnect: () => {
+        setStatus('', 'disconnected');
+        setUI(false);
+        log('Отключено');
+      },
+
+      onWebSocketError: e => {
+        log('WS error: ' + (e.message || 'connection refused'), 'err');
+        setStatus('err', 'ws error');
+        setUI(false);
+      },
+    });
+
+    client.activate();
+  }
+
+  function disconnect() {
+    client?.deactivate();
+    client = null;
+    setStatus('', 'disconnected');
+    setUI(false);
+    log('Отключено вручную');
+  }
+
+  /* ─── история при открытии ─────────── */
+  async function loadHistory() {
+    try {
+      log(`Загружаем историю /api/support-message/${ticketId}...`);
+      const res = await fetch(`/api/support-message/${ticketId}`, { credentials: 'include' });
+      if (!res.ok) { log('История недоступна: HTTP ' + res.status); return; }
+      const list = await res.json();
+      document.getElementById('empty-state')?.remove();
+      if (!list.length) { addSysMsg('история сообщений пуста'); return; }
+      list.forEach(m => renderMsg(m, false));
+      log(`История загружена (${list.length} сообщений)`, 'ok');
+    } catch(e) {
+      log('Не удалось загрузить историю: ' + e.message);
+    }
+  }
+
+  /* ─── отправка ───────────────────── */
+  function sendMsg() {
+    const inp  = document.getElementById('chat-input');
+    const text = inp.value.trim();
+    if (!text || !connected || ticketClosed) return;
+
+    try {
+      client.publish({
+        destination: `/app/support/${ticketId}/send`,
+        body: JSON.stringify({ message: text }),
+      });
+      log(`→ send to ticket ${ticketId}`);
+      renderMsg({
+        message: text, senderType: 'USER',
+        sender: { name: 'YOU' },
+        createdAt: new Date().toISOString()
+      }, true);
+      inp.value = '';
+      inp.style.height = '';
+    } catch(e) { log('Ошибка отправки: ' + e.message, 'err'); }
+  }
+
+  /* ─── закрытие тикета ────────────── */
+  function closeTicket() {
+    if (!connected || ticketClosed) return;
+    client.publish({
+      destination: `/app/support/${ticketId}/close`,
+      body: '{}',
+    });
+    log(`→ close ticket ${ticketId}`);
+  }
+</script>
+</body>
+</html>
