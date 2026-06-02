@@ -20,6 +20,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Month;
 import java.util.Optional;
+import java.util.UUID;
 
 @Slf4j
 @Service
@@ -28,6 +29,7 @@ public class SubscriptionService {
     private final PaymentService paymentService;
     private final SubscriptionRepository subscriptionRepository;
     private final UserService userService;
+    private static final String ADMIN_PAYMENT_ID = "ADMIN_" + UUID.randomUUID();
 
     public SubscriptionEntity findByUserEmail(String userEmail) {
         return subscriptionRepository.findByUserEmail(userEmail).orElse(null);
@@ -55,32 +57,48 @@ public class SubscriptionService {
         );
     }
 
+    public String giveSubscribeFromAdmin(String email) {
+        try {
+            UserEntity user = userService.findUserByEmailEntity(email);
+            createSubscriptionEntity(ADMIN_PAYMENT_ID,user);
+            return "Успешно";
+        }catch (Exception e){
+            log.error("Не удалось выдать подписку с админа,ex={}",e.getMessage());
+            throw new RuntimeException(e);
+        }
+    }
+
     @Transactional
     public String createSubscription(String paymentId) {
         try {
-            String validationError = validateSubscription(paymentId);
+            String validationError = validateSubscription(paymentId);//TODO ПЕРЕДЛЕАТЬ КОД ЧТОБЫ ПРОСТО 1 ФУНКЦИЯ ВЫЗЫВАЛОСЬ ДЛЯ ПРОВЕРКИ
             if (validationError != null) {
                 return validationError;
             }
 
             UserEntity user = userService.getCurrentUser();
-            Optional<SubscriptionEntity> optionalSub = subscriptionRepository
-                    .findByUserEmail(user.getEmail());
-
-            SubscriptionEntity sub = optionalSub.orElseGet(() ->
-                    SubscriptionEntity.builder().user(user).build());
-
-            sub.setActive(Status.ACTIVE);
-            sub.setPaymentId(paymentId);
-            sub.setEndDate(LocalDateTime.now().plusMinutes(3));
-            subscriptionRepository.save(sub);
-
+            createSubscriptionEntity(paymentId,user);
             return "Успешно";
         }catch (Exception e){
             log.error("Не удалось оформить подписку,paymentId={},ex={}",paymentId,e.getMessage());
             throw new RuntimeException(e.getMessage());
         }
     }
+
+    private void createSubscriptionEntity(String paymentId,UserEntity user) {
+        SubscriptionEntity subscription = buildSubscription(paymentId, user);
+        subscriptionRepository.save(subscription);
+    }
+
+    private SubscriptionEntity buildSubscription(String paymentId, UserEntity user) {
+        return SubscriptionEntity.builder()
+                .user(user)
+                .active(Status.ACTIVE)
+                .paymentId(paymentId)
+                .endDate(LocalDateTime.now().plusMinutes(3))
+                .build();
+    }
+
 
     //@Scheduled(cron = "0 0 0 * * *") раз в день //TODO в проде это поставить
     //@Scheduled(cron = "0 * * * * *") минута

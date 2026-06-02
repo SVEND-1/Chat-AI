@@ -29,6 +29,10 @@ public class UserService {
         notFoundUser(user);
         return user;
     }
+    public UserEntity findUserByEmailEntity(String email) {
+        return userRepository.findByEmailEqualsIgnoreCase(email);
+    }
+
 
     public UserRegistrationResponse findUserByEmail(String email) {
         if (email == null) {

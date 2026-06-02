@@ -1,0 +1,58 @@
+.profile-card {
+    background: #1a1a1a;
+    border: 1px solid #2a2a2a;
+    border-radius: 22px;
+    padding: 25px;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.profile-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 36px rgba(0, 102, 255, 0.15);
+    border-color: #0066ff;
+}
+
+.card-title {
+    font-size: 1.35rem;
+    font-weight: 600;
+    color: #e5e5e5;
+    margin-bottom: 22px;
+    padding-bottom: 14px;
+    border-bottom: 2px solid #2a2a2a;
+    position: relative;
+}
+
+.card-title::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 54px;
+    height: 2px;
+    background: linear-gradient(135deg, #0066ff, #66ccff);
+    border-radius: 2px;
+}
+
+.loading-spinner {
+    width: 54px;
+    height: 54px;
+    border: 3px solid #2a2a2a;
+    border-top: 3px solid #0066ff;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 18px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.profile-loading p {
+    color: #8a8a8a;
+    font-size: 16px;
+    margin: 0;
+}

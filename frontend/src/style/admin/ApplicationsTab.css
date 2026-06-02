@@ -1,0 +1,102 @@
+.apps-tab { display: flex; flex-direction: column; }
+
+.apps-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.app-card {
+    background: #1a1a1a;
+    border: 1px solid #2a2a2a;
+    border-radius: 14px;
+    padding: 18px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    transition: border-color 0.15s;
+}
+
+.app-card:hover { border-color: #3a3a3a; }
+
+.app-card__top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 12px;
+}
+
+.app-card__user {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.app-card__email {
+    font-size: 14px;
+    font-weight: 700;
+    color: #e5e5e5;
+}
+
+.app-card__username {
+    font-size: 12px;
+    color: #8a8a8a;
+}
+
+.app-card__status {
+    font-size: 12px;
+    font-weight: 700;
+    padding: 3px 12px;
+    border-radius: 20px;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.app-card__status--pending  { background: rgba(255,152,0,0.12);  color: #ffb74d; }
+.app-card__status--approved { background: rgba(76,175,80,0.12);  color: #81c784; }
+.app-card__status--rejected { background: rgba(244,67,54,0.12);  color: #e57373; }
+
+.app-card__message {
+    font-size: 14px;
+    color: #b0b0b0;
+    margin: 0;
+    line-height: 1.5;
+    font-style: italic;
+}
+
+.app-card__answer {
+    font-size: 13px;
+    color: #66ccff;
+    margin: 0;
+    padding: 8px 12px;
+    background: rgba(0,102,255,0.06);
+    border-radius: 8px;
+    border-left: 2px solid #0066ff;
+}
+
+.app-card__footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.app-card__date {
+    font-size: 12px;
+    color: #5a5a5a;
+}
+
+.app-card__btn {
+    padding: 6px 16px;
+    background: linear-gradient(135deg, #0066ff, #66ccff);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: inherit;
+    transition: box-shadow 0.2s;
+}
+
+.app-card__btn:hover { box-shadow: 0 0 12px rgba(0,102,255,0.4); }

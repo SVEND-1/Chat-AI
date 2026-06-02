@@ -1,0 +1,142 @@
+.role-request-card {
+    margin-top: 0;
+}
+
+.request-info {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.request-status {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+}
+
+.status-badge {
+    padding: 5px 14px;
+    border-radius: 27px;
+    font-size: 12.5px;
+    font-weight: 600;
+}
+
+.status-pending {
+    background: rgba(255, 193, 7, 0.15);
+    color: #ffc107;
+    border: 1px solid #ffc107;
+}
+
+.status-approved {
+    background: rgba(40, 167, 69, 0.15);
+    color: #28a745;
+    border: 1px solid #28a745;
+}
+
+.status-rejected {
+    background: rgba(220, 53, 69, 0.15);
+    color: #dc3545;
+    border: 1px solid #dc3545;
+}
+
+.request-message,
+.admin-response {
+    background: #141414;
+    border-radius: 11px;
+    padding: 14px;
+}
+
+.message-label {
+    display: block;
+    color: #8a8a8a;
+    font-size: 11.5px;
+    margin-bottom: 7px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.request-message p,
+.admin-response p {
+    color: #e5e5e5;
+    font-size: 13.5px;
+    line-height: 1.6;
+    margin: 0;
+}
+
+.request-date,
+.response-date {
+    color: #8a8a8a;
+    font-size: 11.5px;
+    text-align: right;
+}
+
+.request-form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.form-group label {
+    color: #e5e5e5;
+    font-size: 12.5px;
+    font-weight: 500;
+}
+
+.form-group textarea {
+    background: #141414;
+    border: 1px solid #2a2a2a;
+    border-radius: 11px;
+    padding: 12px;
+    color: #e5e5e5;
+    font-size: 13.5px;
+    resize: vertical;
+    transition: all 0.2s ease;
+    font-family: inherit;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.form-group textarea:focus {
+    outline: none;
+    border-color: #0066ff;
+    box-shadow: 0 0 0 2px rgba(0, 102, 255, 0.2);
+}
+
+.message-counter {
+    text-align: right;
+    font-size: 11px;
+    color: #8a8a8a;
+}
+
+.message-counter.warning {
+    color: #ffc107;
+}
+
+.submit-button {
+    background: linear-gradient(135deg, #0066ff, #66ccff);
+    color: white;
+    border: none;
+    padding: 14px;
+    border-radius: 14px;
+    font-size: 14.5px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 100%;
+}
+
+.submit-button:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 7px 18px rgba(0, 102, 255, 0.3);
+}
+
+.submit-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
