@@ -164,6 +164,16 @@ public class SupportTicketService {
         }
     }
 
+
+    /**
+     * Получить тикет по id без проверки пользователя.
+     * Используется из SupportMessageService для чтения истории сообщений.
+     */
+    public SupportTicketEntity getTicketByIdForService(Long id) {
+        return supportTicketRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Ticket not found: " + id));
+    }
+
     //====================================METHODS FOR OTHER SERVICES=======================================================
     public SupportTicketEntity getSupportTicketByIdWithCheckUser(Long id, UserEntity currentUser) {
         log.debug("Getting support ticket with id {}", id);

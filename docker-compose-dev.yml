@@ -1,22 +1,4 @@
 services:
-  postgres-vector:
-    image: ankane/pgvector:latest
-    container_name: postgres-vector
-    ports:
-      - "5433:5432"
-    environment:
-      POSTGRES_DB: virtual_world
-      POSTGRES_USER: admin
-      POSTGRES_PASSWORD: admin123
-      POSTGRES_HOST_AUTH_METHOD: trust
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
-      - ./init.sql:/docker-entrypoint-initdb.d/init.sql:ro
-      - ./backups:/backups
-    restart: unless-stopped
-    networks:
-      - app-network
-
   kafka:
     image: confluentinc/cp-kafka:7.6.0
     container_name: kafka
@@ -51,9 +33,6 @@ services:
     command: serve
 
 volumes:
-  postgres_data:
-    driver: local
-    name: postgres_vector_data
   ollama_data:
     driver: local
 

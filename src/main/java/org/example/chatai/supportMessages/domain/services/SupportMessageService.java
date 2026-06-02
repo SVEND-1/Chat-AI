@@ -12,120 +12,97 @@ import org.example.chatai.supportTickets.db.entities.SupportTicketEntity;
 import org.example.chatai.supportTickets.db.enums.SupportStatus;
 import org.example.chatai.supportTickets.db.repositories.SupportTicketRepository;
 import org.example.chatai.supportTickets.domain.services.SupportTicketService;
+import org.example.chatai.users.api.dto.users.response.UserRegistrationResponse;
 import org.example.chatai.users.db.Role;
 import org.example.chatai.users.db.UserEntity;
+import org.example.chatai.users.db.UserRepository;
 import org.example.chatai.users.domain.UserService;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.stereotype.Service;
 
+import java.security.Principal;
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
 @Slf4j
 public class SupportMessageService {
+
     private final SupportMessageRepository supportMessageRepository;
     private final SupportMessageMapper supportMessageMapper;
-
-    private final SupportTicketRepository supportTicketRepository;
     private final SupportTicketService supportTicketService;
+    private final UserRepository userRepository;
 
-    private final UserService userService;
+    // ===================== WebSocket (основной путь отправки) =====================
 
-    //====================================CONTROLLER METHODS=======================================================
-
+    /**
+     * Создаёт сообщение через WebSocket.
+     * Пользователь берётся из Principal, установленного WebSocketAuthChannelInterceptor при CONNECT.
+     * Вызывается из SupportChatWebSocketController.
+     */
     public SupportMessageResponse createMessage(
             Long supportTicketId,
-            SupportMessageCreateRequest request
+            SupportMessageCreateRequest request,
+            Principal principal
     ) {
-        log.debug("Attempting to create support message");
-        UserEntity currentUser = userService.getCurrentUser();
-        SupportTicketEntity ticketEntity =
-                supportTicketService.getSupportTicketByIdWithCheckUser(
-                        supportTicketId,
-                        currentUser
-                );
-        log.debug("Found support ticket for method: createMessage");
+        log.debug("WS: creating message in ticket {} for '{}'", supportTicketId, principal.getName());
 
-        if (ticketEntity.getStatus() == SupportStatus.CLOSED) {
+        UserEntity currentUser = resolveUserFromPrincipal(principal);
+        SupportTicketEntity ticket = supportTicketService.getSupportTicketByIdWithCheckUser(
+                supportTicketId, currentUser);
+
+        if (ticket.getStatus() == SupportStatus.CLOSED) {
             throw new SupportMessageException("Ticket has been closed");
         }
 
-        SupportMessageEntity messageEntity = SupportMessageEntity.builder()
-                .supportTicket(ticketEntity)
-                .sender(currentUser)
-                .senderType(currentUser.getRole())
-                .message(request.message())
-                .build();
+        SupportMessageEntity saved = supportMessageRepository.save(
+                SupportMessageEntity.builder()
+                        .supportTicket(ticket)
+                        .sender(currentUser)
+                        .senderType(currentUser.getRole())
+                        .message(request.message())
+                        .build()
+        );
 
-        SupportMessageEntity savedEntity = supportMessageRepository.save(messageEntity);
-        log.debug("Created support message");
-        return supportMessageMapper.convertEntityToResponse(savedEntity);
+        log.debug("WS: message saved, id={}", saved.getId());
+        return supportMessageMapper.convertEntityToResponse(saved);
     }
 
+    // ===================== REST (только чтение истории) =====================
+
+    /**
+     * Вся история тикета — вызывается при открытии чата, чтобы загрузить прошлые сообщения.
+     * В дальнейшем новые сообщения приходят по WS без дополнительных запросов.
+     */
     public List<SupportMessageResponse> getAllMessagesFromTicket(Long supportTicketId) {
-        UserEntity currentUser = userService.getCurrentUser();
-        SupportTicketEntity ticketEntity =
-                supportTicketService.getSupportTicketByIdWithCheckUser(
-                        supportTicketId,
-                        currentUser
-                );
-        log.debug("Found support ticket for method: getAllMessagesFromTicket");
-
-        List<SupportMessageEntity> messagesFromTicket = supportMessageRepository.findAllBySupportTicket(ticketEntity);
-        log.debug("Found messages from support ticket: {}", messagesFromTicket.size());
-
-        return supportMessageMapper.convertEntityListToResponseList(messagesFromTicket);
+        log.debug("REST: getAllMessages for ticket {}", supportTicketId);
+        SupportTicketEntity ticket = supportTicketService.getTicketByIdForService(supportTicketId);
+        return supportMessageMapper.convertEntityListToResponseList(
+                supportMessageRepository.findAllBySupportTicket(ticket));
     }
 
+    /**
+     * Последнее сообщение — удобно для превью тикета в списке.
+     */
     public SupportMessageResponse getLastMessageFromTicket(Long supportTicketId) {
-        UserEntity currentUser = userService.getCurrentUser();
-        SupportTicketEntity ticketEntity =
-                supportTicketService.getSupportTicketByIdWithCheckUser(
-                        supportTicketId,
-                        currentUser
-                );
-        log.debug("Found support ticket for method: getLastMessageFromTicket");
-
-        SupportMessageEntity lastMessage =
-                supportMessageRepository.findLastMessageBySupportTicket(ticketEntity);
-        log.debug("Found last message from support ticket");
-
-        return supportMessageMapper.convertEntityToResponse(lastMessage);
+        log.debug("REST: getLastMessage for ticket {}", supportTicketId);
+        SupportTicketEntity ticket = supportTicketService.getTicketByIdForService(supportTicketId);
+        return supportMessageMapper.convertEntityToResponse(
+                supportMessageRepository.findLastMessageBySupportTicket(ticket));
     }
 
-    public List<SupportMessageResponse> getAllUserMessagesFromTicket(Long supportTicketId) {
-        UserEntity currentUser = userService.getCurrentUser();
-        SupportTicketEntity ticketEntity =
-                supportTicketService.getSupportTicketByIdWithCheckUser(
-                        supportTicketId,
-                        currentUser
-                );
-        log.debug("Found support ticket for method: getAllUserMessagesFromTicket");
+    // ===================== Private helpers =====================
 
-        List<SupportMessageEntity> userMessages =
-                supportMessageRepository.findAllBySupportTicketAndSenderType(ticketEntity, Role.USER);
-        log.debug("Found user messages from support ticket: {}", userMessages.size());
+    private UserEntity resolveUserFromPrincipal(Principal principal) {
+        if (principal instanceof UsernamePasswordAuthenticationToken authToken
+                && authToken.getPrincipal() instanceof UserRegistrationResponse dto) {
 
-        return supportMessageMapper.convertEntityListToResponseList(userMessages);
+            UserEntity user = userRepository.findByEmailEqualsIgnoreCase(dto.email());
+            if (user == null) {
+                throw new SupportMessageException("User not found: " + dto.email());
+            }
+            return user;
+        }
+        throw new SupportMessageException("Cannot resolve user from WebSocket principal");
     }
-
-    public List<SupportMessageResponse> getAllSupportMessagesFromTicket(Long supportTicketId) {
-        UserEntity currentUser = userService.getCurrentUser();
-        SupportTicketEntity ticketEntity =
-                supportTicketService.getSupportTicketByIdWithCheckUser(
-                        supportTicketId,
-                        currentUser
-                );
-        log.debug("Found support ticket for method: getAllSupportMessagesFromTicket");
-
-
-        List<SupportMessageEntity> supportMessages =
-                supportMessageRepository.findAllBySupportTicketAndSenderType(ticketEntity, Role.SUPPORT);
-        log.debug("Found support messages from support ticket: {}", supportMessages.size());
-
-        return supportMessageMapper.convertEntityListToResponseList(supportMessages);
-    }
-
-    //====================================SERVICE METHODS=======================================================
-
 }
