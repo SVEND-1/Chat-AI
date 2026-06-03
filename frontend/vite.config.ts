@@ -5,42 +5,25 @@ import svgr from 'vite-plugin-svgr'
 export default defineConfig({
     plugins: [
         react(),
-        svgr() // Добавляем плагин для SVG
+        svgr(),
     ],
     server: {
         host: "localhost",
         port: 5173,
         strictPort: true,
+        proxy: {
+            // Все REST запросы /api/... → Spring Boot
+            '/api': {
+                target: 'http://localhost:8080',
+                changeOrigin: true,
+            },
+            // WebSocket — SockJS сначала делает HTTP запросы к /ws/support/info
+            // потом апгрейдит до ws://, поэтому нужен и ws: true
+            '/ws': {
+                target: 'http://localhost:8080',
+                changeOrigin: true,
+                ws: true,
+            },
+        },
     },
-});
-/*
-export default defineConfig({
-  plugins: [react()],
-  server: {
-    host: true,
-    port: 5173,
-    allowedHosts: [
-      'react-frontend',
-      'localhost',
-      '.twc1.net',
-      '6106779-ee569251.twc1.net'
-    ],
-    strictPort: true,
-    hmr: {
-      host: '6106779-ee569251.twc1.net',
-      protocol: 'ws',
-      clientPort: 80
-    },
-    cors: true
-  },
-  preview: {
-    port: 5173,
-    host: true,
-    allowedHosts: [
-      'react-frontend',
-      'localhost',
-      '.twc1.net',
-      '6106779-ee569251.twc1.net'
-    ]
-  }
-}) */
+})
