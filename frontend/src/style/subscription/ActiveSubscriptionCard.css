@@ -1,0 +1,96 @@
+.active-subscription-card {
+    background: #1a1a1a;
+    border-radius: 14px;
+    border: 1px solid #2a2a2a;
+    padding: 40px;
+    width: 100%;
+}
+
+.active-subscription-card__header {
+    text-align: center;
+    margin-bottom: 32px;
+}
+
+.active-subscription-card__badge {
+    display: inline-block;
+    background: linear-gradient(135deg, #0066ff22, #66ccff22);
+    border: 1px solid #0066ff55;
+    color: #66ccff;
+    font-size: 13px;
+    font-weight: 700;
+    padding: 6px 16px;
+    border-radius: 50px;
+    margin-bottom: 16px;
+}
+
+.active-subscription-card__title {
+    font-size: 28px;
+    font-weight: 700;
+    background: linear-gradient(135deg, #0066ff, #66ccff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin: 0 0 8px 0;
+}
+
+.active-subscription-card__subtitle {
+    font-size: 16px;
+    color: #b0b0b0;
+    margin: 0;
+}
+
+.active-subscription-card__info {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 32px;
+    padding: 20px;
+    background: #141414;
+    border-radius: 10px;
+    border: 1px solid #2a2a2a;
+}
+
+.active-subscription-card__row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.active-subscription-card__label {
+    font-size: 14px;
+    color: #8a8a8a;
+}
+
+.active-subscription-card__value {
+    font-size: 14px;
+    color: #e5e5e5;
+    font-weight: 600;
+}
+
+.active-subscription-card__value--active {
+    color: #66ccff;
+}
+
+.active-subscription-card__button {
+    width: 100%;
+    padding: 16px;
+    background: transparent;
+    color: #8a8a8a;
+    border: 1px solid #2a2a2a;
+    border-radius: 50px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: border-color 0.2s, color 0.2s;
+    font-family: inherit;
+}
+
+.active-subscription-card__button:hover:not(:disabled) {
+    border-color: #0066ff;
+    color: #e5e5e5;
+}
+
+.active-subscription-card__button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
