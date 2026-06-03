@@ -1,0 +1,141 @@
+.receipt-details {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+/* Пустой чек */
+.receipt-details--empty {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+}
+
+.receipt-details__empty-text {
+    font-size: 14px;
+    color: #8a8a8a;
+    margin: 0;
+}
+
+.receipt-details__create-button {
+    padding: 10px 20px;
+    background: linear-gradient(135deg, #0066ff, #66ccff);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: inherit;
+    transition: box-shadow 0.2s;
+}
+
+.receipt-details__create-button:hover {
+    box-shadow: 0 0 14px rgba(0, 102, 255, 0.4);
+}
+
+/* Шапка чека */
+.receipt-details__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 14px;
+    margin-bottom: 14px;
+    border-bottom: 1px solid #2a2a2a;
+}
+
+.receipt-details__id {
+    font-size: 15px;
+    font-weight: 700;
+    color: #e5e5e5;
+}
+
+.receipt-details__status {
+    font-size: 12px;
+    font-weight: 700;
+    padding: 3px 12px;
+    border-radius: 20px;
+    background: rgba(76, 175, 80, 0.15);
+    color: #81c784;
+}
+
+/* Секции */
+.receipt-details__section {
+    padding: 14px 0;
+    border-bottom: 1px solid #2a2a2a;
+}
+
+.receipt-details__section:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.receipt-details__section-title {
+    font-size: 12px;
+    font-weight: 700;
+    color: #5a5a5a;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    margin: 0 0 10px;
+}
+
+.receipt-details__row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 7px 0;
+    border-bottom: 1px solid #1f1f1f;
+    gap: 12px;
+}
+
+.receipt-details__row:last-child { border-bottom: none; }
+
+.receipt-details__label {
+    font-size: 13px;
+    color: #8a8a8a;
+    flex-shrink: 0;
+}
+
+.receipt-details__value {
+    font-size: 13px;
+    font-weight: 600;
+    color: #e5e5e5;
+    text-align: right;
+    word-break: break-all;
+}
+
+/* Товары */
+.receipt-details__item {
+    padding: 8px 0;
+    border-bottom: 1px solid #1f1f1f;
+}
+
+.receipt-details__item:last-child { border-bottom: none; }
+
+.receipt-details__item-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    color: #e5e5e5;
+    font-weight: 600;
+}
+
+.receipt-details__item-row--details {
+    font-size: 12px;
+    color: #5a5a5a;
+    font-weight: 400;
+    margin-top: 4px;
+}
+
+/* Расчёты */
+.receipt-details__settlement {
+    display: flex;
+    justify-content: space-between;
+    padding: 7px 0;
+    font-size: 13px;
+    border-bottom: 1px solid #1f1f1f;
+    color: #e5e5e5;
+}
+
+.receipt-details__settlement:last-child { border-bottom: none; }

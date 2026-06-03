@@ -1,0 +1,120 @@
+/* ========== PaymentList.module.css ========== */
+.sidebar {
+    width: 300px;
+    background: var(--card-bg);
+    border-right: 1.5px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    overflow: hidden;
+}
+
+.top {
+    padding: 24px 20px 16px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.title {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+/* Кнопка купить Premium */
+.buyBtn {
+    width: 100%;
+    padding: 10px;
+    background: var(--accent);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.15s;
+}
+
+.buyBtn:hover {
+    background: var(--accent-start);
+    transform: scale(1.02);
+}
+
+.hint {
+    padding: 20px;
+    font-size: 13px;
+    color: var(--text-muted);
+}
+
+.list {
+    flex: 1;
+    overflow-y: auto;
+    padding: 10px 10px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.item {
+    padding: 12px 14px;
+    border-radius: 12px;
+    background: var(--border);  /* #2a2a2a, лёгкий контраст с фоном сайдбара */
+    cursor: pointer;
+    border: 1.5px solid transparent;
+    transition: background 0.15s, border-color 0.15s;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.item:hover {
+    background: var(--accent-light);
+    color: white;
+}
+
+.active {
+    border-color: var(--accent);
+    background: rgba(0, 102, 255, 0.1);
+}
+
+.itemTitle {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.itemMeta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.itemAmount {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--accent-start);
+}
+
+.itemStatus {
+    font-size: 11px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 20px;
+    /* completed – зелёный оттенок */
+    background: rgba(76, 175, 80, 0.15);
+    color: #81c784;
+}
+
+/* Статус "pending" – янтарный */
+.pending {
+    background: rgba(255, 152, 0, 0.15);
+    color: #ffb74d;
+}
+
+.itemDate {
+    font-size: 11px;
+    color: var(--text-muted);
+}

@@ -1,0 +1,122 @@
+/* ========== ReceiptDetails.module.css ========== */
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    max-width: 600px;
+    width: 100%;
+}
+
+.loading {
+    font-size: 15px;
+    color: var(--text-muted);
+    margin: auto;
+}
+
+/* Шапка с иконкой магазина */
+.receiptHeader {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    background: var(--card-bg);
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: 0 2px 12px rgba(0, 102, 255, 0.08);
+}
+
+.shopIcon {
+    font-size: 36px;
+    line-height: 1;
+    color: var(--text-secondary);
+}
+
+.shopName {
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0 0 4px;
+}
+
+.receiptDate {
+    font-size: 13px;
+    color: var(--text-muted);
+}
+
+.statusBadge {
+    margin-left: auto;
+    padding: 4px 14px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 700;
+    background: rgba(76, 175, 80, 0.15);
+    color: #81c784;
+    white-space: nowrap;
+}
+
+/* Блок с суммой */
+.amountBlock {
+    background: var(--accent);
+    color: white;
+    border-radius: 16px;
+    padding: 20px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.amountLabel {
+    font-size: 15px;
+    font-weight: 600;
+    opacity: 0.85;
+}
+
+.amountValue {
+    font-size: 28px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+}
+
+
+/* ========== ReceiptFiscal.module.css ========== */
+.card {
+    background: var(--card-bg);
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: 0 2px 12px rgba(0, 102, 255, 0.08);
+}
+
+.cardTitle {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    margin-bottom: 14px;
+}
+
+.row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 9px 0;
+    border-bottom: 1px solid var(--border);
+    gap: 12px;
+}
+
+.row:last-child {
+    border-bottom: none;
+}
+
+.label {
+    font-size: 13px;
+    color: var(--text-muted);
+    flex-shrink: 0;
+}
+
+.value {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-primary);
+    text-align: right;
+    word-break: break-all;
+}
