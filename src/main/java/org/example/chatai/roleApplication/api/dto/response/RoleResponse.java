@@ -6,6 +6,7 @@ import org.example.chatai.users.api.dto.users.response.UserDefaultResponse;
 import java.time.LocalDateTime;
 
 public record RoleResponse(
+        Long id,
         String messageUser,
         String answerAdmin,
         StatusRole statusRole,

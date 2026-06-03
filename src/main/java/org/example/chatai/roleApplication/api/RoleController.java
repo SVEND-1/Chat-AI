@@ -52,7 +52,7 @@ public class RoleController {
     }
 
     @Operation(summary = "Получить все заявки с фильтром по их статусу (только для ADMIN!)")
-    @GetMapping
+    @GetMapping("/filter")
     public ResponseEntity<List<RoleResponse>> getAllRolesWithFilter(
             @RequestParam(name = "page-size", required = false) Integer pageSize,
             @RequestParam(name = "page-number", required = false) Integer pageNumber,

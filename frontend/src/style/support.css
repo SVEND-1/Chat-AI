@@ -1,0 +1,358 @@
+/* ========== SUPPORT PAGE — расширение chat.css ========== */
+
+/* Тикет в сайдбаре — дополнительная инфа */
+.support-ticket-item {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+.ticket-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    min-width: 0;
+}
+
+.ticket-status-badge {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.4px;
+    padding: 2px 8px;
+    border-radius: 20px;
+    display: inline-block;
+    width: fit-content;
+}
+
+.status-open {
+    background: rgba(0, 102, 255, 0.15);
+    color: #66aaff;
+    border: 1px solid rgba(0, 102, 255, 0.3);
+}
+
+.status-in_progress {
+    background: rgba(255, 165, 0, 0.15);
+    color: #ffb84d;
+    border: 1px solid rgba(255, 165, 0, 0.3);
+}
+
+.status-closed {
+    background: rgba(100, 100, 100, 0.15);
+    color: #888;
+    border: 1px solid rgba(100, 100, 100, 0.2);
+}
+
+/* ========== ШАПКА ЧАТА ПОДДЕРЖКИ ========== */
+.support-chat-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.support-header-left {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.support-header-meta {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.support-header-date {
+    font-size: 12px;
+    color: #5a5a5a;
+}
+
+/* Индикатор WS */
+.ws-indicator {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 12px;
+    color: #5a5a5a;
+}
+
+.ws-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.ws-indicator.connected .ws-dot {
+    background-color: #4caf7d;
+    box-shadow: 0 0 6px rgba(76, 175, 125, 0.6);
+    animation: pulse-green 2s ease-in-out infinite;
+}
+
+.ws-indicator.connected {
+    color: #4caf7d;
+}
+
+.ws-indicator.disconnected .ws-dot {
+    background-color: #666;
+}
+
+@keyframes pulse-green {
+    0%, 100% { box-shadow: 0 0 4px rgba(76, 175, 125, 0.4); }
+    50% { box-shadow: 0 0 10px rgba(76, 175, 125, 0.8); }
+}
+
+/* Кнопка закрытия тикета */
+.close-ticket-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    background: transparent;
+    border: 1px solid #3a3a3a;
+    border-radius: 20px;
+    color: #8a8a8a;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+.close-ticket-btn:hover {
+    border-color: #4caf7d;
+    color: #4caf7d;
+    background: rgba(76, 175, 125, 0.08);
+    box-shadow: 0 0 12px rgba(76, 175, 125, 0.15);
+}
+
+.close-ticket-btn svg {
+    stroke: currentColor;
+    fill: none;
+    flex-shrink: 0;
+}
+
+/* ========== МЕТКА ОТПРАВИТЕЛЯ ========== */
+.support-sender-label {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 11px;
+    color: #66aaff;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    margin-bottom: 4px;
+    text-transform: uppercase;
+}
+
+.support-sender-label svg {
+    stroke: currentColor;
+    fill: none;
+    flex-shrink: 0;
+}
+
+/* ========== ПУСТОЙ ЧАТ ========== */
+.support-empty-chat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    margin: auto;
+    padding: 40px;
+    color: #5a5a5a;
+    text-align: center;
+}
+
+.support-empty-chat svg {
+    stroke: #3a3a3a;
+}
+
+.support-empty-chat p {
+    font-size: 14px;
+    max-width: 280px;
+    line-height: 1.6;
+}
+
+/* ========== ЗАКРЫТЫЙ ТИКЕТ БАННЕР ========== */
+.support-closed-banner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 14px 20px;
+    margin: 0 30px 20px;
+    background: rgba(100, 100, 100, 0.08);
+    border: 1px solid #2a2a2a;
+    border-radius: 12px;
+    color: #666;
+    font-size: 14px;
+}
+
+.support-closed-banner svg {
+    stroke: currentColor;
+    fill: none;
+    flex-shrink: 0;
+}
+
+/* ========== МОДАЛ СОЗДАНИЯ ТИКЕТА ========== */
+.support-modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(4px);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: fadeIn 0.15s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.support-modal {
+    background: #1a1a1a;
+    border: 1px solid #2a2a2a;
+    border-radius: 20px;
+    padding: 32px;
+    width: 480px;
+    max-width: calc(100vw - 40px);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(0, 102, 255, 0.1);
+    animation: modalIn 0.2s ease;
+}
+
+@keyframes modalIn {
+    from { opacity: 0; transform: translateY(20px) scale(0.97); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.support-modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 8px;
+}
+
+.support-modal-header h2 {
+    font-size: 20px;
+    font-weight: 600;
+    background: var(--gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.support-modal-close {
+    background: transparent;
+    border: none;
+    color: #5a5a5a;
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 6px;
+    transition: color 0.2s;
+    display: flex;
+}
+
+.support-modal-close:hover {
+    color: #ffffff;
+}
+
+.support-modal-close svg {
+    stroke: currentColor;
+    fill: none;
+}
+
+.support-modal-hint {
+    font-size: 13px;
+    color: #5a5a5a;
+    margin-bottom: 20px;
+    line-height: 1.5;
+}
+
+.support-modal-input {
+    width: 100%;
+    background: #0f0f0f;
+    border: 1px solid #2a2a2a;
+    border-radius: 12px;
+    color: #ffffff;
+    font-size: 15px;
+    padding: 14px 16px;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    margin-bottom: 20px;
+}
+
+.support-modal-input:focus {
+    border-color: var(--grad-start);
+    box-shadow: 0 0 0 2px rgba(0, 102, 255, 0.2);
+}
+
+.support-modal-input::placeholder {
+    color: #4a4a4a;
+}
+
+.support-modal-actions {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+}
+
+.support-modal-cancel {
+    padding: 10px 20px;
+    background: transparent;
+    border: 1px solid #3a3a3a;
+    border-radius: 20px;
+    color: #8a8a8a;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.support-modal-cancel:hover {
+    border-color: #5a5a5a;
+    color: #ffffff;
+}
+
+.support-modal-submit {
+    padding: 10px 24px;
+    background: var(--gradient);
+    border: none;
+    border-radius: 20px;
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.support-modal-submit:hover:not(:disabled) {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 20px rgba(0, 102, 255, 0.35);
+}
+
+.support-modal-submit:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .support-chat-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .close-ticket-btn {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .support-closed-banner {
+        margin: 0 15px 15px;
+    }
+}
