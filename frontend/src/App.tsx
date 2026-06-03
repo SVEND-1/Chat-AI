@@ -6,14 +6,7 @@ import {BrowserRouter, Route, Routes} from "react-router-dom";
 import ForgotPassword from "./pages/forgot-password/ForgotPassword";
 import ResetPassword from "./pages/reset-password/ResetPassword";
 import Chat from "./pages/chat/Chat";
-import SubscriptionPage from "./pages/subscription/subscription/SubscriptionPage";
-import Profile from "./pages/profile/Profile";
-import {ReceiptsPage} from "./pages/receipt/ReceiptPage";
-import SuccessSubscriptionPage from "./pages/subscription/succesSubscription/SuccessSubscriptionPage";
-import PaymentHistoryPage from "./pages/payment-history/PaymentHistoryPage";
-import AdminPage from "./pages/admin/AdminPage";
-
-
+import Support from "./pages/chat/Support";
 
 
 function App() {
@@ -26,13 +19,8 @@ function App() {
                 <Route path="/reset-verify" element={<VerifyResetCode />} />
                 <Route path="/forgot-password" element={<ForgotPassword />} />
                 <Route path="/reset-password" element={<ResetPassword />} />
-                <Route path="/chat" element={<Chat />}/>
-                <Route path="/subscription" element={<SubscriptionPage />}/>
-                <Route path="/profile" element={<Profile />}/>
-                <Route path="/receipts" element={<ReceiptsPage />}/>
-                <Route path="/succeeded-payment" element={<SuccessSubscriptionPage />} />
-                <Route path="/payment-history" element={<PaymentHistoryPage />} />
-                <Route path="/admin" element={<AdminPage />} />
+                <Route path="/chat" element={<Chat />} />
+                <Route path="/support" element={<Support/>} />
             </Routes>
         </BrowserRouter>
     );
