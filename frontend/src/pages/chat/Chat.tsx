@@ -18,6 +18,15 @@ interface ChatRoom {
 
 const API_BASE_URL = 'http://localhost:8080/api/chats';
 
+// Парсинг SSE чанка: убираем "data:" префикс и лишние пробелы
+const parseSSEChunk = (chunk: string): string => {
+    return chunk
+        .split('\n')
+        .filter(line => line.startsWith('data:'))
+        .map(line => line.slice(5)) // убираем "data:"
+        .join('');
+};
+
 export default function Chat() {
     const [chatRooms, setChatRooms] = useState<ChatRoom[]>([]);
     const [currentChatId, setCurrentChatId] = useState<number | null>(null);
@@ -31,12 +40,10 @@ export default function Chat() {
 
     const currentChat = chatRooms.find(chat => chat.id === currentChatId);
 
-    // Загрузка чатов при монтировании
     useEffect(() => {
         loadChats();
     }, []);
 
-    // Загрузка сообщений при выборе чата
     useEffect(() => {
         if (currentChatId) {
             loadChatMessages(currentChatId);
@@ -55,7 +62,6 @@ export default function Chat() {
         }
     }, [currentChat?.messages]);
 
-    // Загрузка списка чатов
     const loadChats = async () => {
         setIsLoading(true);
         try {
@@ -71,7 +77,6 @@ export default function Chat() {
                 }));
                 setChatRooms(formattedChats);
 
-                // Если есть чаты, открываем первый
                 if (formattedChats.length > 0) {
                     setCurrentChatId(formattedChats[0].id);
                 }
@@ -83,7 +88,6 @@ export default function Chat() {
         }
     };
 
-    // Загрузка сообщений чата
     const loadChatMessages = async (chatId: number) => {
         try {
             const response = await fetch(`${API_BASE_URL}/${chatId}`, {
@@ -91,6 +95,7 @@ export default function Chat() {
             });
             if (response.ok) {
                 const data = await response.json();
+                // Сообщения из БД идут от старых к новым — порядок правильный
                 const messages = data.message.map((msg: any, index: number) => ({
                     id: index,
                     text: msg.message,
@@ -109,7 +114,6 @@ export default function Chat() {
         }
     };
 
-    // Отправка сообщения
     const handleSend = async () => {
         if (!input.trim() || !currentChatId || isSending) return;
 
@@ -120,7 +124,6 @@ export default function Chat() {
             isUser: true,
         };
 
-        // Добавляем сообщение пользователя сразу
         setChatRooms(prev => prev.map(chat =>
             chat.id === currentChatId
                 ? { ...chat, messages: [...chat.messages, userMessage] }
@@ -131,23 +134,9 @@ export default function Chat() {
         setInput("");
         setIsSending(true);
 
-        // Добавляем временное сообщение ассистента
         const tempAssistantId = Date.now() + 1;
-        const tempAssistantMessage: Message = {
-            id: tempAssistantId,
-            text: "Печатает...",
-            time: new Date().toLocaleTimeString().slice(0, 5),
-            isUser: false,
-        };
-
-        setChatRooms(prev => prev.map(chat =>
-            chat.id === currentChatId
-                ? { ...chat, messages: [...chat.messages, tempAssistantMessage] }
-                : chat
-        ));
 
         try {
-            // Используем EventSource для потокового ответа
             const response = await fetch(`${API_BASE_URL}/${currentChatId}?question=${encodeURIComponent(question)}`, {
                 method: 'POST',
                 credentials: 'include',
@@ -162,17 +151,8 @@ export default function Chat() {
 
             const reader = response.body?.getReader();
             const decoder = new TextDecoder();
-            let fullResponse = '';
 
-            // Удаляем временное сообщение
-            setChatRooms(prev => prev.map(chat =>
-                chat.id === currentChatId
-                    ? { ...chat, messages: chat.messages.filter(m => m.id !== tempAssistantId) }
-                    : chat
-            ));
-
-            // Добавляем пустое сообщение ассистента
-            const assistantMessageId = Date.now();
+            const assistantMessageId = Date.now() + 2;
             let assistantMessageAdded = false;
 
             if (reader) {
@@ -180,8 +160,11 @@ export default function Chat() {
                     const { done, value } = await reader.read();
                     if (done) break;
 
-                    const chunk = decoder.decode(value);
-                    fullResponse += chunk;
+                    const rawChunk = decoder.decode(value);
+                    // Парсим SSE: убираем "data:" префикс
+                    const text = parseSSEChunk(rawChunk);
+
+                    if (!text) continue; // пропускаем пустые чанки
 
                     if (!assistantMessageAdded) {
                         setChatRooms(prev => prev.map(chat =>
@@ -190,7 +173,7 @@ export default function Chat() {
                                     ...chat,
                                     messages: [...chat.messages, {
                                         id: assistantMessageId,
-                                        text: chunk,
+                                        text: text,
                                         time: new Date().toLocaleTimeString().slice(0, 5),
                                         isUser: false,
                                     }]
@@ -205,7 +188,7 @@ export default function Chat() {
                                     ...chat,
                                     messages: chat.messages.map(m =>
                                         m.id === assistantMessageId
-                                            ? { ...m, text: m.text + chunk }
+                                            ? { ...m, text: m.text + text }
                                             : m
                                     )
                                 }
@@ -217,16 +200,16 @@ export default function Chat() {
         } catch (error) {
             console.error('Ошибка отправки сообщения:', error);
 
-            // Обновляем временное сообщение на ошибку
             setChatRooms(prev => prev.map(chat =>
                 chat.id === currentChatId
                     ? {
                         ...chat,
-                        messages: chat.messages.map(m =>
-                            m.id === tempAssistantId
-                                ? { ...m, text: "❌ Ошибка при отправке сообщения. Попробуйте еще раз." }
-                                : m
-                        )
+                        messages: [...chat.messages, {
+                            id: tempAssistantId,
+                            text: "❌ Ошибка при отправке сообщения. Попробуйте еще раз.",
+                            time: new Date().toLocaleTimeString().slice(0, 5),
+                            isUser: false,
+                        }]
                     }
                     : chat
             ));
@@ -235,7 +218,6 @@ export default function Chat() {
         }
     };
 
-    // Создание нового чата
     const handleCreateChat = async () => {
         const title = `Новый чат ${chatRooms.length + 1}`;
         try {
@@ -245,14 +227,13 @@ export default function Chat() {
             });
 
             if (response.ok) {
-                await loadChats(); // Перезагружаем список чатов
+                await loadChats();
             }
         } catch (error) {
             console.error('Ошибка создания чата:', error);
         }
     };
 
-    // Удаление чата
     const handleDeleteClick = async (chatId: number, e: React.MouseEvent) => {
         e.stopPropagation();
 
@@ -275,7 +256,6 @@ export default function Chat() {
         }
     };
 
-    // Переключение чата
     const switchChat = (chatId: number) => {
         setCurrentChatId(chatId);
     };
