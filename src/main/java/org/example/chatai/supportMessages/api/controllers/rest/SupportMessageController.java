@@ -1,15 +1,12 @@
-package org.example.chatai.supportMessages.api.controllers;
+package org.example.chatai.supportMessages.api.controllers.rest;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.example.chatai.supportMessages.api.dto.requests.SupportMessageCreateRequest;
 import org.example.chatai.supportMessages.api.dto.responses.SupportMessageResponse;
 import org.example.chatai.supportMessages.domain.services.SupportMessageService;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
