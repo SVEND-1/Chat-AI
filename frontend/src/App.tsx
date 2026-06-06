@@ -13,6 +13,7 @@ import {ReceiptsPage} from "./pages/receipt/ReceiptPage";
 import PaymentHistory from "./components/profile/PaymentHistory";
 import PaymentHistoryPage from "./pages/payment-history/PaymentHistoryPage";
 import SuccessSubscriptionPage from "./pages/subscription/succesSubscription/SuccessSubscriptionPage";
+import SupportProfile from "./pages/profile/SupportProfile";
 
 
 function App() {
@@ -32,6 +33,7 @@ function App() {
                 <Route path="/supportChat" element={<SupportChat/>} />
                 <Route path="/succeeded-payment" element={<SuccessSubscriptionPage />}/>
                 <Route path="/profile" element={<Profile />}/>
+                <Route path="/support-profile" element={<SupportProfile />}/>
             </Routes>
         </BrowserRouter>
     );

@@ -1,14 +1,16 @@
 // pages/profile/useProfile.ts
 import { useState, useEffect } from 'react';
 import { UserData, SubscriptionData, RoleRequestData } from '../../types/profile/profile.types';
-import { getCurrentUser } from "../../api/profileApi";
-import { getSubscription } from "../../api/subscriptionApi";
-import { getUserRoles, createRoleRequest } from "../../api/rolesApi";
+import { getCurrentUser } from '../../api/profileApi';
+import { getSubscription } from '../../api/subscriptionApi';
+import { getUserRoles, createRoleRequest } from '../../api/rolesApi';
+import { getSupportTickets, SupportTicketResponse } from '../../api/supportTicketApi';
 
 interface UseProfileReturn {
     userData: UserData | null;
     subscription: SubscriptionData | null;
     roleRequest: RoleRequestData | null;
+    supportTickets: SupportTicketResponse[];
     loading: boolean;
     error: string | null;
     submitRoleRequest: (message: string) => Promise<void>;
@@ -18,6 +20,7 @@ export const useProfile = (): UseProfileReturn => {
     const [userData, setUserData] = useState<UserData | null>(null);
     const [subscription, setSubscription] = useState<SubscriptionData | null>(null);
     const [roleRequest, setRoleRequest] = useState<RoleRequestData | null>(null);
+    const [supportTickets, setSupportTickets] = useState<SupportTicketResponse[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
 
@@ -27,12 +30,10 @@ export const useProfile = (): UseProfileReturn => {
                 setLoading(true);
                 setError(null);
 
-                // 1. Пользователь — критичный запрос, если упал — показываем ошибку
                 const userRes = await getCurrentUser();
                 const user = userRes.data;
                 setUserData(user);
 
-                // 2. Подписка — некритичная, может не быть
                 try {
                     const subRes = await getSubscription(user.id);
                     setSubscription(subRes.data);
@@ -40,17 +41,24 @@ export const useProfile = (): UseProfileReturn => {
                     setSubscription(null);
                 }
 
-                // 3. Заявки на роль — некритичные, могут отсутствовать
-                try {
-                    const rolesRes = await getUserRoles();
-                    const roles = rolesRes.data;
-                    if (roles.length > 0) {
-                        setRoleRequest(roles[roles.length - 1]);
+                if (user.role === 'SUPPORT') {
+                    try {
+                        const ticketsRes = await getSupportTickets();
+                        setSupportTickets(ticketsRes.data);
+                    } catch {
+                        setSupportTickets([]);
                     }
-                } catch {
-                    setRoleRequest(null);
+                } else {
+                    try {
+                        const rolesRes = await getUserRoles();
+                        const roles = rolesRes.data;
+                        if (roles.length > 0) {
+                            setRoleRequest(roles[roles.length - 1]);
+                        }
+                    } catch {
+                        setRoleRequest(null);
+                    }
                 }
-
             } catch (err) {
                 setError('Ошибка загрузки данных профиля');
                 console.error(err);
@@ -75,5 +83,5 @@ export const useProfile = (): UseProfileReturn => {
         }
     };
 
-    return { userData, subscription, roleRequest, loading, error, submitRoleRequest };
+    return { userData, subscription, roleRequest, supportTickets, loading, error, submitRoleRequest };
 };
