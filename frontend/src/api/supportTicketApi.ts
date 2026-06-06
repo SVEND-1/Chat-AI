@@ -32,7 +32,7 @@ export interface SupportTicketResponse {
 
 // GET /api/support-ticket/support — тикеты назначенные на текущего саппорта
 export const getSupportTickets = () => {
-    return SUPPORT_TICKET_API.get<SupportTicketResponse[]>('/support');
+    return SUPPORT_TICKET_API.get<SupportTicketResponse[]>('');
 };
 
 export default SUPPORT_TICKET_API;
