@@ -1,3 +1,4 @@
+// components/profile/SubscriptionInfo.tsx
 import React from 'react';
 import { SubscriptionData } from '../../types/profile/profile.types';
 
@@ -7,34 +8,15 @@ interface SubscriptionInfoProps {
 
 const SubscriptionInfo: React.FC<SubscriptionInfoProps> = ({ subscription }) => {
     const getStatusInfo = (status: string) => {
-        const statuses = {
-            active: { text: 'Активна', className: 'status-active' },
-            inactive: { text: 'Неактивна', className: 'status-inactive' },
-            expired: { text: 'Истекла', className: 'status-expired' },
-            pending: { text: 'Ожидает', className: 'status-pending' }
+        const statuses: Record<string, { text: string; className: string }> = {
+            ACTIVE: { text: 'Активна', className: 'status-active' },
+            BLOCKED: { text: 'Заблокирована', className: 'status-inactive' },
         };
-        return statuses[status as keyof typeof statuses] || statuses.inactive;
-    };
-
-    const getPlanName = (plan?: string) => {
-        const plans = {
-            basic: 'Базовая',
-            premium: 'Премиум',
-            pro: 'Профессиональная'
-        };
-        return plan ? plans[plan as keyof typeof plans] : 'Нет подписки';
-    };
-
-    const formatDate = (dateString?: string) => {
-        if (!dateString) return '—';
-        return new Date(dateString).toLocaleDateString('ru-RU', {
-            day: 'numeric',
-            month: 'long',
-            year: 'numeric'
-        });
+        return statuses[status] ?? { text: status, className: 'status-inactive' };
     };
 
     const statusInfo = getStatusInfo(subscription.status);
+    const isActive = subscription.status === 'ACTIVE';
 
     return (
         <div className="profile-card subscription-card">
@@ -48,29 +30,15 @@ const SubscriptionInfo: React.FC<SubscriptionInfoProps> = ({ subscription }) => 
                     </span>
                 </div>
 
-                {subscription.plan && (
-                    <div className="subscription-plan">
-                        <span className="plan-label">Тариф:</span>
-                        <span className="plan-value">{getPlanName(subscription.plan)}</span>
-                    </div>
-                )}
-
                 {subscription.endDate && (
                     <div className="subscription-end">
                         <span className="end-label">Действует до:</span>
-                        <span className="end-value">{formatDate(subscription.endDate)}</span>
+                        <span className="end-value">{subscription.endDate}</span>
                     </div>
                 )}
-
-                <div className="subscription-renew">
-
-                    <span className={`renew-value ${subscription.autoRenew ? 'enabled' : 'disabled'}`}>
-                        {subscription.autoRenew ? 'Включено' : 'Отключено'}
-                    </span>
-                </div>
             </div>
 
-            {subscription.status !== 'active' && (
+            {!isActive && (
                 <button className="upgrade-button">
                     Оформить подписку
                 </button>

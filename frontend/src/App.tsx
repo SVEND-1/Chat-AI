@@ -6,7 +6,7 @@ import {BrowserRouter, Route, Routes} from "react-router-dom";
 import ForgotPassword from "./pages/forgot-password/ForgotPassword";
 import ResetPassword from "./pages/reset-password/ResetPassword";
 import Chat from "./pages/chat/Chat";
-import SubscriptionPage from "./pages/subscription/SubscriptionPage";
+import SubscriptionPage from "./pages/subscription/subscription/SubscriptionPage";
 import Profile from "./pages/profile/Profile";
 
 
