@@ -17,8 +17,7 @@ ADMIN_API.interceptors.request.use((config) => {
 // ─── DTOs ────────────────────────────────────────────────────────────────────
 
 export type Role = 'USER' | 'SUPPORT' | 'ADMIN';
-export type StatusRole = 'PENDING' | 'APPROVED' | 'REJECTED';
-export type SupportStatus = 'OPEN' | 'CLOSED' | 'IN_PROGRESS';
+export type StatusRole = 'WAITING' | 'APPROVED' | 'REJECTED';
 
 export interface UserDefaultResponse {
     id: number;
@@ -36,13 +35,13 @@ export interface SubscriptionsPercentResponse {
 }
 
 export interface RoleResponse {
+    id: number;
     messageUser: string;
     answerAdmin: string | null;
     statusRole: StatusRole;
     createdAt: string;
     answeredAt: string | null;
     user: UserDefaultResponse;
-    id: number; // добавь на бэке если нет — нужен для ответа на заявку
 }
 
 export interface AdminAnswerRequest {
@@ -72,11 +71,15 @@ export const getSubscriptionsPercent = () =>
 export const getSupportByEmail = (email: string) =>
     ADMIN_API.get<UserDefaultResponse>('/api/admin-stats/support', { params: { email } });
 
+// POST /api/admin-stats/{email}/subscriptions — выдать подписку по email
+export const giveSubscription = (email: string) =>
+    ADMIN_API.post<string>(`/api/admin-stats/${encodeURIComponent(email)}/subscriptions`);
+
 // ─── Role Applications ────────────────────────────────────────────────────────
 
-// GET /api/roles/filter?page-size=&page-number=&status-role=
+// GET /api/roles?page-size=&page-number=&status-role=
 export const getRoleApplications = (pageSize: number, pageNumber: number, statusRole?: StatusRole) =>
-    ADMIN_API.get<RoleResponse[]>('/api/roles/filter', {
+    ADMIN_API.get<RoleResponse[]>('/api/roles', {
         params: {
             'page-size': pageSize,
             'page-number': pageNumber,
@@ -84,6 +87,6 @@ export const getRoleApplications = (pageSize: number, pageNumber: number, status
         },
     });
 
-// POST /api/roles/{id}  — одобрить/отклонить заявку
+// POST /api/roles/{id} — одобрить/отклонить заявку
 export const answerRoleApplication = (id: number, data: AdminAnswerRequest) =>
     ADMIN_API.post<RoleResponse>(`/api/roles/${id}`, data);

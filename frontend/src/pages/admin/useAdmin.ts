@@ -12,7 +12,7 @@ import {
     type RoleResponse,
 } from '../../api/adminApi';
 
-export type AdminTab = 'users' | 'applications';
+export type AdminTab = 'users' | 'applications' | 'subscription';
 
 const PAGE_SIZE = 10;
 

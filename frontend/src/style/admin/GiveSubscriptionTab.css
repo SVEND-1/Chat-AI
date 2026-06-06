@@ -1,0 +1,71 @@
+.give-sub-tab {
+    max-width: 500px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.give-sub-tab__desc {
+    font-size: 14px;
+    color: #8a8a8a;
+    margin: 0;
+    line-height: 1.6;
+}
+
+.give-sub-tab__form {
+    display: flex;
+    gap: 10px;
+}
+
+.give-sub-tab__input {
+    flex: 1;
+    padding: 12px 16px;
+    background: #141414;
+    border: 1px solid #2a2a2a;
+    border-radius: 50px;
+    color: #e5e5e5;
+    font-size: 14px;
+    font-family: inherit;
+    outline: none;
+    transition: border-color 0.15s;
+}
+
+.give-sub-tab__input:focus { border-color: #0066ff; }
+.give-sub-tab__input::placeholder { color: #3a3a3a; }
+.give-sub-tab__input:disabled { opacity: 0.5; }
+
+.give-sub-tab__btn {
+    padding: 12px 24px;
+    background: linear-gradient(135deg, #0066ff, #66ccff);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    font-family: inherit;
+    white-space: nowrap;
+    transition: box-shadow 0.2s, opacity 0.15s;
+}
+
+.give-sub-tab__btn:hover:not(:disabled) { box-shadow: 0 0 16px rgba(0, 102, 255, 0.4); }
+.give-sub-tab__btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.give-sub-tab__feedback {
+    font-size: 14px;
+    font-weight: 600;
+    padding: 12px 16px;
+    border-radius: 10px;
+}
+
+.give-sub-tab__feedback--success {
+    background: rgba(76, 175, 80, 0.1);
+    color: #81c784;
+    border: 1px solid rgba(76, 175, 80, 0.2);
+}
+
+.give-sub-tab__feedback--error {
+    background: rgba(244, 67, 54, 0.1);
+    color: #e57373;
+    border: 1px solid rgba(244, 67, 54, 0.2);
+}
