@@ -604,9 +604,11 @@
         const msgs = document.getElementById('messages');
         document.getElementById('empty-state')?.remove();
 
-        const senderType = data.senderType || (selfSent ? 'USER' : 'SUPPORT');
-        const isUser = senderType === 'USER';
-        const name = data.sender?.name || (isUser ? 'YOU' : 'SUPPORT');
+        // isMine — своё сообщение (по email): справа с синим пузырём
+        // !isMine — чужое: слева с серым пузырём
+        // Не зависит от роли (USER/SUPPORT) — каждый видит себя справа
+        const isMine = selfSent; // передаётся как (currentEmail === d.sender.email)
+        const name = data.sender?.name || (isMine ? 'YOU' : '?');
         const initials = name.split(' ').map(w => w[0]).join('').toUpperCase().slice(0, 2) || '?';
         const text = data.message || JSON.stringify(data);
         const time = data.createdAt
@@ -614,11 +616,11 @@
             : ts();
 
         const row = document.createElement('div');
-        row.className = 'msg-row ' + (isUser ? 'user' : 'support');
+        row.className = 'msg-row ' + (isMine ? 'user' : 'support');
         row.innerHTML = `
-      <div class="avatar ${isUser ? 'u' : 's'}">${esc(initials)}</div>
+      <div class="avatar ${isMine ? 'u' : 's'}">${esc(initials)}</div>
       <div>
-        <div class="bubble ${isUser ? 'user' : 'support'}">${esc(text)}</div>
+        <div class="bubble ${isMine ? 'user' : 'support'}">${esc(text)}</div>
         <div class="msg-meta">${esc(name)} · ${time}</div>
       </div>`;
         msgs.appendChild(row);
@@ -642,7 +644,7 @@
             btnCl.disabled = ticketClosed;
             badge.style.display = '';
             document.getElementById('hdr-id').textContent = ticketId;
-            document.getElementById('hdr-title').textContent = 'чат с поддержкой';
+            document.getElementById('hdr-title').textContent = `чат с поддержкой · ${currentEmail || ''}`;
         } else {
             btnC.className = 'btn';
             btnC.textContent = '⚡ connect';
@@ -794,7 +796,7 @@
                 addSysMsg('история сообщений пуста');
                 return;
             }
-            list.forEach(m => renderMsg(m, false));
+            list.forEach(m => renderMsg(m, currentEmail && m.sender?.email === currentEmail));
             log(`История загружена (${list.length} сообщений)`, 'ok');
         } catch (e) {
             log('Не удалось загрузить историю: ' + e.message);

@@ -1,4 +1,4 @@
-package org.example.chatai.config.websocket;
+package org.example.chatai.supportMessages.api.controllers.websocket;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

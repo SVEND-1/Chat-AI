@@ -63,6 +63,9 @@ public class SecurityConfig {
                                 "/api/support-ticket", "/api/support-message/**"
                         ).permitAll()
                         .requestMatchers(
+                                "/api/users/me"
+                        ).permitAll()
+                        .requestMatchers(
                                 "/admin", "/api/admin/role-request/**",
                                 "/swagger-ui/**", "/swagger-ui.html",
                                 "/v3/api-docs/**", "/swagger-resources/**", "/webjars/**"
