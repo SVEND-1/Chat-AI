@@ -1,3 +1,4 @@
+// components/profile/UserInfo.tsx
 import React from 'react';
 import { UserData } from '../../types/profile/profile.types';
 
@@ -7,12 +8,12 @@ interface UserInfoProps {
 
 const UserInfo: React.FC<UserInfoProps> = ({ userData }) => {
     const getRoleName = (role: string) => {
-        const roles = {
-            user: 'Пользователь',
-            support: 'Техподдержка',
-            admin: 'Администратор'
+        const roles: Record<string, string> = {
+            USER: 'Пользователь',
+            SUPPORT: 'Техподдержка',
+            ADMIN: 'Администратор',
         };
-        return roles[role as keyof typeof roles] || role;
+        return roles[role] ?? role;
     };
 
     return (
@@ -34,15 +35,13 @@ const UserInfo: React.FC<UserInfoProps> = ({ userData }) => {
                     <span className="detail-label">Имя:</span>
                     <span className="detail-value">{userData.name}</span>
                 </div>
-
                 <div className="detail-item">
                     <span className="detail-label">Email:</span>
                     <span className="detail-value">{userData.email}</span>
                 </div>
-
                 <div className="detail-item">
                     <span className="detail-label">Роль:</span>
-                    <span className={`detail-value role-badge role-${userData.role}`}>
+                    <span className={`detail-value role-badge role-${userData.role.toLowerCase()}`}>
                         {getRoleName(userData.role)}
                     </span>
                 </div>
