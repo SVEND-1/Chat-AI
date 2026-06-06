@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+// pages/profile/Profile.tsx
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../../style/profile/profile-main.css';
 import '../../style/profile/profile-card.css';
@@ -7,99 +8,20 @@ import '../../style/profile/role-request.css';
 import '../../style/profile/subscription-info.css';
 import '../../style/profile/action-card.css';
 
-// Импортируем компоненты
 import UserInfo from '../../components/profile/UserInfo';
 import RoleRequest from '../../components/profile/RoleRequest';
 import SubscriptionInfo from '../../components/profile/SubscriptionInfo';
 import PasswordChange from '../../components/profile/PasswordChange';
 import PaymentHistory from '../../components/profile/PaymentHistory';
-
-// Импортируем типы
-import { UserData, SubscriptionData, RoleRequestData } from '../../types/profile/profile.types';
+import { useProfile } from './useProfile';
 
 const Profile: React.FC = () => {
     const navigate = useNavigate();
+    const { userData, subscription, roleRequest, loading, error, submitRoleRequest } = useProfile();
 
-    // Состояния для данных пользователя
-    const [userData, setUserData] = useState<UserData | null>(null);
-    const [subscription, setSubscription] = useState<SubscriptionData | null>(null);
-    const [roleRequest, setRoleRequest] = useState<RoleRequestData | null>(null);
-    const [loading, setLoading] = useState(true);
-
-    // Загрузка данных (имитация)
-    useEffect(() => {
-        const fetchUserData = async () => {
-            try {
-                setTimeout(() => {
-                    setUserData({
-                        id: '1',
-                        name: 'Иван Петров',
-                        email: 'ivan.petrov@example.com',
-                        role: 'user',
-                        createdAt: '2026-01-15T10:00:00Z'
-                    });
-
-                    setSubscription({
-                        status: 'active',
-                        plan: 'premium',
-                        startDate: '2024-01-15T10:00:00Z',
-                        endDate: '2024-12-15T10:00:00Z',
-                        autoRenew: true
-                    });
-
-                    setRoleRequest({
-                        id: 'req1',
-                        userId: '1',
-                        requestedRole: 'support',
-                        status: 'rejected', // изменил на rejected для демонстрации ответа админа
-                        message: 'Имею опыт работы в техподдержке 2 года.',
-                        createdAt: '2024-02-01T14:30:00Z',
-                        adminResponse: 'Спасибо за заявку! К сожалению, на текущий момент у нас полный штат сотрудников. Попробуйте через 3 месяца.',
-                        adminResponseDate: '2024-02-05T10:00:00Z'
-                    });
-
-                    setLoading(false);
-                }, 1000);
-            } catch (error) {
-                console.error('Ошибка загрузки профиля:', error);
-                setLoading(false);
-            }
-        };
-
-        fetchUserData();
-    }, []);
-
-    // Обработчики
-    const handlePasswordChange = () => {
-        navigate('/forgot-password');
-    };
-
-    const handlePaymentHistory = () => {
-        navigate('/payment-history');
-    };
-
-    const handleRoleRequestSubmit = async (message: string) => {
-        try {
-            console.log('Заявка на роль support:', message);
-            const newRequest: RoleRequestData = {
-                id: 'req1',
-                userId: '1',
-                requestedRole: 'support',
-                status: 'pending',
-                message: message,
-                createdAt: new Date().toISOString(),
-                adminResponse: undefined,
-                adminResponseDate: undefined
-            };
-            setRoleRequest(newRequest);
-        } catch (error) {
-            console.error('Ошибка отправки заявки:', error);
-        }
-    };
-
-    const handleBackToChat = () => {
-        navigate('/chat');
-    };
+    const handlePasswordChange = () => navigate('/forgot-password');
+    const handlePaymentHistory = () => navigate('/payment-history');
+    const handleBackToChat = () => navigate('/chat');
 
     if (loading) {
         return (
@@ -109,6 +31,17 @@ const Profile: React.FC = () => {
             </div>
         );
     }
+
+    if (error) {
+        return (
+            <div className="profile-loading">
+                <p>{error}</p>
+            </div>
+        );
+    }
+
+    const isSupport = userData?.role === 'SUPPORT';
+    const isAdmin = userData?.role === 'ADMIN';
 
     return (
         <div className="profile-page">
@@ -120,13 +53,7 @@ const Profile: React.FC = () => {
                         onClick={handleBackToChat}
                         aria-label="Вернуться в чат"
                     >
-                        <svg
-                            width="20"
-                            height="20"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
-                        >
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
                             <path
                                 d="M19 12H5M5 12L12 19M5 12L12 5"
                                 stroke="currentColor"
@@ -140,19 +67,41 @@ const Profile: React.FC = () => {
                 </div>
 
                 <div className="profile-grid">
-                    {/* Левая колонка */}
                     <div className="profile-left">
                         {userData && <UserInfo userData={userData} />}
-                        {userData?.role !== 'support' && (
+                        {!isSupport && !isAdmin && (
                             <RoleRequest
-                                // existingRequest={roleRequest}
-                                // onSubmit={handleRoleRequestSubmit}
-                                // userRole={userData?.role || 'user'}
+                                existingRequest={roleRequest}
+                                onSubmit={submitRoleRequest}
                             />
+                        )}
+                        {isSupport && (
+                            <div className="profile-card action-card">
+                                <h2 className="card-title">Техподдержка</h2>
+                                <div className="action-content">
+                                    <p>Просмотрите ваши активные тикеты и управляйте обращениями</p>
+                                    <button
+                                        className="action-button"
+                                        onClick={() => navigate('/support-profile')}
+                                    >
+                                        <svg viewBox="0 0 24 24" strokeWidth="1.5" width="20" height="20">
+                                            <path
+                                                stroke="currentColor"
+                                                strokeLinecap="round"
+                                                strokeLinejoin="round"
+                                                d="M20.25 8.511c.884.284 1.5 1.128 1.5 2.097v4.286c0 1.136-.847 2.1-1.98 2.193-.34.027-.68.052-1.02.072v3.091l-3-3c-1.354 0-2.694-.055-4.02-.163a2.115 2.115 0 01-.825-.242m9.345-8.334a2.126 2.126 0 00-.476-.095 48.64 48.64 0 00-8.048 0c-1.131.094-1.976 1.057-1.976 2.192v4.286c0 .837.46 1.58 1.155 1.951m9.345-8.334V6.637c0-1.621-1.152-3.026-2.76-3.235A48.455 48.455 0 0011.25 3c-2.115 0-4.198.137-6.24.402-1.608.209-2.76 1.614-2.76 3.235v6.226c0 1.621 1.152 3.026 2.76 3.235.577.075 1.157.14 1.74.194V21l4.155-4.155"
+                                            />
+                                        </svg>
+                                        <span>Профиль техподдержки</span>
+                                        <svg viewBox="0 0 24 24" strokeWidth="1.5" width="16" height="16" className="arrow-icon">
+                                            <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
                         )}
                     </div>
 
-                    {/* Правая колонка */}
                     <div className="profile-right">
                         {subscription && <SubscriptionInfo subscription={subscription} />}
                         <PasswordChange onNavigate={handlePasswordChange} />

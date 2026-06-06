@@ -2,30 +2,32 @@ package org.example.chatai.users.api;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
+import org.example.chatai.config.JwtTokenProvider;
 import org.example.chatai.users.api.dto.auth.request.LoginRequest;
 import org.example.chatai.users.api.dto.auth.request.RegisterCodeRequest;
 import org.example.chatai.users.api.dto.auth.request.ResetPasswordRequest;
 import org.example.chatai.users.api.dto.auth.request.VerifyRegisterRequest;
 import org.example.chatai.users.domain.AuthService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
+
 @RestController
 @RequestMapping("/api/auth")
+@RequiredArgsConstructor
 @Tag(name = "Auth", description = "Управление авторизацией")
 public class AuthController {
 
     private final AuthService authService;
+    private final JwtTokenProvider jwtTokenProvider;
 
-    @Autowired
-    public AuthController(AuthService authService) {
-        this.authService = authService;
-    }
-
-    @Operation(summary = "Вход в систему существуещего пользователя")
+    @Operation(summary = "Вход в систему существующего пользователя")
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody @Valid LoginRequest loginRequest,
                                    HttpServletResponse response) {
@@ -79,4 +81,19 @@ public class AuthController {
             HttpServletResponse response) {
         return ResponseEntity.ok(authService.resetPassword(request, response));
     }
+
+    @Operation(summary = "Получить текущий JWT токен из cookie (для WebSocket-подключения)")
+    @GetMapping("/token")
+    public ResponseEntity<?> getToken(HttpServletRequest request) {
+        if (request.getCookies() != null) {
+            for (Cookie cookie : request.getCookies()) {
+                if ("jwtToken".equals(cookie.getName())) {
+                    String email = jwtTokenProvider.getEmailFromToken(cookie.getValue());
+                    return ResponseEntity.ok(Map.of("token", cookie.getValue(), "email", email));
+                }
+            }
+        }
+        return ResponseEntity.status(401).body(Map.of("error", "Not authenticated"));
+    }
 }
+

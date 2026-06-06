@@ -5,11 +5,13 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.example.chatai.config.JwtTokenProvider;
 import org.example.chatai.users.api.dto.users.request.UserCreateRequest;
+import org.example.chatai.users.api.dto.users.response.UserDefaultResponse;
 import org.example.chatai.users.api.dto.users.response.UserRegistrationResponse;
 import org.example.chatai.users.db.UserEntity;
 import org.example.chatai.users.db.UserRepository;
 import org.example.chatai.users.domain.mapper.UserMapper;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -103,10 +105,16 @@ public class UserService {
         }
     }
 
+    public UserDefaultResponse getCurrentUserForController() {
+        UserEntity currentUser = getCurrentUser();
+
+        return userMapper.convertEntityToUserDefaultResponse(currentUser);
+    }
+
     public void delete(Long id) {
         try {
             userRepository.deleteById(id);
-            log.info("Пользователб с id={} удален", id);
+            log.info("Пользователь с id={} удален", id);
         } catch (Exception e) {
             log.error("Не удалось удалить пользователя с id={}, ex={}", id, e.getMessage());
             throw new RuntimeException();

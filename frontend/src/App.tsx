@@ -6,12 +6,14 @@ import {BrowserRouter, Route, Routes} from "react-router-dom";
 import ForgotPassword from "./pages/forgot-password/ForgotPassword";
 import ResetPassword from "./pages/reset-password/ResetPassword";
 import Chat from "./pages/chat/Chat";
-import Support from "./pages/chat/Support";
+import SupportChat from "./pages/support-chat/SupportChat";
 import SubscriptionPage from "./pages/subscription/subscription/SubscriptionPage";
+import Profile from "./pages/profile/Profile";
 import {ReceiptsPage} from "./pages/receipt/ReceiptPage";
 import PaymentHistory from "./components/profile/PaymentHistory";
 import PaymentHistoryPage from "./pages/payment-history/PaymentHistoryPage";
 import SuccessSubscriptionPage from "./pages/subscription/succesSubscription/SuccessSubscriptionPage";
+import SupportProfile from "./pages/profile/SupportProfile";
 
 
 function App() {
@@ -27,9 +29,11 @@ function App() {
                 <Route path="/subscription" element={<SubscriptionPage/>} />
                 <Route path="/receipts" element={<ReceiptsPage/>}/>
                 <Route path="/payment-history" element={<PaymentHistoryPage/>}/>
-                <Route path="/chat" element={<Chat />}/>
-                <Route path="/support" element={<Support />} />
+                <Route path="/chat" element={<Chat />} />
+                <Route path="/supportChat" element={<SupportChat/>} />
                 <Route path="/succeeded-payment" element={<SuccessSubscriptionPage />}/>
+                <Route path="/profile" element={<Profile />}/>
+                <Route path="/support-profile" element={<SupportProfile />}/>
             </Routes>
         </BrowserRouter>
     );

@@ -31,19 +31,20 @@ import java.util.Set;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
+
     private final UserService userService;
     private final JwtFilter jwtFilter;
 
     @Value("${cors.allowed-origins:http://localhost:5173,http://localhost:3000}")
     private String[] allowedOrigins;
 
-    public SecurityConfig(UserService userService,@Lazy JwtFilter jwtFilter) {
+    public SecurityConfig(UserService userService, @Lazy JwtFilter jwtFilter) {
         this.userService = userService;
         this.jwtFilter = jwtFilter;
     }
 
     @Bean
-    public SecurityFilterChain configure(HttpSecurity http) throws Exception {//TODO настроить
+    public SecurityFilterChain configure(HttpSecurity http) throws Exception {
         return http
                 .csrf(AbstractHttpConfigurer::disable)
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
@@ -51,39 +52,36 @@ public class SecurityConfig {
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 )
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
-
-                .authorizeHttpRequests(auth ->
-                    auth
-                            .requestMatchers(
-                            "/", "/login", "/codeEmail", "/forgotPassword",
-                            "/recoveryPassword", "/register", "/api/auth/**",
-                            "/error","/*.html", "/*.css", "/*.js","/**",
-                            "/api/support-ticket", "api/support-message"
-                            ).permitAll()
-
-                            .requestMatchers(
-                                    "/admin", "/api/admin/role-request/**",   "/swagger-ui/**",
-                                    "/swagger-ui.html", "/v3/api-docs/**", "/swagger-resources/**",
-                                    "/webjars/**"
-                            )
-                            .permitAll()
-
-                            .requestMatchers(
-                                    "/test","/chooseTest","/createTest","/result","/dashboard",
-                                    "/api/user-test/**","/api/user-answer","/api/users/**","/api/tests/**",
-                                    "/api/questions","/tests/jwt"
-                            ).authenticated()
-
-                            .anyRequest().permitAll()
+                .authorizeHttpRequests(auth -> auth
+                        .requestMatchers(
+                                "/", "/login", "/codeEmail", "/forgotPassword",
+                                "/recoveryPassword", "/register", "/api/auth/**",
+                                "/error", "/*.html", "/*.css", "/*.js",
+                                // WebSocket — SockJS делает несколько HTTP-запросов перед апгрейдом
+                                "/ws/support/**",
+                                // REST поддержки (история чата доступна без дополнительного разрешения)
+                                "/api/support-ticket", "/api/support-message/**"
+                        ).permitAll()
+                        .requestMatchers(
+                                "/api/users/me"
+                        ).permitAll()
+                        .requestMatchers(
+                                "/admin", "/api/admin/role-request/**",
+                                "/swagger-ui/**", "/swagger-ui.html",
+                                "/v3/api-docs/**", "/swagger-resources/**", "/webjars/**"
+                        ).permitAll()
+                        .requestMatchers(
+                                "/test", "/chooseTest", "/createTest", "/result", "/dashboard",
+                                "/api/user-test/**", "/api/user-answer", "/api/users/**",
+                                "/api/tests/**", "/api/questions", "/tests/jwt"
+                        ).authenticated()
+                        .anyRequest().permitAll()
                 )
-
                 .exceptionHandling(exception -> exception
                         .authenticationEntryPoint(
-                                (request, response, authException)
-                                        -> response.sendRedirect("/login")
+                                (request, response, authException) -> response.sendRedirect("/login")
                         )
                 )
-
                 .logout(logout -> logout
                         .logoutUrl("/api/auth/logout")
                         .logoutSuccessUrl("/")
@@ -108,7 +106,7 @@ public class SecurityConfig {
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowedOrigins(Arrays.asList(allowedOrigins));
-        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type"));
         configuration.setAllowCredentials(true);
         configuration.setMaxAge(3600L);
@@ -121,16 +119,14 @@ public class SecurityConfig {
     @Bean
     public UserDetailsService userDetailsService() {
         return new UserDetailsService() {
-
             @Override
             public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
                 UserRegistrationResponse user = userService.findUserByEmail(username);
-                if(user == null)
-                    throw new UsernameNotFoundException(username);
+                if (user == null) throw new UsernameNotFoundException(username);
                 Set<SimpleGrantedAuthority> roles = Collections.singleton(user.role().toAuthority());
-                return new org.springframework.security.core.userdetails.User(user.email(),user.password(),roles);
+                return new org.springframework.security.core.userdetails.User(
+                        user.email(), user.password(), roles);
             }
         };
     }
-
 }
