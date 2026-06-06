@@ -1,5 +1,8 @@
 package org.example.chatai.supportTickets.api.controllers;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -13,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@Tag(name = "Тикеты для обращения в поддержку")
 @RestController
 @RequestMapping("/api/support-ticket")
 @RequiredArgsConstructor
@@ -20,6 +24,7 @@ import java.util.List;
 public class SupportTicketController {
     private final SupportTicketService supportTicketService;
 
+    @Operation(summary = "Создать новый тикет обращения в поддержку (ТОЛЬКО USER!)")
     @PostMapping
     public ResponseEntity<SupportTicketResponse> createTicket(
             @RequestBody @Valid SupportTicketCreateRequest request
@@ -31,6 +36,7 @@ public class SupportTicketController {
                 .body(supportTicketService.createTicket(request));
     }
 
+    @Operation(summary = "Показать все тикеты текущего пользователя")
     @GetMapping
     public ResponseEntity<List<SupportTicketResponse>> getAllTickets(
             @RequestParam(name = "pageSize", required = false) Integer pageSize,
@@ -43,8 +49,10 @@ public class SupportTicketController {
                 .body(supportTicketService.getAllTicketsByUser(pageSize, pageNum));
     }
 
+    @Operation(summary = "Получить тикет по id (ТОЛЬКО ПРИНАДЛЕЖАЩИЕ ТЕКУЩЕМУ ПОЛЬЗОВАТЕЛЮ!)")
     @GetMapping("/{id}")
     public ResponseEntity<SupportTicketResponse> getTicketById(
+            @Parameter(description = "Id тикета")
             @PathVariable Long id
     ) {
         log.info("Called method: getTicketById with id: {}", id);
@@ -54,8 +62,10 @@ public class SupportTicketController {
                 .body(supportTicketService.getTicketById(id));
     }
 
+    @Operation(summary = "Получить статус тикета")
     @GetMapping("/status/{id}")
     public ResponseEntity<SupportStatusResponse> getTicketStatusById(
+            @Parameter(description = "Id тикета")
             @PathVariable Long id
     ) {
         log.info("Called method: getStatusById with id: {}", id);
@@ -65,8 +75,10 @@ public class SupportTicketController {
                 .body(supportTicketService.getTicketStatusById(id));
     }
 
+    @Operation(summary = "Закрыть тикет(поставить статус CLOSED)")
     @PatchMapping("/{id}")
     public ResponseEntity<SupportTicketResponse> closeTicket(
+            @Parameter(description = "Id тикета")
             @PathVariable("id") Long id
     ) {
         log.info("Called method: closeTicket with id: {}", id);

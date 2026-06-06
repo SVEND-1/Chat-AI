@@ -4,28 +4,19 @@ import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.text.StrBuilder;
 import org.example.chatai.chat.api.dto.response.ChatAIResponse;
 import org.example.chatai.chat.api.dto.response.ListChatAI;
 import org.example.chatai.chat.api.exception.ChatOwnershipException;
 import org.example.chatai.chat.db.ChatEntity;
 import org.example.chatai.chat.db.ChatRepository;
 import org.example.chatai.users.domain.UserService;
-import org.springframework.ai.chat.memory.ChatMemory;
-import org.springframework.ai.chat.messages.AssistantMessage;
-import org.springframework.ai.chat.messages.Message;
-import org.springframework.ai.chat.messages.UserMessage;
-import org.springframework.ai.chat.prompt.Prompt;
-import org.springframework.ai.ollama.OllamaChatModel;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Slf4j
-@Repository
+@Service
 @RequiredArgsConstructor
 public class ChatService {
 
@@ -63,14 +54,13 @@ public class ChatService {
             chatEntity.setUser(userService.getCurrentUser());
             chatRepository.save(chatEntity);
             return title;
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             log.error("Не удалось сохранить чат");
             return e.getMessage();
         }
     }
 
-    public Flux<String> sendMessageToAI(Long chatId,String question) {
+    public Flux<String> sendMessageToAI(Long chatId, String question) {
         return aiManager.sendMessageToAI(chatId, question);
     }
 
@@ -81,15 +71,14 @@ public class ChatService {
             aiManager.deleted(String.valueOf(chatId));
             chatRepository.deleteById(chatId);
             return "Успешно";
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             return e.getMessage();
         }
     }
 
     private void isValid(Long chatId) {
         ChatEntity chatEntity = chatRepository.findById(chatId).orElseThrow(() -> new EntityNotFoundException("Чат не найден"));
-        if(!chatEntity.getUser().getId().equals(userService.getCurrentUser().getId())){
+        if (!chatEntity.getUser().getId().equals(userService.getCurrentUser().getId())) {
             log.warn("Пользователь не является владельцем чата");
             throw new ChatOwnershipException("Пользователь не является владельцем чата");
         }
