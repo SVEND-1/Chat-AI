@@ -27,21 +27,30 @@ export const useProfile = (): UseProfileReturn => {
                 setLoading(true);
                 setError(null);
 
-                // 1. Получаем текущего пользователя
+                // 1. Пользователь — критичный запрос, если упал — показываем ошибку
                 const userRes = await getCurrentUser();
                 const user = userRes.data;
                 setUserData(user);
 
-                // 2. Получаем подписку по id пользователя
-                const subRes = await getSubscription(user.id);
-                setSubscription(subRes.data);
-
-                // 3. Получаем заявки на роль (берём последнюю)
-                const rolesRes = await getUserRoles();
-                const roles = rolesRes.data;
-                if (roles.length > 0) {
-                    setRoleRequest(roles[roles.length - 1]);
+                // 2. Подписка — некритичная, может не быть
+                try {
+                    const subRes = await getSubscription(user.id);
+                    setSubscription(subRes.data);
+                } catch {
+                    setSubscription(null);
                 }
+
+                // 3. Заявки на роль — некритичные, могут отсутствовать
+                try {
+                    const rolesRes = await getUserRoles();
+                    const roles = rolesRes.data;
+                    if (roles.length > 0) {
+                        setRoleRequest(roles[roles.length - 1]);
+                    }
+                } catch {
+                    setRoleRequest(null);
+                }
+
             } catch (err) {
                 setError('Ошибка загрузки данных профиля');
                 console.error(err);
@@ -55,11 +64,14 @@ export const useProfile = (): UseProfileReturn => {
 
     const submitRoleRequest = async (message: string) => {
         await createRoleRequest(message);
-        // После отправки перезапрашиваем заявки
-        const rolesRes = await getUserRoles();
-        const roles = rolesRes.data;
-        if (roles.length > 0) {
-            setRoleRequest(roles[roles.length - 1]);
+        try {
+            const rolesRes = await getUserRoles();
+            const roles = rolesRes.data;
+            if (roles.length > 0) {
+                setRoleRequest(roles[roles.length - 1]);
+            }
+        } catch {
+            // игнорируем
         }
     };
 
