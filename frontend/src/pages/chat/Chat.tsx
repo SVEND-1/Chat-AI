@@ -1,9 +1,7 @@
 import { useState, useEffect, useRef } from "react";
-import {Link, useNavigate} from "react-router-dom";
+import { Link } from "react-router-dom";
 import "../../style/chat.css";
 import logoIcon from '../../assets/icons/icon.svg'
-import SettingsModal from "../../components/Chat/settingModal/SettingModal";
-
 
 interface Message {
     id: number;
@@ -13,27 +11,44 @@ interface Message {
 }
 
 interface ChatRoom {
-    id: string;
-    name: string;
+    id: number;
+    title: string;
     messages: Message[];
 }
 
+const API_BASE_URL = 'http://localhost:8080/api/chats';
 
+// Парсинг SSE чанка: убираем "data:" префикс и лишние пробелы
+const parseSSEChunk = (chunk: string): string => {
+    return chunk
+        .split('\n')
+        .filter(line => line.startsWith('data:'))
+        .map(line => line.slice(5)) // убираем "data:"
+        .join('');
+};
 
 export default function Chat() {
-    const navigate = useNavigate();
     const [chatRooms, setChatRooms] = useState<ChatRoom[]>([]);
-    const [currentChatId, setCurrentChatId] = useState<string | null>(null);
+    const [currentChatId, setCurrentChatId] = useState<number | null>(null);
     const [input, setInput] = useState("");
     const [showProfileMenu, setShowProfileMenu] = useState(false);
-
-    const [showSettingsModal, setShowSettingsModal] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
+    const [isSending, setIsSending] = useState(false);
 
     const inputRef = useRef<HTMLInputElement>(null);
     const messagesEndRef = useRef<HTMLDivElement>(null);
 
     const currentChat = chatRooms.find(chat => chat.id === currentChatId);
 
+    useEffect(() => {
+        loadChats();
+    }, []);
+
+    useEffect(() => {
+        if (currentChatId) {
+            loadChatMessages(currentChatId);
+        }
+    }, [currentChatId]);
 
     useEffect(() => {
         if (inputRef.current) {
@@ -41,17 +56,68 @@ export default function Chat() {
         }
     }, [currentChatId]);
 
-    // Scroll to bottom when messages change
     useEffect(() => {
         if (messagesEndRef.current) {
             messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
         }
     }, [currentChat?.messages]);
 
-    const handleSend = () => {
-        if (!input.trim() || !currentChatId) return;
+    const loadChats = async () => {
+        setIsLoading(true);
+        try {
+            const response = await fetch(API_BASE_URL, {
+                credentials: 'include'
+            });
+            if (response.ok) {
+                const chats = await response.json();
+                const formattedChats = chats.map((chat: any) => ({
+                    id: chat.id,
+                    title: chat.title,
+                    messages: []
+                }));
+                setChatRooms(formattedChats);
 
-        const newMessage: Message = {
+                if (formattedChats.length > 0) {
+                    setCurrentChatId(formattedChats[0].id);
+                }
+            }
+        } catch (error) {
+            console.error('Ошибка загрузки чатов:', error);
+        } finally {
+            setIsLoading(false);
+        }
+    };
+
+    const loadChatMessages = async (chatId: number) => {
+        try {
+            const response = await fetch(`${API_BASE_URL}/${chatId}`, {
+                credentials: 'include'
+            });
+            if (response.ok) {
+                const data = await response.json();
+                // Сообщения из БД идут от старых к новым — порядок правильный
+                const messages = data.message.map((msg: any, index: number) => ({
+                    id: index,
+                    text: msg.message,
+                    time: new Date().toLocaleTimeString().slice(0, 5),
+                    isUser: msg.type === 'USER'
+                }));
+
+                setChatRooms(prev => prev.map(chat =>
+                    chat.id === chatId
+                        ? { ...chat, messages: messages }
+                        : chat
+                ));
+            }
+        } catch (error) {
+            console.error('Ошибка загрузки сообщений:', error);
+        }
+    };
+
+    const handleSend = async () => {
+        if (!input.trim() || !currentChatId || isSending) return;
+
+        const userMessage: Message = {
             id: Date.now(),
             text: input,
             time: new Date().toLocaleTimeString().slice(0, 5),
@@ -60,60 +126,164 @@ export default function Chat() {
 
         setChatRooms(prev => prev.map(chat =>
             chat.id === currentChatId
-                ? { ...chat, messages: [...chat.messages, newMessage] }
+                ? { ...chat, messages: [...chat.messages, userMessage] }
                 : chat
         ));
 
+        const question = input;
         setInput("");
+        setIsSending(true);
 
-        // Keep focus on input after sending
-        setTimeout(() => {
-            if (inputRef.current) {
-                inputRef.current.focus();
+        const tempAssistantId = Date.now() + 1;
+
+        try {
+            const response = await fetch(`${API_BASE_URL}/${currentChatId}?question=${encodeURIComponent(question)}`, {
+                method: 'POST',
+                credentials: 'include',
+                headers: {
+                    'Accept': 'text/event-stream',
+                }
+            });
+
+            if (!response.ok) {
+                throw new Error('Ошибка отправки');
             }
-        }, 0);
+
+            const reader = response.body?.getReader();
+            const decoder = new TextDecoder();
+
+            const assistantMessageId = Date.now() + 2;
+            let assistantMessageAdded = false;
+
+            if (reader) {
+                while (true) {
+                    const { done, value } = await reader.read();
+                    if (done) break;
+
+                    const rawChunk = decoder.decode(value);
+                    // Парсим SSE: убираем "data:" префикс
+                    const text = parseSSEChunk(rawChunk);
+
+                    if (!text) continue; // пропускаем пустые чанки
+
+                    if (!assistantMessageAdded) {
+                        setChatRooms(prev => prev.map(chat =>
+                            chat.id === currentChatId
+                                ? {
+                                    ...chat,
+                                    messages: [...chat.messages, {
+                                        id: assistantMessageId,
+                                        text: text,
+                                        time: new Date().toLocaleTimeString().slice(0, 5),
+                                        isUser: false,
+                                    }]
+                                }
+                                : chat
+                        ));
+                        assistantMessageAdded = true;
+                    } else {
+                        setChatRooms(prev => prev.map(chat =>
+                            chat.id === currentChatId
+                                ? {
+                                    ...chat,
+                                    messages: chat.messages.map(m =>
+                                        m.id === assistantMessageId
+                                            ? { ...m, text: m.text + text }
+                                            : m
+                                    )
+                                }
+                                : chat
+                        ));
+                    }
+                }
+            }
+        } catch (error) {
+            console.error('Ошибка отправки сообщения:', error);
+
+            setChatRooms(prev => prev.map(chat =>
+                chat.id === currentChatId
+                    ? {
+                        ...chat,
+                        messages: [...chat.messages, {
+                            id: tempAssistantId,
+                            text: "❌ Ошибка при отправке сообщения. Попробуйте еще раз.",
+                            time: new Date().toLocaleTimeString().slice(0, 5),
+                            isUser: false,
+                        }]
+                    }
+                    : chat
+            ));
+        } finally {
+            setIsSending(false);
+        }
     };
 
-    const handleCreateChat = () => {
-        const newChat: ChatRoom = {
-            id: `chat-${Date.now()}`,
-            name: `Новый чат ${chatRooms.length + 1}`,
-            messages: [],
-        };
+    const handleCreateChat = async () => {
+        const title = `Новый чат ${chatRooms.length + 1}`;
+        try {
+            const response = await fetch(`${API_BASE_URL}?title=${encodeURIComponent(title)}`, {
+                method: 'POST',
+                credentials: 'include'
+            });
 
-        setChatRooms(prev => [...prev, newChat]);
-        setCurrentChatId(newChat.id);
+            if (response.ok) {
+                await loadChats();
+            }
+        } catch (error) {
+            console.error('Ошибка создания чата:', error);
+        }
     };
 
-    const switchChat = (chatId: string) => {
-        setCurrentChatId(chatId);
-    };
-
-    const handleDeleteClick = (chatId: string, e: React.MouseEvent) => {
+    const handleDeleteClick = async (chatId: number, e: React.MouseEvent) => {
         e.stopPropagation();
 
-        setChatRooms(prev => prev.filter(chat => chat.id !== chatId));
+        try {
+            const response = await fetch(`${API_BASE_URL}/${chatId}`, {
+                method: 'DELETE',
+                credentials: 'include'
+            });
 
-        if (currentChatId === chatId) {
-            const remainingChats = chatRooms.filter(chat => chat.id !== chatId);
-            setCurrentChatId(remainingChats.length > 0 ? remainingChats[0].id : null);
+            if (response.ok) {
+                setChatRooms(prev => prev.filter(chat => chat.id !== chatId));
+
+                if (currentChatId === chatId) {
+                    const remainingChats = chatRooms.filter(chat => chat.id !== chatId);
+                    setCurrentChatId(remainingChats.length > 0 ? remainingChats[0].id : null);
+                }
+            }
+        } catch (error) {
+            console.error('Ошибка удаления чата:', error);
         }
+    };
+
+    const switchChat = (chatId: number) => {
+        setCurrentChatId(chatId);
     };
 
     const toggleProfileMenu = () => {
         setShowProfileMenu(!showProfileMenu);
     };
 
-    // Функции для открытия/закрытия
-    const openSettingsModal = () => {
-        setShowProfileMenu(false);
-        setShowSettingsModal(true);
-    };
-
-    const closeSettingsModal = () => {
-        setShowSettingsModal(false);
-    };
-
+    if (isLoading) {
+        return (
+            <div className="app">
+                <div className="sidebar">
+                    <div className="logo">
+                        <img src={logoIcon} alt="Lumen logo" className="logo-icon" />
+                        <span>Lumen</span>
+                    </div>
+                </div>
+                <div className="main-content">
+                    <div className="empty-state">
+                        <div className="empty-state-content">
+                            <div className="loader"></div>
+                            <p>Загрузка чатов...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        );
+    }
 
     return (
         <div className="app">
@@ -153,7 +323,7 @@ export default function Chat() {
                                             d="M8.625 12a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H8.25m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H12m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25-.781 0-1.544-.094-2.273-.27-.365.326-.793.636-1.294.883-.784.39-1.684.577-2.602.637-.447.03-.835-.33-.788-.777.119-1.104.418-2.118.908-3.022C4.717 16.408 3 14.357 3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25Z"
                                         />
                                     </svg>
-                                    <span className="chat-name">{chat.name}</span>
+                                    <span className="chat-name">{chat.title}</span>
                                 </button>
                                 <button
                                     className="delete-chat-btn"
@@ -204,10 +374,7 @@ export default function Chat() {
 
                         {showProfileMenu && (
                             <div className="profile-menu">
-                                <button
-                                    className="profile-menu-item"
-                                    onClick={openSettingsModal}
-                                >
+                                <Link to="/settings" className="profile-menu-item">
                                     <svg viewBox="0 0 24 24" strokeWidth="1.5" width="18" height="18">
                                         <path
                                             stroke="currentColor"
@@ -223,7 +390,7 @@ export default function Chat() {
                                         />
                                     </svg>
                                     Настройки
-                                </button>
+                                </Link>
                                 <Link to="/support" className="profile-menu-item">
                                     <svg viewBox="0 0 24 24" strokeWidth="1.5" width="18" height="18">
                                         <path
@@ -258,7 +425,7 @@ export default function Chat() {
                     {currentChat ? (
                         <>
                             <div className="chat-header">
-                                <h1>{currentChat.name}</h1>
+                                <h1>{currentChat.title}</h1>
                             </div>
 
                             <div className="messages-wrapper">
@@ -273,6 +440,17 @@ export default function Chat() {
                                         </div>
                                     </div>
                                 ))}
+                                {isSending && (
+                                    <div className="message left">
+                                        <div className="message-content">
+                                            <div className="typing-indicator">
+                                                <span></span>
+                                                <span></span>
+                                                <span></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                )}
                                 <div ref={messagesEndRef} />
                             </div>
 
@@ -285,16 +463,17 @@ export default function Chat() {
                                         value={input}
                                         onChange={(e) => setInput(e.target.value)}
                                         onKeyDown={(e) => {
-                                            if (e.key === "Enter" && !e.shiftKey) {
+                                            if (e.key === "Enter" && !e.shiftKey && !isSending) {
                                                 e.preventDefault();
                                                 handleSend();
                                             }
                                         }}
+                                        disabled={isSending}
                                     />
                                     <button
-                                        className={`send-btn ${!input.trim() ? 'disabled' : ''}`}
+                                        className={`send-btn ${!input.trim() || isSending ? 'disabled' : ''}`}
                                         onClick={handleSend}
-                                        disabled={!input.trim()}
+                                        disabled={!input.trim() || isSending}
                                     >
                                         <svg viewBox="0 0 24 24" strokeWidth="1.5" width="20" height="20">
                                             <path
@@ -337,9 +516,6 @@ export default function Chat() {
                     )}
                 </div>
             </div>
-            {showSettingsModal && (
-                <SettingsModal onClose={closeSettingsModal} />
-            )}
         </div>
     );
 }

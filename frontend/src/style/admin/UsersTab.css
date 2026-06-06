@@ -1,0 +1,58 @@
+.users-tab { display: flex; flex-direction: column; }
+
+.users-table {
+    background: #1a1a1a;
+    border: 1px solid #2a2a2a;
+    border-radius: 14px;
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+.users-table__head {
+    display: grid;
+    grid-template-columns: 1fr 1fr 120px;
+    padding: 12px 20px;
+    background: #141414;
+    border-bottom: 1px solid #2a2a2a;
+    font-size: 11px;
+    font-weight: 700;
+    color: #5a5a5a;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.users-table__row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 120px;
+    padding: 14px 20px;
+    border-bottom: 1px solid #1f1f1f;
+    align-items: center;
+    transition: background 0.15s;
+}
+
+.users-table__row:last-child { border-bottom: none; }
+.users-table__row:hover { background: #1e1e1e; }
+
+.users-table__email {
+    font-size: 14px;
+    color: #e5e5e5;
+    font-weight: 500;
+}
+
+.users-table__name {
+    font-size: 14px;
+    color: #b0b0b0;
+}
+
+.users-table__role {
+    font-size: 12px;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 20px;
+    display: inline-block;
+    text-align: center;
+}
+
+.users-table__role--user     { background: rgba(255,255,255,0.06); color: #8a8a8a; }
+.users-table__role--support  { background: rgba(0,102,255,0.12);   color: #66ccff; }
+.users-table__role--admin    { background: rgba(255,152,0,0.12);   color: #ffb74d; }

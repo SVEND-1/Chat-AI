@@ -1,0 +1,29 @@
+/* ========== EmptyReceipt.module.css ========== */
+.empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    color: var(--text-muted);
+    height: 100%;
+}
+
+.icon {
+    font-size: 52px;
+    color: var(--text-secondary);
+}
+
+.title {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text-secondary);
+}
+
+.sub {
+    font-size: 13px;
+    text-align: center;
+    max-width: 260px;
+    line-height: 1.5;
+    color: var(--text-muted);
+}

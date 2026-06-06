@@ -1,88 +1,81 @@
 .payment-list {
-    height: 100%;
     display: flex;
     flex-direction: column;
-    overflow: hidden;
-}
-
-.payment-list__title {
-    padding: 20px 16px;
-    margin: 0;
-    font-size: 18px;
-    font-weight: 600;
-    color: #e5e5e5;
-    border-bottom: 1px solid #2a2a2a;
-}
-
-.payment-list__items {
-    flex: 1;
-    overflow-y: auto;
-    padding: 8px;
+    gap: 6px;
 }
 
 .payment-list__item {
-    padding: 16px;
-    margin-bottom: 8px;
-    border-radius: 12px;
-    background-color: #2a2a2a;
-    border: 1px solid #404040;
+    width: 100%;
+    padding: 12px 14px;
+    background: #141414;
+    border: 1px solid #2a2a2a;
+    border-radius: 10px;
     cursor: pointer;
-    transition: all 0.2s ease;
+    text-align: left;
+    transition: border-color 0.15s, background 0.15s;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    font-family: inherit;
 }
 
 .payment-list__item:hover {
-    border-color: #0066ff;
+    border-color: #3a3a3a;
+    background: #1e1e1e;
 }
 
-.payment-list__item--selected {
+.payment-list__item--active {
     border-color: #0066ff;
-    background: linear-gradient(135deg, rgba(0, 102, 255, 0.2), rgba(102, 150, 255, 0.2));
+    background: rgba(0, 102, 255, 0.08);
 }
 
-.payment-list__item-header {
+.payment-list__item-top {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    margin-bottom: 12px;
-    gap: 12px;
+    gap: 8px;
 }
 
-.payment-list__item-description {
-    font-size: 14px;
-    font-weight: 500;
+.payment-list__item-desc {
+    font-size: 13px;
+    font-weight: 600;
     color: #e5e5e5;
-    line-height: 1.4;
+    line-height: 1.3;
     flex: 1;
 }
 
 .payment-list__item-status {
-    font-size: 12px;
-    font-weight: 600;
-    padding: 4px 8px;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 2px 8px;
     border-radius: 20px;
     white-space: nowrap;
+    flex-shrink: 0;
 }
 
-.payment-list__item-status--success {
-    color: #0083ef;
+.payment-list__item-status--succeeded {
+    background: rgba(76, 175, 80, 0.15);
+    color: #81c784;
 }
 
 .payment-list__item-status--pending {
-    color: #ffaa00;
+    background: rgba(255, 152, 0, 0.15);
+    color: #ffb74d;
 }
 
 .payment-list__item-status--failed {
-    color: #ff4444;
+    background: rgba(244, 67, 54, 0.15);
+    color: #e57373;
 }
 
-.payment-list__item-footer {
+.payment-list__item-bottom {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
 .payment-list__item-amount {
-    font-size: 16px;
+    font-size: 15px;
     font-weight: 700;
     background: linear-gradient(135deg, #0066ff, #66ccff);
     -webkit-background-clip: text;
@@ -91,6 +84,6 @@
 }
 
 .payment-list__item-date {
-    font-size: 12px;
-    color: #8a8a8a;
+    font-size: 11px;
+    color: #5a5a5a;
 }

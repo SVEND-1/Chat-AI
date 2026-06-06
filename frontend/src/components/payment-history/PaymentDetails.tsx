@@ -1,11 +1,11 @@
 import React from 'react';
-import { Payment, Receipt } from '../../pages/payment-history/PaymentHistoryPage';
+import type { PaymentResponse, ReceiptResponse } from '../../api/paymentApi';
 import ReceiptDetails from './ReceiptDetails';
 import '../../style/payment-history/PaymentDetails.css';
 
 interface PaymentDetailsProps {
-    payment: Payment;
-    receipt: Receipt | null;
+    payment: PaymentResponse;
+    receipt: ReceiptResponse | null;
     onCreateReceipt: () => void;
 }
 
@@ -53,15 +53,15 @@ const PaymentDetails: React.FC<PaymentDetailsProps> = ({ payment, receipt, onCre
                 <div className="payment-details__row">
                     <span className="payment-details__label">Сумма:</span>
                     <span className="payment-details__value payment-details__value--amount">
-            {payment.value} ₽
-          </span>
+                        {payment.value} ₽
+                    </span>
                 </div>
 
                 <div className="payment-details__row">
                     <span className="payment-details__label">Статус:</span>
                     <span className={`payment-details__value payment-details__value--status payment-details__value--status-${payment.status}`}>
-            {getStatusText(payment.status)}
-          </span>
+                        {getStatusText(payment.status)}
+                    </span>
                 </div>
 
                 <div className="payment-details__row">

@@ -8,7 +8,6 @@ import ResetPassword from "./pages/reset-password/ResetPassword";
 import Chat from "./pages/chat/Chat";
 import SubscriptionPage from "./pages/subscription/SubscriptionPage";
 import Profile from "./pages/profile/Profile";
-import PaymentHistoryPage from "./pages/payment-history/PaymentHistoryPage";
 
 
 
@@ -26,7 +25,6 @@ function App() {
                 <Route path="/chat" element={<Chat />}/>
                 <Route path="/subscription" element={<SubscriptionPage />}/>
                 <Route path="/profile" element={<Profile />}/>
-                <Route path="/payment-history" element={<PaymentHistoryPage />}/>
             </Routes>
         </BrowserRouter>
     );

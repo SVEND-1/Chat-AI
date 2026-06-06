@@ -1,9 +1,9 @@
 import React from 'react';
-import { Receipt } from '../../pages/payment-history/PaymentHistoryPage';
+import type { ReceiptResponse } from '../../api/paymentApi';
 import '../../style/payment-history/ReceiptDetails.css';
 
 interface ReceiptDetailsProps {
-    receipt: Receipt | null;
+    receipt: ReceiptResponse | null;
     onCreateReceipt: () => void;
 }
 
@@ -104,8 +104,8 @@ const ReceiptDetails: React.FC<ReceiptDetailsProps> = ({ receipt, onCreateReceip
                     <div key={index} className="receipt-details__settlement">
                         <span className="receipt-details__settlement-type">{settlement.type}:</span>
                         <span className="receipt-details__settlement-amount">
-              {settlement.amountValue} {settlement.amountCurrency}
-            </span>
+                            {settlement.amountValue} {settlement.amountCurrency}
+                        </span>
                     </div>
                 ))}
             </div>

@@ -1,0 +1,45 @@
+.admin-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 16px;
+    margin-bottom: 32px;
+}
+
+.admin-stat-card {
+    background: #1a1a1a;
+    border: 1px solid #2a2a2a;
+    border-radius: 14px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.admin-stat-card__icon {
+    font-size: 32px;
+    line-height: 1;
+}
+
+.admin-stat-card__body {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.admin-stat-card__label {
+    font-size: 12px;
+    color: #8a8a8a;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+}
+
+.admin-stat-card__value {
+    font-size: 28px;
+    font-weight: 800;
+    background: linear-gradient(135deg, #0066ff, #66ccff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1;
+}
