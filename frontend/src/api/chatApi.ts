@@ -1,7 +1,12 @@
-import { ApiChatDetail, ApiChatItem } from '../types/Chat/api.types';
-import { ChatRoom, Message } from '../types/Chat/chat.types';
+import axios from 'axios';
+import { ApiChatDetail, ApiChatItem } from '../types/chat/api.types';
+import { ChatRoom, Message } from '../types/chat/chat.types';
 
-export const API_BASE_URL = 'http://localhost:8080/api/chats';
+// Создаем экземпляр axios для чатов (аналогично auth)
+const API = axios.create({
+    baseURL: "http://localhost:8080/api/chats",
+    withCredentials: true,
+});
 
 export const parseSSEChunk = (chunk: string): string => {
     return chunk
@@ -12,17 +17,13 @@ export const parseSSEChunk = (chunk: string): string => {
 };
 
 export const fetchChats = async (): Promise<ChatRoom[]> => {
-    const response = await fetch(API_BASE_URL, { credentials: 'include' });
-    if (!response.ok) throw new Error('Ошибка загрузки чатов');
-    const chats: ApiChatItem[] = await response.json();
-    return chats.map(chat => ({ id: chat.id, title: chat.title, messages: [] }));
+    const response = await API.get<ApiChatItem[]>('');
+    return response.data.map(chat => ({ id: chat.id, title: chat.title, messages: [] }));
 };
 
 export const fetchChatMessages = async (chatId: number): Promise<Message[]> => {
-    const response = await fetch(`${API_BASE_URL}/${chatId}`, { credentials: 'include' });
-    if (!response.ok) throw new Error('Ошибка загрузки сообщений');
-    const data: ApiChatDetail = await response.json();
-    return data.message.map((msg, index) => ({
+    const response = await API.get<ApiChatDetail>(`/${chatId}`);
+    return response.data.message.map((msg, index) => ({
         id: chatId * 100000 + index,
         text: msg.message,
         time: new Date().toLocaleTimeString().slice(0, 5),
@@ -31,19 +32,13 @@ export const fetchChatMessages = async (chatId: number): Promise<Message[]> => {
 };
 
 export const createChat = async (title: string): Promise<void> => {
-    const response = await fetch(`${API_BASE_URL}?title=${encodeURIComponent(title)}`, {
-        method: 'POST',
-        credentials: 'include',
+    await API.post('', null, {
+        params: { title: title }
     });
-    if (!response.ok) throw new Error('Ошибка создания чата');
 };
 
 export const deleteChat = async (chatId: number): Promise<void> => {
-    const response = await fetch(`${API_BASE_URL}/${chatId}`, {
-        method: 'DELETE',
-        credentials: 'include',
-    });
-    if (!response.ok) throw new Error('Ошибка удаления чата');
+    await API.delete(`/${chatId}`);
 };
 
 export const sendMessage = async (
@@ -52,7 +47,7 @@ export const sendMessage = async (
     onChunk: (text: string) => void
 ): Promise<void> => {
     const response = await fetch(
-        `${API_BASE_URL}/${chatId}?question=${encodeURIComponent(question)}`,
+        `http://localhost:8080/api/chats/${chatId}?question=${encodeURIComponent(question)}`,
         {
             method: 'POST',
             credentials: 'include',
