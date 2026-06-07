@@ -73,7 +73,8 @@ public class AIManager {
                         el.getText(),
                         el.getMessageType()
                 ))
-                .toList();
+                .toList()
+                .reversed();
     }
 
     @Transactional

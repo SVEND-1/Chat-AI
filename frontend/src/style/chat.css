@@ -386,6 +386,8 @@ body {
     padding: 30px;
     display: flex;
     flex-direction: column;
+    /* Сообщения идут сверху вниз. Новые добавляются в конец массива → оказываются снизу. */
+    justify-content: flex-start;
     gap: 16px;
     width: 100%;
     max-width: 900px;
