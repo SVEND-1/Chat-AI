@@ -14,6 +14,7 @@ import PaymentHistory from "./components/profile/PaymentHistory";
 import PaymentHistoryPage from "./pages/payment-history/PaymentHistoryPage";
 import SuccessSubscriptionPage from "./pages/subscription/succesSubscription/SuccessSubscriptionPage";
 import SupportProfile from "./pages/profile/SupportProfile";
+import AdminPage from "./pages/admin/AdminPage";
 
 
 function App() {
@@ -26,14 +27,20 @@ function App() {
                 <Route path="/reset-verify" element={<VerifyResetCode />} />
                 <Route path="/forgot-password" element={<ForgotPassword />} />
                 <Route path="/reset-password" element={<ResetPassword />} />
+
                 <Route path="/subscription" element={<SubscriptionPage/>} />
                 <Route path="/receipts" element={<ReceiptsPage/>}/>
                 <Route path="/payment-history" element={<PaymentHistoryPage/>}/>
                 <Route path="/chat" element={<Chat />} />
-                <Route path="/supportChat" element={<SupportChat/>} />
                 <Route path="/succeeded-payment" element={<SuccessSubscriptionPage />}/>
-                <Route path="/profile" element={<Profile />}/>
+
+                <Route path="/supportChat" element={<SupportChat/>} />
                 <Route path="/support-profile" element={<SupportProfile />}/>
+
+                <Route path="/profile" element={<Profile />}/>
+
+                <Route path="/admin" element={<AdminPage />} />
+
             </Routes>
         </BrowserRouter>
     );

@@ -22,6 +22,7 @@ import java.time.Month;
 import java.util.Optional;
 import java.util.UUID;
 
+
 @Slf4j
 @Service
 @RequiredArgsConstructor
@@ -57,13 +58,24 @@ public class SubscriptionService {
         );
     }
 
+    private void upsertSubscription(String paymentId, UserEntity user) {
+        Optional<SubscriptionEntity> existing = subscriptionRepository.findByUserEmail(user.getEmail());
+
+        SubscriptionEntity sub = existing.orElseGet(() -> SubscriptionEntity.builder().user(user).build());
+        sub.setActive(Status.ACTIVE);
+        sub.setPaymentId(paymentId);
+        sub.setEndDate(LocalDateTime.now().plusMinutes(3));
+
+        subscriptionRepository.save(sub);
+    }
+
     public String giveSubscribeFromAdmin(String email) {
         try {
             UserEntity user = userService.findUserByEmailEntity(email);
-            createSubscriptionEntity(ADMIN_PAYMENT_ID,user);
+            upsertSubscription(ADMIN_PAYMENT_ID, user);
             return "Успешно";
-        }catch (Exception e){
-            log.error("Не удалось выдать подписку с админа,ex={}",e.getMessage());
+        } catch (Exception e) {
+            log.error("Не удалось выдать подписку с админа, ex={}", e.getMessage());
             throw new RuntimeException(e);
         }
     }
@@ -85,9 +97,8 @@ public class SubscriptionService {
         }
     }
 
-    private void createSubscriptionEntity(String paymentId,UserEntity user) {
-        SubscriptionEntity subscription = buildSubscription(paymentId, user);
-        subscriptionRepository.save(subscription);
+    private void createSubscriptionEntity(String paymentId, UserEntity user) {
+        upsertSubscription(paymentId, user);
     }
 
     private SubscriptionEntity buildSubscription(String paymentId, UserEntity user) {

@@ -4,6 +4,7 @@ import CloseButton from '../../components/subscription/subscription/CloseButton'
 import AdminStats from '../../components/admin/AdminStats';
 import UsersTab from '../../components/admin/UsersTab';
 import ApplicationsTab from '../../components/admin/ApplicationsTab';
+import GiveSubscriptionTab from '../../components/admin/GiveSubscriptionTab';
 import AnswerModal from '../../components/admin/AnswerModal';
 import '../../style/admin/AdminPage.css';
 
@@ -14,19 +15,16 @@ const AdminPage: React.FC = () => {
         <div className="admin-page">
             <CloseButton onClose={() => state.navigate('/chat')} />
 
-            {/* Header */}
             <div className="admin-page__header">
                 <h1 className="admin-page__title">Панель администратора</h1>
                 <p className="admin-page__subtitle">Управление пользователями и заявками</p>
             </div>
 
-            {/* Stats */}
             <AdminStats
                 totalUsers={state.totalUsers}
                 subsPercent={state.subsPercent}
             />
 
-            {/* Tabs */}
             <div className="admin-tabs">
                 <button
                     className={`admin-tabs__btn ${state.activeTab === 'users' ? 'admin-tabs__btn--active' : ''}`}
@@ -40,9 +38,14 @@ const AdminPage: React.FC = () => {
                 >
                     Заявки на роль
                 </button>
+                <button
+                    className={`admin-tabs__btn ${state.activeTab === 'subscription' ? 'admin-tabs__btn--active' : ''}`}
+                    onClick={() => state.setActiveTab('subscription')}
+                >
+                    Выдать подписку
+                </button>
             </div>
 
-            {/* Tab content */}
             <div className="admin-page__content">
                 {state.activeTab === 'users' && (
                     <UsersTab
@@ -67,9 +70,11 @@ const AdminPage: React.FC = () => {
                         onAnswer={state.setAnswerTarget}
                     />
                 )}
+                {state.activeTab === 'subscription' && (
+                    <GiveSubscriptionTab />
+                )}
             </div>
 
-            {/* Answer modal */}
             {state.answerTarget && (
                 <AnswerModal
                     application={state.answerTarget}

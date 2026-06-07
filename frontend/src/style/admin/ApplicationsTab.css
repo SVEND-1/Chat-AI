@@ -53,7 +53,7 @@
     flex-shrink: 0;
 }
 
-.app-card__status--pending  { background: rgba(255,152,0,0.12);  color: #ffb74d; }
+.app-card__status--waiting { background: rgba(255,152,0,0.12);  color: #ffb74d; }
 .app-card__status--approved { background: rgba(76,175,80,0.12);  color: #81c784; }
 .app-card__status--rejected { background: rgba(244,67,54,0.12);  color: #e57373; }
 
@@ -86,17 +86,70 @@
     color: #5a5a5a;
 }
 
+.app-card__actions {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding-top: 12px;
+    border-top: 1px solid #2a2a2a;
+    margin-top: 4px;
+}
+
+.app-card__textarea {
+    width: 100%;
+    padding: 10px 12px;
+    background: #141414;
+    border: 1px solid #2a2a2a;
+    border-radius: 10px;
+    color: #e5e5e5;
+    font-size: 13px;
+    font-family: inherit;
+    resize: none;
+    outline: none;
+    box-sizing: border-box;
+    transition: border-color 0.15s;
+}
+
+.app-card__textarea:focus { border-color: #0066ff; }
+.app-card__textarea::placeholder { color: #3a3a3a; }
+.app-card__textarea:disabled { opacity: 0.5; }
+
+.app-card__error {
+    font-size: 12px;
+    color: #e57373;
+    margin: 0;
+}
+
+.app-card__btns {
+    display: flex;
+    gap: 8px;
+}
+
 .app-card__btn {
-    padding: 6px 16px;
-    background: linear-gradient(135deg, #0066ff, #66ccff);
-    color: white;
+    flex: 1;
+    padding: 8px 16px;
     border: none;
     border-radius: 50px;
     font-size: 13px;
-    font-weight: 600;
+    font-weight: 700;
     cursor: pointer;
     font-family: inherit;
-    transition: box-shadow 0.2s;
+    transition: box-shadow 0.2s, opacity 0.15s;
 }
 
-.app-card__btn:hover { box-shadow: 0 0 12px rgba(0,102,255,0.4); }
+.app-card__btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.app-card__btn--approve {
+    background: linear-gradient(135deg, #0066ff, #66ccff);
+    color: white;
+}
+
+.app-card__btn--approve:hover:not(:disabled) { box-shadow: 0 0 12px rgba(0,102,255,0.4); }
+
+.app-card__btn--reject {
+    background: rgba(244, 67, 54, 0.1);
+    color: #e57373;
+    border: 1px solid rgba(244, 67, 54, 0.2);
+}
+
+.app-card__btn--reject:hover:not(:disabled) { background: rgba(244, 67, 54, 0.18); }
