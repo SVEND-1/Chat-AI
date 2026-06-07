@@ -68,6 +68,7 @@ const AdminPage: React.FC = () => {
                         onPageChange={state.setAppsPage}
                         onStatusFilter={state.handleAppsStatusFilter}
                         onAnswer={state.setAnswerTarget}
+
                     />
                 )}
                 {state.activeTab === 'subscription' && (

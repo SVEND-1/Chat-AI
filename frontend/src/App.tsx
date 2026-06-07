@@ -15,6 +15,7 @@ import PaymentHistoryPage from "./pages/payment-history/PaymentHistoryPage";
 import SuccessSubscriptionPage from "./pages/subscription/succesSubscription/SuccessSubscriptionPage";
 import SupportProfile from "./pages/profile/SupportProfile";
 import AdminPage from "./pages/admin/AdminPage";
+import Support from "./pages/chat/Support";
 
 
 function App() {
@@ -34,7 +35,7 @@ function App() {
                 <Route path="/chat" element={<Chat />} />
                 <Route path="/succeeded-payment" element={<SuccessSubscriptionPage />}/>
 
-                <Route path="/supportChat" element={<SupportChat/>} />
+                <Route path="/supportChat" element={<Support/>} />
                 <Route path="/support-profile" element={<SupportProfile />}/>
 
                 <Route path="/profile" element={<Profile />}/>

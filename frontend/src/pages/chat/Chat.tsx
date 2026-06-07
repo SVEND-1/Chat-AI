@@ -5,6 +5,7 @@ import { Sidebar } from '../../components/Chat/Sidebar';
 import { MessageList } from '../../components/Chat/MessageList';
 import { MessageInput } from '../../components/Chat/MessageInput';
 import { EmptyState } from '../../components/Chat/EmptyState';
+import SettingsModal from "../../components/Chat/settingModal/SettingModal";
 
 export default function Chat() {
     const {
@@ -20,13 +21,14 @@ export default function Chat() {
     } = useChat();
 
     const [showProfileMenu, setShowProfileMenu] = useState(false);
+    const [showSettings, setShowSettings] = useState(false);
 
     // Отладка
-    console.log('🔴 Chat render:', {
-        chatRoomsLength: chatRooms.length,
-        currentChatId,
-        hasSidebar: !!chatRooms
-    });
+    // console.log('🔴 Chat render:', {
+    //     chatRoomsLength: chatRooms.length,
+    //     currentChatId,
+    //     hasSidebar: !!chatRooms
+    // });
 
     if (isLoading) {
         return (
@@ -41,7 +43,6 @@ export default function Chat() {
 
     return (
         <div className="app" style={{ display: 'flex', minHeight: '100vh' }}>
-            {/* Sidebar - принудительно показываем */}
             <div style={{ width: '280px', flexShrink: 0 }}>
                 <Sidebar
                     chatRooms={chatRooms}
@@ -51,6 +52,7 @@ export default function Chat() {
                     onSelectChat={setCurrentChatId}
                     onDeleteChat={handleDeleteChat}
                     onToggleProfileMenu={() => setShowProfileMenu(prev => !prev)}
+                    onOpenSettings={() => setShowSettings(true)}
                 />
             </div>
 
@@ -76,6 +78,9 @@ export default function Chat() {
                     )}
                 </div>
             </div>
+            {showSettings && (
+                <SettingsModal onClose={() => setShowSettings(false)} />
+            )}
         </div>
     );
 }

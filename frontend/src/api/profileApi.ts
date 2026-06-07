@@ -1,6 +1,6 @@
 // api/profile/profileApi.ts
 import axios from 'axios';
-import { UserData } from '../../types/profile/profile.types';
+import { UserData } from '../types/profile/profile.types';
 
 const API_BASE_URL = 'http://localhost:8080';
 

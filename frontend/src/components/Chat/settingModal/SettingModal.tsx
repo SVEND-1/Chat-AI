@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import "../../../style/settingModal/SettingModal.css";
 import "../../../style/settingModal/Modal.css";
+// import { SettingsTab, SettingsModalProps } from '../../../types/chat/settingModal/settingModal.types';
 import { SettingsTab, SettingsModalProps } from '../../../types/chat/settingModal/settingModal.types';
 import GeneralSettings from './GeneralSettings';
 import AboutProgram from './AboutProgram';

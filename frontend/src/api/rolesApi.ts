@@ -1,6 +1,6 @@
 // api/profile/rolesApi.ts
 import axios from 'axios';
-import { RoleRequestData } from '../../types/profile/profile.types';
+import { RoleRequestData } from '../types/profile/profile.types';
 
 const API_BASE_URL = 'http://localhost:8080';
 

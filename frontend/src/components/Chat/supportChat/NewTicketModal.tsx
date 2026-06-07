@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { createPortal } from "react-dom";
 
 interface NewTicketModalProps {
     onClose: () => void;
@@ -22,7 +23,7 @@ export function NewTicketModal({ onClose, onCreate }: NewTicketModalProps) {
         }
     };
 
-    return (
+    return createPortal(
         <div className="support-modal-overlay" onClick={onClose}>
             <div className="support-modal" onClick={(e) => e.stopPropagation()}>
                 <div className="support-modal-header">
@@ -30,7 +31,7 @@ export function NewTicketModal({ onClose, onCreate }: NewTicketModalProps) {
                     <button className="support-modal-close" onClick={onClose}>
                         <svg viewBox="0 0 24 24" strokeWidth="1.5" width="20" height="20">
                             <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round"
-                                d="M6 18 18 6M6 6l12 12" />
+                                  d="M6 18 18 6M6 6l12 12" />
                         </svg>
                     </button>
                 </div>
@@ -55,10 +56,11 @@ export function NewTicketModal({ onClose, onCreate }: NewTicketModalProps) {
                         onClick={handleSubmit}
                         disabled={!title.trim() || isSubmitting}
                     >
-                        Создать обращение
+                        {isSubmitting ? "Создание..." : "Создать обращение"}
                     </button>
                 </div>
             </div>
-        </div>
+        </div>,
+        document.body
     );
 }
