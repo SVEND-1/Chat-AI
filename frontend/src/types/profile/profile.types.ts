@@ -1,39 +1,31 @@
+// profile.types.ts
+
 export interface UserData {
-    id: string;
+    id: number;
     name: string;
     email: string;
-    role: 'user' | 'support' | 'admin';
+    role: 'USER' | 'SUPPORT' | 'ADMIN';
     avatar?: string;
-    createdAt: string;
 }
 
 export interface SubscriptionData {
-    status: 'active' | 'inactive' | 'expired' | 'pending';
-    plan?: 'basic' | 'premium' | 'pro';
-    startDate?: string;
-    endDate?: string;
-    autoRenew: boolean;
+    status: string;   // "ACTIVE" | "BLOCKED" — строка с бэка
+    endDate: string;  // уже отформатирована на бэке: "15 мая 2025г."
 }
 
 export interface RoleRequestData {
-    id: string;
-    userId: string;
-    requestedRole: 'support';
-    status: 'pending' | 'approved' | 'rejected';
-    message?: string;
+    id?: number;              // пока нет, но будет
+    messageUser: string;
+    answerAdmin?: string;
+    statusRole: 'PENDING' | 'APPROVED' | 'REJECTED';
     createdAt: string;
-    reviewedAt?: string;
-    // Новые поля для ответа администратора
-    adminResponse?: string;
-    adminResponseDate?: string;
+    answeredAt?: string;
+    user: UserDefaultResponse;
 }
 
-export interface PaymentHistoryItem {
-    id: string;
-    date: string;
-    amount: number;
-    currency: string;
-    status: 'success' | 'pending' | 'failed';
-    description: string;
-    invoiceUrl?: string;
+export interface UserDefaultResponse {
+    id: number;
+    name: string;
+    email: string;
+    role: 'USER' | 'SUPPORT' | 'ADMIN';
 }
