@@ -306,7 +306,7 @@
 .badge.open   { background: var(--green-dim); color: var(--green); border: 1px solid var(--green); }
 .badge.closed { background: var(--bg3); color: var(--muted); border: 1px solid var(--border); }
 
-/* ─── Messages ───────────────────────────── */
+/* ─── Messages — ИСПРАВЛЕННЫЕ СТИЛИ (мои справа, чужие слева, перенос текста) ───── */
 .messages {
   flex: 1;
   overflow-y: auto;
@@ -331,9 +331,19 @@
 
 .empty-icon { font-size: 40px; }
 
-.msg-row { display: flex; gap: 10px; align-items: flex-end; }
-.msg-row.mine { flex-direction: row-reverse; }
+/* РЯД СООБЩЕНИЯ */
+.msg-row {
+  display: flex;
+  gap: 10px;
+  align-items: flex-end;
+}
 
+/* МОИ СООБЩЕНИЯ — СПРАВА */
+.msg-row.mine {
+  flex-direction: row-reverse;
+}
+
+/* ЧУЖИЕ СООБЩЕНИЯ — СЛЕВА (по умолчанию) */
 .avatar {
   width: 30px;
   height: 30px;
@@ -345,26 +355,76 @@
   font-weight: 700;
   flex-shrink: 0;
 }
+
 .avatar.mine    { background: var(--accent-dim); color: var(--accent); border: 1px solid var(--accent); }
 .avatar.user    { background: var(--accent-dim); color: var(--accent); border: 1px solid var(--accent); }
 .avatar.support { background: var(--support-dim); color: var(--support-clr); border: 1px solid var(--support-clr); }
 .avatar.other   { background: var(--bg3); color: var(--muted); border: 1px solid var(--border); }
 
+/* ПУЗЫРЬКИ СООБЩЕНИЙ — с переносом длинных слов */
 .bubble {
-  max-width: 65%;
+  max-width: 80%;
   padding: 9px 13px;
   border-radius: 12px;
   font-size: 13px;
   line-height: 1.5;
+  word-wrap: break-word;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
 }
-.bubble.mine    { background: var(--accent-dim); color: var(--accent); border: 1px solid var(--accent); border-bottom-right-radius: 3px; }
-.bubble.user    { background: var(--accent-dim); color: var(--accent); border: 1px solid var(--accent); border-bottom-left-radius: 3px; }
-.bubble.support { background: var(--support-dim); color: var(--support-clr); border: 1px solid var(--support-clr); border-bottom-left-radius: 3px; }
-.bubble.other   { background: var(--bg3); color: var(--text); border: 1px solid var(--border); border-bottom-left-radius: 3px; }
 
-.msg-meta { font-size: 10px; color: var(--muted); margin-top: 4px; padding: 0 5px; }
-.msg-row.mine .msg-meta { text-align: right; }
+/* МОИ СООБЩЕНИЯ (справа) */
+.bubble.mine {
+  background: var(--accent-dim);
+  color: var(--accent);
+  border: 1px solid var(--accent);
+  border-bottom-right-radius: 3px;
+}
 
+/* СООБЩЕНИЯ ПОЛЬЗОВАТЕЛЯ (слева, когда пишешь не ты) */
+.bubble.user {
+  background: var(--accent-dim);
+  color: var(--accent);
+  border: 1px solid var(--accent);
+  border-bottom-left-radius: 3px;
+}
+
+/* СООБЩЕНИЯ ПОДДЕРЖКИ (слева) */
+.bubble.support {
+  background: var(--support-dim);
+  color: var(--support-clr);
+  border: 1px solid var(--support-clr);
+  border-bottom-left-radius: 3px;
+}
+
+/* ДРУГИЕ СООБЩЕНИЯ (слева) */
+.bubble.other {
+  background: var(--bg3);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-bottom-left-radius: 3px;
+}
+
+/* ВРЕМЯ СООБЩЕНИЯ */
+.msg-meta {
+  font-size: 10px;
+  color: var(--muted);
+  margin-top: 4px;
+  padding: 0 5px;
+}
+
+/* Время у моих сообщений — справа */
+.msg-row.mine .msg-meta {
+  text-align: right;
+}
+
+/* Время у чужих сообщений — слева */
+.msg-row:not(.mine) .msg-meta {
+  text-align: left;
+}
+
+/* СИСТЕМНЫЕ СООБЩЕНИЯ */
 .sys-msg {
   text-align: center;
   font-size: 10px;
@@ -456,3 +516,16 @@
 ::-webkit-scrollbar { width: 4px; }
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+/* ─── Адаптивность ───────────────────────── */
+@media (max-width: 768px) {
+  .bubble {
+    max-width: 85%;
+  }
+}
+
+@media (max-width: 480px) {
+  .bubble {
+    max-width: 92%;
+  }
+}

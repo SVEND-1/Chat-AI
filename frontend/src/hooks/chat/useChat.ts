@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { ChatRoom, Message } from '../../types/Chat/chat.types';
+import { ChatRoom, Message } from '../../types/chat/chat.types';
 import { fetchChats, fetchChatMessages, createChat, deleteChat, sendMessage } from '../../api/chatApi';
 
 export function useChat() {
@@ -34,10 +34,6 @@ export function useChat() {
     };
 
     const loadChatMessages = async (chatId: number) => {
-        // Сбрасываем сообщения сразу при переключении — чтобы не было артефактов старого чата
-        setChatRooms(prev =>
-            prev.map(chat => (chat.id === chatId ? { ...chat, messages: [] } : chat))
-        );
         try {
             const messages = await fetchChatMessages(chatId);
             setChatRooms(prev =>
@@ -64,7 +60,7 @@ export function useChat() {
                 chat.id === currentChatId
                     ? { ...chat, messages: [...chat.messages, userMessage] }
                     : chat
-            ).reverse()
+            )
         );
 
         setIsSending(true);

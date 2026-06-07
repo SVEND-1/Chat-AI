@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { ChatRoom } from '../../types/Chat/chat.types';
+import { ChatRoom } from '../../types/chat/chat.types';
 
 interface SidebarProps {
     chatRooms: ChatRoom[];

@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import { Message } from '../../types/Chat/chat.types';
+import { Message } from '../../types/chat/chat.types';
 
 interface MessageListProps {
     messages: Message[];
@@ -14,9 +14,6 @@ export function MessageList({ messages, isSending }: MessageListProps) {
     }, [messages]);
 
     return (
-        // justify-content: flex-start — сообщения идут сверху вниз в хронологическом порядке.
-        // Новые сообщения добавляются в конец массива и оказываются снизу.
-        // Скролл автоматически прокручивается к последнему сообщению.
         <div className="messages-wrapper">
             {messages.map(msg => (
                 <div key={msg.id} className={`message ${msg.isUser ? 'right' : 'left'}`}>
