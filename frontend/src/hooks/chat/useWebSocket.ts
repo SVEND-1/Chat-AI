@@ -1,6 +1,8 @@
 import { useRef, useCallback, useEffect } from "react";
+import { Client } from "@stomp/stompjs";
+import SockJS from "sockjs-client";
 import { SupportMessage } from "../../types/chat/support.types";
-import { WS_BASE, getTokenFromCookie } from "../../api/supportApi";
+import axios from "axios";
 
 interface UseWebSocketOptions {
     onMessage: (msg: SupportMessage) => void;
@@ -9,82 +11,79 @@ interface UseWebSocketOptions {
     onError: (msg: string) => void;
 }
 
+async function fetchWsToken(): Promise<string> {
+    try {
+        const res = await axios.get("http://localhost:8080/api/auth/token", {
+            withCredentials: true,
+        });
+        return res.data.token ?? "";
+    } catch {
+        return "";
+    }
+}
+
 export function useWebSocket({ onMessage, onConnect, onDisconnect, onError }: UseWebSocketOptions) {
-    const wsRef = useRef<WebSocket | null>(null);
-    const reconnectTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+    const clientRef = useRef<Client | null>(null);
     const currentTicketIdRef = useRef<number | null>(null);
 
-    const disconnect = useCallback((intentional = false) => {
-        if (reconnectTimerRef.current) {
-            clearTimeout(reconnectTimerRef.current);
-            reconnectTimerRef.current = null;
+    const disconnect = useCallback((_intentional = false) => {
+        if (clientRef.current?.active) {
+            clientRef.current.deactivate();
         }
-        if (wsRef.current) {
-            if (intentional) wsRef.current.close(1000);
-            else wsRef.current.close();
-            wsRef.current = null;
-        }
+        clientRef.current = null;
     }, []);
 
-    const connect = useCallback((ticketId: number) => {
+    const connect = useCallback(async (ticketId: number) => {
         disconnect();
         currentTicketIdRef.current = ticketId;
 
-        const token = getTokenFromCookie();
-        const url = token
-            ? `${WS_BASE}/${ticketId}?token=${encodeURIComponent(token)}`
-            : `${WS_BASE}/${ticketId}`;
+        const token = await fetchWsToken();
+        if (!token) {
+            onError("Не удалось получить токен для WebSocket");
+            return;
+        }
 
-        const ws = new WebSocket(url);
-        wsRef.current = ws;
-
-        ws.onopen = () => {
-            onConnect();
-        };
-
-        ws.onmessage = (event) => {
-            try {
-                const data = JSON.parse(event.data);
-                if (data.type === "ERROR") {
-                    onError(data.message);
-                    return;
-                }
-                const newMsg: SupportMessage = {
-                    id: data.id,
-                    senderId: data.senderId,
-                    senderEmail: data.senderEmail,
-                    senderType: data.senderType,
-                    message: data.message,
-                    createdAt: data.createdAt,
-                };
-                onMessage(newMsg);
-            } catch (e) {
-                console.error("WS parse error", e);
-            }
-        };
-
-        ws.onclose = (event) => {
-            onDisconnect();
-            // Переподключаемся если закрытие не намеренное и тикет тот же
-            if (event.code !== 1000 && currentTicketIdRef.current === ticketId) {
-                reconnectTimerRef.current = setTimeout(() => {
-                    if (currentTicketIdRef.current === ticketId) {
-                        connect(ticketId);
+        const client = new Client({
+            webSocketFactory: () => new SockJS("http://localhost:8080/ws/support"),
+            connectHeaders: { token },
+            reconnectDelay: 3000,
+            onConnect: () => {
+                onConnect();
+                client.subscribe(`/topic/support/${ticketId}`, (frame) => {
+                    try {
+                        const data = JSON.parse(frame.body);
+                        if (data.type === "ERROR") { onError(data.message); return; }
+                        const msg: SupportMessage = {
+                            id: data.id,
+                            senderId: data.senderId,
+                            senderEmail: data.senderEmail,
+                            senderType: data.senderType,
+                            message: data.message,
+                            createdAt: data.createdAt,
+                        };
+                        onMessage(msg);
+                    } catch (e) {
+                        console.error("WS parse error", e);
                     }
-                }, 3000);
-            }
-        };
+                });
+            },
+            onDisconnect: () => onDisconnect(),
+            onStompError: (frame) => onError(frame.headers["message"] ?? "WS error"),
+        });
 
-        ws.onerror = () => {
-            onDisconnect();
-        };
+        client.activate();
+        clientRef.current = client;
     }, [disconnect, onConnect, onDisconnect, onError, onMessage]);
 
     const send = useCallback((payload: object) => {
-        wsRef.current?.send(JSON.stringify(payload));
+        if (clientRef.current?.active && currentTicketIdRef.current) {
+            clientRef.current.publish({
+                destination: `/app/support/${currentTicketIdRef.current}/send`,
+                body: JSON.stringify(payload),
+            });
+        }
     }, []);
 
-    // Очищаем при размонтировании
     useEffect(() => {
         return () => disconnect(true);
     }, [disconnect]);

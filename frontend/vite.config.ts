@@ -7,6 +7,9 @@ export default defineConfig({
         react(),
         svgr(),
     ],
+    define: {
+        global: 'globalThis',
+    },
     server: {
         host: "localhost",
         port: 5173,
