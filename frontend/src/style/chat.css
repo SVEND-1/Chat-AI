@@ -318,6 +318,9 @@ body {
 }
 
 .chat-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
     padding: 20px 30px;
     border-bottom: 1px solid #222222;
     background-color: #0f0f0f;
@@ -325,6 +328,11 @@ body {
 }
 
 .chat-header h1 {
+    flex: 1;
+    min-width: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
     font-size: 24px;
     font-weight: 500;
     background: var(--gradient);
@@ -341,8 +349,6 @@ body {
     flex-direction: column;
     gap: 16px;
     width: 100%;
-    max-width: 900px;
-    margin: 0 auto;
 }
 
 .message {
@@ -392,8 +398,6 @@ body {
 .input-container {
     padding: 0 30px 30px 30px;
     width: 100%;
-    max-width: 900px;
-    margin: 0 auto;
     flex-shrink: 0;
 }
 
@@ -628,6 +632,19 @@ body {
 }
 
 
+/* Десктоп: центрируем контент с max-width */
+@media (min-width: 769px) {
+    .messages-wrapper {
+        max-width: 900px;
+        margin: 0 auto;
+    }
+
+    .input-container {
+        max-width: 900px;
+        margin: 0 auto;
+    }
+}
+
 /* ========== Мобильная адаптация ========== */
 
 /* Планшет (768px) */
@@ -690,10 +707,6 @@ body {
     .chat-header {
         padding: 14px 16px;
         gap: 10px;
-    }
-
-    .chat-header h1 {
-        font-size: 18px;
     }
 
     /* Messages */
