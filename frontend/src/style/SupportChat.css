@@ -518,15 +518,83 @@
 ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
 
 /* ─── Адаптивность ───────────────────────── */
-@media (max-width: 768px) {
-    .bubble {
-        max-width: 85%;
-    }
+
+/* ─── Бургер-кнопка ─────────────────────── */
+.burger-btn {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    background: transparent;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    color: var(--muted);
+    cursor: pointer;
+    transition: all 0.15s;
+    flex-shrink: 0;
 }
 
-@media (max-width: 480px) {
+.burger-btn:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    background: var(--accent-dim);
+}
+
+.burger-btn svg {
+    stroke: currentColor;
+    fill: none;
+    width: 16px;
+    height: 16px;
+}
+
+/* ─── Оверлей для мобилки ────────────────── */
+.sidebar-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 99;
+    backdrop-filter: blur(2px);
+}
+
+@media (max-width: 768px) {
+    .burger-btn {
+        display: flex;
+    }
+
+    .sidebar-overlay.open {
+        display: block;
+    }
+
+    .layout {
+        grid-template-columns: 1fr;
+    }
+
+    .sidebar {
+        position: fixed;
+        left: -300px;
+        top: 48px;
+        height: calc(100vh - 48px);
+        width: 300px;
+        z-index: 100;
+        transition: left 0.3s ease;
+    }
+
+    .sidebar.open {
+        left: 0;
+    }
+
     .bubble {
-        max-width: 92%;
+        max-width: 88%;
+    }
+
+    .messages {
+        padding: 12px;
+    }
+
+    .input-area {
+        padding: 10px 12px;
     }
 }
 
@@ -633,197 +701,3 @@
 }
 .support-modal-submit:hover:not(:disabled) { background: var(--accent); color: #fff; }
 .support-modal-submit:disabled { opacity: 0.35; cursor: not-allowed; }
-/* ─── Мобильная адаптивность ─────────────── */
-
-/* Планшеты */
-@media (max-width: 768px) {
-    .layout {
-        grid-template-columns: 220px 1fr;
-    }
-
-    .topbar {
-        padding: 0 14px;
-        font-size: 11px;
-    }
-
-    .messages {
-        padding: 14px;
-    }
-
-    .input-area {
-        padding: 10px 12px;
-    }
-}
-
-/* Мобильные телефоны */
-@media (max-width: 480px) {
-    .app {
-        grid-template-rows: 44px 1fr;
-    }
-
-    /* Topbar: скрываем лишнее, оставляем лого + статус */
-    .topbar {
-        padding: 0 12px;
-        gap: 8px;
-    }
-
-    .topbar-left {
-        gap: 8px;
-    }
-
-    .topbar-logo {
-        font-size: 12px;
-    }
-
-    /* Pill — компактнее */
-    .pill {
-        padding: 3px 8px;
-        font-size: 9px;
-    }
-
-    /* Сайдбар становится шторкой снизу или скрывается */
-    .layout {
-        grid-template-columns: 1fr;
-        position: relative;
-    }
-
-    .sidebar {
-        position: fixed;
-        top: 44px;
-        left: 0;
-        width: 100vw;
-        height: calc(100vh - 44px);
-        z-index: 150;
-        transform: translateX(-100%);
-        transition: transform 0.3s ease;
-        overflow-y: auto;
-        border-right: none;
-        border-bottom: 1px solid var(--border);
-    }
-
-    .sidebar.open {
-        transform: translateX(0);
-        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
-    }
-
-    /* Кнопка переключения сайдбара в topbar */
-    .topbar-sidebar-toggle {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 30px;
-        height: 30px;
-        background: transparent;
-        border: 1px solid var(--border);
-        border-radius: 6px;
-        color: var(--muted);
-        cursor: pointer;
-        font-size: 14px;
-        transition: all 0.15s;
-    }
-
-    .topbar-sidebar-toggle:hover {
-        border-color: var(--accent);
-        color: var(--accent);
-    }
-
-    /* Чат занимает полный экран */
-    .chat {
-        width: 100vw;
-    }
-
-    .chat-hdr {
-        padding: 10px 14px;
-        gap: 8px;
-    }
-
-    .chat-hdr-title {
-        font-size: 12px;
-    }
-
-    .chat-hdr-id {
-        font-size: 9px;
-    }
-
-    .badge {
-        font-size: 8px;
-        padding: 2px 8px;
-    }
-
-    /* Сообщения */
-    .messages {
-        padding: 12px 10px;
-        gap: 10px;
-    }
-
-    .bubble {
-        font-size: 12px;
-        padding: 8px 11px;
-        max-width: 90%;
-    }
-
-    .avatar {
-        width: 26px;
-        height: 26px;
-        font-size: 9px;
-    }
-
-    .msg-meta {
-        font-size: 9px;
-    }
-
-    /* Поле ввода */
-    .input-area {
-        padding: 10px;
-        gap: 6px;
-    }
-
-    .chat-textarea {
-        font-size: 16px; /* предотвращает zoom на iOS */
-        min-height: 38px;
-        padding: 8px 10px;
-    }
-
-    .send-btn {
-        padding: 8px 12px;
-        font-size: 11px;
-    }
-
-    .close-btn {
-        padding: 8px 10px;
-        font-size: 10px;
-    }
-
-    /* Лог событий */
-    .log {
-        font-size: 9.5px;
-    }
-
-    .section {
-        padding: 10px 12px;
-    }
-
-    .inp {
-        font-size: 16px; /* предотвращает zoom на iOS */
-    }
-
-    /* Модальное окно — полный экран на мобиле */
-    .support-modal {
-        width: 100%;
-        max-width: calc(100vw - 24px);
-        padding: 18px 16px;
-        border-radius: 10px;
-    }
-
-    .support-modal-actions {
-        flex-direction: column-reverse;
-        gap: 6px;
-    }
-
-    .support-modal-cancel,
-    .support-modal-submit {
-        width: 100%;
-        text-align: center;
-        padding: 10px 16px;
-    }
-}
