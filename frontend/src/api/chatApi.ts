@@ -4,7 +4,7 @@ import { ChatRoom, Message } from '../types/chat/chat.types';
 
 // Создаем экземпляр axios для чатов (аналогично auth)
 const API = axios.create({
-    baseURL: "http://localhost:8080/api/chats",
+    baseURL: "/api/chats",
     withCredentials: true,
 });
 

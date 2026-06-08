@@ -3,7 +3,7 @@ import { ApiSupportMessageResponse } from "../types/chat/api.types";
 import { SupportMessage, SupportTicket, UserDefaultResponse } from "../types/chat/support.types";
 
 const API = axios.create({
-    baseURL: "http://localhost:8080/api",
+    baseURL: "/api",
     withCredentials: true,
 });
 

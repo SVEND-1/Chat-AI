@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_BASE_URL = "http://localhost:8080";
+const API_BASE_URL = "";
 
 const SUBSCRIPTION_API = axios.create({
     baseURL: `${API_BASE_URL}/api/subscription`,

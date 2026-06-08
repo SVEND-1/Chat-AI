@@ -47,22 +47,6 @@ services:
     restart: unless-stopped
     command: serve
 
-#  minio:
-#    image: minio/minio:latest
-#    container_name: minio
-#    restart: unless-stopped
-#    ports:
-#      - "9000:9000"
-#      - "9001:9001"
-#    environment:
-#      - MINIO_ROOT_USER=admin
-#      - MINIO_ROOT_PASSWORD=strongpassword123
-#    volumes:
-#      - ./minio/data:/data
-#      - ./minio/config:/root/.minio
-#    command: server /data --console-address ":9001"
-#    networks:
-#      - app-network
 
   backend:
     build:
@@ -77,7 +61,7 @@ services:
       - SPRING_DATASOURCE_PASSWORD=admin123
       - KAFKA_BOOTSTRAP_SERVERS=kafka:9092
       - OLLAMA_URL=http://ollama:11434
-      - OLLAMA_MODEL=llama3.2:1b
+      - OLLAMA_MODEL=llama3.2:3b
 
     depends_on:
       - postgres-vector
@@ -88,52 +72,52 @@ services:
       - app-network
     restart: unless-stopped
 
-#  frontend:
-#    build:
-#      context: ./frontend/hackaton
-#      dockerfile: Dockerfile.frontend
-#    container_name: react-frontend
-#    ports:
-#      - "5173:5173"
-#    environment:
-#      - REACT_APP_API_URL=http://6106779-ee569251.twc1.net/api
-#      - REACT_APP_MINIO_URL=http://6106779-ee569251.twc1.net:9000
-#    depends_on:
-#      - backend
-#    networks:
-#      - app-network
-#    restart: unless-stopped
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.frontend
+    container_name: react-frontend
+    ports:
+      - "5173:5173"
+    environment:
+      - REACT_APP_API_URL=http://6106779-ee569251.twc1.net/api
+      - REACT_APP_MINIO_URL=http://6106779-ee569251.twc1.net:9000
+    depends_on:
+      - backend
+    networks:
+      - app-network
+    restart: unless-stopped
 
-#  nginx:
-#    image: nginx:alpine
-#    container_name: nginx-proxy
-#    ports:
-#      - "80:80"
-#      - "443:443"
-#    volumes:
-#      - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf
-#      - ./nginx/ssl:/etc/nginx/ssl
-#      - ./nginx/html:/var/www/html
-#    depends_on:
-#      - backend
-#      - frontend
-#    networks:
-#      - app-network
-#    restart: unless-stopped
-#
-#  certbot:
-#    image: certbot/certbot
-#    container_name: certbot
-#    volumes:
-#      - ./nginx/ssl:/etc/letsencrypt
-#      - ./nginx/html:/var/www/html
-#    command: certonly --webroot --webroot-path=/var/www/html -d 6106779-ee569251.twc1.net --email your-email@example.com --agree-tos --no-eff-email
-#    networks:
-#      - app-network
-#    depends_on:
-#      - nginx
-#    profiles:
-#      - certbot
+  nginx:
+    image: nginx:alpine
+    container_name: nginx-proxy
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+      - ./nginx/ssl:/etc/nginx/ssl
+      - ./nginx/html:/var/www/html
+    depends_on:
+      - backend
+      - frontend
+    networks:
+      - app-network
+    restart: unless-stopped
+
+  certbot:
+    image: certbot/certbot
+    container_name: certbot
+    volumes:
+      - ./nginx/ssl:/etc/letsencrypt
+      - ./nginx/html:/var/www/html
+    command: certonly --webroot --webroot-path=/var/www/html -d 6106779-ee569251.twc1.net --email your-email@example.com --agree-tos --no-eff-email
+    networks:
+      - app-network
+    depends_on:
+      - nginx
+    profiles:
+      - certbot
 
 volumes:
   postgres_data:
@@ -141,8 +125,6 @@ volumes:
     name: postgres_vector_data
   ollama_data:
     driver: local
-#  minio-data:
-#    driver: local
 
 networks:
   app-network:

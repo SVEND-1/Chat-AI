@@ -2,7 +2,7 @@
 import axios from 'axios';
 import { RoleRequestData } from '../types/profile/profile.types';
 
-const API_BASE_URL = 'http://localhost:8080';
+const API_BASE_URL = '';
 
 const ROLES_API = axios.create({
     baseURL: `${API_BASE_URL}/api/roles`,
