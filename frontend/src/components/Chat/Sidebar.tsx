@@ -1,703 +1,121 @@
-/* ─── Design tokens ──────────────────────── */
-:root {
-    --bg:           #0b0d14;
-    --bg2:          #12151f;
-    --bg3:          #1a1e2e;
-    --bg4:          #222740;
-    --border:       #252a3d;
-    --border-light: #2e3550;
-    --text:         #dde1f0;
-    --muted:        #636b8a;
-    --accent:       #5b8af0;
-    --accent-dim:   #111d3d;
-    --accent-glow:  rgba(91, 138, 240, 0.18);
-    --green:        #3ecf72;
-    --green-dim:    #0a2018;
-    --red:          #f05b5b;
-    --red-dim:      #2a0e0e;
-    --yellow:       #f0c05b;
-    --support-clr:  #c48af5;
-    --support-dim:  #1e1030;
-    --font-mono:    'SF Mono', 'Fira Code', 'Cascadia Code', 'Consolas', monospace;
+import { Link } from 'react-router-dom';
+import { ChatRoom } from '../../types/chat/chat.types';
+
+interface SidebarProps {
+    chatRooms: ChatRoom[];
+    currentChatId: number | null;
+    showProfileMenu: boolean;
+    onCreateChat: () => void;
+    onSelectChat: (id: number) => void;
+    onDeleteChat: (id: number, e: React.MouseEvent) => void;
+    onToggleProfileMenu: () => void;
+    onOpenSettings: () => void;
 }
 
-*, *::before, *::after {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+export function Sidebar({
+    chatRooms,
+    currentChatId,
+    showProfileMenu,
+    onCreateChat,
+    onSelectChat,
+    onDeleteChat,
+    onToggleProfileMenu,
+    onOpenSettings,
+}: SidebarProps) {
+    return (
+        <div className="sidebar">
+            <div className="logo">
+
+                <span>Lumen</span>
+            </div>
+
+            <button className="create-chat-btn" onClick={onCreateChat}>
+                <svg viewBox="0 0 24 24" strokeWidth="1.5">
+                    <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round"
+                        d="M12 4.5v15m7.5-7.5h-15" />
+                </svg>
+                <span>Новый чат</span>
+            </button>
+
+            {chatRooms.length > 0 && (
+                <div className="chat-list">
+                    <h3 className="chat-list-title">История чатов</h3>
+                    {chatRooms.map(chat => (
+                        <div key={chat.id} className="chat-item-wrapper">
+                            <button
+                                className={`chat-item ${chat.id === currentChatId ? 'active' : ''}`}
+                                onClick={() => onSelectChat(chat.id)}
+                            >
+                                <svg viewBox="0 0 24 24" strokeWidth="1.5" width="18" height="18">
+                                    <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round"
+                                        d="M8.625 12a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H8.25m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H12m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25-.781 0-1.544-.094-2.273-.27-.365.326-.793.636-1.294.883-.784.39-1.684.577-2.602.637-.447.03-.835-.33-.788-.777.119-1.104.418-2.118.908-3.022C4.717 16.408 3 14.357 3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25Z" />
+                                </svg>
+                                <span className="chat-name">{chat.title}</span>
+                            </button>
+                            <button
+                                className="delete-chat-btn"
+                                onClick={(e) => onDeleteChat(chat.id, e)}
+                                title="Удалить чат"
+                            >
+                                <svg viewBox="0 0 24 24" strokeWidth="1.5" width="16" height="16">
+                                    <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round"
+                                        d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
+                                </svg>
+                            </button>
+                        </div>
+                    ))}
+                </div>
+            )}
+
+            <div className="sidebar-footer">
+                <button className="subscribe-btn" onClick={() => window.location.href = '/subscription'}>
+                    <svg viewBox="0 0 24 24" strokeWidth="1.5" width="20" height="20">
+                        <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round"
+                            d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5z" />
+                    </svg>
+                    <span>Оформить подписку</span>
+                </button>
+
+                <div className="profile-section">
+                    <button className="profile-btn" onClick={onToggleProfileMenu}>
+                        <div className="profile-avatar">
+                            <svg viewBox="0 0 24 24" strokeWidth="1.5">
+                                <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round"
+                                    d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
+                            </svg>
+                        </div>
+                        <span>Профиль</span>
+                    </button>
+
+                    {showProfileMenu && (
+                        <div className="profile-menu">
+                            <button className="profile-menu-item" onClick={onOpenSettings}>
+                                <svg viewBox="0 0 24 24" strokeWidth="1.5" width="18" height="18">
+                                    <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round"
+                                        d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.324.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 011.37.49l1.296 2.247a1.125 1.125 0 01-.26 1.431l-1.003.827c-.293.24-.438.613-.431.992a6.759 6.759 0 010 .255c-.007.378.138.75.43.99l1.005.828c.424.35.534.954.26 1.43l-1.298 2.247a1.125 1.125 0 01-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.57 6.57 0 01-.22.128c-.331.183-.581.495-.644.869l-.213 1.28c-.09.543-.56.941-1.11.941h-2.594c-.55 0-1.02-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 01-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 01-1.369-.49l-1.297-2.247a1.125 1.125 0 01.26-1.431l1.004-.827c.292-.24.437-.613.43-.992a6.932 6.932 0 010-.255c.007-.378-.138-.75-.43-.99l-1.004-.828a1.125 1.125 0 01-.26-1.43l1.297-2.247a1.125 1.125 0 011.37-.491l1.216.456c.356.133.751.072 1.076-.124.074-.04.147-.083.22-.128.332-.183.582-.495.644-.869l.214-1.281z" />
+                                    <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round"
+                                        d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                </svg>
+                                Настройки
+                            </button>
+                            <Link to="/supportChat" className="profile-menu-item">
+                                <svg viewBox="0 0 24 24" strokeWidth="1.5" width="18" height="18">
+                                    <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round"
+                                        d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9 5.25h.008v.008H12v-.008z" />
+                                </svg>
+                                Поддержка
+                            </Link>
+                            <button className="profile-menu-item logout">
+                                <svg viewBox="0 0 24 24" strokeWidth="1.5" width="18" height="18">
+                                    <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round"
+                                        d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75" />
+                                </svg>
+                                Выйти
+                            </button>
+                        </div>
+                    )}
+                </div>
+            </div>
+        </div>
+    );
 }
-
-/* ─── App shell ──────────────────────────── */
-.app {
-    font-family: var(--font-mono);
-    background: var(--bg);
-    color: var(--text);
-    height: 100vh;
-    display: grid;
-    grid-template-rows: 48px 1fr;
-    overflow: hidden;
-}
-
-/* ─── Topbar ─────────────────────────────── */
-.topbar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 20px;
-    border-bottom: 1px solid var(--border);
-    background: var(--bg2);
-    font-size: 12px;
-    font-weight: 600;
-    letter-spacing: 0.06em;
-    flex-shrink: 0;
-}
-
-.topbar-left {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-}
-
-.topbar-logo {
-    color: var(--accent);
-    font-size: 13px;
-}
-
-.topbar-role {
-    font-size: 9px;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    padding: 3px 10px;
-    border-radius: 99px;
-    border: 1px solid var(--border-light);
-    color: var(--muted);
-    font-weight: 400;
-    transition: all 0.3s;
-}
-
-.topbar-role.role-user    { border-color: var(--accent); color: var(--accent); }
-.topbar-role.role-support { border-color: var(--support-clr); color: var(--support-clr); }
-.topbar-role.role-admin   { border-color: var(--yellow); color: var(--yellow); }
-
-/* ─── Status pill ────────────────────────── */
-.pill {
-    display: flex;
-    align-items: center;
-    gap: 7px;
-    padding: 4px 12px;
-    border-radius: 99px;
-    border: 1px solid var(--border);
-    font-size: 10px;
-    font-weight: 400;
-    color: var(--muted);
-    transition: all 0.25s;
-}
-
-.pill .dot {
-    width: 7px;
-    height: 7px;
-    border-radius: 50%;
-    background: var(--muted);
-    transition: background 0.3s;
-}
-
-.pill.ok   { border-color: var(--green); color: var(--green); }
-.pill.ok   .dot { background: var(--green); box-shadow: 0 0 6px var(--green); }
-.pill.err  { border-color: var(--red); color: var(--red); }
-.pill.err  .dot { background: var(--red); }
-
-/* ─── Main layout ────────────────────────── */
-.layout {
-    display: grid;
-    grid-template-columns: 300px 1fr;
-    overflow: hidden;
-    min-height: 0;
-}
-
-/* ─── Sidebar ────────────────────────────── */
-.sidebar {
-    border-right: 1px solid var(--border);
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-    background: var(--bg2);
-}
-
-.section {
-    padding: 14px 16px;
-    border-bottom: 1px solid var(--border);
-    flex-shrink: 0;
-}
-
-.section-label {
-    font-size: 9px;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--muted);
-    margin-bottom: 10px;
-}
-
-/* ─── Ticket list (support/admin view) ───── */
-.ticket-list {
-    flex: 1;
-    overflow-y: auto;
-    display: flex;
-    flex-direction: column;
-}
-
-.ticket-list-header {
-    padding: 10px 16px 6px;
-    font-size: 9px;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--muted);
-    border-bottom: 1px solid var(--border);
-    flex-shrink: 0;
-}
-
-.ticket-item {
-    padding: 11px 16px;
-    border-bottom: 1px solid var(--border);
-    cursor: pointer;
-    transition: background 0.15s;
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-}
-
-.ticket-item:hover { background: var(--bg3); }
-.ticket-item.active { background: var(--bg4); border-left: 2px solid var(--accent); }
-
-.ticket-item-top {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.ticket-item-id {
-    font-size: 9px;
-    color: var(--muted);
-}
-
-.ticket-item-title {
-    font-size: 12px;
-    color: var(--text);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.ticket-item-meta {
-    font-size: 10px;
-    color: var(--muted);
-}
-
-/* ─── Connection section (user view) ─────── */
-.inp {
-    width: 100%;
-    background: var(--bg3);
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    color: var(--text);
-    font-family: inherit;
-    font-size: 12px;
-    padding: 7px 10px;
-    outline: none;
-    margin-bottom: 8px;
-    transition: border-color 0.15s;
-}
-.inp:focus { border-color: var(--accent); }
-.inp:last-of-type { margin-bottom: 0; }
-
-.hint {
-    font-size: 10px;
-    color: var(--muted);
-    line-height: 1.6;
-    margin-top: 8px;
-}
-
-.btn {
-    width: 100%;
-    padding: 8px;
-    border-radius: 6px;
-    border: 1px solid var(--border);
-    background: transparent;
-    color: var(--text);
-    font-family: inherit;
-    font-size: 12px;
-    font-weight: 500;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 6px;
-    transition: all 0.15s;
-    margin-top: 10px;
-}
-.btn:hover { background: var(--bg3); border-color: var(--accent); color: var(--accent); }
-.btn.btn-red { border-color: var(--red); color: var(--red); }
-.btn.btn-red:hover { background: var(--red-dim); }
-.btn:disabled { opacity: 0.35; cursor: not-allowed; pointer-events: none; }
-
-/* ─── Event log ──────────────────────────── */
-.log-label {
-    font-size: 9px;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--muted);
-    padding: 12px 16px 4px;
-    flex-shrink: 0;
-}
-
-.log {
-    flex: 1;
-    overflow-y: auto;
-    padding: 6px 10px;
-    font-size: 10.5px;
-    line-height: 1.7;
-    display: flex;
-    flex-direction: column;
-    gap: 1px;
-    min-height: 0;
-}
-
-.le {
-    padding: 2px 8px;
-    border-radius: 3px;
-    border-left: 2px solid transparent;
-    word-break: break-all;
-    color: var(--muted);
-}
-.le.ok   { border-color: var(--green); color: var(--green); background: var(--green-dim); }
-.le.err  { border-color: var(--red); color: var(--red); background: var(--red-dim); }
-.le.recv { border-color: var(--accent); color: var(--accent); background: var(--accent-dim); }
-.le .t   { opacity: 0.45; margin-right: 5px; }
-
-/* ─── Chat area ──────────────────────────── */
-.chat {
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-    background: var(--bg);
-    min-height: 0;
-}
-
-.chat-hdr {
-    padding: 12px 20px;
-    border-bottom: 1px solid var(--border);
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    background: var(--bg2);
-    flex-shrink: 0;
-}
-
-.chat-hdr-info { flex: 1; }
-.chat-hdr-id   { font-size: 10px; color: var(--muted); margin-bottom: 2px; }
-.chat-hdr-title { font-size: 13px; }
-
-.badge {
-    font-size: 9px;
-    padding: 3px 10px;
-    border-radius: 99px;
-    letter-spacing: 0.06em;
-    font-weight: 600;
-}
-.badge.open   { background: var(--green-dim); color: var(--green); border: 1px solid var(--green); }
-.badge.closed { background: var(--bg3); color: var(--muted); border: 1px solid var(--border); }
-
-/* ─── Messages — ИСПРАВЛЕННЫЕ СТИЛИ (мои справа, чужие слева, перенос текста) ───── */
-.messages {
-    flex: 1;
-    overflow-y: auto;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    min-height: 0;
-}
-
-.empty {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    color: var(--muted);
-    font-size: 12px;
-    gap: 10px;
-    opacity: 0.5;
-}
-
-.empty-icon { font-size: 40px; }
-
-/* РЯД СООБЩЕНИЯ */
-.msg-row {
-    display: flex;
-    gap: 10px;
-    align-items: flex-end;
-}
-
-/* МОИ СООБЩЕНИЯ — СПРАВА */
-.msg-row.mine {
-    flex-direction: row-reverse;
-}
-
-/* ЧУЖИЕ СООБЩЕНИЯ — СЛЕВА (по умолчанию) */
-.avatar {
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 10px;
-    font-weight: 700;
-    flex-shrink: 0;
-}
-
-.avatar.mine    { background: var(--accent-dim); color: var(--accent); border: 1px solid var(--accent); }
-.avatar.user    { background: var(--accent-dim); color: var(--accent); border: 1px solid var(--accent); }
-.avatar.support { background: var(--support-dim); color: var(--support-clr); border: 1px solid var(--support-clr); }
-.avatar.other   { background: var(--bg3); color: var(--muted); border: 1px solid var(--border); }
-
-/* ПУЗЫРЬКИ СООБЩЕНИЙ — с переносом длинных слов */
-.bubble {
-    max-width: 80%;
-    padding: 9px 13px;
-    border-radius: 12px;
-    font-size: 13px;
-    line-height: 1.5;
-    word-wrap: break-word;
-    word-break: break-word;
-    overflow-wrap: break-word;
-    white-space: normal;
-}
-
-/* МОИ СООБЩЕНИЯ (справа) */
-.bubble.mine {
-    background: var(--accent-dim);
-    color: var(--accent);
-    border: 1px solid var(--accent);
-    border-bottom-right-radius: 3px;
-}
-
-/* СООБЩЕНИЯ ПОЛЬЗОВАТЕЛЯ (слева, когда пишешь не ты) */
-.bubble.user {
-    background: var(--accent-dim);
-    color: var(--accent);
-    border: 1px solid var(--accent);
-    border-bottom-left-radius: 3px;
-}
-
-/* СООБЩЕНИЯ ПОДДЕРЖКИ (слева) */
-.bubble.support {
-    background: var(--support-dim);
-    color: var(--support-clr);
-    border: 1px solid var(--support-clr);
-    border-bottom-left-radius: 3px;
-}
-
-/* ДРУГИЕ СООБЩЕНИЯ (слева) */
-.bubble.other {
-    background: var(--bg3);
-    color: var(--text);
-    border: 1px solid var(--border);
-    border-bottom-left-radius: 3px;
-}
-
-/* ВРЕМЯ СООБЩЕНИЯ */
-.msg-meta {
-    font-size: 10px;
-    color: var(--muted);
-    margin-top: 4px;
-    padding: 0 5px;
-}
-
-/* Время у моих сообщений — справа */
-.msg-row.mine .msg-meta {
-    text-align: right;
-}
-
-/* Время у чужих сообщений — слева */
-.msg-row:not(.mine) .msg-meta {
-    text-align: left;
-}
-
-/* СИСТЕМНЫЕ СООБЩЕНИЯ */
-.sys-msg {
-    text-align: center;
-    font-size: 10px;
-    color: var(--muted);
-    padding: 4px 0;
-    border-top: 1px solid var(--border);
-    border-bottom: 1px solid var(--border);
-}
-
-/* ─── Input area ─────────────────────────── */
-.input-area {
-    padding: 14px 16px;
-    border-top: 1px solid var(--border);
-    display: flex;
-    gap: 8px;
-    background: var(--bg2);
-    flex-shrink: 0;
-}
-
-.chat-textarea {
-    flex: 1;
-    background: var(--bg3);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    color: var(--text);
-    font-family: inherit;
-    font-size: 13px;
-    padding: 9px 13px;
-    resize: none;
-    outline: none;
-    min-height: 40px;
-    max-height: 120px;
-    line-height: 1.5;
-    transition: border-color 0.15s;
-}
-.chat-textarea:focus { border-color: var(--accent); }
-.chat-textarea:disabled { opacity: 0.4; cursor: not-allowed; }
-
-.send-btn {
-    padding: 9px 16px;
-    border-radius: 8px;
-    border: 1px solid var(--border);
-    background: transparent;
-    color: var(--text);
-    font-family: inherit;
-    font-size: 12px;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 0.15s;
-    white-space: nowrap;
-}
-.send-btn:hover:not(:disabled) { border-color: var(--accent); color: var(--accent); background: var(--accent-dim); }
-.send-btn:active:not(:disabled) { transform: scale(0.97); }
-.send-btn:disabled { opacity: 0.35; cursor: not-allowed; }
-
-.close-btn {
-    padding: 9px 14px;
-    border-radius: 8px;
-    border: 1px solid var(--red);
-    background: transparent;
-    color: var(--red);
-    font-family: inherit;
-    font-size: 11px;
-    cursor: pointer;
-    transition: all 0.15s;
-    white-space: nowrap;
-}
-.close-btn:hover:not(:disabled) { background: var(--red-dim); }
-.close-btn:disabled { opacity: 0.3; cursor: not-allowed; }
-
-/* ─── Loading / Error screens ────────────── */
-.screen-center {
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 12px;
-    background: var(--bg);
-    color: var(--muted);
-    font-family: var(--font-mono);
-    font-size: 13px;
-}
-
-.screen-center .icon { font-size: 36px; margin-bottom: 6px; }
-.screen-center .title { color: var(--text); font-size: 15px; font-weight: 600; }
-
-/* ─── Scrollbars ─────────────────────────── */
-::-webkit-scrollbar { width: 4px; }
-::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
-
-/* ─── Адаптивность ───────────────────────── */
-
-/* ─── Бургер-кнопка ─────────────────────── */
-.burger-btn {
-    display: none;
-    align-items: center;
-    justify-content: center;
-    width: 32px;
-    height: 32px;
-    background: transparent;
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    color: var(--muted);
-    cursor: pointer;
-    transition: all 0.15s;
-    flex-shrink: 0;
-}
-
-.burger-btn:hover {
-    border-color: var(--accent);
-    color: var(--accent);
-    background: var(--accent-dim);
-}
-
-.burger-btn svg {
-    stroke: currentColor;
-    fill: none;
-    width: 16px;
-    height: 16px;
-}
-
-/* ─── Оверлей для мобилки ────────────────── */
-.sidebar-overlay {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.6);
-    z-index: 99;
-    backdrop-filter: blur(2px);
-}
-
-@media (max-width: 768px) {
-.burger-btn {
-        display: flex;
-    }
-
-.sidebar-overlay.open {
-        display: block;
-    }
-
-.layout {
-        grid-template-columns: 1fr;
-    }
-
-.sidebar {
-        position: fixed;
-        left: -300px;
-        top: 48px;
-        height: calc(100vh - 48px);
-        width: 300px;
-        z-index: 100;
-        transition: left 0.3s ease;
-    }
-
-.sidebar.open {
-        left: 0;
-    }
-
-.bubble {
-        max-width: 88%;
-    }
-
-.messages {
-        padding: 12px;
-    }
-
-.input-area {
-        padding: 10px 12px;
-    }
-}
-
-/* ─── Modal ──────────────────────────────── */
-.support-modal-overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.6);
-    backdrop-filter: blur(4px);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 1000;
-}
-
-.support-modal {
-    background: var(--bg2);
-    border: 1px solid var(--border-light);
-    border-radius: 12px;
-    padding: 24px;
-    width: 460px;
-    max-width: calc(100vw - 32px);
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-}
-
-.support-modal-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.support-modal-header h2 {
-    font-size: 15px;
-    font-weight: 600;
-    color: var(--text);
-}
-
-.support-modal-close {
-    background: transparent;
-    border: none;
-    color: var(--muted);
-    cursor: pointer;
-    padding: 4px;
-    border-radius: 6px;
-    display: flex;
-    align-items: center;
-    transition: color 0.15s;
-}
-.support-modal-close:hover { color: var(--text); }
-
-.support-modal-hint {
-    font-size: 12px;
-    color: var(--muted);
-    line-height: 1.6;
-}
-
-.support-modal-input {
-    background: var(--bg3);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    color: var(--text);
-    font-family: inherit;
-    font-size: 13px;
-    padding: 10px 13px;
-    outline: none;
-    width: 100%;
-    transition: border-color 0.15s;
-}
-.support-modal-input:focus { border-color: var(--accent); }
-
-.support-modal-actions {
-    display: flex;
-    gap: 8px;
-    justify-content: flex-end;
-    margin-top: 4px;
-}
-
-.support-modal-cancel {
-    padding: 8px 16px;
-    border-radius: 8px;
-    border: 1px solid var(--border);
-    background: transparent;
-    color: var(--muted);
-    font-family: inherit;
-    font-size: 12px;
-    cursor: pointer;
-    transition: all 0.15s;
-}
-.support-modal-cancel:hover { border-color: var(--border-light); color: var(--text); }
-
-.support-modal-submit {
-    padding: 8px 16px;
-    border-radius: 8px;
-    border: 1px solid var(--accent);
-    background: var(--accent-dim);
-    color: var(--accent);
-    font-family: inherit;
-    font-size: 12px;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 0.15s;
-}
-.support-modal-submit:hover:not(:disabled) { background: var(--accent); color: #fff; }
-.support-modal-submit:disabled { opacity: 0.35; cursor: not-allowed; }
