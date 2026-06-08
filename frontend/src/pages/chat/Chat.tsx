@@ -19,16 +19,9 @@ export default function Chat() {
         handleCreateChat,
         handleDeleteChat,
     } = useChat();
-
     const [showProfileMenu, setShowProfileMenu] = useState(false);
     const [showSettings, setShowSettings] = useState(false);
-
-    // Отладка
-    // console.log('🔴 Chat render:', {
-    //     chatRoomsLength: chatRooms.length,
-    //     currentChatId,
-    //     hasSidebar: !!chatRooms
-    // });
+    const [sidebarOpen, setSidebarOpen] = useState(false);
 
     if (isLoading) {
         return (
@@ -43,13 +36,21 @@ export default function Chat() {
 
     return (
         <div className="app" style={{ display: 'flex', minHeight: '100vh' }}>
+            {/* Overlay for mobile */}
+            <div
+                className={`sidebar-overlay ${sidebarOpen ? 'visible' : ''}`}
+                onClick={() => setSidebarOpen(false)}
+            />
+
             <div style={{ width: '280px', flexShrink: 0 }}>
                 <Sidebar
                     chatRooms={chatRooms}
                     currentChatId={currentChatId}
                     showProfileMenu={showProfileMenu}
+                    isOpen={sidebarOpen}
+                    onClose={() => setSidebarOpen(false)}
                     onCreateChat={handleCreateChat}
-                    onSelectChat={setCurrentChatId}
+                    onSelectChat={(id) => { setCurrentChatId(id); setSidebarOpen(false); }}
                     onDeleteChat={handleDeleteChat}
                     onToggleProfileMenu={() => setShowProfileMenu(prev => !prev)}
                     onOpenSettings={() => setShowSettings(true)}
@@ -61,23 +62,40 @@ export default function Chat() {
                 <div className="chat-page" style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
                     {currentChat ? (
                         <>
-                            <div className="chat-header" style={{ padding: '20px', borderBottom: '1px solid #333' }}>
+                            <div className="chat-header" style={{ padding: '20px', borderBottom: '1px solid #333', display: 'flex', alignItems: 'center', gap: '12px' }}>
+                                {/* Burger button */}
+                                <button className="burger-btn" onClick={() => setSidebarOpen(true)}>
+                                    <svg viewBox="0 0 24 24" strokeWidth="1.5" width="22" height="22">
+                                        <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round"
+                                              d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                                    </svg>
+                                </button>
                                 <h1 style={{ color: 'white', margin: 0 }}>{currentChat.title}</h1>
                             </div>
-
                             <div style={{ flex: 1, overflow: 'auto' }}>
                                 <MessageList messages={currentChat.messages} isSending={isSending} />
                             </div>
-
                             <div style={{ padding: '20px' }}>
                                 <MessageInput isSending={isSending} onSend={handleSend} />
                             </div>
                         </>
                     ) : (
-                        <EmptyState onCreateChat={handleCreateChat} />
+                        <>
+                            {/* Burger button on empty state too */}
+                            <div style={{ padding: '16px 20px', display: 'flex', alignItems: 'center' }}>
+                                <button className="burger-btn" onClick={() => setSidebarOpen(true)}>
+                                    <svg viewBox="0 0 24 24" strokeWidth="1.5" width="22" height="22">
+                                        <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round"
+                                              d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                                    </svg>
+                                </button>
+                            </div>
+                            <EmptyState onCreateChat={handleCreateChat} />
+                        </>
                     )}
                 </div>
             </div>
+
             {showSettings && (
                 <SettingsModal onClose={() => setShowSettings(false)} />
             )}

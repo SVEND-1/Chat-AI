@@ -13,7 +13,7 @@ interface UseWebSocketOptions {
 
 async function fetchWsToken(): Promise<string> {
     try {
-        const res = await axios.get("http://localhost:8080/api/auth/token", {
+        const res = await axios.get("/api/auth/token", {
             withCredentials: true,
         });
         return res.data.token ?? "";
@@ -44,7 +44,7 @@ export function useWebSocket({ onMessage, onConnect, onDisconnect, onError }: Us
         }
 
         const client = new Client({
-            webSocketFactory: () => new SockJS("http://localhost:8080/ws/support"),
+            webSocketFactory: () => new SockJS("/ws/support"),
             connectHeaders: { token },
             reconnectDelay: 3000,
             onConnect: () => {
