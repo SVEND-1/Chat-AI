@@ -174,3 +174,111 @@ input:checked + .slider:before {
     border-color: var(--grad-start);
     color: #1a1a1a;
 }
+/* ========== АДАПТИВНОСТЬ ДЛЯ МОБИЛЬНЫХ ========== */
+
+/* Планшеты */
+@media (max-width: 768px) {
+    /* Модальное окно — уже указано ниже, здесь общие правки */
+    .social-links {
+        gap: 12px;
+    }
+}
+
+/* Мобильные телефоны */
+@media (max-width: 480px) {
+    /* Переключатель — без изменений (уже маленький) */
+
+    /* Модальное окно настроек: занимает почти весь экран */
+    .modal-overlay {
+        align-items: flex-end; /* шторка снизу */
+        padding: 0;
+    }
+
+    .modal-content {
+        width: 100vw;
+        max-width: 100vw;
+        height: 92vh;
+        border-radius: 20px 20px 0 0;
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* Сайдбар внутри модалки — горизонтальные вкладки сверху */
+    .modal-sidebar {
+        width: 100%;
+        flex-direction: row;
+        overflow-x: auto;
+        overflow-y: hidden;
+        border-right: none;
+        border-bottom: 1px solid #2a2a2a;
+        padding: 10px 12px;
+        gap: 6px;
+        flex-shrink: 0;
+        scrollbar-width: none;
+    }
+
+    .modal-sidebar::-webkit-scrollbar {
+        display: none;
+    }
+
+    .modal-sidebar-btn {
+        white-space: nowrap;
+        padding: 8px 14px;
+        border-radius: 20px;
+        font-size: 13px;
+        flex-shrink: 0;
+    }
+
+    /* Область контента */
+    .modal-content-area {
+        flex: 1;
+        overflow-y: auto;
+        padding: 16px;
+    }
+
+    /* Пункты настроек */
+    .settings-item {
+        padding: 14px 0;
+        gap: 10px;
+    }
+
+    .settings-item-label {
+        font-size: 14px;
+    }
+
+    /* Блок "О приложении" */
+    .about-card {
+        padding: 14px;
+    }
+
+    /* Переключатель темы */
+    .theme-toggle {
+        padding: 3px;
+    }
+
+    .theme-toggle-btn {
+        padding: 6px 12px;
+        font-size: 12px;
+    }
+
+    /* Соц. ссылки */
+    .social-links {
+        margin-top: 16px;
+        gap: 12px;
+    }
+
+    .social-link {
+        width: 42px;
+        height: 42px;
+    }
+
+    /* Кнопка профиля в настройках */
+    .profile-button {
+        padding: 14px;
+    }
+
+    /* Светлая тема — переопределения для мобиля */
+    [data-theme="light"] .modal-sidebar {
+        border-bottom-color: #e5e5e5;
+    }
+}

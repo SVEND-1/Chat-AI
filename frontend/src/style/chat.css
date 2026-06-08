@@ -576,3 +576,157 @@ body {
 @keyframes spin {
     to { transform: rotate(360deg); }
 }
+/* ========== АДАПТИВНОСТЬ ДЛЯ МОБИЛЬНЫХ ========== */
+
+/* Планшеты */
+@media (max-width: 768px) {
+    .sidebar {
+        width: 240px;
+    }
+
+    .messages-wrapper {
+        padding: 20px 16px;
+        max-width: 100%;
+    }
+
+    .input-container {
+        padding: 0 16px 20px 16px;
+        max-width: 100%;
+    }
+
+    .chat-header {
+        padding: 16px 20px;
+    }
+
+    .chat-header h1 {
+        font-size: 20px;
+    }
+}
+
+/* Мобильные телефоны */
+@media (max-width: 480px) {
+    /* Сайдбар скрывается и становится шторкой */
+    .sidebar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100vh;
+        width: 280px;
+        z-index: 200;
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
+    }
+
+    .sidebar.open {
+        transform: translateX(0);
+        box-shadow: 4px 0 24px rgba(0, 0, 0, 0.6);
+    }
+
+    /* Оверлей при открытом сайдбаре */
+    .sidebar-overlay {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 199;
+    }
+
+    .sidebar-overlay.visible {
+        display: block;
+    }
+
+    /* Кнопка-гамбургер для открытия сайдбара */
+    .mobile-menu-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 36px;
+        height: 36px;
+        background: transparent;
+        border: 1px solid #2a2a2a;
+        border-radius: 8px;
+        color: #b0b0b0;
+        cursor: pointer;
+        flex-shrink: 0;
+    }
+
+    .mobile-menu-btn svg {
+        stroke: currentColor;
+        fill: none;
+        width: 20px;
+        height: 20px;
+    }
+
+    /* Шапка чата на мобиле — строка с кнопкой меню */
+    .chat-header {
+        padding: 12px 16px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .chat-header h1 {
+        font-size: 18px;
+        flex: 1;
+    }
+
+    /* Основной контент занимает весь экран */
+    .main-content {
+        width: 100vw;
+    }
+
+    .messages-wrapper {
+        padding: 16px 12px;
+    }
+
+    .message-content {
+        max-width: 85%;
+    }
+
+    .input-container {
+        padding: 0 12px 16px 12px;
+    }
+
+    .input-wrapper {
+        padding: 2px 2px 2px 16px;
+    }
+
+    .input-wrapper input {
+        font-size: 16px; /* предотвращает zoom на iOS */
+        padding: 10px 0;
+    }
+
+    .send-btn {
+        width: 38px;
+        height: 38px;
+    }
+
+    /* Пустое состояние — компактнее */
+    .empty-state-content {
+        padding: 28px 20px;
+        margin: 0 16px;
+    }
+
+    .empty-state-content svg {
+        width: 48px;
+        height: 48px;
+    }
+
+    .empty-state-content h2 {
+        font-size: 20px;
+    }
+
+    .empty-state-content p {
+        font-size: 14px;
+    }
+
+    .start-chat-btn {
+        padding: 12px 22px;
+        font-size: 15px;
+    }
+
+    /* Профиль-меню поднимается выше */
+    .profile-menu {
+        margin-bottom: 8px;
+    }
+}
