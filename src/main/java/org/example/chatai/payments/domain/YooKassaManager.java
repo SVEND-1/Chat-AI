@@ -21,7 +21,7 @@ public class YooKassaManager {
 
     private final PaymentService paymentService;
     private final UserService userService;
-    private final String RETURN_URL = "http://83.217.203.103:5173/succeeded-payment";
+    private final String RETURN_URL = "http://83.217.203.103/succeeded-payment";
     private final ReceiptManager receiptManager;
     private final ReceiptMapper receiptMapper;
 

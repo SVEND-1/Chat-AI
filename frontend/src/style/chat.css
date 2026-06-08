@@ -534,6 +534,60 @@ body {
     height: 20px;
 }
 
+/* ========== Burger button (только мобильные) ========== */
+.burger-btn {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: 1px solid #2a2a2a;
+    border-radius: 8px;
+    color: #b0b0b0;
+    cursor: pointer;
+    padding: 6px;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+}
+.burger-btn:hover {
+    border-color: var(--grad-start);
+    color: #ffffff;
+    background: rgba(0, 102, 255, 0.1);
+}
+.burger-btn svg {
+    stroke: currentColor;
+    fill: none;
+    display: block;
+}
+
+/* Кнопка закрытия сайдбара (скрыта на десктопе) */
+.sidebar-close-btn {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    color: #5a5a5a;
+    cursor: pointer;
+    padding: 4px;
+    margin-left: auto;
+    border-radius: 6px;
+    transition: color 0.2s ease;
+}
+.sidebar-close-btn:hover { color: #ffffff; }
+.sidebar-close-btn svg { stroke: currentColor; fill: none; display: block; }
+
+/* Оверлей под открытым сайдбаром */
+.sidebar-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.55);
+    z-index: 90;
+    opacity: 0;
+    transition: opacity 0.25s ease;
+    pointer-events: none;
+}
+
 /* ========== Индикатор печати ========== */
 .typing-indicator {
     display: flex;
@@ -573,92 +627,187 @@ body {
     animation: spin 1s linear infinite;
 }
 
-@keyframes spin {
-    to { transform: rotate(360deg); }
-}
 
-/* ========== БУРГЕР-КНОПКА ========== */
-.burger-btn {
-    display: none;
-    align-items: center;
-    justify-content: center;
-    width: 40px;
-    height: 40px;
-    background: transparent;
-    border: 1px solid #2a2a2a;
-    border-radius: 10px;
-    color: #b0b0b0;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    flex-shrink: 0;
-}
+/* ========== Мобильная адаптация ========== */
 
-.burger-btn:hover {
-    background: #2a2a2a;
-    color: #ffffff;
-    border-color: var(--grad-start);
-}
-
-.burger-btn svg {
-    stroke: currentColor;
-    fill: none;
-    width: 20px;
-    height: 20px;
-}
-
-/* ========== ОВЕРЛЕЙ ДЛЯ МОБИЛКИ ========== */
-.sidebar-overlay {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.6);
-    z-index: 99;
-    backdrop-filter: blur(2px);
-}
-
-/* ========== МОБИЛЬНАЯ АДАПТИВНОСТЬ ========== */
+/* Планшет (768px) */
 @media (max-width: 768px) {
+    /* Burger и overlay — активны */
     .burger-btn {
         display: flex;
     }
 
-    .sidebar-overlay.open {
+    .sidebar-overlay {
         display: block;
     }
+    .sidebar-overlay.visible {
+        opacity: 1;
+        pointer-events: auto;
+    }
 
-    .chat-header {
+    .sidebar-close-btn {
+        display: flex;
+    }
+
+    /* App: убираем фиксированную ширину под сайдбар */
+    .app {
+        position: relative;
+    }
+
+    /* Сайдбар — выезжает как drawer */
+    .sidebar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 280px;
+        height: 100dvh;
+        z-index: 100;
+        transform: translateX(-100%);
+        transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: 6px 0 30px rgba(0, 0, 0, 0.5);
+    }
+
+    .sidebar.open {
+        transform: translateX(0);
+    }
+
+    /* logo внутри сайдбара: flex-строка */
+    .logo {
         display: flex;
         align-items: center;
-        gap: 12px;
-        padding: 16px 20px;
+        justify-content: flex-start;
+        gap: 8px;
+        padding-bottom: 16px;
+        font-size: 22px;
+    }
+
+    /* Основной контент — на всю ширину */
+    .main-content {
+        width: 100%;
+    }
+
+    /* Chat header */
+    .chat-header {
+        padding: 14px 16px;
+        gap: 10px;
     }
 
     .chat-header h1 {
         font-size: 18px;
     }
 
-    .sidebar {
-        position: fixed;
-        left: -280px;
-        top: 0;
-        height: 100vh;
-        z-index: 100;
-        transition: left 0.3s ease;
-    }
-
-    .sidebar.open {
-        left: 0;
-    }
-
+    /* Messages */
     .messages-wrapper {
         padding: 16px;
-    }
-
-    .input-container {
-        padding: 0 16px 20px 16px;
+        gap: 12px;
+        max-width: 100%;
     }
 
     .message-content {
-        max-width: 85%;
+        max-width: 80%;
+    }
+
+    /* Input */
+    .input-container {
+        padding: 0 16px 16px 16px;
+        max-width: 100%;
+    }
+
+    .input-wrapper {
+        padding: 4px 4px 4px 14px;
+    }
+
+    .input-wrapper input {
+        font-size: 14px;
+    }
+}
+
+/* Мобильный (480px) */
+@media (max-width: 480px) {
+    .sidebar {
+        width: 100vw;
+        max-width: 300px;
+    }
+
+    .chat-header {
+        padding: 12px 14px;
+    }
+
+    .chat-header h1 {
+        font-size: 16px;
+    }
+
+    .messages-wrapper {
+        padding: 12px;
+        gap: 10px;
+    }
+
+    .message-content {
+        max-width: 88%;
+        padding: 10px 13px;
+    }
+
+    .message-text {
+        font-size: 14px;
+    }
+
+    .message-time {
+        font-size: 10px;
+    }
+
+    .input-container {
+        padding: 0 12px 14px 12px;
+    }
+
+    .input-wrapper {
+        padding: 3px 3px 3px 14px;
+        border-radius: 24px;
+    }
+
+    .input-wrapper input {
+        font-size: 14px;
+        padding: 10px 0;
+    }
+
+    .send-btn {
+        width: 36px;
+        height: 36px;
+    }
+
+    .send-btn svg {
+        width: 17px;
+        height: 17px;
+    }
+
+    /* Empty state */
+    .empty-state-content {
+        padding: 28px 20px;
+        border-radius: 16px;
+        gap: 14px;
+    }
+
+    .empty-state-content h2 {
+        font-size: 20px;
+    }
+
+    .empty-state-content p {
+        font-size: 14px;
+    }
+
+    .start-chat-btn {
+        padding: 12px 22px;
+        font-size: 14px;
+    }
+
+    /* Subscribe / profile footer */
+    .subscribe-btn,
+    .profile-btn {
+        padding: 10px 12px;
+        font-size: 13px;
+    }
+
+    .profile-menu-item {
+        font-size: 13px;
+        padding: 9px 10px;
     }
 }

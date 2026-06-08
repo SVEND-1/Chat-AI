@@ -517,84 +517,240 @@
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
 
-/* ─── Адаптивность ───────────────────────── */
-
-/* ─── Бургер-кнопка ─────────────────────── */
+/* ─── Burger button (только мобильные) ───── */
 .burger-btn {
     display: none;
     align-items: center;
     justify-content: center;
-    width: 32px;
-    height: 32px;
     background: transparent;
     border: 1px solid var(--border);
-    border-radius: 6px;
-    color: var(--muted);
+    border-radius: 8px;
+    color: var(--text);
     cursor: pointer;
+    padding: 6px;
     transition: all 0.15s;
     flex-shrink: 0;
 }
-
 .burger-btn:hover {
     border-color: var(--accent);
     color: var(--accent);
     background: var(--accent-dim);
 }
-
 .burger-btn svg {
     stroke: currentColor;
     fill: none;
-    width: 16px;
-    height: 16px;
+    display: block;
 }
 
-/* ─── Оверлей для мобилки ────────────────── */
+/* Кнопка закрытия сайдбара (скрыта на десктопе) */
+.sidebar-close-btn {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    color: var(--muted);
+    cursor: pointer;
+    padding: 4px;
+    margin-left: auto;
+    border-radius: 6px;
+    transition: color 0.15s;
+}
+.sidebar-close-btn:hover { color: var(--text); }
+.sidebar-close-btn svg { stroke: currentColor; fill: none; display: block; }
+
+/* Оверлей под открытым сайдбаром */
 .sidebar-overlay {
     display: none;
     position: fixed;
     inset: 0;
-    background: rgba(0, 0, 0, 0.6);
-    z-index: 99;
-    backdrop-filter: blur(2px);
+    background: rgba(0, 0, 0, 0.55);
+    z-index: 90;
+    opacity: 0;
+    transition: opacity 0.25s;
 }
 
-@media (max-width: 768px) {
-    .burger-btn {
-        display: flex;
-    }
+/* ─── Адаптивность ───────────────────────── */
 
-    .sidebar-overlay.open {
-        display: block;
+/* Планшет (768px) */
+@media (max-width: 768px) {
+    .bubble {
+        max-width: 85%;
     }
 
     .layout {
         grid-template-columns: 1fr;
+        position: relative;
     }
 
+    /* Сайдбар — выезжает слева как drawer */
     .sidebar {
         position: fixed;
-        left: -300px;
-        top: 48px;
-        height: calc(100vh - 48px);
-        width: 300px;
+        top: 0;
+        left: 0;
+        width: 280px;
+        height: 100dvh;
         z-index: 100;
-        transition: left 0.3s ease;
+        transform: translateX(-100%);
+        transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: 4px 0 24px rgba(0, 0, 0, 0.5);
     }
 
     .sidebar.open {
-        left: 0;
+        transform: translateX(0);
+    }
+
+    /* Оверлей активен */
+    .sidebar-overlay {
+        display: block;
+    }
+    .sidebar-overlay.visible {
+        opacity: 1;
+        pointer-events: auto;
+    }
+    .sidebar-overlay:not(.visible) {
+        pointer-events: none;
+    }
+
+    /* Показываем кнопки burger и close */
+    .burger-btn {
+        display: flex;
+    }
+
+    .sidebar-close-btn {
+        display: flex;
+    }
+
+    /* Шапка сайдбара с логотипом + крестик */
+    .logo {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 14px 16px;
+        border-bottom: 1px solid var(--border);
+        flex-shrink: 0;
+        font-size: 15px;
+    }
+
+    /* chat-hdr: добавляем место под burger */
+    .chat-hdr {
+        gap: 10px;
+        padding: 10px 14px;
+    }
+
+    .chat-hdr-title {
+        font-size: 12px;
+    }
+
+    /* Кнопки в header — меньше */
+    .close-btn {
+        padding: 7px 10px;
+        font-size: 10px;
+    }
+
+    /* input area */
+    .input-area {
+        padding: 10px 12px;
+        gap: 6px;
+    }
+
+    .send-btn {
+        padding: 9px 12px;
+        font-size: 11px;
+    }
+
+    /* empty state */
+    .empty {
+        padding: 0 24px;
+        text-align: center;
+        font-size: 11px;
+    }
+}
+
+/* Мобильный (480px) */
+@media (max-width: 480px) {
+    .bubble {
+        max-width: 92%;
+    }
+
+    .sidebar {
+        width: 100vw;
+        max-width: 320px;
+    }
+
+    /* topbar */
+    .topbar {
+        padding: 0 12px;
+        font-size: 11px;
+    }
+
+    .topbar-role {
+        font-size: 8px;
+        padding: 2px 8px;
+    }
+
+    .pill {
+        font-size: 9px;
+        padding: 3px 8px;
+    }
+
+    /* messages */
+    .messages {
+        padding: 12px;
+        gap: 10px;
     }
 
     .bubble {
-        max-width: 88%;
+        font-size: 12px;
+        padding: 8px 11px;
     }
 
-    .messages {
-        padding: 12px;
+    .avatar {
+        width: 26px;
+        height: 26px;
+        font-size: 9px;
     }
 
-    .input-area {
-        padding: 10px 12px;
+    .msg-meta {
+        font-size: 9px;
+    }
+
+    /* input */
+    .chat-textarea {
+        font-size: 12px;
+        padding: 8px 11px;
+    }
+
+    .send-btn {
+        padding: 8px 10px;
+        font-size: 11px;
+    }
+
+    .close-btn {
+        padding: 6px 8px;
+        font-size: 10px;
+    }
+
+    /* modal */
+    .support-modal {
+        padding: 18px 16px;
+        gap: 12px;
+    }
+
+    .support-modal-header h2 {
+        font-size: 13px;
+    }
+
+    .support-modal-actions {
+        flex-direction: column-reverse;
+        gap: 6px;
+    }
+
+    .support-modal-cancel,
+    .support-modal-submit {
+        width: 100%;
+        text-align: center;
+        padding: 10px;
     }
 }
 
