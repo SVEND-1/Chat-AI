@@ -184,14 +184,12 @@ public class AuthService {
             user.setRole(Role.USER);
             UserRegistrationResponse savedUser = userService.save(userMapper.convertDtoToCreateRequest(user));
 
-
             String token = jwtTokenProvider.createToken(savedUser.email(), savedUser.role().name());
             Cookie cookie = new Cookie("jwtToken", token);
             cookie.setHttpOnly(true);
             cookie.setPath("/");
             cookie.setMaxAge(24 * 60 * 60);
             cookie.setSecure(false);
-            cookie.setDomain("localhost");
             response.addCookie(cookie);
 
             Set<SimpleGrantedAuthority> roles = Collections.singleton(Role.USER.toAuthority());

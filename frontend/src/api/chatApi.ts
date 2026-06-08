@@ -47,7 +47,7 @@ export const sendMessage = async (
     onChunk: (text: string) => void
 ): Promise<void> => {
     const response = await fetch(
-        `http://localhost:8080/api/chats/${chatId}?question=${encodeURIComponent(question)}`,
+        `/api/chats/${chatId}?question=${encodeURIComponent(question)}`,
         {
             method: 'POST',
             credentials: 'include',
